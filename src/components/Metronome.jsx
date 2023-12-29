@@ -34,6 +34,7 @@ export default function Metronome({ config, isPlaying }) {
   };
 
   return (
+
     <Stack direction="row" gap={1} >
       {beats.map((b, index) => (
         <MetronomeBeat
