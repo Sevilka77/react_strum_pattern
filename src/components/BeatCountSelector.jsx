@@ -1,4 +1,4 @@
-"use client";
+
 import IncDec from "./IncDec";
 
 
