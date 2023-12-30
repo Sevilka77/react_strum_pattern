@@ -1,5 +1,5 @@
 
-import './App.css'
+
 import { useState, useReducer } from 'react';
 import PlayStopButton from './components/PlayStopButton'
 import BeatCountSelector from './components/BeatCountSelector';

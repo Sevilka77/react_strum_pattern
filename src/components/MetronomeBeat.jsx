@@ -1,4 +1,3 @@
-"use client";
 import { MoveDown, MoveUp } from "lucide-react"
 import Button from '@mui/material/Button';
 
