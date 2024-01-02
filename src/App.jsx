@@ -8,15 +8,15 @@ import PatternList from './components/PatternLIst';
 import TempoSelector from './components/TempoSelector';
 import Button from '@mui/material/Button';
 import { Stack } from '@mui/system';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+
 //import { Tally4, Tally3, Tally2, Tally1 } from 'lucide-react'
 
 
 
 export const MIN_TEMPO = 40;
 export const MAX_TEMPO = 220;
-export const MIN_BEAT_COUNT = 1;
-export const MAX_BEAT_COUNT = 7;
-
 
 function reducer(state, action) {
   const newState = { ...state };
@@ -36,10 +36,16 @@ function reducer(state, action) {
       // eslint-disable-next-line no-case-declarations
       let beatCount = action.data.beatCount;
       if (beatCount === undefined) return state;
+      // eslint-disable-next-line no-case-declarations
+      let beatPatternCount = state.beatPattern;
+      if (beatCount > beatPatternCount.length) {
+        for (let i = beatPatternCount.length; i < beatCount; i++) beatPatternCount.push("rest");
+      } else if (beatCount < state.beatPattern.length) {
+        for (let i = beatPatternCount.length; i > beatCount; i--) beatPatternCount.pop();
+      }
 
-      beatCount = Math.min(beatCount, MAX_BEAT_COUNT);
-      beatCount = Math.max(beatCount, MIN_BEAT_COUNT);
-      newState.beatCount = beatCount;
+
+      newState.beatPattern = beatPatternCount;
       break;
     case "setBeatPattern":
       // eslint-disable-next-line no-case-declarations
@@ -67,6 +73,15 @@ function reducer(state, action) {
 function App() {
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMetronomeSound, setIsMetronomeSound] = useState(false);
+  const [isBeatSound, setIsBeatSound] = useState(false);
+  const handleMetronomeSoundChange = (event) => {
+    setIsMetronomeSound(event.target.checked);
+  };
+  const handleBeatSoundChange = (event) => {
+    setIsBeatSound(event.target.checked);
+  };
+
 
   const [config, dispatch] = useReducer(reducer, {
     tempo: 60,
@@ -87,13 +102,24 @@ function App() {
         onTempoChanged={(tempo) => dispatch({ type: "setTempo", data: { tempo } })}
         tempo={config.tempo}
       />
-      <PatternList onPatternChanged={(beatPattern) => dispatch({ type: "setBeatPattern", data: { beatPattern } })}></PatternList>
-      <Metronome config={config} isPlaying={isPlaying} />
+      <Metronome config={config} isPlaying={isPlaying} isMetronomeSound={isMetronomeSound} isBeatSound={isBeatSound} />
       <PlayStopButton onPlayStopChanged={setIsPlaying} />
+      <FormControlLabel control={<Switch
+        checked={isMetronomeSound}
+        onChange={handleMetronomeSoundChange}
+        inputProps={{ 'aria-label': 'controlled' }}
+      />} label="Звук Метронома" />
+      <FormControlLabel control={<Switch
+        checked={isBeatSound}
+        onChange={handleBeatSoundChange}
+        inputProps={{ 'aria-label': 'controlled' }}
+      />} label="Звук Бита" />
+
       <BeatCountSelector
         onBeatCountChanged={(beatCount) => dispatch({ type: "setBeatCount", data: { beatCount } })}
-        beatCount={config.beatCount}
+        beatCount={config.beatPattern.length}
       />
+      <PatternList onPatternChanged={(beatPattern) => dispatch({ type: "setBeatPattern", data: { beatPattern } })}></PatternList>
 
     </Stack>
   )

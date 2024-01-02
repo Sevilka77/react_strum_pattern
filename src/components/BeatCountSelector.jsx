@@ -5,7 +5,7 @@ import IncDec from "./IncDec";
 
 export default function BeatCountSelector({ beatCount, onBeatCountChanged }) {
   return (
-    <div className="flex flex-col items-center">
+    <div>
       <p>Number of beats</p>
 
       <IncDec
