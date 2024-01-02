@@ -1,5 +1,7 @@
 import { Play, Square } from "lucide-react"
 import { useState } from "react"
+import Button from '@mui/material/Button';
+
 
 export default function PlayStopButton({ onPlayStopChanged }) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -10,30 +12,26 @@ export default function PlayStopButton({ onPlayStopChanged }) {
     onPlayStopChanged(newIsPlayingState);
   };
 
-  const playClassName = "bg-amber-500";
+
   const playContent = (
     <>
       <Play width={18} /> <span>Play</span>
     </>
   );
 
-  const stopClassName = "bg-red-500";
+
   const stopContent = (
     <>
-      <Square width={14} className="mr-1" /> <span>Stop</span>
+      <Square width={14} /> <span>Stop</span>
     </>
   );
 
   return (
-    <button
-      className={`
-        ${isPlaying ? stopClassName : playClassName} 
-        rounded py-2 w-[112px]  text-gray-50 text-xl font-medium 
-        flex justify-center items-center
-      `}
+    <Button variant="outlined"
+
       onClick={playButtonClickHandler}
     >
       {isPlaying ? stopContent : playContent}
-    </button>
+    </Button>
   );
 }

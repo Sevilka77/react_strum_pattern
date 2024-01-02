@@ -1,13 +1,15 @@
+import Button from '@mui/material/Button';
+import { Stack } from '@mui/system'
 export default function IncDec({ label, onInc, onDec }) {
   return (
-    <div className="flex justify-center gap-2">
-      <button onClick={onDec} className="text-5xl px-2">
+    <Stack direction="row" gap={1} >
+      <Button variant="outlined" onClick={onDec} >
         -
-      </button>
-      <p className="text-5xl font-semibold">{label}</p>
-      <button onClick={onInc} className="text-5xl px-2">
+      </Button>
+      <p>{label}</p>
+      <Button variant="outlined" onClick={onInc} >
         +
-      </button>
-    </div>
+      </Button>
+    </Stack>
   );
 }

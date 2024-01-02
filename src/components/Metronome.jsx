@@ -1,14 +1,15 @@
 import useStepMetronome from "../hooks/useStepMetronome";
 import { useEffect, useState } from "react";
 import MetronomeBeat from "./MetronomeBeat";
-import usePlayClickSound from "../hooks/usePlaySound";
+import useMetronomeSound from "../hooks/useMetronomeSOund";
+import useBeatSound from "../hooks/useBeatSound"
 
 import { Stack } from '@mui/system';
 
 
 
 
-export default function Metronome({ config, isPlaying }) {
+export default function Metronome({ config, isPlaying, isMetronomeSound, isBeatSound }) {
   const [beats, setBeats] = useState(config.beatPattern);
   const [activeBeat, setActiveBeat] = useStepMetronome(
     config.tempo,
@@ -17,7 +18,8 @@ export default function Metronome({ config, isPlaying }) {
     isPlaying
   );
 
-  usePlayClickSound(activeBeat, config.note, isPlaying);
+  useMetronomeSound(activeBeat, config.note, isPlaying, isMetronomeSound);
+  useBeatSound(activeBeat, beats, isPlaying, isBeatSound);
 
   useEffect(() => {
     setBeats(config.beatPattern)

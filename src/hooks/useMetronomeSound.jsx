@@ -41,14 +41,15 @@ export class SynthClickService {
 const synthClickService = new SynthClickService();
 
 
-export default function usePlayClickSound(
+export default function useMetronomeSound(
   activeBeatIndex,
   note,
-  isPlaying
+  isPlaying,
+  isMetronomeSound
 ) {
   useEffect(() => {
-    if (activeBeatIndex !== null && isPlaying && (activeBeatIndex % note == 0)) synthClickService.play()
+    if (activeBeatIndex !== null && isPlaying && isMetronomeSound && (activeBeatIndex % note == 0)) synthClickService.play()
   }
-    , [activeBeatIndex, note, isPlaying]
+    , [activeBeatIndex, note, isPlaying, isMetronomeSound]
   );
 }
