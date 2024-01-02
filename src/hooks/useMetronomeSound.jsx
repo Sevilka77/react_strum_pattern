@@ -1,44 +1,25 @@
 
 import { useEffect } from "react";
-let audioContext
-let envelope
+import metronome_down from "./metronome_down.wav"
 
-const createAudioContext = () => {
-  if (typeof window !== "undefined") {
-    const AudioContext = window.AudioContext;
-    audioContext = new AudioContext();
 
-    envelope = audioContext.createGain();
-    envelope.connect(audioContext.destination);
-  }
-};
+const audios =
+  typeof window !== "undefined"
+    ? new Audio(metronome_down)
+    : [];
 
-export class SynthClickService {
+export class RecordedClickService {
   play() {
-    if (!audioContext || !envelope) {
-      createAudioContext();
-    }
 
-    if (audioContext && envelope) {
-      envelope.gain.cancelScheduledValues(0);
-      const oscillator = audioContext.createOscillator();
-      oscillator.type = "square";
-      oscillator.frequency.value = 250;
-      oscillator.connect(envelope);
+    const audio = audios;
 
-      envelope.gain.value = 0;
-      const time = audioContext.currentTime;
-      //envelope.gain.linearRampToValueAtTime(1, time + 0.01);
-      envelope.gain.setValueAtTime(1, time + 0.01);
-      envelope.gain.linearRampToValueAtTime(0.001, time + 0.04);
-
-      oscillator.start();
-      oscillator.stop(time + 0.1);
-    }
+    audio.play();
+    audio.currentTime = 0;
   }
 }
 
-const synthClickService = new SynthClickService();
+const recordedClickService = new RecordedClickService();
+
 
 
 export default function useMetronomeSound(
@@ -48,7 +29,7 @@ export default function useMetronomeSound(
   isMetronomeSound
 ) {
   useEffect(() => {
-    if (activeBeatIndex !== null && isPlaying && isMetronomeSound && (activeBeatIndex % note == 0)) synthClickService.play()
+    if (activeBeatIndex !== null && isPlaying && isMetronomeSound && (activeBeatIndex % note == 0)) recordedClickService.play()
   }
     , [activeBeatIndex, note, isPlaying, isMetronomeSound]
   );
