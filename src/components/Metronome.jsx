@@ -1,7 +1,7 @@
 import useStepMetronome from "../hooks/useStepMetronome";
 import { useEffect, useState } from "react";
 import MetronomeBeat from "./MetronomeBeat";
-import useMetronomeSound from "../hooks/useMetronomeSOund";
+import useMetronomeSound from "../hooks/useMetronomeSound";
 import useBeatSound from "../hooks/useBeatSound"
 
 import { Stack } from '@mui/system';
