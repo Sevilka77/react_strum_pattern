@@ -1,5 +1,5 @@
 import { MoveDown, MoveUp } from "lucide-react"
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 
 export default function MetronomeBeat({ id, beatStatus, active, onBeatStatusChanged }) {
   const clickHandler = () => {
@@ -9,14 +9,18 @@ export default function MetronomeBeat({ id, beatStatus, active, onBeatStatusChan
   const isUp = id % 2 !== 0
   let color = '';
   if (active) {
-    color = '#c71111';
+    color = "error.main";
   }
-  let status = beatStatus == "rest";
-  let variant
-  status ? variant = "outlined" : variant = "contained"
+  let status = beatStatus == "work";
+  let bgcolor
+  if (status) {
+    bgcolor = "primary.main"
+  }
+
+
 
   return (
-    <Button variant={variant} sx={{ p: 2 }} style={{ color: color }}
+    <IconButton sx={{ minWidth: 0, bgcolor: bgcolor, color: color }}
       onClick={clickHandler}>
       {
         isUp
@@ -24,6 +28,6 @@ export default function MetronomeBeat({ id, beatStatus, active, onBeatStatusChan
           : <MoveDown />
       }
 
-    </Button >
+    </IconButton >
   );
 }

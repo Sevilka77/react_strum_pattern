@@ -11,6 +11,8 @@ import { Stack } from '@mui/system';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
+
+
 //import { Tally4, Tally3, Tally2, Tally1 } from 'lucide-react'
 
 
@@ -91,8 +93,10 @@ function App() {
   });
 
   return (
-    <Stack gap={2} alignItems="center">
-      <Stack direction="row" gap={1} >
+
+    <Stack  >
+
+      <Stack direction="row" gap={1} spacing={{ xs: 1, sm: 2, md: 4 }} >
         <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 1 } })}>Четвертые</Button>
         <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 2 } })}>Восьмые</Button>
         <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 3 } })}>Триоли</Button>

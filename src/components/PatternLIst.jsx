@@ -1,8 +1,6 @@
 import { patterns } from "../patterns"
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
+import Masonry from '@mui/lab/Masonry';
+import Button from '@mui/material/Button';
 
 
 
@@ -13,24 +11,11 @@ export default function PatternList({ onPatternChanged }) {
 
 
   return (
-    <List
-      sx={{
-        width: '100%',
-        maxWidth: 360,
-
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: 300,
-
-      }}
+    <Masonry columns={4} spacing={1}
     >
       {patterns.map((pattern) => (
-        <ListItem key={pattern.title} disablePadding>
-          <ListItemButton onClick={() => onPatternChanged(pattern)} >
-            <ListItemText primary={pattern.title} />
-          </ListItemButton>
-        </ListItem>
+        <Button key={pattern.title} variant="contained" onClick={() => onPatternChanged(pattern)}>{pattern.title}</Button>
       ))}
-    </List>
+    </Masonry>
   )
 }
