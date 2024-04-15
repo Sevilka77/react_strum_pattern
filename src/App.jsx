@@ -118,7 +118,7 @@ function App() {
         onChange={handleBeatSoundChange}
         inputProps={{ 'aria-label': 'controlled' }}
       />} label="Звук Бита" />
-/*
+
       <BeatCountSelector
         onBeatCountChanged={(beatCount) => dispatch({ type: "setBeatCount", data: { beatCount } })}
         beatCount={config.beatPattern.length}
