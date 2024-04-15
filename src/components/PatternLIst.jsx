@@ -7,8 +7,8 @@ import ListItemText from '@mui/material/ListItemText';
 export default function PatternList({ onPatternChanged }) {
   return (
     <List>
-      {patterns.map((pattern) => (
-        <ListItem disablePadding key={pattern.title}  >
+      {patterns.map((pattern, index) => (
+        <ListItem disablePadding key={index}  >
           <ListItemButton>
             <ListItemText key={pattern.title} onClick={() => onPatternChanged(pattern)} primary={pattern.title} />
           </ListItemButton>

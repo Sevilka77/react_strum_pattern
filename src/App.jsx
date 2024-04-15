@@ -51,13 +51,10 @@ function reducer(state, action) {
       break;
     case "setBeatPattern":
       // eslint-disable-next-line no-case-declarations
-      let beatPattern = action.data.beatPattern.pattern;
-      // eslint-disable-next-line no-case-declarations
-      let note = action.data.beatPattern.note;
+      let beatPattern = action.data.beatPattern.pattern.split('');
+
       if (beatPattern === undefined) return state;
       newState.beatPattern = beatPattern;
-      if (note === undefined) return state;
-      newState.note = note;
       break;
     case "setNoteSize":
       // eslint-disable-next-line no-case-declarations
@@ -84,10 +81,10 @@ function App() {
     setIsBeatSound(event.target.checked);
   };
 
-
+  let beat = "1101"
   const [config, dispatch] = useReducer(reducer, {
     tempo: 60,
-    beatPattern: ["work", "rest", "rest", "rest"],
+    beatPattern: beat.split(''),
     note: 1,
     isPlaying,
   });

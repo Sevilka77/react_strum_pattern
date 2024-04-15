@@ -3,11 +3,12 @@ import Button from '@mui/material/Button';
 import { Stack } from "@mui/material";
 
 
-export default function MetronomeBeat({ id, beatStatus, active, onBeatStatusChanged }) {
-  const clickHandler = () => {
-    const newStatus = (beatStatus === "work" ? "rest" : "work");
-    onBeatStatusChanged(newStatus);
-  };
+export default function MetronomeBeat({ id, beatStatus, active }) {
+  //export default function MetronomeBeat({ id, beatStatus, active, onBeatStatusChanged }) {
+  // const clickHandler = () => {
+  //   const newStatus = (beatStatus === "1" ? "0" : "1");
+  //   onBeatStatusChanged(newStatus);
+  // };
   const isUp = id % 2 !== 0
   let color = 'grey.600';
   if (active) {
@@ -15,13 +16,23 @@ export default function MetronomeBeat({ id, beatStatus, active, onBeatStatusChan
   }
   let height = 40
   let bgcolor = "grey.600"
-  if (beatStatus == "work") {
-    bgcolor = "primary.main"
-    height = 120
+  if (beatStatus == "1") {
+    height = 80
+    isUp
+      ? bgcolor = "#0336FF"
+      : bgcolor = "#fdee03"
+
+  }
+  if (beatStatus == "A") {
+    height = 110
+    isUp
+      ? bgcolor = "#0336FF"
+      : bgcolor = "#fdee03"
+
   }
   if (beatStatus == "x") {
-    bgcolor = "warning.main"
-    height = 120
+    bgcolor = "#ff0266"
+    height = 80
   }
 
 
@@ -32,14 +43,14 @@ export default function MetronomeBeat({ id, beatStatus, active, onBeatStatusChan
       <Button variant="contained" sx={{
         width: 20, height: height, borderRadius: 2, bgcolor: bgcolor
       }}
-        onClick={clickHandler} >
+      >
         {
           isUp
             ? <MoveUp />
             : <MoveDown />
         }
       </Button >
-      <Button sx={{ width: 20, height: 10, bgcolor: color }} />
+      <Button variant="contained" sx={{ width: 20, height: 40, bgcolor: color }}> {id} </Button>
     </Stack>
   );
 }
