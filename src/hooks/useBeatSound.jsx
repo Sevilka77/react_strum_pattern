@@ -1,7 +1,7 @@
 
 import { useEffect } from "react";
-import up from "./up.mp3"
-import down from "./down.mp3"
+import up from "./up.wav"
+import down from "./down.wav"
 
 
 const audios =
