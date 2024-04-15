@@ -2,7 +2,7 @@
 
 import { useState, useReducer } from 'react';
 import PlayStopButton from './components/PlayStopButton'
-import BeatCountSelector from './components/BeatCountSelector';
+//import BeatCountSelector from './components/BeatCountSelector';
 import Metronome from './components/Metronome';
 import PatternList from './components/PatternLIst';
 import TempoSelector from './components/TempoSelector';
@@ -94,7 +94,12 @@ function App() {
 
   return (
 
-    <Stack  >
+
+    <Stack direction="column"
+      justifyContent="center"
+      alignItems="center"
+      spacing={2}>
+
 
       <Stack direction="row" gap={1} spacing={{ xs: 1, sm: 2, md: 4 }} >
         <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 1 } })}>Четвертые</Button>
@@ -119,10 +124,10 @@ function App() {
         inputProps={{ 'aria-label': 'controlled' }}
       />} label="Звук Бита" />
 
-      <BeatCountSelector
+      {/* <BeatCountSelector
         onBeatCountChanged={(beatCount) => dispatch({ type: "setBeatCount", data: { beatCount } })}
         beatCount={config.beatPattern.length}
-      />*/
+      /> */}
       <PatternList onPatternChanged={(beatPattern) => dispatch({ type: "setBeatPattern", data: { beatPattern } })}></PatternList>
 
     </Stack>

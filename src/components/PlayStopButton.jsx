@@ -27,7 +27,7 @@ export default function PlayStopButton({ onPlayStopChanged }) {
   );
 
   return (
-    <Button variant="outlined"
+    <Button variant="outlined" size="small"
 
       onClick={playButtonClickHandler}
     >
