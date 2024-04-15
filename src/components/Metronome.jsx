@@ -29,15 +29,15 @@ export default function Metronome({ config, isPlaying, isMetronomeSound, isBeatS
     setBeats(config.beatPattern)
   }, [config.beatPattern, setActiveBeat])
 
-  const beatStatusChanged = (index, status) => {
-    setBeats((curr) => {
-      const newBeats = [...curr];
+  // const beatStatusChanged = (index, status) => {
+  //   setBeats((curr) => {
+  //     const newBeats = [...curr];
 
-      newBeats[index] = status;
+  //     newBeats[index] = status;
 
-      return newBeats;
-    });
-  };
+  //     return newBeats;
+  //   });
+  // };
 
   return (
 
