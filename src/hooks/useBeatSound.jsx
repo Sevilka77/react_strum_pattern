@@ -30,7 +30,7 @@ export default function usePlayActiveSound(
   isBeatSound
 ) {
   useEffect(() => {
-    if (activeBeatIndex !== null && isPlaying && isBeatSound && (beatPattern[activeBeatIndex] != "rest")) recordedClickService.play(activeBeatIndex);
+    if (activeBeatIndex !== null && isPlaying && isBeatSound && (beatPattern[activeBeatIndex] != "0")) recordedClickService.play(activeBeatIndex);
   }
     , [activeBeatIndex, beatPattern, isPlaying, isBeatSound]
   );
