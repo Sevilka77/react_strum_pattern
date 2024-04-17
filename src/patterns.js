@@ -25,7 +25,7 @@ pattern:"100111"
 },
 {
   title: 'Hjr',
-pattern:"1010Ф011"
+pattern:"1010A011"
 },
 {
   title: '6ка обычная',

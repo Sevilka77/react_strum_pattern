@@ -21,7 +21,7 @@ export default function TempoSelector({ tempo, onTempoChanged }) {
           onInc={() => onTempoChanged(tempo + 1)}
         />
       </div>
-      <Box sx={{ width: 600 }}>
+      <Box sx={{ width: 1 / 2 }}>
         <Slider
           aria-label="Tempo"
           value={tempo}

@@ -44,7 +44,8 @@ export default function Metronome({ config, isPlaying, isMetronomeSound, isBeatS
     <Stack direction="row"
       justifyContent="center"
       alignItems="flex-end"
-      spacing={2} >
+      flexBasis="content"
+      sx={{ width: 1 }} >
       {beats.map((b, index) => (
         <MetronomeBeat
           key={index}

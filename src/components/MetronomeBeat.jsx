@@ -1,6 +1,6 @@
 import { MoveDown, MoveUp, X } from "lucide-react"
 
-import { Stack, Button } from "@mui/material";
+import { Stack, Box } from "@mui/material";
 
 
 export default function MetronomeBeat({ id, beatStatus, active }) {
@@ -41,7 +41,7 @@ export default function MetronomeBeat({ id, beatStatus, active }) {
   if (beatStatus == "A") {
     height = 110
     if (isUp) {
-      bgcolor = "##088F4",
+      bgcolor = "#4088F4",
         icon = <MoveUp />
     } else {
       bgcolor = "#46B4A7",
@@ -59,25 +59,25 @@ export default function MetronomeBeat({ id, beatStatus, active }) {
 
 
   return (
-    <Stack orientation="vertical" spacing={1}>
-      <Button variant="contained" sx={{
-        '&:hover': {
-          backgroundColor: bgcolor,
-        },
-        width: 20, height: height, borderRadius: 2, bgcolor: bgcolor
+    <Stack orientation="vertical" sx={{ width: "auto", border: "1px solid #fff" }}>
+      <Box sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+        height: height, borderRadius: 2, bgcolor: bgcolor
       }}
       >
         {icon
         }
 
 
-      </Button>
-      <Button variant="contained" sx={{
-        '&:hover': {
-          backgroundColor: bgcolor,
-        },
-        width: 20, height: 40, bgcolor: color
-      }}> {id} </Button>
+      </Box>
+      <Box sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+        height: 40, bgcolor: color
+      }}> {id} </Box>
     </Stack>
   );
 }

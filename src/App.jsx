@@ -95,10 +95,18 @@ function App() {
     <Stack direction="column"
       justifyContent="center"
       alignItems="center"
-      spacing={2}>
+      sx={{
+        width: 1
+
+      }}
+    >
 
 
-      <Stack direction="row" gap={1} spacing={{ xs: 1, sm: 2, md: 4 }} >
+      <Stack direction="row"
+        justifyContent="space-evenly"
+        alignItems="flex-end"
+        flexBasis="content"
+        sx={{ width: 1 }} >
         <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 1 } })}>Четвертые</Button>
         <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 2 } })}>Восьмые</Button>
         <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 3 } })}>Триоли</Button>
