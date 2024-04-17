@@ -57,7 +57,7 @@ pattern:"10001011"
 },
 {
   title: 'Варвара ',
-pattern:"1001x10"
+pattern:"A00Ax110"
 },
 {
   title: 'Рэгги',

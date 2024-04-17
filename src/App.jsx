@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import { Stack } from '@mui/system';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import Visual from './components/visual';
 
 
 
@@ -103,7 +104,7 @@ function App() {
 
 
       <Stack direction="row"
-        justifyContent="space-evenly"
+        justifyContent="center"
         alignItems="flex-end"
         flexBasis="content"
         sx={{ width: 1 }} >
@@ -128,7 +129,7 @@ function App() {
         onChange={handleBeatSoundChange}
         inputProps={{ 'aria-label': 'controlled' }}
       />} label="Звук Бита" />
-
+      <Visual toggleStart={isPlaying ? 'swing' : 'stop'} swing={(120 / config.tempo)} />
       {/* <BeatCountSelector
         onBeatCountChanged={(beatCount) => dispatch({ type: "setBeatCount", data: { beatCount } })}
         beatCount={config.beatPattern.length}

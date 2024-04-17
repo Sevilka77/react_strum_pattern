@@ -10,6 +10,13 @@ export default function MetronomeBeat({ id, beatStatus, active }) {
   //   onBeatStatusChanged(newStatus);
   // };
   const isUp = id % 2 !== 0
+  let nameId
+  if (isUp) {
+    nameId = "и"
+  } else {
+    nameId = (id + 2) / 2
+  }
+
   let color = '#C6C6C6';
   let icon
   if (active) {
@@ -59,12 +66,12 @@ export default function MetronomeBeat({ id, beatStatus, active }) {
 
 
   return (
-    <Stack orientation="vertical" sx={{ width: "auto", border: "1px solid #fff" }}>
+    <Stack orientation="vertical" sx={{ width: "auto" }} >
       <Box sx={{
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
-        height: height, borderRadius: 2, bgcolor: bgcolor
+        height: height, borderRadius: 1, bgcolor: bgcolor, border: "1px solid #fff"
       }}
       >
         {icon
@@ -76,8 +83,8 @@ export default function MetronomeBeat({ id, beatStatus, active }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
-        height: 40, bgcolor: color
-      }}> {id} </Box>
-    </Stack>
+        height: 40, bgcolor: color, borderRadius: 1, border: "1px solid #fff"
+      }}> {nameId} </Box>
+    </ Stack>
   );
 }
