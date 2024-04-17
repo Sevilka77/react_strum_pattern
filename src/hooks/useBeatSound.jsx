@@ -12,6 +12,7 @@ const audios =
 export class RecordedClickService {
   play(id) {
     const isUp = id % 2
+
     const audio = audios[isUp];
 
     audio.play();

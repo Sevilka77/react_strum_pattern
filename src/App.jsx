@@ -86,7 +86,7 @@ function App() {
   const [config, dispatch] = useReducer(reducer, {
     tempo: 60,
     beatPattern: beat.split(''),
-    note: 1,
+    note: 4,
     isPlaying,
   });
 
@@ -108,10 +108,10 @@ function App() {
         alignItems="flex-end"
         flexBasis="content"
         sx={{ width: 1 }} >
-        <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 1 } })}>Четвертые</Button>
-        <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 2 } })}>Восьмые</Button>
-        <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 3 } })}>Триоли</Button>
-        <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 4 } })}>Шестнадцатые</Button>
+        <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 4 } })}>4/4</Button>
+        <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 2 } })}>2/4</Button>
+        <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 3 } })}>3/4</Button>
+
       </Stack>
       <TempoSelector
         onTempoChanged={(tempo) => dispatch({ type: "setTempo", data: { tempo } })}

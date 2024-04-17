@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function useStepMetronome(tempo, beatPattern, note, isPlaying) {
+export default function useStepMetronome(tempo, beatPattern, isPlaying) {
   const [activeBeat, setActiveBeat] = useState(tempo);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export default function useStepMetronome(tempo, beatPattern, note, isPlaying) {
         return curr < beatPattern.length - 1 ? curr + 1 : 0;
       });
 
-      let period = Math.round((1000 * 60) / tempo / note);
+      let period = Math.round((1000 * 60) / tempo);
 
 
 
@@ -22,7 +22,7 @@ export default function useStepMetronome(tempo, beatPattern, note, isPlaying) {
     } else {
       setActiveBeat(null);
     }
-  }, [tempo, beatPattern, note, isPlaying]);
+  }, [tempo, beatPattern, isPlaying]);
 
   return [activeBeat, setActiveBeat];
 }

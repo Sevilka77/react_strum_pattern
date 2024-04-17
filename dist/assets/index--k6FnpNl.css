@@ -1,0 +1,7 @@
+@charset "UTF-8";/*!
+ * animate.css -http://daneden.me/animate
+ * Version - 3.7.0
+ * Licensed under the MIT license - http://opensource.org/licenses/MIT
+ *
+ * Copyright (c) 2018 Daniel Eden
+ */.swing{animation:swing infinite 1s linear;height:5vmin}@-webkit-keyframes swing{0%{-webkit-transform-origin:bottom;transform-origin:bottom;-webkit-transform:rotate(-60deg);transform:rotate(-60deg)}50%{-webkit-transform-origin:bottom;transform-origin:bottom;-webkit-transform:rotate(60deg);transform:rotate(60deg)}to{-webkit-transform-origin:bottom;transform-origin:bottom;-webkit-transform:rotate(-60deg);transform:rotate(-60deg)}}@keyframes swing{0%{transform-origin:bottom;transform:rotate(-60deg)}50%{transform-origin:bottom;transform:rotate(60deg)}to{transform-origin:bottom;transform:rotate(-60deg)}}.swing{-webkit-animation-name:swing;animation-name:swing}@media (prefers-reduced-motion){.animated{-webkit-animation:unset!important;animation:unset!important;-webkit-transition:none!important;transition:none!important}}

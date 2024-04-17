@@ -17,12 +17,11 @@ export default function Metronome({ config, isPlaying, isMetronomeSound, isBeatS
   const [activeBeat, setActiveBeat] = useStepMetronome(
     config.tempo,
     config.beatPattern,
-    config.note,
-    isPlaying
+    isPlaying,
   );
 
 
-  useMetronomeSound(activeBeat, config.note, isPlaying, isMetronomeSound);
+  useMetronomeSound(activeBeat, isPlaying, isMetronomeSound, config.note,);
   useBeatSound(activeBeat, beats, isPlaying, isBeatSound);
 
   useEffect(() => {
