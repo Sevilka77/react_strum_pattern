@@ -22,8 +22,8 @@ export default function TempoSelector({ tempo, onTempoChanged }) {
         valueLabelDisplay="auto"
         step={10}
         marks
-        min={40}
-        max={220}
+        min={60}
+        max={160}
         onChange={handleChange}
       />
     </Box>
