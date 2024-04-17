@@ -1,7 +1,7 @@
 
-import IncDec from "./IncDec";
-import Slider from '@mui/material/Slider';
-import Box from '@mui/material/Box';
+//import IncDec from "./IncDec";
+//import Slider from '@mui/material/Slider';
+import { Slider, Box } from '@mui/material';
 
 
 
@@ -13,29 +13,22 @@ export default function TempoSelector({ tempo, onTempoChanged }) {
   };
 
   return (
-    <>
-      <div className="mb-4">
-        <IncDec
-          label={"" + tempo}
-          onDec={() => onTempoChanged(tempo - 1)}
-          onInc={() => onTempoChanged(tempo + 1)}
-        />
-      </div>
-      <Box sx={{ width: 1 / 2 }}>
-        <Slider
-          aria-label="Tempo"
-          value={tempo}
-          // getAriaValueText={(e) => console.log(e)}
-          valueLabelDisplay="auto"
-          step={10}
-          marks
-          min={40}
-          max={220}
-          onChange={handleChange}
-        />
-      </Box>
 
-    </>
+    <Box sx={{ width: 1 / 3 }}>
+      <Slider
+        aria-label="Tempo"
+        value={tempo}
+        // getAriaValueText={(e) => console.log(e)}
+        valueLabelDisplay="auto"
+        step={10}
+        marks
+        min={40}
+        max={220}
+        onChange={handleChange}
+      />
+    </Box>
+
+
   );
 }
 

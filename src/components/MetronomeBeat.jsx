@@ -3,7 +3,7 @@ import { MoveDown, MoveUp, X } from "lucide-react"
 import { Stack, Box } from "@mui/material";
 
 
-export default function MetronomeBeat({ id, beatStatus, active }) {
+export default function MetronomeBeat({ id, beatStatus, active, note }) {
   //export default function MetronomeBeat({ id, beatStatus, active, onBeatStatusChanged }) {
   // const clickHandler = () => {
   //   const newStatus = (beatStatus === "1" ? "0" : "1");
@@ -11,6 +11,7 @@ export default function MetronomeBeat({ id, beatStatus, active }) {
   // };
   const isUp = id % 2 !== 0
   let nameId
+
   if (isUp) {
     nameId = "и"
   } else {
@@ -19,9 +20,13 @@ export default function MetronomeBeat({ id, beatStatus, active }) {
 
   let color = '#C6C6C6';
   let icon
-  if (active) {
-    color = "error.main";
+  if (id % note === 0) {
+    color = "#b800d8"
   }
+  if (active) {
+    color = "#ef4036";
+  }
+
   let height = 40
   let bgcolor = "#C6C6C6"
   if (beatStatus == "0") {

@@ -8,7 +8,6 @@ export default function useMetronomeSound(activeBeatIndex, isPlaying, isMetronom
   const cl2 = new Audio(click2)
   useEffect(() => {
     if (isPlaying && isMetronomeSound) {
-      console.log(activeBeatIndex % note)
       if (activeBeatIndex % note === 0) {
         cl2.play()
       } else {
@@ -16,6 +15,7 @@ export default function useMetronomeSound(activeBeatIndex, isPlaying, isMetronom
       }
     }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeBeatIndex, isMetronomeSound, isPlaying, note])
 
 }

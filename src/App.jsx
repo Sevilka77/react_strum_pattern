@@ -1,16 +1,16 @@
 
 
 import { useState, useReducer } from 'react';
-import PlayStopButton from './components/PlayStopButton'
-//import BeatCountSelector from './components/BeatCountSelector';
+
 import Metronome from './components/Metronome';
 import PatternList from './components/PatternLIst';
 import TempoSelector from './components/TempoSelector';
-import Button from '@mui/material/Button';
-import { Stack } from '@mui/system';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import TimeSelect from './components/TimeSelect'
+
+import { Stack, ToggleButton } from '@mui/material';
+
 import Visual from './components/visual';
+import { Volume2Icon, VolumeXIcon, DrumIcon, PlayIcon, SquareIcon } from 'lucide-react';
 
 
 
@@ -75,12 +75,7 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMetronomeSound, setIsMetronomeSound] = useState(false);
   const [isBeatSound, setIsBeatSound] = useState(false);
-  const handleMetronomeSoundChange = (event) => {
-    setIsMetronomeSound(event.target.checked);
-  };
-  const handleBeatSoundChange = (event) => {
-    setIsBeatSound(event.target.checked);
-  };
+
 
   let beat = "1101"
   const [config, dispatch] = useReducer(reducer, {
@@ -102,33 +97,52 @@ function App() {
       }}
     >
 
-
       <Stack direction="row"
         justifyContent="center"
         alignItems="flex-end"
         flexBasis="content"
-        sx={{ width: 1 }} >
-        <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 4 } })}>4/4</Button>
-        <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 2 } })}>2/4</Button>
-        <Button onClick={() => dispatch({ type: "setNoteSize", data: { noteS: 3 } })}>3/4</Button>
-
+      >
+        <TimeSelect
+          onNoteChanged={(noteS) => dispatch({ type: "setNoteSize", data: { noteS } })}
+          note={config.note}
+        />
+        <ToggleButton
+          value="MS"
+          selected={isMetronomeSound}
+          onChange={() => {
+            setIsMetronomeSound(!isMetronomeSound)
+          }}
+        >
+          {isMetronomeSound ? <VolumeXIcon /> : <Volume2Icon />}
+        </ToggleButton>
+        <ToggleButton
+          value="BS"
+          selected={isBeatSound}
+          onChange={() => {
+            setIsBeatSound(!isBeatSound)
+          }}
+        >
+          <DrumIcon />
+        </ToggleButton>
+        <ToggleButton
+          value="chplayeck"
+          selected={isPlaying}
+          onChange={() => {
+            setIsPlaying(!isPlaying)
+          }}
+        >
+          {isPlaying ? <SquareIcon /> : <PlayIcon />}
+        </ToggleButton>
       </Stack>
       <TempoSelector
         onTempoChanged={(tempo) => dispatch({ type: "setTempo", data: { tempo } })}
         tempo={config.tempo}
       />
+
+
+
       <Metronome config={config} isPlaying={isPlaying} isMetronomeSound={isMetronomeSound} isBeatSound={isBeatSound} />
-      <PlayStopButton onPlayStopChanged={setIsPlaying} />
-      <FormControlLabel control={<Switch
-        checked={isMetronomeSound}
-        onChange={handleMetronomeSoundChange}
-        inputProps={{ 'aria-label': 'controlled' }}
-      />} label="Звук Метронома" />
-      <FormControlLabel control={<Switch
-        checked={isBeatSound}
-        onChange={handleBeatSoundChange}
-        inputProps={{ 'aria-label': 'controlled' }}
-      />} label="Звук Бита" />
+
       <Visual toggleStart={isPlaying ? 'swing' : 'stop'} swing={(120 / config.tempo)} />
       {/* <BeatCountSelector
         onBeatCountChanged={(beatCount) => dispatch({ type: "setBeatCount", data: { beatCount } })}
