@@ -23,7 +23,7 @@ export default function TempoSelector({ tempo, onTempoChanged }) {
         step={10}
         marks
         min={60}
-        max={160}
+        max={300}
         onChange={handleChange}
       />
     </Box>

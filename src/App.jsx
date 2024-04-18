@@ -6,6 +6,7 @@ import Metronome from './components/Metronome';
 import PatternList from './components/PatternLIst';
 import TempoSelector from './components/TempoSelector';
 import TimeSelect from './components/TimeSelect'
+import Input from './components/Input';
 
 import { Stack, ToggleButton } from '@mui/material';
 
@@ -19,7 +20,7 @@ import { Volume2Icon, VolumeXIcon, DrumIcon, PlayIcon, SquareIcon } from 'lucide
 
 
 export const MIN_TEMPO = 40;
-export const MAX_TEMPO = 220;
+export const MAX_TEMPO = 300;
 
 function reducer(state, action) {
   const newState = { ...state };
@@ -134,6 +135,7 @@ function App() {
           {isPlaying ? <SquareIcon /> : <PlayIcon />}
         </ToggleButton>
       </Stack>
+
       <TempoSelector
         onTempoChanged={(tempo) => dispatch({ type: "setTempo", data: { tempo } })}
         tempo={config.tempo}
