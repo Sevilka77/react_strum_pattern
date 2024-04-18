@@ -1,23 +1,15 @@
-
-
-import { useState, useReducer } from 'react';
-
+import { useState, useReducer, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom'
 import Metronome from './components/Metronome';
 import PatternList from './components/PatternLIst';
 import TempoSelector from './components/TempoSelector';
 import TimeSelect from './components/TimeSelect'
-import Input from './components/Input';
+//import Input from './components/Input';
 
 import { Stack, ToggleButton } from '@mui/material';
 
 import Visual from './components/visual';
 import { Volume2Icon, VolumeXIcon, DrumIcon, PlayIcon, SquareIcon } from 'lucide-react';
-
-
-
-//import { Tally4, Tally3, Tally2, Tally1 } from 'lucide-react'
-
-
 
 export const MIN_TEMPO = 40;
 export const MAX_TEMPO = 300;
@@ -53,7 +45,7 @@ function reducer(state, action) {
       break;
     case "setBeatPattern":
       // eslint-disable-next-line no-case-declarations
-      let beatPattern = action.data.beatPattern.pattern.split('');
+      let beatPattern = action.data.split('');
 
       if (beatPattern === undefined) return state;
       newState.beatPattern = beatPattern;
@@ -72,19 +64,33 @@ function reducer(state, action) {
 }
 
 function App() {
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMetronomeSound, setIsMetronomeSound] = useState(false);
   const [isBeatSound, setIsBeatSound] = useState(false);
 
 
-  let beat = "1101"
+
   const [config, dispatch] = useReducer(reducer, {
     tempo: 60,
-    beatPattern: beat.split(''),
+    beatPattern: "1101".split(""),
     note: 4,
     isPlaying,
   });
+
+  useEffect(() => {
+    if (!searchParams.get("p")) {
+      setSearchParams({ p: "1101" })
+
+    }
+    else {
+      console.log(searchParams.get("p"))
+      dispatch({ type: "setBeatPattern", data: searchParams.get("p") });
+    }
+  }, [searchParams]
+  );
+
+
 
   return (
 
@@ -149,10 +155,11 @@ function App() {
       {/* <BeatCountSelector
         onBeatCountChanged={(beatCount) => dispatch({ type: "setBeatCount", data: { beatCount } })}
         beatCount={config.beatPattern.length}
+        dispatch({ type: "setBeatPattern", data: beatPattern.pattern });
       /> */}
-      <PatternList onPatternChanged={(beatPattern) => dispatch({ type: "setBeatPattern", data: { beatPattern } })}></PatternList>
+      <PatternList onPatternChanged={(beatPattern) => { setSearchParams({ p: beatPattern.pattern }) }}></PatternList>
 
-    </Stack>
+    </Stack >
   )
 }
 export default App
