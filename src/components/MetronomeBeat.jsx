@@ -67,6 +67,11 @@ export default function MetronomeBeat({ id, beatStatus, active, note }) {
     height = 80
     icon = <X />
   }
+  if (beatStatus == "c") {
+    bgcolor = "#FD4C5E"
+    height = 80
+    icon = "Щ"
+  }
 
 
 

@@ -13,6 +13,7 @@ export default function PatternEdit({ beatPattern, onPatternChanged }) {
     if (event === "1") { beats.push('1') }
     if (event === "0") { beats.push('0') }
     if (event === "x") { beats.push('x') }
+    if (event === "c") { beats.push('c') }
     if (event === "del") { if (beats.length > 0) beats.pop() }
     console.log(beats);
     onPatternChanged(beats.join(''))
@@ -43,8 +44,9 @@ export default function PatternEdit({ beatPattern, onPatternChanged }) {
 
           <Button onClick={() => handleChange("A")}>Aкцент</Button>
           <Button onClick={() => handleChange("1")}>Удар</Button>
-          <Button onClick={() => handleChange("0")}>Пропуск</Button>
+          <Button onClick={() => handleChange("c")}>Щелчок</Button>
           <Button onClick={() => handleChange("x")}>Заглушка</Button>
+          <Button onClick={() => handleChange("0")}>Пропуск</Button>
           <Button onClick={() => handleChange("del")} ><DeleteIcon /></Button>
 
         </ButtonGroup>

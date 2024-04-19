@@ -11,6 +11,7 @@ import { Stack, ToggleButton } from '@mui/material';
 
 import Visual from './components/visual';
 import { Volume2Icon, VolumeXIcon, DrumIcon, PlayIcon, SquareIcon } from 'lucide-react';
+import Share from './components/Share';
 
 export const MIN_TEMPO = 40;
 export const MAX_TEMPO = 300;
@@ -134,6 +135,7 @@ function App() {
         >
           {isPlaying ? <SquareIcon /> : <PlayIcon />}
         </ToggleButton>
+        <Share />
       </Stack>
 
       <TempoSelector
