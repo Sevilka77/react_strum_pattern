@@ -14,7 +14,16 @@ export default function TempoSelector({ tempo, onTempoChanged }) {
 
   return (
 
-    <Box sx={{ width: 1 / 3 }}>
+    <Box sx={{
+
+      display: 'flex',
+      flexDirection: "column",
+      justifyContent: "center",
+
+      width: 1 / 3
+
+    }}>
+      <p style={{ textAlign: "center" }}>BPM:{tempo}</p>
       <Slider
         aria-label="Tempo"
         value={tempo}
@@ -26,7 +35,7 @@ export default function TempoSelector({ tempo, onTempoChanged }) {
         max={300}
         onChange={handleChange}
       />
-    </Box>
+    </Box >
 
 
   );
