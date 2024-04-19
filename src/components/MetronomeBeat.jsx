@@ -23,8 +23,9 @@ export default function MetronomeBeat({ id, beatStatus, active, note }) {
   if (id % note === 0) {
     color = "#b800d8"
   }
+  let bColor = "#fff";
   if (active) {
-    color = "#ef4036";
+    bColor = "#ef4036";
   }
 
   let height = 40
@@ -76,7 +77,13 @@ export default function MetronomeBeat({ id, beatStatus, active, note }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
-        height: height, borderRadius: 1, bgcolor: bgcolor, border: "1px solid #fff"
+        height: 40, bgcolor: color, borderRadius: 1, border: "2px solid " + bColor
+      }}> {nameId} </Box>
+      <Box sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+        height: height, borderRadius: 1, bgcolor: bgcolor, border: "2px solid #fff"
       }}
       >
         {icon
@@ -84,12 +91,6 @@ export default function MetronomeBeat({ id, beatStatus, active, note }) {
 
 
       </Box>
-      <Box sx={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-around",
-        height: 40, bgcolor: color, borderRadius: 1, border: "1px solid #fff"
-      }}> {nameId} </Box>
     </ Stack>
   );
 }

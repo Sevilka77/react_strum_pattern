@@ -11,22 +11,23 @@ import { Stack } from '@mui/system';
 
 
 
-export default function Metronome({ config, isPlaying, isMetronomeSound, isBeatSound }) {
+export default function Metronome({ config, beatPattern, isPlaying, isMetronomeSound, isBeatSound }) {
 
-  const [beats, setBeats] = useState(config.beatPattern);
+  const [beats, setBeats] = useState(beatPattern);
   const [activeBeat, setActiveBeat] = useStepMetronome(
     config.tempo,
-    config.beatPattern,
+    beatPattern,
     isPlaying,
   );
+
 
 
   useMetronomeSound(activeBeat, isPlaying, isMetronomeSound, config.note,);
   useBeatSound(activeBeat, beats, isPlaying, isBeatSound);
 
   useEffect(() => {
-    setBeats(config.beatPattern)
-  }, [config.beatPattern, setActiveBeat])
+    setBeats(beatPattern)
+  }, [beatPattern, setActiveBeat])
 
   // const beatStatusChanged = (index, status) => {
   //   setBeats((curr) => {
@@ -42,7 +43,7 @@ export default function Metronome({ config, isPlaying, isMetronomeSound, isBeatS
 
     <Stack direction="row"
       justifyContent="center"
-      alignItems="flex-end"
+      alignItems="flex-start"
       flexBasis="content"
       sx={{ width: 1 }} >
       {beats.map((b, index) => (

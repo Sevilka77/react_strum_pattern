@@ -2,6 +2,7 @@ import { useState, useReducer, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom'
 import Metronome from './components/Metronome';
 import PatternList from './components/PatternLIst';
+import PatternEdit from './components/PatternEdit';
 import TempoSelector from './components/TempoSelector';
 import TimeSelect from './components/TimeSelect'
 //import Input from './components/Input';
@@ -16,18 +17,15 @@ export const MAX_TEMPO = 300;
 
 function reducer(state, action) {
   const newState = { ...state };
-
   switch (action.type) {
     case "setTempo":
       // eslint-disable-next-line no-case-declarations
       let newTempo = action.data.tempo;
       if (newTempo === undefined) return state;
-
       newTempo = Math.min(newTempo, MAX_TEMPO);
       newTempo = Math.max(newTempo, MIN_TEMPO);
       newState.tempo = newTempo;
       break;
-
     case "setBeatCount":
       // eslint-disable-next-line no-case-declarations
       let beatCount = action.data.beatCount;
@@ -39,14 +37,11 @@ function reducer(state, action) {
       } else if (beatCount < state.beatPattern.length) {
         for (let i = beatPatternCount.length; i > beatCount; i--) beatPatternCount.pop();
       }
-
-
       newState.beatPattern = beatPatternCount;
       break;
     case "setBeatPattern":
       // eslint-disable-next-line no-case-declarations
       let beatPattern = action.data.split('');
-
       if (beatPattern === undefined) return state;
       newState.beatPattern = beatPattern;
       break;
@@ -59,7 +54,6 @@ function reducer(state, action) {
     default:
       return state;
   }
-
   return newState;
 }
 
@@ -68,26 +62,26 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMetronomeSound, setIsMetronomeSound] = useState(false);
   const [isBeatSound, setIsBeatSound] = useState(false);
-
+  const [beatPattern, setBeatPattern] = useState("1101");
 
 
   const [config, dispatch] = useReducer(reducer, {
     tempo: 60,
-    beatPattern: "1101".split(""),
     note: 4,
     isPlaying,
   });
 
   useEffect(() => {
-    if (!searchParams.get("p")) {
+    if (!searchParams.has("p")) {
+
       setSearchParams({ p: "1101" })
 
     }
     else {
-      console.log(searchParams.get("p"))
-      dispatch({ type: "setBeatPattern", data: searchParams.get("p") });
+      console.log(searchParams.get("p"));
+      setBeatPattern(searchParams.get("p"));
     }
-  }, [searchParams]
+  }, [searchParams, setSearchParams]
   );
 
 
@@ -149,7 +143,7 @@ function App() {
 
 
 
-      <Metronome config={config} isPlaying={isPlaying} isMetronomeSound={isMetronomeSound} isBeatSound={isBeatSound} />
+      <Metronome config={config} beatPattern={beatPattern.split('')} isPlaying={isPlaying} isMetronomeSound={isMetronomeSound} isBeatSound={isBeatSound} />
 
       <Visual toggleStart={isPlaying ? 'swing' : 'stop'} swing={(120 / config.tempo)} />
       {/* <BeatCountSelector
@@ -158,6 +152,7 @@ function App() {
         dispatch({ type: "setBeatPattern", data: beatPattern.pattern });
       /> */}
       <PatternList onPatternChanged={(beatPattern) => { setSearchParams({ p: beatPattern.pattern }) }}></PatternList>
+      <PatternEdit beatPattern={beatPattern.split('')} onPatternChanged={(beatPattern) => { setSearchParams({ p: beatPattern }) }} />
 
     </Stack >
   )
