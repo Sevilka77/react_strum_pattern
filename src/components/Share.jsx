@@ -1,16 +1,17 @@
-import * as React from 'react';
+
 
 import Snackbar from '@mui/material/Snackbar';
 
 import { Share2Icon } from 'lucide-react';
 import { ToggleButton } from '@mui/material';
+import { useState } from 'react';
 
 async function copyToClip() {
   await navigator.clipboard.writeText(location.href);
 }
 
 export default function Share() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleClick = () => {
     copyToClip();
     setOpen(true);
