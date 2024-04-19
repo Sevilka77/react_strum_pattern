@@ -1,4 +1,61 @@
 export const patterns =[
+  {
+    title: 'ГСН 1 урок',
+    pattern:"11c1"
+  },
+  {
+    title: 'ГСН 3 урок',
+    pattern:"10c101c1"
+  },
+  {
+    title: 'ГСН 5 урок',
+    pattern:"A00110c01111"
+  },
+
+  {
+    title: 'ГСН 6 урок',
+    pattern:"A0A0c011"
+  },
+  {
+    title: 'ГСН 7 урок',
+    pattern:"A0A0c111"
+  },
+  {
+    title: 'ГСН 11 урок',
+    pattern:"A011A011"
+  },
+  {
+    title: 'ГСН 12 урок',
+    pattern:"x0A0x0A0x0A0x0A0"
+  },
+  {
+    title: 'ГСН 13 Кино',
+    pattern:"xxA0A0xA0AxxA0xx"
+  },
+  {
+    title: 'ГСН 13 Ямайка',
+    pattern:"x0AAx0A0"
+  },
+  {
+    title: 'ГСН 14 урок',
+    pattern:"A001x0A00110x111"
+  },
+  {
+    title: 'ГСН 15 урок',
+    pattern:"10c111c1"
+  },
+  {
+    title: 'ГСН 16 урок',
+    pattern:"1011A0111011A011"
+  },
+  {
+    title: 'ГСН 20 урок',
+    pattern:"1111c11A0A11c111"
+  },
+  {
+    title: 'ГСН 21 урок',
+    pattern:"A01111"
+  },
 {
   title: 'Галоп',
   pattern:"1011"

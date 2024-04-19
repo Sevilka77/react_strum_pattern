@@ -18,7 +18,12 @@ export default function PatternList({ onPatternChanged }) {
         {patterns.map((pattern, index) => (
           <ListItem disablePadding key={index}  >
             <ListItemButton>
-              <ListItemText key={pattern.title} onClick={() => onPatternChanged(pattern)} primary={pattern.title} />
+              <ListItemText primaryTypographyProps={{
+                fontSize: 14,
+                fontWeight: 'medium',
+                lineHeight: '10px',
+              }}
+                key={pattern.title} onClick={() => onPatternChanged(pattern)} primary={pattern.title} />
             </ListItemButton>
           </ListItem>))}
       </List>
