@@ -49,6 +49,10 @@ export const patterns =[
     pattern:"1011A0111011A011"
   },
   {
+    title: 'ГСН 17 урок',
+    pattern:"A000c01111A0c111"
+  },
+  {
     title: 'ГСН 20 урок',
     pattern:"1111c11A0A11c111"
   },
