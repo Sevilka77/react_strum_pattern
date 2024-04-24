@@ -3,36 +3,19 @@ import { useEffect } from "react";
 import up from "./up.wav"
 import down from "./down.wav"
 
-
-const audios =
-  typeof window !== "undefined"
-    ? [new Audio(down), new Audio(up)]
-    : [];
-
-export class RecordedClickService {
-  play(id) {
-    const isUp = id % 2
-
-    const audio = audios[isUp];
-
-    audio.play();
-    audio.currentTime = 0;
-  }
-}
-
-const recordedClickService = new RecordedClickService();
-
-
-
-export default function usePlayActiveSound(
-  activeBeatIndex,
-  beatPattern,
-  isPlaying,
-  isBeatSound
-) {
+export default function useBeatSound(activeBeatIndex, isPlaying, isBeatSound, beatPattern) {
+  const u = new Audio(up)
+  const d = new Audio(down)
   useEffect(() => {
-    if (activeBeatIndex !== null && isPlaying && isBeatSound && (beatPattern[activeBeatIndex] != "0")) recordedClickService.play(activeBeatIndex);
-  }
-    , [activeBeatIndex, beatPattern, isPlaying, isBeatSound]
-  );
+    if (isPlaying && isBeatSound && (beatPattern[activeBeatIndex] != "0")) {
+      if (activeBeatIndex % 2 === 0) {
+        d.play()
+      } else {
+        u.play();
+      }
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeBeatIndex, beatPattern, isBeatSound, isPlaying])
+
 }

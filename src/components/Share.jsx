@@ -28,7 +28,7 @@ export default function Share() {
 
   return (
     <div>
-      <ToggleButton onClick={handleClick}><Share2Icon />  </ToggleButton>
+      <ToggleButton value="chplayeck" onClick={handleClick}><Share2Icon />  </ToggleButton>
       <Snackbar
         open={open}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}

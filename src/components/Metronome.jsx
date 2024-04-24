@@ -11,19 +11,18 @@ import { Stack } from '@mui/system';
 
 
 
-export default function Metronome({ config, beatPattern, isPlaying, isMetronomeSound, isBeatSound }) {
+export default function Metronome({ config, beatPattern }) {
 
   const [beats, setBeats] = useState(beatPattern);
   const [activeBeat, setActiveBeat] = useStepMetronome(
     config.tempo,
     beatPattern,
-    isPlaying,
+    config.isPlaying,
   );
 
 
-
-  useMetronomeSound(activeBeat, isPlaying, isMetronomeSound, config.note,);
-  useBeatSound(activeBeat, beats, isPlaying, isBeatSound);
+  useMetronomeSound(activeBeat, config.isPlaying, config.isMetronomeSound, config.note,);
+  useBeatSound(activeBeat, config.isPlaying, config.isBeatSound, beats);
 
   useEffect(() => {
     setBeats(beatPattern)

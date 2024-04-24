@@ -4,20 +4,21 @@ import Metronome from './components/Metronome';
 import PatternList from './components/PatternLIst';
 import PatternEdit from './components/PatternEdit';
 import TempoSelector from './components/TempoSelector';
-import TimeSelect from './components/TimeSelect'
-//import Input from './components/Input';
+import ControlBar from './components/ControlBar';
 
-import { Stack, ToggleButton } from '@mui/material';
+
+import { Stack } from '@mui/material';
 
 import Visual from './components/visual';
-import { Volume2Icon, VolumeXIcon, DrumIcon, PlayIcon, SquareIcon } from 'lucide-react';
-import Share from './components/Share';
+//import { Volume2Icon, VolumeXIcon, DrumIcon, PlayIcon, SquareIcon } from 'lucide-react';
+//import Share from './components/Share';
 
 export const MIN_TEMPO = 40;
 export const MAX_TEMPO = 300;
 
 function reducer(state, action) {
   const newState = { ...state };
+  console.log(action.type)
   switch (action.type) {
     case "setTempo":
       // eslint-disable-next-line no-case-declarations
@@ -48,9 +49,18 @@ function reducer(state, action) {
       break;
     case "setNoteSize":
       // eslint-disable-next-line no-case-declarations
-      let noteSize = action.data.noteS;
+      let noteSize = action.data;
       if (noteSize === undefined) return state;
       newState.note = noteSize;
+      break;
+    case "setIsPlay":
+      newState.isPlaying = action.data;
+      break;
+    case "setIsBeatSound":
+      newState.isBeatSound = action.data;
+      break;
+    case "setIsMetronomSound":
+      newState.isMetronomeSound = action.data;
       break;
     default:
       return state;
@@ -60,16 +70,15 @@ function reducer(state, action) {
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMetronomeSound, setIsMetronomeSound] = useState(false);
-  const [isBeatSound, setIsBeatSound] = useState(false);
   const [beatPattern, setBeatPattern] = useState("1101");
 
 
   const [config, dispatch] = useReducer(reducer, {
     tempo: 60,
     note: 4,
-    isPlaying,
+    isPlaying: false,
+    isMetronomeSound: false,
+    isBeatSound: false
   });
 
   useEffect(() => {
@@ -88,8 +97,6 @@ function App() {
 
 
   return (
-
-
     <Stack direction="column"
       justifyContent="center"
       alignItems="center"
@@ -98,61 +105,23 @@ function App() {
 
       }}
     >
-
       <Stack direction="row"
         justifyContent="center"
         alignItems="flex-end"
         flexBasis="content"
       >
-        <TimeSelect
-          onNoteChanged={(noteS) => dispatch({ type: "setNoteSize", data: { noteS } })}
-          note={config.note}
+        <ControlBar
+          onConfigChanged={(event, data) => dispatch({ type: event, data: data })}
+          config={config}
         />
-        <ToggleButton
-          value="MS"
-          selected={isMetronomeSound}
-          onChange={() => {
-            setIsMetronomeSound(!isMetronomeSound)
-          }}
-        >
-          {isMetronomeSound ? <VolumeXIcon /> : <Volume2Icon />}
-        </ToggleButton>
-        <ToggleButton
-          value="BS"
-          selected={isBeatSound}
-          onChange={() => {
-            setIsBeatSound(!isBeatSound)
-          }}
-        >
-          <DrumIcon />
-        </ToggleButton>
-        <ToggleButton
-          value="chplayeck"
-          selected={isPlaying}
-          onChange={() => {
-            setIsPlaying(!isPlaying)
-          }}
-        >
-          {isPlaying ? <SquareIcon /> : <PlayIcon />}
-        </ToggleButton>
-        <Share />
       </Stack>
 
       <TempoSelector
+        config={config}
         onTempoChanged={(tempo) => dispatch({ type: "setTempo", data: { tempo } })}
-        tempo={config.tempo}
       />
-
-
-
-      <Metronome config={config} beatPattern={beatPattern.split('')} isPlaying={isPlaying} isMetronomeSound={isMetronomeSound} isBeatSound={isBeatSound} />
-
-      <Visual toggleStart={isPlaying ? 'swing' : 'stop'} swing={(120 / config.tempo)} />
-      {/* <BeatCountSelector
-        onBeatCountChanged={(beatCount) => dispatch({ type: "setBeatCount", data: { beatCount } })}
-        beatCount={config.beatPattern.length}
-        dispatch({ type: "setBeatPattern", data: beatPattern.pattern });
-      /> */}
+      <Metronome config={config} beatPattern={beatPattern.split('')} />
+      <Visual toggleStart={config.isPlaying ? 'swing' : 'stop'} swing={(120 / config.tempo)} />
       <PatternList onPatternChanged={(beatPattern) => { setSearchParams({ p: beatPattern.pattern }) }}></PatternList>
       <PatternEdit beatPattern={beatPattern.split('')} onPatternChanged={(beatPattern) => { setSearchParams({ p: beatPattern }) }} />
 
