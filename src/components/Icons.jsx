@@ -4,7 +4,7 @@ const ShareIcon = createSvgIcon(
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
-    strokeWidth={2}
+    strokeWidth={1}
     stroke="currentColor"
   >
     <circle cx="18" cy="5" r="3"></circle>

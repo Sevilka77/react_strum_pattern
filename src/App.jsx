@@ -155,9 +155,9 @@ function App() {
               gridTemplateAreas: `"header header header header"
                                 "main main main main "
                                 "edit edit edit edit"
-                                "PB MB BB NB"
                                 "tempo tempo tempo tempo"
-                                ". PLB PEB SB"`,
+                                "PB MB BB NB"
+                                "PB PLB PEB SB"`,
             })
           }
         >
