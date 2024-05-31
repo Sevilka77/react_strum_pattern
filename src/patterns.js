@@ -1,15 +1,15 @@
 export const patterns =[
   {
     title: 'ГСН 1 урок',
-    pattern:"11c1"
+    pattern:"11x1"
   },
   {
     title: 'ГСН 3 урок',
-    pattern:"10c101c1"
+    pattern:"10x101x1"
   },
   {
     title: 'ГСН 5 урок',
-    pattern:"A00110c01111"
+    pattern:"A00110x01111"
   },
 
   {

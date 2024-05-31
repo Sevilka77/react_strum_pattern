@@ -1,11 +1,4 @@
-
-//import IncDec from "./IncDec";
-//import Slider from '@mui/material/Slider';
-//import * as React from 'react'
-import { Divider, Paper, ToggleButton, ToggleButtonGroup } from '@mui/material';
-
-
-
+import { Divider, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { Volume2Icon, VolumeXIcon, DrumIcon, PlayIcon, SquareIcon } from 'lucide-react';
 import Share from './Share';
 
@@ -32,23 +25,13 @@ export default function ControlBar({ config, onConfigChanged }) {
   };
 
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        display: 'flex',
-        border: (theme) => `1px solid ${theme.palette.divider}`,
-        flexWrap: 'wrap',
-        '& .MuiToggleButtonGroup-grouped ': {
-          border: 0,
-        },
-      }}
-    >
-      <ToggleButtonGroup styled={{ border: 0 }}
+    <>
+      <ToggleButtonGroup styled={{ border: 0, fontSize: "inherit" }}
 
         exclusive
         value={config.note}
         onChange={handleNoteChange}
-        aria-label="text note"
+        aria-label="note"
       >
         <ToggleButton value="4" aria-label="4">
           4/4
@@ -80,12 +63,13 @@ export default function ControlBar({ config, onConfigChanged }) {
         >
           {config.isPlaying ? <SquareIcon /> : <PlayIcon />}
         </ToggleButton>
+
         <Share />
 
 
 
       </ToggleButtonGroup>
-    </Paper >
+    </>
   );
 }
 
