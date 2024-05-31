@@ -48,7 +48,9 @@ export default function MetronomeBeat({ id, beatStatus, active, note }) {
   }
   if (beatStatus == "A") {
     if (isUp) {
-      icon = <ArrowU c color="warning" sx={{ fill: bColor }} />;
+      icon = (
+        <ArrowU fontSize="inherit" color="warning" sx={{ fill: bColor }} />
+      );
     } else {
       icon = (
         <ArrowD fontSize="inherit" color="warning" sx={{ fill: bColor }} />
