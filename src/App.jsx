@@ -265,7 +265,7 @@ function App() {
             sx={{
               gridArea: "tempo",
               alignSelf: "center",
-              justifySelf: "center",
+              p: "15px",
             }}
           >
             <TempoSelector
