@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { Button, Grid } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import { DeleteIcon } from "lucide-react";
+import { ArrowD, XDownIcon, XIcon } from "./Icons";
 
 export default function PatternEdit({ beatPattern, onPatternChanged }) {
   const [beats, setBeats] = useState(beatPattern);
@@ -32,23 +33,31 @@ export default function PatternEdit({ beatPattern, onPatternChanged }) {
   }, [beatPattern]);
 
   return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="space-evenly"
-      alignItems="center"
-      mt={1}
-      columns={{ xs: 2, sm: 3, md: 12 }}
-      bottom={0}
-    >
-      <Button onClick={() => handleChange("A")}>Aкцент</Button>
-      <Button onClick={() => handleChange("1")}>Удар</Button>
-      <Button onClick={() => handleChange("c")}>Щелчок</Button>
-      <Button onClick={() => handleChange("x")}>Заглушка</Button>
-      <Button onClick={() => handleChange("0")}>Пропуск</Button>
-      <Button onClick={() => handleChange("del")}>
+    <Stack direction="row" flexWrap="wrap" justifyContent="center">
+      <Stack direction="column" justifyContent="center" alignItems="center">
+        <ArrowD color="warning" />
+        <Button onClick={() => handleChange("A")}>Aкцент</Button>
+      </Stack>
+      <Stack direction="column" justifyContent="center" alignItems="center">
+        <ArrowD color="warning.main" />
+        <Button onClick={() => handleChange("1")}>Удар</Button>
+      </Stack>
+      <Stack direction="column" justifyContent="center" alignItems="center">
+        <XDownIcon />
+        <Button onClick={() => handleChange("c")}>Удар по заглушенным</Button>
+      </Stack>
+      <Stack direction="column" justifyContent="center" alignItems="center">
+        <XIcon />
+        <Button onClick={() => handleChange("x")}>Заглушка</Button>
+      </Stack>
+      <Stack direction="column" justifyContent="center" alignItems="center">
+        <ArrowD color="disabled" />
+        <Button onClick={() => handleChange("0")}>Пропуск</Button>
+      </Stack>
+      <Stack direction="column" justifyContent="center" alignItems="center">
         <DeleteIcon />
-      </Button>
-    </Grid>
+        <Button onClick={() => handleChange("del")}>Удалить</Button>
+      </Stack>
+    </Stack>
   );
 }

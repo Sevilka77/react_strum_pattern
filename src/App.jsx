@@ -6,7 +6,13 @@ import Metronome from "./components/Metronome";
 import PatternList from "./components/PatternLIst";
 import TempoSelector from "./components/TempoSelector";
 
-import { Stack, Typography, IconButton, Grid, Box } from "@mui/material";
+import {
+  Stack,
+  Typography,
+  IconButton,
+  Box,
+  useMediaQuery,
+} from "@mui/material";
 import Visual from "./components/visual";
 
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -77,6 +83,8 @@ function reducer(state, action) {
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 function App() {
+  const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+  const isMediumDevice = useMediaQuery("only screen and (min-width : 770px)");
   const [mode, setMode] = useState("light");
   const [showPB, setPB] = useState(false);
   const colorMode = useMemo(
@@ -125,19 +133,33 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Box
-          sx={{
-            boxSizing: "border-box",
+          sx={
+            (isMediumDevice && {
+              boxSizing: "border-box",
 
-            height: "100vh",
-            display: "grid",
-            gridTemplateColumns: "1fr",
-
-            gridTemplateRows: "1fr 2fr 1fr 1fr ",
-            gridTemplateAreas: `"header"
-            "main"
-            "edit"
-            "footer"`,
-          }}
+              height: "100vh",
+              display: "grid",
+              gridTemplateColumns: "repeat(10,1fr)",
+              gridTemplateRows: "1fr 2fr 1fr 1fr ",
+              gridTemplateAreas: `"header header header header header header header header header header"
+                                "main main main main main main main main main main"
+                                ". . . . . . edit edit edit edit"
+                                "PB MB BB NB tempo tempo tempo PLB PEB SB"`,
+            }) ||
+            (isSmallDevice && {
+              boxSizing: "border-box",
+              height: "100vh",
+              display: "grid",
+              gridTemplateColumns: "repeat(4,1fr)",
+              gridTemplateRows: "1fr 2fr 1fr 1fr 1fr 1fr",
+              gridTemplateAreas: `"header header header header"
+                                "main main main main "
+                                "edit edit edit edit"
+                                "PB MB BB NB"
+                                "tempo tempo tempo tempo"
+                                ". PLB PEB SB"`,
+            })
+          }
         >
           <Box
             sx={{
@@ -181,7 +203,6 @@ function App() {
               direction="column"
               justifyContent="flex-start"
               alignItems="center"
-              sx={{ width: "96vw" }}
             >
               <Metronome config={config} beatPattern={beatPattern.split("")} />
               <Visual
@@ -201,79 +222,81 @@ function App() {
             )}
           </Box>
           <Box
+            sx={{ gridArea: "PB", alignSelf: "center", justifySelf: "center" }}
+          >
+            <PlayButton
+              onConfigChanged={(event, data) =>
+                dispatch({ type: event, data: data })
+              }
+              config={config}
+            />
+          </Box>
+          <Box
+            sx={{ gridArea: "MB", alignSelf: "center", justifySelf: "center" }}
+          >
+            <MetronomeButton
+              onConfigChanged={(event, data) =>
+                dispatch({ type: event, data: data })
+              }
+              config={config}
+            />
+          </Box>
+          <Box
+            sx={{ gridArea: "BB", alignSelf: "center", justifySelf: "center" }}
+          >
+            <BeatSound
+              onConfigChanged={(event, data) =>
+                dispatch({ type: event, data: data })
+              }
+              config={config}
+            />
+          </Box>
+          <Box
+            sx={{ gridArea: "NB", alignSelf: "center", justifySelf: "center" }}
+          >
+            <NoteSizeButton
+              onConfigChanged={(event, data) =>
+                dispatch({ type: event, data: data })
+              }
+              config={config}
+            />
+          </Box>
+          <Box
             sx={{
-              gridArea: "footer",
-              borderTop: "1px solid #5f5f5f",
-              alignSelf: "end",
+              gridArea: "tempo",
+              alignSelf: "center",
+              justifySelf: "center",
             }}
           >
-            <Grid
-              container
-              direction="row"
-              justifyContent="space-evenly"
-              alignItems="center"
-              mt={1}
-              columns={{ xs: 2, sm: 3, md: 12 }}
-            >
-              <Grid item>
-                <PlayButton
-                  onConfigChanged={(event, data) =>
-                    dispatch({ type: event, data: data })
-                  }
-                  config={config}
-                />
-              </Grid>
-
-              <Grid item>
-                <MetronomeButton
-                  onConfigChanged={(event, data) =>
-                    dispatch({ type: event, data: data })
-                  }
-                  config={config}
-                />
-              </Grid>
-              <Grid item>
-                <BeatSound
-                  onConfigChanged={(event, data) =>
-                    dispatch({ type: event, data: data })
-                  }
-                  config={config}
-                />
-              </Grid>
-              <Grid item>
-                <NoteSizeButton
-                  onConfigChanged={(event, data) =>
-                    dispatch({ type: event, data: data })
-                  }
-                  config={config}
-                />
-              </Grid>
-              <Grid item xs={4}>
-                <TempoSelector
-                  tempo={config.tempo}
-                  onTempoChanged={(tempo) =>
-                    dispatch({ type: "setTempo", data: { tempo } })
-                  }
-                />
-              </Grid>
-              <Grid item>
-                <PatternList
-                  onPatternChanged={(beatPattern) => {
-                    setSearchParams({ p: beatPattern.pattern });
-                  }}
-                ></PatternList>
-              </Grid>
-              <Grid item>
-                <PatternButton
-                  onChanged={() => {
-                    setPB(!showPB);
-                  }}
-                />
-              </Grid>
-              <Grid item>
-                <Share />
-              </Grid>
-            </Grid>
+            <TempoSelector
+              tempo={config.tempo}
+              onTempoChanged={(tempo) =>
+                dispatch({ type: "setTempo", data: { tempo } })
+              }
+            />
+          </Box>
+          <Box
+            sx={{ gridArea: "PLB", alignSelf: "center", justifySelf: "center" }}
+          >
+            <PatternList
+              onPatternChanged={(beatPattern) => {
+                setSearchParams({ p: beatPattern.pattern });
+              }}
+            ></PatternList>
+          </Box>
+          <Box
+            sx={{ gridArea: "PEB", alignSelf: "center", justifySelf: "center" }}
+          >
+            <PatternButton
+              onChanged={() => {
+                setPB(!showPB);
+              }}
+            />
+          </Box>
+          <Box
+            sx={{ gridArea: "SB", alignSelf: "center", justifySelf: "center" }}
+          >
+            <Share />
           </Box>
         </Box>
       </ThemeProvider>

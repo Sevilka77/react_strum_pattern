@@ -1,7 +1,5 @@
 import { IconButton } from "@mui/material";
 
-
-
 export default function NoteSizeButton({ config, onConfigChanged }) {
   const handleChange = () => {
     if (config.note == "4") {
@@ -15,8 +13,13 @@ export default function NoteSizeButton({ config, onConfigChanged }) {
     }
   };
   return (
-    <IconButton sx={{ fontSize: "40px", borderRadius: "50%", border: "1px solid#f5f5f5" }}
-
+    <IconButton
+      sx={{
+        color: "text.primary",
+        fontSize: "40px",
+        borderRadius: "50%",
+        border: "1px solid#f5f5f5",
+      }}
       onClick={handleChange}
     >
       {config.note + "/4"}
