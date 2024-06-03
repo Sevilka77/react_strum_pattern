@@ -10,86 +10,45 @@ export default function MetronomeBeat({
   beatsLen,
 }) {
   const isUp = id % 2 !== 0;
-  let nameId;
-
-  if (isUp) {
-    nameId = "e";
-  } else {
-    nameId = (id + 2) / 2;
-  }
-
-  let color = "primary.main";
+  let nameId = isUp ? "e" : (id + 2) / 2;
+  let color = id % note === 0 ? "warning.main" : "primary.main";
   let icon;
-  if (id % note === 0) {
-    color = "warning.main";
-  }
-  let bColor = "#ffffff0";
-  let aColor = "#ffffff0";
-  let fSize = 6;
-  if (isSmd) {
-    if (94 / beatsLen > 18) {
-      fSize = 18;
-    } else {
-      fSize = 94 / beatsLen;
-    }
-  }
+  let aColor = active ? "#ed6c02" : "#ffffff0";
+  let bColor = active ? "currentColor" : "#ffffff0";
+  let fSize = isSmd ? (beatsLen !== 0 ? Math.min(18, 94 / beatsLen) : 0) : 6;
 
-  if (active) {
-    bColor = "currentColor";
-    aColor = "#ed6c02";
-  }
-
-  if (beatStatus == "0") {
-    if (isUp) {
-      icon = (
+  switch (beatStatus) {
+    case "0":
+      icon = isUp ? (
         <ArrowU fontSize="inherit" color="disabled" sx={{ fill: bColor }} />
-      );
-    } else {
-      icon = (
+      ) : (
         <ArrowD fontSize="inherit" color="disabled" sx={{ fill: bColor }} />
       );
-    }
-  }
-
-  if (beatStatus == "1") {
-    if (isUp) {
-      icon = (
+      break;
+    case "1":
+      icon = isUp ? (
         <ArrowU fontSize="inherit" color="primary" sx={{ fill: bColor }} />
-      );
-    } else {
-      icon = (
+      ) : (
         <ArrowD fontSize="inherit" color="primary" sx={{ fill: bColor }} />
       );
-    }
-  }
-  if (beatStatus == "A") {
-    if (isUp) {
-      icon = (
+      break;
+    case "A":
+      icon = isUp ? (
         <ArrowU fontSize="inherit" color="warning" sx={{ fill: bColor }} />
-      );
-    } else {
-      icon = (
+      ) : (
         <ArrowD fontSize="inherit" color="warning" sx={{ fill: bColor }} />
       );
-    }
-  }
-  if (beatStatus == "x") {
-    if (isUp) {
+      break;
+    case "x":
       icon = <XIcon fontSize="inherit" color="primary" sx={{ fill: bColor }} />;
-    } else {
-      icon = <XIcon fontSize="inherit" color="primary" sx={{ fill: bColor }} />;
-    }
-  }
-  if (beatStatus == "c") {
-    if (isUp) {
-      icon = (
+      break;
+    case "c":
+      icon = isUp ? (
         <XUpIcon fontSize="inherit" color="primary" sx={{ fill: bColor }} />
-      );
-    } else {
-      icon = (
+      ) : (
         <XDownIcon fontSize="inherit" color="primary" sx={{ fill: bColor }} />
       );
-    }
+      break;
   }
 
   return (
@@ -106,12 +65,10 @@ export default function MetronomeBeat({
           alignItems: "center",
           justifyContent: "space-around",
           marginBottom: "-2vh",
-
           color: color,
         }}
       >
-        {" "}
-        {nameId}{" "}
+        {nameId}
       </Box>
       <Box sx={{ height: "1vh", bgcolor: aColor, marginBottom: "1vh" }} />
       <Box
