@@ -67,11 +67,7 @@ export default function MetronomeBeat({ id, beatStatus, active, note }) {
   if (beatStatus == "c") {
     if (isUp) {
       icon = (
-        <XUpIcon
-          fontSize="inherit"
-          color="primary"
-          sx={{ fill: bColor, fontSize: 120 }}
-        />
+        <XUpIcon fontSize="inherit" color="primary" sx={{ fill: bColor }} />
       );
     } else {
       icon = (
