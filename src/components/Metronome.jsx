@@ -26,16 +26,6 @@ export default function Metronome({ config, isSmd, beatPattern }) {
     setBeats(beatPattern);
   }, [beatPattern, setActiveBeat]);
 
-  // const beatStatusChanged = (index, status) => {
-  //   setBeats((curr) => {
-  //     const newBeats = [...curr];
-
-  //     newBeats[index] = status;
-
-  //     return newBeats;
-  //   });
-  // };
-
   return (
     <Stack
       direction="row"
@@ -52,7 +42,7 @@ export default function Metronome({ config, isSmd, beatPattern }) {
           beatStatus={b}
           isSmd={isSmd}
           beatsLen={beats.length}
-          //onBeatStatusChanged={(status) => beatStatusChanged(index, status)}
+          a
           active={activeBeat == index}
         />
       ))}
