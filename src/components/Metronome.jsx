@@ -6,7 +6,7 @@ import useBeatSound from "../hooks/useBeatSound";
 
 import { Stack } from "@mui/system";
 
-export default function Metronome({ config, beatPattern }) {
+export default function Metronome({ config, isSmd, beatPattern }) {
   const [beats, setBeats] = useState(beatPattern);
   const [activeBeat, setActiveBeat] = useStepMetronome(
     config.tempo,
@@ -50,6 +50,8 @@ export default function Metronome({ config, beatPattern }) {
           id={index}
           note={config.note}
           beatStatus={b}
+          isSmd={isSmd}
+          beatsLen={beats.length}
           //onBeatStatusChanged={(status) => beatStatusChanged(index, status)}
           active={activeBeat == index}
         />

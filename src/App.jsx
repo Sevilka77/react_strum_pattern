@@ -204,7 +204,11 @@ function App() {
               justifyContent="flex-start"
               alignItems="center"
             >
-              <Metronome config={config} beatPattern={beatPattern.split("")} />
+              <Metronome
+                config={config}
+                isSmd={isSmallDevice}
+                beatPattern={beatPattern.split("")}
+              />
               <Visual
                 toggleStart={config.isPlaying ? "swing" : "stop"}
                 swing={120 / config.tempo}

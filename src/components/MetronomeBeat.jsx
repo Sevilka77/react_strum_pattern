@@ -1,7 +1,14 @@
 import { Stack, Box } from "@mui/material";
 import { ArrowD, ArrowU, XDownIcon, XUpIcon, XIcon } from "./Icons";
 
-export default function MetronomeBeat({ id, beatStatus, active, note }) {
+export default function MetronomeBeat({
+  id,
+  beatStatus,
+  active,
+  isSmd,
+  note,
+  beatsLen,
+}) {
   const isUp = id % 2 !== 0;
   let nameId;
 
@@ -18,6 +25,15 @@ export default function MetronomeBeat({ id, beatStatus, active, note }) {
   }
   let bColor = "#ffffff0";
   let aColor = "#ffffff0";
+  let fSize = 6;
+  if (isSmd) {
+    if (94 / beatsLen > 18) {
+      fSize = 18;
+    } else {
+      fSize = 94 / beatsLen;
+    }
+  }
+
   if (active) {
     bColor = "currentColor";
     aColor = "#ed6c02";
@@ -81,7 +97,7 @@ export default function MetronomeBeat({ id, beatStatus, active, note }) {
       orientation="vertical"
       sx={{
         width: "auto",
-        fontSize: "6vw",
+        fontSize: fSize + "vw",
       }}
     >
       <Box
