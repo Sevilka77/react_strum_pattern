@@ -42,7 +42,7 @@ export default function Share() {
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         autoHideDuration={2000}
         onClose={handleClose}
-        message="link copied to clipboard!"
+        message="Ссылка на гитарйный бой скопирована!"
       />
     </Box>
   );

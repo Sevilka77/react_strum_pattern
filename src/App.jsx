@@ -183,7 +183,7 @@ function App() {
                 letterSpacing: "2px",
               }}
             >
-              strumming pattern trainer
+              Тренажёр гитарного боя
             </Typography>
 
             <IconButton
