@@ -24,6 +24,7 @@ import Share from "./components/Share";
 import NoteSizeButton from "./components/NoteSizeButton";
 import PatternButton from "./components/PatternButton";
 import PatternEdit from "./components/PatternEdit";
+// import About from "./components/About";
 
 export const MIN_TEMPO = 40;
 export const MAX_TEMPO = 300;
@@ -185,18 +186,20 @@ function App() {
             >
               Тренажёр гитарного боя
             </Typography>
-
-            <IconButton
-              onClick={colorMode.toggleColorMode}
-              color="inherit"
-              sx={{
-                fontSize: "40px",
-                borderRadius: "50%",
-                border: "1px solid#f5f5f5",
-              }}
-            >
-              {theme.palette.mode === "dark" ? <MoonIcon /> : <SunIcon />}
-            </IconButton>
+            <Stack direction="row">
+              <IconButton
+                onClick={colorMode.toggleColorMode}
+                color="inherit"
+                sx={{
+                  fontSize: "40px",
+                  borderRadius: "50%",
+                  border: "1px solid#f5f5f5",
+                }}
+              >
+                {theme.palette.mode === "dark" ? <MoonIcon /> : <SunIcon />}
+              </IconButton>
+              {/* <About /> */}
+            </Stack>
           </Box>
           <Box sx={{ gridArea: "main" }}>
             <Stack

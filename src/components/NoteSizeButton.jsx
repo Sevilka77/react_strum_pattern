@@ -1,4 +1,4 @@
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 
 export default function NoteSizeButton({ config, onConfigChanged }) {
   const handleChange = () => {
@@ -13,16 +13,18 @@ export default function NoteSizeButton({ config, onConfigChanged }) {
     }
   };
   return (
-    <IconButton
-      sx={{
-        color: "text.primary",
-        fontSize: "40px",
-        borderRadius: "50%",
-        border: "1px solid#f5f5f5",
-      }}
-      onClick={handleChange}
-    >
-      {config.note + "/4"}
-    </IconButton>
+    <Tooltip title="Изменить размер" placement="top">
+      <IconButton
+        sx={{
+          color: "text.primary",
+          fontSize: "40px",
+          borderRadius: "50%",
+          border: "1px solid#f5f5f5",
+        }}
+        onClick={handleChange}
+      >
+        {config.note + "/4"}
+      </IconButton>
+    </Tooltip>
   );
 }

@@ -1,6 +1,6 @@
 import Snackbar from "@mui/material/Snackbar";
 import { ShareIcon } from "./Icons";
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Tooltip } from "@mui/material";
 import { useState } from "react";
 
 async function copyToClip() {
@@ -24,19 +24,20 @@ export default function Share() {
 
   return (
     <Box sx={{ gridArea: "SB" }}>
-      <IconButton
-        sx={{
-          color: "text.primary",
-          fontSize: "40px",
-          borderRadius: "50%",
-          border: "1px solid #f5f5f5",
-        }}
-        value="chplayeck"
-        onClick={handleClick}
-      >
-        <ShareIcon fontSize="inherit" />
-      </IconButton>
-
+      <Tooltip title="Поделиться ссылкой на гитарный бой" placement="top">
+        <IconButton
+          sx={{
+            color: "text.primary",
+            fontSize: "40px",
+            borderRadius: "50%",
+            border: "1px solid #f5f5f5",
+          }}
+          value="chplayeck"
+          onClick={handleClick}
+        >
+          <ShareIcon fontSize="inherit" />
+        </IconButton>
+      </Tooltip>
       <Snackbar
         open={open}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
