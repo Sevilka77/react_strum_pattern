@@ -65,7 +65,7 @@ function reducer(state, action) {
       // eslint-disable-next-line no-case-declarations
       let noteSize = action.data;
       if (noteSize === undefined) return state;
-      newState.note = noteSize;
+      newState.noteSize = noteSize;
       break;
     case "setIsPlay":
       newState.isPlaying = action.data;
@@ -114,7 +114,7 @@ function App() {
 
   const [config, dispatch] = useReducer(reducer, {
     tempo: 60,
-    note: 4,
+    noteSize: 4,
     isPlaying: false,
     isMetronomeSound: false,
     isBeatSound: false,

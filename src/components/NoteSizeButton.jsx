@@ -23,7 +23,7 @@ export default function NoteSizeButton({ config, onConfigChanged }) {
         }}
         onClick={handleChange}
       >
-        {config.note + "/4"}
+        {config.noteSize + "/4"}
       </IconButton>
     </Tooltip>
   );
