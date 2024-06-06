@@ -10,7 +10,7 @@ export default function MetronomeBeat({
   beatsLen,
 }) {
   const isUp = id % 2 !== 0;
-  let nameId = isUp ? "e" : (id + 2) / 2;
+  let nameId = isUp ? "и" : (id + 2) / 2;
   let color = id % noteSize === 0 ? "warning.main" : "primary.main";
   let icon;
   let aColor = active ? "#ed6c02" : "#ffffff0";
