@@ -24,7 +24,7 @@ import Share from "./components/Share";
 import NoteSizeButton from "./components/NoteSizeButton";
 import PatternButton from "./components/PatternButton";
 import PatternEdit from "./components/PatternEdit";
-// import About from "./components/About";
+import About from "./components/About";
 
 export const MIN_TEMPO = 40;
 export const MAX_TEMPO = 300;
@@ -198,7 +198,7 @@ function App() {
               >
                 {theme.palette.mode === "dark" ? <MoonIcon /> : <SunIcon />}
               </IconButton>
-              {/* <About /> */}
+              <About />
             </Stack>
           </Box>
           <Box sx={{ gridArea: "main" }}>

@@ -4,7 +4,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { Box, Drawer, IconButton } from "@mui/material";
+import { Box, Drawer, IconButton, Tooltip } from "@mui/material";
 import { ListIcon } from "./Icons";
 
 export default function PatternList({ onPatternChanged }) {
@@ -36,7 +36,7 @@ export default function PatternList({ onPatternChanged }) {
   );
 
   return (
-    <div>
+    <Tooltip title="Выбрать бой" placement="top">
       <IconButton
         sx={{
           color: "text.primary",
@@ -51,6 +51,6 @@ export default function PatternList({ onPatternChanged }) {
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>
-    </div>
+    </Tooltip>
   );
 }
