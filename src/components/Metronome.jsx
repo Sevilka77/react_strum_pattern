@@ -23,11 +23,10 @@ export default function Metronome({ config, isSmd, beatPattern }) {
         <MetronomeBeat
           key={index}
           id={index}
-          note={config.note}
+          noteSize={config.noteSize}
           beatStatus={b}
           isSmd={isSmd}
           beatsLen={beats.length}
-          a
           active={activeBeat == index}
         />
       ))}

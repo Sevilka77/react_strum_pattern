@@ -2,13 +2,13 @@ import { IconButton, Tooltip } from "@mui/material";
 
 export default function NoteSizeButton({ config, onConfigChanged }) {
   const handleChange = () => {
-    if (config.note == "4") {
+    if (config.noteSize == "4") {
       onConfigChanged("setNoteSize", 3);
     }
-    if (config.note == "3") {
+    if (config.noteSize == "3") {
       onConfigChanged("setNoteSize", 2);
     }
-    if (config.note == "2") {
+    if (config.noteSize == "2") {
       onConfigChanged("setNoteSize", 4);
     }
   };
