@@ -43,7 +43,7 @@ function countSteps(beats) {
 
 export default function useTone(config, beatPattern) {
   const [activeBeat, setActiveBeat] = useState(0);
-  Tone.getTransport().bpm.value = config.tempo;
+  Tone.getTransport().bpm.value = config.tempo || 120;
   const seqRef = useRef(seq);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export default function useTone(config, beatPattern) {
         beatPattern,
         config.isBeatSound,
         config.isMetronomeSound,
-        config.noteSize,
+        config.noteSize || 4,
       );
       setActiveBeat(note);
     };
