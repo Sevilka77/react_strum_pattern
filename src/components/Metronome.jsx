@@ -5,11 +5,11 @@ import useTone from "../hooks/useTone";
 
 export default function Metronome({ config, isSmd, beatPattern }) {
   const [beats, setBeats] = useState(beatPattern);
-  const [activeBeat, setActiveBeat] = useTone(config, beatPattern);
+  const [activeBeat] = useTone(config, beatPattern);
 
   useEffect(() => {
     setBeats(beatPattern);
-  }, [beatPattern, setActiveBeat]);
+  }, [beatPattern, activeBeat]);
 
   return (
     <Stack

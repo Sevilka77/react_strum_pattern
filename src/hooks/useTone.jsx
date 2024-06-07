@@ -74,5 +74,5 @@ export default function useTone(config, beatPattern) {
     config.noteSize,
   ]);
 
-  return [activeBeat, setActiveBeat];
+  return [activeBeat];
 }

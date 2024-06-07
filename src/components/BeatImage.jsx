@@ -8,7 +8,13 @@ export default function BeatImage({ beatString }) {
     let iconColor = "primary";
     switch (beat) {
       case "0":
-        IconComponent = null;
+        iconColor = "disabled";
+        IconComponent =
+          index % 2 === 0 ? (
+            <ArrowD color={iconColor} />
+          ) : (
+            <ArrowU color={iconColor} />
+          );
 
         break;
       case "1":
