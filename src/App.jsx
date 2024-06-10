@@ -15,7 +15,6 @@ import { MoonIcon, SunIcon } from "lucide-react";
 import PatternList from "./components/PatternLIst";
 import TempoSelector from "./components/TempoSelector";
 import MetronomeWrapper from "./components/MetronomeWrapper";
-import Visual from "./components/visual";
 import PlayButton from "./components/PlayButton";
 import MetronomeButton from "./components/MetronomeButton";
 import BeatSound from "./components/BeatSound";
@@ -156,10 +155,6 @@ function App() {
                 config={config}
                 isSmallDevice={isSmallDevice}
                 beatPattern={beatPattern.split("")}
-              />
-              <Visual
-                toggleStart={config.isPlaying ? "swing" : "stop"}
-                swing={120 / config.tempo}
               />
             </Stack>
           </Box>
