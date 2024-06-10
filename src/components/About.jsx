@@ -22,11 +22,12 @@ export default function About() {
   };
 
   return (
-    <React.Fragment>
+    <>
       <IconButton
         onClick={handleClickOpen}
         color="inherit"
         sx={{
+          minWidth: 0,
           fontSize: "40px",
           borderRadius: "50%",
           border: "1px solid#f5f5f5",
@@ -78,6 +79,6 @@ export default function About() {
           </Typography>
         </Container>
       </Dialog>
-    </React.Fragment>
+    </>
   );
 }

@@ -120,6 +120,7 @@ function App() {
             }}
           >
             <div />
+
             <Typography
               sx={{
                 textTransform: "uppercase",
@@ -137,7 +138,7 @@ function App() {
                 sx={{
                   fontSize: "40px",
                   borderRadius: "50%",
-                  border: "1px solid#f5f5f5",
+                  border: "1px solid #f5f5f5",
                 }}
               >
                 {theme.palette.mode === "dark" ? <MoonIcon /> : <SunIcon />}

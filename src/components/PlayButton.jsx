@@ -18,7 +18,6 @@ export default function PlayButton({ config, onConfigChanged }) {
         borderRadius: "50%",
         border: "1px solid #f5f5f5",
       }}
-      selected={config.isPlaying}
       onClick={handleClick}
     >
       {config.isPlaying ? (
