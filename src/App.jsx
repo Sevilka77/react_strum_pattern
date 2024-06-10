@@ -24,6 +24,7 @@ import NoteSizeButton from "./components/NoteSizeButton";
 import PatternButton from "./components/PatternButton";
 import PatternEdit from "./components/PatternEdit";
 import About from "./components/About";
+
 import reducer from "./reducer";
 
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
