@@ -1,28 +1,29 @@
 import { ArrowU, ArrowD, XIcon, XUpIcon, XDownIcon } from "./Icons"; // Замени на путь к своим иконкам
 
-export default function BeatImage({ beatString }) {
+export default function BeatImage({ beatString, fill }) {
   const iconSize = 24; // Размер иконок
 
   const beatIcons = beatString.split("").map((beat, index) => {
     let IconComponent;
     let iconColor = "primary";
+    let iconFill = fill && "currentColor";
     switch (beat) {
       case "0":
         iconColor = "disabled";
         IconComponent =
           index % 2 === 0 ? (
-            <ArrowD color={iconColor} />
+            <ArrowD color={iconColor} sx={{ fill: iconFill }} />
           ) : (
-            <ArrowU color={iconColor} />
+            <ArrowU color={iconColor} sx={{ fill: iconFill }} />
           );
 
         break;
       case "1":
         IconComponent =
           index % 2 === 0 ? (
-            <ArrowD color={iconColor} />
+            <ArrowD color={iconColor} sx={{ fill: iconFill }} />
           ) : (
-            <ArrowU color={iconColor} />
+            <ArrowU color={iconColor} sx={{ fill: iconFill }} />
           );
 
         break;
@@ -30,22 +31,22 @@ export default function BeatImage({ beatString }) {
         iconColor = "warning";
         IconComponent =
           index % 2 === 0 ? (
-            <ArrowD color={iconColor} />
+            <ArrowD color={iconColor} sx={{ fill: iconFill }} />
           ) : (
-            <ArrowU color={iconColor} />
+            <ArrowU color={iconColor} sx={{ fill: iconFill }} />
           );
 
         break;
       case "x":
-        IconComponent = <XIcon color={iconColor} />;
+        IconComponent = <XIcon color={iconColor} sx={{ fill: iconFill }} />;
 
         break;
       case "c":
         IconComponent =
           index % 2 === 0 ? (
-            <XUpIcon color={iconColor} />
+            <XUpIcon color={iconColor} sx={{ fill: iconFill }} />
           ) : (
-            <XDownIcon color={iconColor} />
+            <XDownIcon color={iconColor} sx={{ fill: iconFill }} />
           );
         break;
       default:

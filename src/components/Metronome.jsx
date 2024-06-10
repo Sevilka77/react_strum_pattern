@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import MetronomeBeat from "./MetronomeBeat";
 import { Stack } from "@mui/system";
-import useTone from "../hooks/useTone";
 
-export default function Metronome({ config, isSmd, beatPattern }) {
+export default function Metronome({ config, isSmd, beatPattern, activeBeat }) {
   const [beats, setBeats] = useState(beatPattern);
-  const [activeBeat] = useTone(config, beatPattern);
 
   useEffect(() => {
     setBeats(beatPattern);

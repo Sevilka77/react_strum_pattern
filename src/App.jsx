@@ -2,9 +2,10 @@ import { useState, useMemo, useReducer, useEffect, createContext } from "react";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { useSearchParams } from "react-router-dom";
-import Metronome from "./components/Metronome";
+
 import PatternList from "./components/PatternLIst";
 import TempoSelector from "./components/TempoSelector";
+import MetronomeWrapper from "./components/MetronomeWrapper";
 
 import {
   Stack,
@@ -207,9 +208,9 @@ function App() {
               justifyContent="flex-start"
               alignItems="center"
             >
-              <Metronome
+              <MetronomeWrapper
                 config={config}
-                isSmd={isSmallDevice}
+                isSmallDevice={isSmallDevice}
                 beatPattern={beatPattern.split("")}
               />
               <Visual

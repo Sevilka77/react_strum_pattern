@@ -28,9 +28,9 @@ const playNote = (
   }
   if (isMetronomeSound) {
     if (note % noteSize === 0) {
-      keys.player("click1").start(time);
-    } else {
       keys.player("click2").start(time);
+    } else {
+      keys.player("click1").start(time);
     }
   }
 };
@@ -45,14 +45,6 @@ export default function useTone(config, beatPattern) {
   const [activeBeat, setActiveBeat] = useState(0);
   Tone.getTransport().bpm.value = config.tempo || 120;
   const seqRef = useRef(seq);
-
-  useEffect(() => {
-    if (config.isPlaying) {
-      Tone.getTransport().start();
-    } else {
-      Tone.getTransport().stop();
-    }
-  }, [config.isPlaying]);
 
   useEffect(() => {
     seqRef.current.callback = (time, note) => {
