@@ -47,6 +47,9 @@ export default function useTone(config, beatPattern) {
   const seqRef = useRef(seq);
 
   useEffect(() => {
+    if (!config.isPlaying) {
+      return; // Если метроном не запущен, выходим из useEffect
+    }
     seqRef.current.callback = (time, note) => {
       playNote(
         time,
@@ -60,11 +63,12 @@ export default function useTone(config, beatPattern) {
     };
     seqRef.current.events = countSteps(beatPattern);
   }, [
+    config.isPlaying,
     beatPattern,
     config.isBeatSound,
     config.isMetronomeSound,
     config.noteSize,
   ]);
 
-  return [activeBeat];
+  return config.isPlaying ? [activeBeat] : [null];
 }

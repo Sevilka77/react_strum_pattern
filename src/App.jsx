@@ -2,11 +2,6 @@ import { useState, useMemo, useReducer, useEffect, createContext } from "react";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { useSearchParams } from "react-router-dom";
-
-import PatternList from "./components/PatternLIst";
-import TempoSelector from "./components/TempoSelector";
-import MetronomeWrapper from "./components/MetronomeWrapper";
-
 import {
   Stack,
   Typography,
@@ -14,10 +9,13 @@ import {
   Box,
   useMediaQuery,
 } from "@mui/material";
-import Visual from "./components/visual";
-
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { MoonIcon, SunIcon } from "lucide-react";
+
+import PatternList from "./components/PatternLIst";
+import TempoSelector from "./components/TempoSelector";
+import MetronomeWrapper from "./components/MetronomeWrapper";
+import Visual from "./components/visual";
 import PlayButton from "./components/PlayButton";
 import MetronomeButton from "./components/MetronomeButton";
 import BeatSound from "./components/BeatSound";
@@ -26,62 +24,8 @@ import NoteSizeButton from "./components/NoteSizeButton";
 import PatternButton from "./components/PatternButton";
 import PatternEdit from "./components/PatternEdit";
 import About from "./components/About";
+import reducer from "./reducer";
 
-export const MIN_TEMPO = 40;
-export const MAX_TEMPO = 300;
-
-function reducer(state, action) {
-  const newState = { ...state };
-  switch (action.type) {
-    case "setTempo":
-      // eslint-disable-next-line no-case-declarations
-      let newTempo = action.data.tempo;
-      if (newTempo === undefined) return state;
-      newTempo = Math.min(newTempo, MAX_TEMPO);
-      newTempo = Math.max(newTempo, MIN_TEMPO);
-      newState.tempo = newTempo;
-      break;
-    case "setBeatCount":
-      // eslint-disable-next-line no-case-declarations
-      let beatCount = action.data.beatCount;
-      if (beatCount === undefined) return state;
-      // eslint-disable-next-line no-case-declarations
-      let beatPatternCount = state.beatPattern;
-      if (beatCount > beatPatternCount.length) {
-        for (let i = beatPatternCount.length; i < beatCount; i++)
-          beatPatternCount.push("rest");
-      } else if (beatCount < state.beatPattern.length) {
-        for (let i = beatPatternCount.length; i > beatCount; i--)
-          beatPatternCount.pop();
-      }
-      newState.beatPattern = beatPatternCount;
-      break;
-    case "setBeatPattern":
-      // eslint-disable-next-line no-case-declarations
-      let beatPattern = action.data.split("");
-      if (beatPattern === undefined) return state;
-      newState.beatPattern = beatPattern;
-      break;
-    case "setNoteSize":
-      // eslint-disable-next-line no-case-declarations
-      let noteSize = action.data;
-      if (noteSize === undefined) return state;
-      newState.noteSize = noteSize;
-      break;
-    case "setIsPlay":
-      newState.isPlaying = action.data;
-      break;
-    case "setIsBeatSound":
-      newState.isBeatSound = action.data;
-      break;
-    case "setIsMetronomSound":
-      newState.isMetronomeSound = action.data;
-      break;
-    default:
-      return state;
-  }
-  return newState;
-}
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 function App() {
@@ -125,7 +69,6 @@ function App() {
     if (!searchParams.has("p")) {
       setSearchParams({ p: "1101" });
     } else {
-      console.log(searchParams.get("p"));
       setBeatPattern(searchParams.get("p"));
     }
   }, [searchParams, setSearchParams]);
