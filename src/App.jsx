@@ -1,16 +1,6 @@
-import { useState, useMemo, useReducer, useEffect, createContext } from "react";
-
-import CssBaseline from "@mui/material/CssBaseline";
+import { useState, useReducer, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import {
-  Stack,
-  Typography,
-  IconButton,
-  Box,
-  useMediaQuery,
-} from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { MoonIcon, SunIcon } from "lucide-react";
+import { Stack, Typography, Box, useMediaQuery } from "@mui/material";
 
 import PatternList from "./components/PatternLIst";
 import TempoSelector from "./components/TempoSelector";
@@ -23,36 +13,15 @@ import NoteSizeButton from "./components/NoteSizeButton";
 import PatternButton from "./components/PatternButton";
 import PatternEdit from "./components/PatternEdit";
 import About from "./components/About";
+import ThemeToggleButton from "./components/ThemeToggleButton";
+import ThemeContextProvider from "./components/ThemeContextProvider"; // Импортируем новый компонент
 
 import reducer from "./reducer";
-
-const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 function App() {
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const isMediumDevice = useMediaQuery("only screen and (min-width : 770px)");
-  const [mode, setMode] = useState("light");
   const [showPB, setPB] = useState(false);
-  const colorMode = useMemo(
-    () => ({
-      // The dark mode switch would invoke this method
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-      },
-    }),
-    [],
-  );
-
-  // Update the theme only if the mode changes
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode,
-        },
-      }),
-    [mode],
-  );
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [beatPattern, setBeatPattern] = useState("1101");
@@ -74,181 +43,167 @@ function App() {
   }, [searchParams, setSearchParams]);
 
   return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+    <ThemeContextProvider>
+      <Box
+        sx={
+          (isMediumDevice && {
+            boxSizing: "border-box",
+            height: "100vh",
+            display: "grid",
+            gridTemplateColumns: "repeat(10,1fr)",
+            gridTemplateRows: "1fr 2fr 1fr 1fr",
+            gridTemplateAreas: `"header header header header header header header header header header"
+                              "main main main main main main main main main main"
+                              ". . . . . . edit edit edit edit"
+                              "MB BB NB tempo tempo tempo tempo PLB PEB SB"`,
+          }) ||
+          (isSmallDevice && {
+            boxSizing: "border-box",
+            height: "100vh",
+            display: "grid",
+            gridTemplateColumns: "repeat(3,1fr)",
+            gridTemplateRows: "1fr 2fr 1fr 1fr 1fr 1fr",
+            gridTemplateAreas: `"header  header header"
+                              "main main  main"
+                              "edit edit  edit"
+                              "tempo tempo  tempo"
+                              "MB BB NB"
+                              "PLB PEB SB"`,
+          })
+        }
+      >
         <Box
-          sx={
-            (isMediumDevice && {
-              boxSizing: "border-box",
-
-              height: "100vh",
-              display: "grid",
-              gridTemplateColumns: "repeat(10,1fr)",
-              gridTemplateRows: "1fr 2fr 1fr 1fr ",
-              gridTemplateAreas: `"header header header header header header header header header header"
-                                "main main main main main main main main main main"
-                                ". . . . . . edit edit edit edit"
-                                "PB MB BB NB tempo tempo tempo PLB PEB SB"`,
-            }) ||
-            (isSmallDevice && {
-              boxSizing: "border-box",
-              height: "100vh",
-              display: "grid",
-              gridTemplateColumns: "repeat(4,1fr)",
-              gridTemplateRows: "1fr 2fr 1fr 1fr 1fr 1fr",
-              gridTemplateAreas: `"header header header header"
-                                "main main main main "
-                                "edit edit edit edit"
-                                "tempo tempo tempo tempo"
-                                "PB MB BB NB"
-                                "PB PLB PEB SB"`,
-            })
-          }
+          sx={{
+            display: "flex",
+            height: "min-content",
+            flexDirection: "row",
+            gridArea: "header",
+            borderBottom: "1px solid #5f5f5f",
+            alignContent: "center",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "nowrap",
+          }}
         >
-          <Box
+          <div />
+
+          <Typography
             sx={{
-              display: "flex",
-              height: "min-content",
-              flexDirection: "row",
-              gridArea: "header",
-              borderBottom: "1px solid #5f5f5f",
-              alignContent: "center",
-              justifyContent: "space-between",
-              alignItems: "center",
-              flexWrap: "nowrap",
+              textTransform: "uppercase",
+              textAlign: "center",
+              fontSize: "20px",
+              letterSpacing: "2px",
             }}
           >
-            <div />
-
-            <Typography
-              sx={{
-                textTransform: "uppercase",
-                textAlign: "center",
-                fontSize: "20px",
-                letterSpacing: "2px",
-              }}
-            >
-              Тренажёр гитарного боя
-            </Typography>
-            <Stack direction="row">
-              <IconButton
-                onClick={colorMode.toggleColorMode}
-                color="inherit"
-                sx={{
-                  fontSize: "40px",
-                  borderRadius: "50%",
-                  border: "1px solid #f5f5f5",
-                }}
-              >
-                {theme.palette.mode === "dark" ? <MoonIcon /> : <SunIcon />}
-              </IconButton>
-              <About />
-            </Stack>
-          </Box>
-          <Box sx={{ gridArea: "main" }}>
-            <Stack
-              direction="column"
-              justifyContent="flex-start"
-              alignItems="center"
-            >
-              <MetronomeWrapper
-                config={config}
-                isSmallDevice={isSmallDevice}
-                beatPattern={beatPattern.split("")}
-              />
-            </Stack>
-          </Box>
-          <Box sx={{ gridArea: "edit", alignSelf: "end" }}>
-            {showPB && (
-              <PatternEdit
-                beatPattern={beatPattern.split("")}
-                onPatternChanged={(beatPattern) => {
-                  setSearchParams({ p: beatPattern });
-                }}
-              />
-            )}
-          </Box>
-          <Box
-            sx={{ gridArea: "PB", alignSelf: "center", justifySelf: "center" }}
+            Тренажёр гитарного боя
+          </Typography>
+          <Stack direction="row">
+            <ThemeToggleButton />
+            <About />
+          </Stack>
+        </Box>
+        <Box sx={{ gridArea: "main" }}>
+          <Stack
+            direction="column"
+            justifyContent="flex-start"
+            alignItems="center"
           >
+            <MetronomeWrapper
+              config={config}
+              isSmallDevice={isSmallDevice}
+              beatPattern={beatPattern.split("")}
+            />
             <PlayButton
               onConfigChanged={(event, data) =>
                 dispatch({ type: event, data: data })
               }
               config={config}
             />
-          </Box>
-          <Box
-            sx={{ gridArea: "MB", alignSelf: "center", justifySelf: "center" }}
-          >
-            <MetronomeButton
-              onConfigChanged={(event, data) =>
-                dispatch({ type: event, data: data })
-              }
-              config={config}
-            />
-          </Box>
-          <Box
-            sx={{ gridArea: "BB", alignSelf: "center", justifySelf: "center" }}
-          >
-            <BeatSound
-              onConfigChanged={(event, data) =>
-                dispatch({ type: event, data: data })
-              }
-              config={config}
-            />
-          </Box>
-          <Box
-            sx={{ gridArea: "NB", alignSelf: "center", justifySelf: "center" }}
-          >
-            <NoteSizeButton
-              onConfigChanged={(event, data) =>
-                dispatch({ type: event, data: data })
-              }
-              config={config}
-            />
-          </Box>
-          <Box
-            sx={{
-              gridArea: "tempo",
-              alignSelf: "center",
-              p: "15px",
-            }}
-          >
-            <TempoSelector
-              tempo={config.tempo}
-              onTempoChanged={(tempo) =>
-                dispatch({ type: "setTempo", data: { tempo } })
-              }
-            />
-          </Box>
-          <Box
-            sx={{ gridArea: "PLB", alignSelf: "center", justifySelf: "center" }}
-          >
-            <PatternList
-              onPatternChanged={(beatPattern) => {
-                setSearchParams({ p: beatPattern.pattern });
-              }}
-            ></PatternList>
-          </Box>
-          <Box
-            sx={{ gridArea: "PEB", alignSelf: "center", justifySelf: "center" }}
-          >
-            <PatternButton
-              onChanged={() => {
-                setPB(!showPB);
-              }}
-            />
-          </Box>
-          <Box
-            sx={{ gridArea: "SB", alignSelf: "center", justifySelf: "center" }}
-          >
-            <Share />
-          </Box>
+          </Stack>
         </Box>
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+        <Box sx={{ gridArea: "edit", alignSelf: "end" }}>
+          {showPB && (
+            <PatternEdit
+              beatPattern={beatPattern.split("")}
+              onPatternChanged={(beatPattern) => {
+                setSearchParams({ p: beatPattern });
+              }}
+            />
+          )}
+        </Box>
+        <Box
+          sx={{ gridArea: "PB", alignSelf: "center", justifySelf: "center" }}
+        ></Box>
+        <Box
+          sx={{ gridArea: "MB", alignSelf: "center", justifySelf: "center" }}
+        >
+          <MetronomeButton
+            onConfigChanged={(event, data) =>
+              dispatch({ type: event, data: data })
+            }
+            config={config}
+          />
+        </Box>
+        <Box
+          sx={{ gridArea: "BB", alignSelf: "center", justifySelf: "center" }}
+        >
+          <BeatSound
+            onConfigChanged={(event, data) =>
+              dispatch({ type: event, data: data })
+            }
+            config={config}
+          />
+        </Box>
+        <Box
+          sx={{ gridArea: "NB", alignSelf: "center", justifySelf: "center" }}
+        >
+          <NoteSizeButton
+            onConfigChanged={(event, data) =>
+              dispatch({ type: event, data: data })
+            }
+            config={config}
+          />
+        </Box>
+        <Box
+          sx={{
+            gridArea: "tempo",
+            alignSelf: "center",
+            p: "15px",
+          }}
+        >
+          <TempoSelector
+            tempo={config.tempo}
+            onTempoChanged={(tempo) =>
+              dispatch({ type: "setTempo", data: { tempo } })
+            }
+          />
+        </Box>
+        <Box
+          sx={{ gridArea: "PLB", alignSelf: "center", justifySelf: "center" }}
+        >
+          <PatternList
+            onPatternChanged={(beatPattern) => {
+              setSearchParams({ p: beatPattern.pattern });
+            }}
+          ></PatternList>
+        </Box>
+        <Box
+          sx={{ gridArea: "PEB", alignSelf: "center", justifySelf: "center" }}
+        >
+          <PatternButton
+            onChanged={() => {
+              setPB(!showPB);
+            }}
+          />
+        </Box>
+        <Box
+          sx={{ gridArea: "SB", alignSelf: "center", justifySelf: "center" }}
+        >
+          <Share />
+        </Box>
+      </Box>
+    </ThemeContextProvider>
   );
 }
+
 export default App;
