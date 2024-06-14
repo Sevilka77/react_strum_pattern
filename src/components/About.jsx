@@ -36,6 +36,7 @@ export default function About() {
         <HelpCircleIcon />
       </IconButton>
       <Dialog
+        keepMounted
         fullScreen
         open={open}
         onClose={handleClose}

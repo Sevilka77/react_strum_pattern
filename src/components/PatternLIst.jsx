@@ -57,7 +57,7 @@ export default function PatternList({ onPatternChanged }) {
         >
           <ListIcon fontSize="inherit" />
         </IconButton>
-        <Drawer open={open} onClose={toggleDrawer(false)}>
+        <Drawer keepMounted open={open} onClose={toggleDrawer(false)}>
           {DrawerList}
         </Drawer>
       </Box>
