@@ -1,5 +1,5 @@
 import * as React from "react";
-import IconButton from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
 import { Box, Container, Typography } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import Slide from "@mui/material/Slide";
@@ -10,7 +10,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-export default function About() {
+const About = () => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -25,13 +25,9 @@ export default function About() {
     <>
       <IconButton
         onClick={handleClickOpen}
+        size="large"
+        aria-label="open about info"
         color="inherit"
-        sx={{
-          minWidth: 0,
-          fontSize: "40px",
-          borderRadius: "50%",
-          border: "1px solid#f5f5f5",
-        }}
       >
         <HelpCircleIcon />
       </IconButton>
@@ -82,4 +78,6 @@ export default function About() {
       </Dialog>
     </>
   );
-}
+};
+
+export default About;

@@ -1,37 +1,19 @@
-import { Typography, Box, Stack } from "@mui/material";
+import { Typography, Box, AppBar, Toolbar } from "@mui/material";
 import ThemeToggleButton from "./ThemeToggleButton";
 import About from "./About";
 
 function Header() {
   return (
-    <Box
-      sx={{
-        display: "flex",
-
-        flexDirection: "row",
-
-        borderBottom: "1px solid #5f5f5f",
-        alignContent: "center",
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexWrap: "nowrap",
-      }}
-    >
-      <div />
-      <Typography
-        sx={{
-          textTransform: "uppercase",
-          textAlign: "center",
-          fontSize: "20px",
-          letterSpacing: "2px",
-        }}
-      >
-        Тренажёр гитарного боя
-      </Typography>
-      <Stack direction="row">
-        <ThemeToggleButton />
-        <About />
-      </Stack>
+    <Box sx={{ gridArea: "header", flexGrow: 1 }}>
+      <AppBar position="static" color="primary">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Тренажер гитарного боя
+          </Typography>
+          <About color="inherit" />
+          <ThemeToggleButton color="inherit">Login</ThemeToggleButton>
+        </Toolbar>
+      </AppBar>
     </Box>
   );
 }

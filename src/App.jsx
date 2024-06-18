@@ -1,6 +1,6 @@
 import { useState, useReducer, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Stack, Typography, Box, useMediaQuery } from "@mui/material";
+import { Stack, Box, useMediaQuery } from "@mui/material";
 
 import PatternList from "./components/PatternLIst";
 import TempoSelector from "./components/TempoSelector";
@@ -12,11 +12,11 @@ import Share from "./components/Share";
 import NoteSizeButton from "./components/NoteSizeButton";
 import PatternButton from "./components/PatternButton";
 import PatternEdit from "./components/PatternEdit";
-import About from "./components/About";
-import ThemeToggleButton from "./components/ThemeToggleButton";
+
 import ThemeContextProvider from "./components/ThemeContextProvider"; // Импортируем новый компонент
 
 import reducer from "./reducer";
+import Header from "./components/Header";
 
 function App() {
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
@@ -72,36 +72,7 @@ function App() {
           })
         }
       >
-        <Box
-          sx={{
-            display: "flex",
-            height: "min-content",
-            flexDirection: "row",
-            gridArea: "header",
-            borderBottom: "1px solid #5f5f5f",
-            alignContent: "center",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "nowrap",
-          }}
-        >
-          <div />
-
-          <Typography
-            sx={{
-              textTransform: "uppercase",
-              textAlign: "center",
-              fontSize: "20px",
-              letterSpacing: "2px",
-            }}
-          >
-            Тренажёр гитарного боя
-          </Typography>
-          <Stack direction="row">
-            <ThemeToggleButton />
-            <About />
-          </Stack>
-        </Box>
+        <Header />
         <Box sx={{ gridArea: "main" }}>
           <Stack
             direction="column"
