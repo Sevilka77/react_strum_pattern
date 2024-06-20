@@ -1,56 +1,52 @@
-import { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import Slider from '@mui/material/Slider';
-import MuiInput from '@mui/material/Input';
-
+import { useState, useEffect } from "react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import Slider from "@mui/material/Slider";
+import MuiInput from "@mui/material/Input";
+import { useConfig } from "../useConfig";
 
 const Input = styled(MuiInput)`
   width: 42px;
 `;
 
-export default function TempoSelector({ tempo, onTempoChanged }) {
-  const [value, setValue] = useState(tempo);
+export default function TempoSelector() {
+  const { config, dispatch } = useConfig();
+  const [value, setValue] = useState(config.tempo);
+
+  // Этот useEffect для отправки изменений в контекст
   useEffect(() => {
-    onTempoChanged(value);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
+    dispatch({ type: "setTempo", data: value });
+  }, [value, dispatch]);
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
-
   };
 
   const handleInputChange = (event) => {
-    setValue(event.target.value === '' ? 0 : Number(event.target.value));
+    setValue(event.target.value === "" ? 0 : Number(event.target.value));
   };
 
   const handleBlur = () => {
     if (value < 40) {
       setValue(40);
-
     } else if (value > 300) {
       setValue(300);
-      onTempoChanged(300);
     }
   };
 
   return (
-    <Box >
-
+    <Box>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
-          <Typography id="input-slider" >
-            Tempo
-          </Typography>
+          <Typography id="input-slider">Tempo</Typography>
         </Grid>
         <Grid item xs>
           <Slider
             min={40}
             max={300}
-            value={typeof value === 'number' ? value : 0}
+            value={typeof value === "number" ? value : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
           />
@@ -65,8 +61,8 @@ export default function TempoSelector({ tempo, onTempoChanged }) {
               step: 10,
               min: 40,
               max: 300,
-              type: 'number',
-              'aria-labelledby': 'input-slider',
+              type: "number",
+              "aria-labelledby": "input-slider",
             }}
           />
         </Grid>
@@ -74,8 +70,3 @@ export default function TempoSelector({ tempo, onTempoChanged }) {
     </Box>
   );
 }
-
-
-
-
-

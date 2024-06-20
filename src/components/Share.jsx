@@ -2,15 +2,19 @@ import Snackbar from "@mui/material/Snackbar";
 import { ShareIcon } from "./Icons";
 import { Box, IconButton, Tooltip } from "@mui/material";
 import { useState } from "react";
+import { useConfig } from "../useConfig";
 
-async function copyToClip() {
-  await navigator.clipboard.writeText(location.href);
+async function copyToClip(url) {
+  await navigator.clipboard.writeText(url);
 }
 
 export default function Share() {
+  const { config } = useConfig();
   const [open, setOpen] = useState(false);
+
+  const url = `${location.href}?p=${config.beatPattern}`;
   const handleClick = () => {
-    copyToClip();
+    copyToClip(url);
     setOpen(true);
   };
 
@@ -30,7 +34,6 @@ export default function Share() {
             color: "text.primary",
             fontSize: "40px",
             borderRadius: "50%",
-            border: "1px solid #f5f5f5",
           }}
           value="chplayeck"
           onClick={handleClick}

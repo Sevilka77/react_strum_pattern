@@ -1,7 +1,16 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { MetrIcon } from "./Icons";
+import { useConfig } from "../useConfig";
 
-export default function MetronomeButton({ config, onConfigChanged }) {
+const MetronomeButton = () => {
+  const { config, dispatch } = useConfig();
+  const onClick = () => {
+    dispatch({
+      type: "setIsMetronomSound",
+      data: !config.isMetronomeSound,
+    });
+  };
+
   return (
     <Tooltip title="Включить звук метронома" placement="top">
       <IconButton
@@ -9,12 +18,9 @@ export default function MetronomeButton({ config, onConfigChanged }) {
           color: "text.primary",
           fontSize: "40px",
           borderRadius: "50%",
-          border: "1px solid#f5f5f5",
         }}
         selected={config.isMetronomeSound}
-        onClick={() =>
-          onConfigChanged("setIsMetronomSound", !config.isMetronomeSound)
-        }
+        onClick={onClick}
       >
         {config.isMetronomeSound ? (
           <MetrIcon fontSize="inherit" color="primary" />
@@ -24,4 +30,6 @@ export default function MetronomeButton({ config, onConfigChanged }) {
       </IconButton>
     </Tooltip>
   );
-}
+};
+
+export default MetronomeButton;

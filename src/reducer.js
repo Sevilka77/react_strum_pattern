@@ -1,15 +1,12 @@
-const MIN_TEMPO = 40;
-const MAX_TEMPO = 300;
-
 const setTempo = (state, tempo) => {
   if (tempo === undefined) return state;
-  const newTempo = Math.max(MIN_TEMPO, Math.min(MAX_TEMPO, tempo));
+  const newTempo = Math.max(40, Math.min(300, tempo));
   return { ...state, tempo: newTempo };
 };
 
 const setBeatPattern = (state, beatPattern) => {
   if (beatPattern === undefined) return state;
-  return { ...state, beatPattern: beatPattern.split("") };
+  return { ...state, beatPattern: beatPattern };
 };
 
 const setNoteSize = (state, noteSize) => {
@@ -27,7 +24,7 @@ const setIsMetronomeSound = (state, isMetronomeSound) => ({
 export default function reducer(state, action) {
   switch (action.type) {
     case "setTempo":
-      return setTempo(state, action.data.tempo);
+      return setTempo(state, action.data);
     case "setBeatPattern":
       return setBeatPattern(state, action.data);
     case "setNoteSize":

@@ -1,15 +1,17 @@
 import { IconButton, Tooltip } from "@mui/material";
+import { useConfig } from "../useConfig";
 
-export default function NoteSizeButton({ config, onConfigChanged }) {
+const NoteSizeButton = () => {
+  const { config, dispatch } = useConfig();
   const handleChange = () => {
     if (config.noteSize == "4") {
-      onConfigChanged("setNoteSize", 3);
+      dispatch({ type: "setNoteSize", data: 3 });
     }
     if (config.noteSize == "3") {
-      onConfigChanged("setNoteSize", 2);
+      dispatch({ type: "setNoteSize", data: 2 });
     }
     if (config.noteSize == "2") {
-      onConfigChanged("setNoteSize", 4);
+      dispatch({ type: "setNoteSize", data: 4 });
     }
   };
   return (
@@ -19,7 +21,6 @@ export default function NoteSizeButton({ config, onConfigChanged }) {
           color: "text.primary",
           fontSize: "40px",
           borderRadius: "50%",
-          border: "1px solid#f5f5f5",
         }}
         onClick={handleChange}
       >
@@ -27,4 +28,6 @@ export default function NoteSizeButton({ config, onConfigChanged }) {
       </IconButton>
     </Tooltip>
   );
-}
+};
+
+export default NoteSizeButton;

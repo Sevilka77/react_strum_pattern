@@ -13,7 +13,6 @@ export default function PatternButton({ onChanged }) {
           color: "text.primary",
           fontSize: "40px",
           borderRadius: "50%",
-          border: "1px solid#f5f5f5",
         }}
       >
         <EditIcon fontSize="inherit" />

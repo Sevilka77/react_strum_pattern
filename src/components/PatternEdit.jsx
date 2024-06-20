@@ -3,9 +3,12 @@ import { useState, useEffect } from "react";
 import { Button, Stack } from "@mui/material";
 import { DeleteIcon } from "lucide-react";
 import { ArrowD, XDownIcon, XIcon } from "./Icons";
+import { useConfig } from "../useConfig";
 
-export default function PatternEdit({ beatPattern, onPatternChanged }) {
-  const [beats, setBeats] = useState(beatPattern);
+const PatternEdit = () => {
+  const { config, dispatch } = useConfig();
+  const [beats] = useState(config.beatPattern.split(""));
+
   const handleChange = (event) => {
     if (event === "A") {
       beats.push("A");
@@ -26,38 +29,95 @@ export default function PatternEdit({ beatPattern, onPatternChanged }) {
       if (beats.length > 0) beats.pop();
     }
     console.log(beats);
-    onPatternChanged(beats.join(""));
+    dispatch({ type: "setBeatPattern", data: beats.join("") });
   };
-  useEffect(() => {
-    setBeats(beatPattern.slice(""));
-  }, [beatPattern]);
 
   return (
     <Stack direction="row" flexWrap="wrap" justifyContent="center">
-      <Stack direction="column" justifyContent="center" alignItems="center">
+      <Button
+        sx={{
+          flexDirection: "column", // Устанавливаем направление элементов в столбец
+          height: "100%", // Занимает всю доступную высоту ячейки Grid
+          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
+          alignItems: "center", // Выравниваем по центру по вертикали
+          justifyContent: "center", // Выравниваем по центру по горизонтали
+        }}
+        onClick={() => handleChange("A")}
+      >
         <ArrowD color="warning" />
-        <Button onClick={() => handleChange("A")}>Aкцент</Button>
-      </Stack>
-      <Stack direction="column" justifyContent="center" alignItems="center">
+        Aкцент
+      </Button>
+
+      <Button
+        sx={{
+          flexDirection: "column", // Устанавливаем направление элементов в столбец
+          height: "100%", // Занимает всю доступную высоту ячейки Grid
+          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
+          alignItems: "center", // Выравниваем по центру по вертикали
+          justifyContent: "center", // Выравниваем по центру по горизонтали
+        }}
+        onClick={() => handleChange("1")}
+      >
         <ArrowD color="warning.main" />
-        <Button onClick={() => handleChange("1")}>Удар</Button>
-      </Stack>
-      <Stack direction="column" justifyContent="center" alignItems="center">
+        Удар
+      </Button>
+
+      <Button
+        sx={{
+          flexDirection: "column", // Устанавливаем направление элементов в столбец
+          height: "100%", // Занимает всю доступную высоту ячейки Grid
+          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
+          alignItems: "center", // Выравниваем по центру по вертикали
+          justifyContent: "center", // Выравниваем по центру по горизонтали
+        }}
+        onClick={() => handleChange("c")}
+      >
         <XDownIcon />
-        <Button onClick={() => handleChange("c")}>Удар по заглушенным</Button>
-      </Stack>
-      <Stack direction="column" justifyContent="center" alignItems="center">
+        Удар по заглушенным
+      </Button>
+
+      <Button
+        sx={{
+          flexDirection: "column", // Устанавливаем направление элементов в столбец
+          height: "100%", // Занимает всю доступную высоту ячейки Grid
+          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
+          alignItems: "center", // Выравниваем по центру по вертикали
+          justifyContent: "center", // Выравниваем по центру по горизонтали
+        }}
+        onClick={() => handleChange("x")}
+      >
         <XIcon />
-        <Button onClick={() => handleChange("x")}>Заглушка</Button>
-      </Stack>
-      <Stack direction="column" justifyContent="center" alignItems="center">
+        Заглушка
+      </Button>
+
+      <Button
+        sx={{
+          flexDirection: "column", // Устанавливаем направление элементов в столбец
+          height: "100%", // Занимает всю доступную высоту ячейки Grid
+          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
+          alignItems: "center", // Выравниваем по центру по вертикали
+          justifyContent: "center", // Выравниваем по центру по горизонтали
+        }}
+        onClick={() => handleChange("0")}
+      >
         <ArrowD color="disabled" />
-        <Button onClick={() => handleChange("0")}>Пропуск</Button>
-      </Stack>
-      <Stack direction="column" justifyContent="center" alignItems="center">
+        Пропуск
+      </Button>
+
+      <Button
+        sx={{
+          flexDirection: "column", // Устанавливаем направление элементов в столбец
+          height: "100%", // Занимает всю доступную высоту ячейки Grid
+          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
+          alignItems: "center", // Выравниваем по центру по вертикали
+          justifyContent: "center", // Выравниваем по центру по горизонтали
+        }}
+        onClick={() => handleChange("del")}
+      >
         <DeleteIcon />
-        <Button onClick={() => handleChange("del")}>Удалить</Button>
-      </Stack>
+        Удалить
+      </Button>
     </Stack>
   );
-}
+};
+export default PatternEdit;

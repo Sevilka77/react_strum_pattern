@@ -6,8 +6,18 @@ function Header() {
   return (
     <Box sx={{ gridArea: "header", flexGrow: 1 }}>
       <AppBar position="static" color="primary">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, textAlign: "center" }}
+          >
             Тренажер гитарного боя
           </Typography>
           <About color="inherit" />

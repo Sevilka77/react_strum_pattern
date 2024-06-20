@@ -1,7 +1,12 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { DrumIcon } from "./Icons";
+import { useConfig } from "../useConfig";
 
-export default function BeatSound({ config, onConfigChanged }) {
+const BeatSound = () => {
+  const { config, dispatch } = useConfig();
+  const onClick = () => {
+    dispatch({ type: "setIsBeatSound", data: !config.isBeatSound });
+  };
   return (
     <Tooltip title="Включить звук боя" placement="top">
       <IconButton
@@ -9,10 +14,9 @@ export default function BeatSound({ config, onConfigChanged }) {
           color: "text.primary",
           fontSize: "40px",
           borderRadius: "50%",
-          border: "1px solid#f5f5f5",
         }}
         selected={config.isPlaying}
-        onClick={() => onConfigChanged("setIsBeatSound", !config.isBeatSound)}
+        onClick={onClick}
       >
         {config.isBeatSound ? (
           <DrumIcon color="primary" fontSize="inherit" />
@@ -22,4 +26,6 @@ export default function BeatSound({ config, onConfigChanged }) {
       </IconButton>
     </Tooltip>
   );
-}
+};
+
+export default BeatSound;

@@ -1,5 +1,5 @@
 import { patterns } from "../patterns";
-import { useState } from "react";
+import React, { useState, useCallback } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -7,13 +7,45 @@ import ListItemText from "@mui/material/ListItemText";
 import { Box, Drawer, IconButton, Tooltip } from "@mui/material";
 import { ListIcon } from "./Icons";
 import BeatImage from "./BeatImage";
+import { useConfig } from "../useConfig";
 
-export default function PatternList({ onPatternChanged }) {
+const Child = ({ value, onClick }) => {
+  return (
+    <ListItem disablePadding>
+      <ListItemButton onClick={() => onClick(value.pattern)}>
+        <ListItemText
+          primaryTypographyProps={{
+            fontSize: 10,
+            fontWeight: "medium",
+            lineHeight: "10px",
+          }}
+          key={value.title}
+          primary={value.title}
+        />
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <BeatImage beatString={value.pattern} />
+        </Box>
+      </ListItemButton>
+    </ListItem>
+  );
+};
+const ChildMemo = React.memo(Child);
+
+const PatternListNotMemo = () => {
   const [open, setOpen] = useState(false);
+  const { dispatch } = useConfig();
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+  const onClick = useCallback(
+    (value) => {
+      dispatch({ type: "setBeatPattern", data: value });
+      console.log(value);
+    },
+    [dispatch],
+  );
+
   const DrawerList = (
     <Box
       sx={{ width: "auto" }}
@@ -22,22 +54,7 @@ export default function PatternList({ onPatternChanged }) {
     >
       <List>
         {patterns.map((pattern, index) => (
-          <ListItem disablePadding key={index}>
-            <ListItemButton onClick={() => onPatternChanged(pattern)}>
-              <ListItemText
-                primaryTypographyProps={{
-                  fontSize: 10,
-                  fontWeight: "medium",
-                  lineHeight: "10px",
-                }}
-                key={pattern.title}
-                primary={pattern.title}
-              />
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                <BeatImage beatString={pattern.pattern} />
-              </Box>
-            </ListItemButton>
-          </ListItem>
+          <ChildMemo value={pattern} key={index} onClick={onClick} />
         ))}
       </List>
     </Box>
@@ -51,7 +68,6 @@ export default function PatternList({ onPatternChanged }) {
             color: "text.primary",
             fontSize: "40px",
             borderRadius: "50%",
-            border: "1px solid#f5f5f5",
           }}
           onClick={toggleDrawer(true)}
         >
@@ -63,4 +79,7 @@ export default function PatternList({ onPatternChanged }) {
       </Box>
     </Tooltip>
   );
-}
+};
+const PatternList = React.memo(PatternListNotMemo);
+
+export default PatternList;

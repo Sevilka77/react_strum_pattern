@@ -1,9 +1,12 @@
 import { useEffect } from "react";
 import Metronome from "./Metronome";
 import useTone from "../hooks/useTone";
+import { useConfig } from "../useConfig";
 
-function MetronomeWrapper({ config, isSmallDevice, beatPattern }) {
-  const [activeBeat] = useTone(config, beatPattern);
+function MetronomeWrapper({ isSmallDevice }) {
+  const { config } = useConfig();
+  const { beatPattern } = config;
+  const [activeBeat] = useTone(config, beatPattern.split(""));
 
   useEffect(
     () => {
@@ -18,7 +21,7 @@ function MetronomeWrapper({ config, isSmallDevice, beatPattern }) {
     <Metronome
       config={config}
       isSmd={isSmallDevice}
-      beatPattern={beatPattern}
+      beatPattern={beatPattern.split("")}
       activeBeat={activeBeat}
     />
   );

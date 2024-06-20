@@ -1,4 +1,4 @@
-import { useState, useReducer, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Stack, Box, useMediaQuery } from "@mui/material";
 
@@ -15,32 +15,24 @@ import PatternEdit from "./components/PatternEdit";
 
 import ThemeContextProvider from "./components/ThemeContextProvider"; // Импортируем новый компонент
 
-import reducer from "./reducer";
 import Header from "./components/Header";
+import { useConfig } from "./useConfig";
 
 function App() {
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const isMediumDevice = useMediaQuery("only screen and (min-width : 770px)");
   const [showPB, setPB] = useState(false);
-
+  const { config, dispatch } = useConfig();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [beatPattern, setBeatPattern] = useState("1101");
-
-  const [config, dispatch] = useReducer(reducer, {
-    tempo: 60,
-    noteSize: 4,
-    isPlaying: false,
-    isMetronomeSound: false,
-    isBeatSound: false,
-  });
 
   useEffect(() => {
-    if (!searchParams.has("p")) {
-      setSearchParams({ p: "1101" });
+    if (searchParams.has("p")) {
+      dispatch({ type: "setBeatPattern", data: searchParams.get("p") });
+      setSearchParams();
     } else {
-      setBeatPattern(searchParams.get("p"));
+      dispatch({ type: "setBeatPattern", data: config.beatPattern });
     }
-  }, [searchParams, setSearchParams]);
+  }, [config.beatPattern, dispatch, searchParams, setSearchParams]);
 
   return (
     <ThemeContextProvider>
@@ -79,28 +71,12 @@ function App() {
             justifyContent="flex-start"
             alignItems="center"
           >
-            <MetronomeWrapper
-              config={config}
-              isSmallDevice={isSmallDevice}
-              beatPattern={beatPattern.split("")}
-            />
-            <PlayButton
-              onConfigChanged={(event, data) =>
-                dispatch({ type: event, data: data })
-              }
-              config={config}
-            />
+            <MetronomeWrapper isSmallDevice={isSmallDevice} />
+            <PlayButton />
           </Stack>
         </Box>
         <Box sx={{ gridArea: "edit", alignSelf: "end" }}>
-          {showPB && (
-            <PatternEdit
-              beatPattern={beatPattern.split("")}
-              onPatternChanged={(beatPattern) => {
-                setSearchParams({ p: beatPattern });
-              }}
-            />
-          )}
+          {showPB && <PatternEdit />}
         </Box>
         <Box
           sx={{ gridArea: "PB", alignSelf: "center", justifySelf: "center" }}
@@ -108,32 +84,17 @@ function App() {
         <Box
           sx={{ gridArea: "MB", alignSelf: "center", justifySelf: "center" }}
         >
-          <MetronomeButton
-            onConfigChanged={(event, data) =>
-              dispatch({ type: event, data: data })
-            }
-            config={config}
-          />
+          <MetronomeButton />
         </Box>
         <Box
           sx={{ gridArea: "BB", alignSelf: "center", justifySelf: "center" }}
         >
-          <BeatSound
-            onConfigChanged={(event, data) =>
-              dispatch({ type: event, data: data })
-            }
-            config={config}
-          />
+          <BeatSound />
         </Box>
         <Box
           sx={{ gridArea: "NB", alignSelf: "center", justifySelf: "center" }}
         >
-          <NoteSizeButton
-            onConfigChanged={(event, data) =>
-              dispatch({ type: event, data: data })
-            }
-            config={config}
-          />
+          <NoteSizeButton />
         </Box>
         <Box
           sx={{
@@ -142,21 +103,12 @@ function App() {
             p: "15px",
           }}
         >
-          <TempoSelector
-            tempo={config.tempo}
-            onTempoChanged={(tempo) =>
-              dispatch({ type: "setTempo", data: { tempo } })
-            }
-          />
+          <TempoSelector />
         </Box>
         <Box
           sx={{ gridArea: "PLB", alignSelf: "center", justifySelf: "center" }}
         >
-          <PatternList
-            onPatternChanged={(beatPattern) => {
-              setSearchParams({ p: beatPattern.pattern });
-            }}
-          ></PatternList>
+          <PatternList />
         </Box>
         <Box
           sx={{ gridArea: "PEB", alignSelf: "center", justifySelf: "center" }}
