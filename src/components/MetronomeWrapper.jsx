@@ -5,11 +5,11 @@ import { useConfig } from "../useConfig";
 function MetronomeWrapper({ isSmallDevice }) {
   const { config } = useConfig();
   const { beatPattern } = config;
-  const [activeBeat] = useTone(config, beatPattern.split(""));
+  const [activeBeat] = useTone(config);
 
   return (
     <Metronome
-      config={config}
+      noteSize={config.noteSize}
       isSmd={isSmallDevice}
       beatPattern={beatPattern.split("")}
       activeBeat={activeBeat}

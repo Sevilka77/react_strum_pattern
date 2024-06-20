@@ -48,7 +48,7 @@ function countSteps(beats) {
 }
 
 // Хук useTone для управления воспроизведением звуков
-export default function useTone(config, beatPattern) {
+export default function useTone(config) {
   const [activeBeat, setActiveBeat] = useState(0); // Состояние активного бита
   Tone.getTransport().bpm.value = config.tempo || 120; // Установка значения BPM
 
@@ -64,7 +64,7 @@ export default function useTone(config, beatPattern) {
       playNote(
         time,
         note,
-        beatPattern,
+        config.beatPattern,
         config.isBeatSound,
         config.isMetronomeSound,
         config.noteSize || 4,
@@ -72,10 +72,10 @@ export default function useTone(config, beatPattern) {
       setActiveBeat(note); // Установка активного бита
     };
 
-    seqRef.current.events = countSteps(beatPattern); // Установка шагов последовательности
+    seqRef.current.events = countSteps(config.beatPattern.split("")); // Установка шагов последовательности
   }, [
     config.isPlaying,
-    beatPattern,
+    config.beatPattern,
     config.isBeatSound,
     config.isMetronomeSound,
     config.noteSize,

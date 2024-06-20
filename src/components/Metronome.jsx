@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import MetronomeBeat from "./MetronomeBeat";
 import { Stack } from "@mui/system";
+import { memo } from "react";
 
-export default function Metronome({ config, isSmd, beatPattern, activeBeat }) {
+const MetronomeNM = ({ noteSize, isSmd, beatPattern, activeBeat }) => {
   const [beats, setBeats] = useState(beatPattern);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export default function Metronome({ config, isSmd, beatPattern, activeBeat }) {
         <MetronomeBeat
           key={index}
           id={index}
-          noteSize={config.noteSize}
+          noteSize={noteSize}
           beatStatus={b}
           isSmd={isSmd}
           beatsLen={beats.length}
@@ -30,4 +31,7 @@ export default function Metronome({ config, isSmd, beatPattern, activeBeat }) {
       ))}
     </Stack>
   );
-}
+};
+
+const Metronome = memo(MetronomeNM);
+export default Metronome;
