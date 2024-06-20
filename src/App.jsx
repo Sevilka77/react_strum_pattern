@@ -17,8 +17,10 @@ import ThemeContextProvider from "./components/ThemeContextProvider"; // Имп�
 
 import Header from "./components/Header";
 import { useConfig } from "./useConfig";
+import useWakeLock from "./hooks/useWakeLock.jsx";
 
 function App() {
+  useWakeLock();
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
   const isMediumDevice = useMediaQuery("only screen and (min-width : 770px)");
   const [showPB, setPB] = useState(false);
