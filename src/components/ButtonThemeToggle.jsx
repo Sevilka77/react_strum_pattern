@@ -5,7 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { ColorModeContext } from "./ThemeContextProvider";
 
-const ThemeToggleButton = () => {
+const ButtonThemeToggle = () => {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
 
@@ -21,4 +21,4 @@ const ThemeToggleButton = () => {
   );
 };
 
-export default ThemeToggleButton;
+export default ButtonThemeToggle;

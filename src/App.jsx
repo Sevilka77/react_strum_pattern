@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Stack, Box, useMediaQuery } from "@mui/material";
 
-import PatternList from "./components/PatternLIst";
+import ButtonPatternList from "./components/ButtonPatternList.jsx";
 import TempoSelector from "./components/TempoSelector";
 import MetronomeWrapper from "./components/MetronomeWrapper";
-import PlayButton from "./components/PlayButton";
-import MetronomeButton from "./components/MetronomeButton";
-import BeatSound from "./components/BeatSound";
-import Share from "./components/Share";
-import NoteSizeButton from "./components/NoteSizeButton";
-import PatternButton from "./components/PatternButton";
+import ButtonPlayStop from "./components/ButtonPlayStop.jsx";
+import ButtonMetronomeSound from "./components/ButtonMetronomeSound.jsx";
+import ButtonBeatSound from "./components/ButtonBeatSound";
+import ButtonShare from "./components/ButtonShare.jsx";
+import ButtonNoteSize from "./components/ButtonNoteSize.jsx";
+import ButtonPatternEdit from "./components/ButtonPatternEdit.jsx";
 import PatternEdit from "./components/PatternEdit";
 
 import ThemeContextProvider from "./components/ThemeContextProvider"; // Импортируем новый компонент
@@ -72,7 +72,7 @@ function App() {
             alignItems="center"
           >
             <MetronomeWrapper isSmallDevice={isSmallDevice} />
-            <PlayButton />
+            <ButtonPlayStop />
           </Stack>
         </Box>
         <Box sx={{ gridArea: "edit", alignSelf: "end" }}>
@@ -84,17 +84,17 @@ function App() {
         <Box
           sx={{ gridArea: "MB", alignSelf: "center", justifySelf: "center" }}
         >
-          <MetronomeButton />
+          <ButtonMetronomeSound />
         </Box>
         <Box
           sx={{ gridArea: "BB", alignSelf: "center", justifySelf: "center" }}
         >
-          <BeatSound />
+          <ButtonBeatSound />
         </Box>
         <Box
           sx={{ gridArea: "NB", alignSelf: "center", justifySelf: "center" }}
         >
-          <NoteSizeButton />
+          <ButtonNoteSize />
         </Box>
         <Box
           sx={{
@@ -108,12 +108,12 @@ function App() {
         <Box
           sx={{ gridArea: "PLB", alignSelf: "center", justifySelf: "center" }}
         >
-          <PatternList />
+          <ButtonPatternList />
         </Box>
         <Box
           sx={{ gridArea: "PEB", alignSelf: "center", justifySelf: "center" }}
         >
-          <PatternButton
+          <ButtonPatternEdit
             onChanged={() => {
               setPB(!showPB);
             }}
@@ -122,7 +122,7 @@ function App() {
         <Box
           sx={{ gridArea: "SB", alignSelf: "center", justifySelf: "center" }}
         >
-          <Share />
+          <ButtonShare />
         </Box>
       </Box>
     </ThemeContextProvider>

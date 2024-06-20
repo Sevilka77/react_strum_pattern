@@ -1,7 +1,7 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { EditIcon } from "./Icons";
 
-export default function PatternButton({ onChanged }) {
+const ButtonPatternEdit = ({ onChanged }) => {
   return (
     <Tooltip title="Редактировать бой" placement="top">
       <IconButton
@@ -19,4 +19,6 @@ export default function PatternButton({ onChanged }) {
       </IconButton>
     </Tooltip>
   );
-}
+};
+
+export default ButtonPatternEdit;

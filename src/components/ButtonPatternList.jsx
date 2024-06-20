@@ -80,6 +80,6 @@ const PatternListNotMemo = () => {
     </Tooltip>
   );
 };
-const PatternList = React.memo(PatternListNotMemo);
+const ButtonPatternList = React.memo(PatternListNotMemo);
 
-export default PatternList;
+export default ButtonPatternList;

@@ -1,7 +1,7 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { useConfig } from "../useConfig";
 
-const NoteSizeButton = () => {
+const ButtonNoteSize = () => {
   const { config, dispatch } = useConfig();
   const handleChange = () => {
     if (config.noteSize == "4") {
@@ -30,4 +30,4 @@ const NoteSizeButton = () => {
   );
 };
 
-export default NoteSizeButton;
+export default ButtonNoteSize;

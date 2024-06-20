@@ -2,7 +2,7 @@ import { IconButton, Tooltip } from "@mui/material";
 import { MetrIcon } from "./Icons";
 import { useConfig } from "../useConfig";
 
-const MetronomeButton = () => {
+const ButtonMetronomeSound = () => {
   const { config, dispatch } = useConfig();
   const onClick = () => {
     dispatch({
@@ -32,4 +32,4 @@ const MetronomeButton = () => {
   );
 };
 
-export default MetronomeButton;
+export default ButtonMetronomeSound;

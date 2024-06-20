@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { Button, Stack } from "@mui/material";
 import { DeleteIcon } from "lucide-react";
@@ -28,7 +28,7 @@ const PatternEdit = () => {
     if (event === "del") {
       if (beats.length > 0) beats.pop();
     }
-    console.log(beats);
+
     dispatch({ type: "setBeatPattern", data: beats.join("") });
   };
 

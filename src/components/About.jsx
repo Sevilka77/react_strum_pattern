@@ -45,7 +45,6 @@ const About = () => {
             sx={{
               fontSize: "40px",
               borderRadius: "50%",
-              border: "1px solid#f5f5f5",
             }}
           >
             <XCircleIcon />

@@ -1,5 +1,5 @@
 import { Typography, Box, AppBar, Toolbar } from "@mui/material";
-import ThemeToggleButton from "./ThemeToggleButton";
+import ButtonThemeToggle from "./ButtonThemeToggle";
 import About from "./About";
 
 function Header() {
@@ -21,7 +21,7 @@ function Header() {
             Тренажер гитарного боя
           </Typography>
           <About color="inherit" />
-          <ThemeToggleButton color="inherit">Login</ThemeToggleButton>
+          <ButtonThemeToggle color="inherit">Login</ButtonThemeToggle>
         </Toolbar>
       </AppBar>
     </Box>

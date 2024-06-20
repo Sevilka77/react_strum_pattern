@@ -8,7 +8,7 @@ async function copyToClip(url) {
   await navigator.clipboard.writeText(url);
 }
 
-export default function Share() {
+export default function ButtonShare() {
   const { config } = useConfig();
   const [open, setOpen] = useState(false);
 

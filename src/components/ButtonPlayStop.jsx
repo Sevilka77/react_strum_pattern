@@ -3,7 +3,7 @@ import { PlayIcon, SquareIcon } from "./Icons";
 import * as Tone from "tone";
 import { useConfig } from "../useConfig";
 
-export default function PlayButton() {
+export default function ButtonPlayStop() {
   const { config, dispatch } = useConfig();
   const handleClick = async () => {
     // Убедитесь, что Tone.js запущен

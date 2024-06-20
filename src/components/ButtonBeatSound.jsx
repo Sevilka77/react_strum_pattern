@@ -2,7 +2,7 @@ import { IconButton, Tooltip } from "@mui/material";
 import { DrumIcon } from "./Icons";
 import { useConfig } from "../useConfig";
 
-const BeatSound = () => {
+const ButtonBeatSound = () => {
   const { config, dispatch } = useConfig();
   const onClick = () => {
     dispatch({ type: "setIsBeatSound", data: !config.isBeatSound });
@@ -28,4 +28,4 @@ const BeatSound = () => {
   );
 };
 
-export default BeatSound;
+export default ButtonBeatSound;
