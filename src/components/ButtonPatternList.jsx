@@ -1,5 +1,5 @@
 import { patterns } from "../patterns";
-import React, { useState, useCallback } from "react";
+import { memo, useState, useCallback } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -7,7 +7,6 @@ import ListItemText from "@mui/material/ListItemText";
 import { Box, Drawer, IconButton, Tooltip } from "@mui/material";
 import { ListIcon } from "./Icons";
 import BeatImage from "./BeatImage";
-import { useConfig } from "../useConfig";
 
 const Child = ({ value, onClick }) => {
   return (
@@ -29,11 +28,10 @@ const Child = ({ value, onClick }) => {
     </ListItem>
   );
 };
-const ChildMemo = React.memo(Child);
+const ChildMemo = memo(Child);
 
-const PatternListNotMemo = () => {
+const PatternListNotMemo = ({ dispatch }) => {
   const [open, setOpen] = useState(false);
-  const { dispatch } = useConfig();
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
@@ -80,6 +78,6 @@ const PatternListNotMemo = () => {
     </Tooltip>
   );
 };
-const ButtonPatternList = React.memo(PatternListNotMemo);
+const ButtonPatternList = memo(PatternListNotMemo);
 
 export default ButtonPatternList;

@@ -5,15 +5,14 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import MuiInput from "@mui/material/Input";
-import { useConfig } from "../useConfig";
+import { memo } from "react";
 
 const Input = styled(MuiInput)`
   width: 42px;
 `;
 
-export default function TempoSelector() {
-  const { config, dispatch } = useConfig();
-  const [value, setValue] = useState(config.tempo);
+const TempoSelectorNM = ({ tempo, dispatch }) => {
+  const [value, setValue] = useState(tempo);
 
   // Этот useEffect для отправки изменений в контекст
   useEffect(() => {
@@ -69,4 +68,6 @@ export default function TempoSelector() {
       </Grid>
     </Box>
   );
-}
+};
+const TempoSelector = memo(TempoSelectorNM);
+export default TempoSelector;

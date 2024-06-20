@@ -1,19 +1,17 @@
+import { memo } from "react";
 import { IconButton, Tooltip } from "@mui/material";
-import { useConfig } from "../useConfig";
 
-const ButtonNoteSize = () => {
-  const { config, dispatch } = useConfig();
+const ButtonNoteSizeNM = ({ noteSize, dispatch }) => {
   const handleChange = () => {
-    if (config.noteSize == "4") {
+    if (noteSize === 4) {
       dispatch({ type: "setNoteSize", data: 3 });
-    }
-    if (config.noteSize == "3") {
+    } else if (noteSize === 3) {
       dispatch({ type: "setNoteSize", data: 2 });
-    }
-    if (config.noteSize == "2") {
+    } else if (noteSize === 2) {
       dispatch({ type: "setNoteSize", data: 4 });
     }
   };
+
   return (
     <Tooltip title="Изменить размер" placement="top">
       <IconButton
@@ -24,10 +22,10 @@ const ButtonNoteSize = () => {
         }}
         onClick={handleChange}
       >
-        {config.noteSize + "/4"}
+        {noteSize + "/4"}
       </IconButton>
     </Tooltip>
   );
 };
-
+const ButtonNoteSize = memo(ButtonNoteSizeNM);
 export default ButtonNoteSize;

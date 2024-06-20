@@ -3,11 +3,10 @@ import { useState } from "react";
 import { Button, Stack } from "@mui/material";
 import { DeleteIcon } from "lucide-react";
 import { ArrowD, XDownIcon, XIcon } from "./Icons";
-import { useConfig } from "../useConfig";
+import { memo } from "react";
 
-const PatternEdit = () => {
-  const { config, dispatch } = useConfig();
-  const [beats] = useState(config.beatPattern.split(""));
+const PatternEditNM = ({ beatPattern, dispatch }) => {
+  const [beats] = useState(beatPattern.split(""));
 
   const handleChange = (event) => {
     if (event === "A") {
@@ -120,4 +119,6 @@ const PatternEdit = () => {
     </Stack>
   );
 };
+
+const PatternEdit = memo(PatternEditNM);
 export default PatternEdit;

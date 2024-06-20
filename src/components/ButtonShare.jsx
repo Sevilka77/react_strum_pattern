@@ -2,17 +2,16 @@ import Snackbar from "@mui/material/Snackbar";
 import { ShareIcon } from "./Icons";
 import { Box, IconButton, Tooltip } from "@mui/material";
 import { useState } from "react";
-import { useConfig } from "../useConfig";
+import { memo } from "react";
 
 async function copyToClip(url) {
   await navigator.clipboard.writeText(url);
 }
 
-export default function ButtonShare() {
-  const { config } = useConfig();
+const ButtonShareNM = ({ beatPattern }) => {
   const [open, setOpen] = useState(false);
 
-  const url = `${location.href}?p=${config.beatPattern}`;
+  const url = `${location.href}?p=${beatPattern}`;
   const handleClick = () => {
     copyToClip(url);
     setOpen(true);
@@ -50,4 +49,6 @@ export default function ButtonShare() {
       />
     </Box>
   );
-}
+};
+const ButtonShare = memo(ButtonShareNM);
+export default ButtonShare;

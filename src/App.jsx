@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Stack, Box, useMediaQuery } from "@mui/material";
 
@@ -26,6 +26,9 @@ function App() {
   const [showPB, setPB] = useState(false);
   const { config, dispatch } = useConfig();
   const [searchParams, setSearchParams] = useSearchParams();
+  const handleTogglePB = useCallback(() => {
+    setPB((prevShowPB) => !prevShowPB);
+  }, []);
 
   useEffect(() => {
     if (searchParams.has("p")) {
@@ -74,11 +77,13 @@ function App() {
             alignItems="center"
           >
             <MetronomeWrapper isSmallDevice={isSmallDevice} />
-            <ButtonPlayStop />
+            <ButtonPlayStop isPlaying={config.isPlaying} dispatch={dispatch} />
           </Stack>
         </Box>
         <Box sx={{ gridArea: "edit", alignSelf: "end" }}>
-          {showPB && <PatternEdit />}
+          {showPB && (
+            <PatternEdit beatPattern={config.beatPattern} dispatch={dispatch} />
+          )}
         </Box>
         <Box
           sx={{ gridArea: "PB", alignSelf: "center", justifySelf: "center" }}
@@ -86,17 +91,23 @@ function App() {
         <Box
           sx={{ gridArea: "MB", alignSelf: "center", justifySelf: "center" }}
         >
-          <ButtonMetronomeSound />
+          <ButtonMetronomeSound
+            isMetronomeSound={config.isMetronomeSound}
+            dispatch={dispatch}
+          />
         </Box>
         <Box
           sx={{ gridArea: "BB", alignSelf: "center", justifySelf: "center" }}
         >
-          <ButtonBeatSound />
+          <ButtonBeatSound
+            isBeatSound={config.isBeatSound}
+            dispatch={dispatch}
+          />
         </Box>
         <Box
           sx={{ gridArea: "NB", alignSelf: "center", justifySelf: "center" }}
         >
-          <ButtonNoteSize />
+          <ButtonNoteSize noteSize={config.noteSize} dispatch={dispatch} />
         </Box>
         <Box
           sx={{
@@ -105,26 +116,22 @@ function App() {
             p: "15px",
           }}
         >
-          <TempoSelector />
+          <TempoSelector tempo={config.tempo} dispatch={dispatch} />
         </Box>
         <Box
           sx={{ gridArea: "PLB", alignSelf: "center", justifySelf: "center" }}
         >
-          <ButtonPatternList />
+          <ButtonPatternList dispatch={dispatch} />
         </Box>
         <Box
           sx={{ gridArea: "PEB", alignSelf: "center", justifySelf: "center" }}
         >
-          <ButtonPatternEdit
-            onChanged={() => {
-              setPB(!showPB);
-            }}
-          />
+          <ButtonPatternEdit onChanged={handleTogglePB} />
         </Box>
         <Box
           sx={{ gridArea: "SB", alignSelf: "center", justifySelf: "center" }}
         >
-          <ButtonShare />
+          <ButtonShare beatPattern={config.beatPattern} />
         </Box>
       </Box>
     </ThemeContextProvider>

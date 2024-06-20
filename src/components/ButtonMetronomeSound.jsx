@@ -1,13 +1,13 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { MetrIcon } from "./Icons";
-import { useConfig } from "../useConfig";
 
-const ButtonMetronomeSound = () => {
-  const { config, dispatch } = useConfig();
+import { memo } from "react";
+
+const ButtonMetronomeSoundNM = ({ isMetronomeSound, dispatch }) => {
   const onClick = () => {
     dispatch({
       type: "setIsMetronomSound",
-      data: !config.isMetronomeSound,
+      data: !isMetronomeSound,
     });
   };
 
@@ -19,10 +19,10 @@ const ButtonMetronomeSound = () => {
           fontSize: "40px",
           borderRadius: "50%",
         }}
-        selected={config.isMetronomeSound}
+        selected={isMetronomeSound}
         onClick={onClick}
       >
-        {config.isMetronomeSound ? (
+        {isMetronomeSound ? (
           <MetrIcon fontSize="inherit" color="primary" />
         ) : (
           <MetrIcon fontSize="inherit" />
@@ -31,5 +31,5 @@ const ButtonMetronomeSound = () => {
     </Tooltip>
   );
 };
-
+const ButtonMetronomeSound = memo(ButtonMetronomeSoundNM);
 export default ButtonMetronomeSound;

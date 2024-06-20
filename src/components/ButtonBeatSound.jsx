@@ -1,11 +1,11 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { DrumIcon } from "./Icons";
-import { useConfig } from "../useConfig";
 
-const ButtonBeatSound = () => {
-  const { config, dispatch } = useConfig();
+import { memo } from "react";
+
+const ButtonBeatSoundNM = ({ isBeatSound, dispatch }) => {
   const onClick = () => {
-    dispatch({ type: "setIsBeatSound", data: !config.isBeatSound });
+    dispatch({ type: "setIsBeatSound", data: !isBeatSound });
   };
   return (
     <Tooltip title="Включить звук боя" placement="top">
@@ -15,10 +15,10 @@ const ButtonBeatSound = () => {
           fontSize: "40px",
           borderRadius: "50%",
         }}
-        selected={config.isPlaying}
+        selected={isBeatSound}
         onClick={onClick}
       >
-        {config.isBeatSound ? (
+        {isBeatSound ? (
           <DrumIcon color="primary" fontSize="inherit" />
         ) : (
           <DrumIcon fontSize="inherit" />
@@ -27,5 +27,5 @@ const ButtonBeatSound = () => {
     </Tooltip>
   );
 };
-
+const ButtonBeatSound = memo(ButtonBeatSoundNM);
 export default ButtonBeatSound;

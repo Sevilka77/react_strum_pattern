@@ -5,14 +5,14 @@ import Dialog from "@mui/material/Dialog";
 import Slide from "@mui/material/Slide";
 
 import { HelpCircleIcon, XCircleIcon } from "lucide-react";
+import { memo } from "react";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-const About = () => {
+const AboutNM = () => {
   const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -78,5 +78,5 @@ const About = () => {
     </>
   );
 };
-
+const About = memo(AboutNM);
 export default About;

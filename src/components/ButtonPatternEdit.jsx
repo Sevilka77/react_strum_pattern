@@ -1,7 +1,8 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { EditIcon } from "./Icons";
+import { memo } from "react";
 
-const ButtonPatternEdit = ({ onChanged }) => {
+const ButtonPatternEditNM = ({ onChanged }) => {
   return (
     <Tooltip title="Редактировать бой" placement="top">
       <IconButton
@@ -20,5 +21,5 @@ const ButtonPatternEdit = ({ onChanged }) => {
     </Tooltip>
   );
 };
-
+const ButtonPatternEdit = memo(ButtonPatternEditNM);
 export default ButtonPatternEdit;

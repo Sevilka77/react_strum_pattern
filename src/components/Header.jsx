@@ -1,8 +1,9 @@
 import { Typography, Box, AppBar, Toolbar } from "@mui/material";
 import ButtonThemeToggle from "./ButtonThemeToggle";
 import About from "./About";
+import { memo } from "react";
 
-function Header() {
+const Header = memo(function Header() {
   return (
     <Box sx={{ gridArea: "header", flexGrow: 1 }}>
       <AppBar position="static" color="primary">
@@ -26,6 +27,5 @@ function Header() {
       </AppBar>
     </Box>
   );
-}
-
+});
 export default Header;
