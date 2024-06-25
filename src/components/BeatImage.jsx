@@ -44,9 +44,9 @@ export default function BeatImage({ beatString, fill }) {
       case "c":
         IconComponent =
           index % 2 === 0 ? (
-            <XUpIcon color={iconColor} sx={{ fill: iconFill }} />
-          ) : (
             <XDownIcon color={iconColor} sx={{ fill: iconFill }} />
+          ) : (
+            <XUpIcon color={iconColor} sx={{ fill: iconFill }} />
           );
         break;
       default:
