@@ -3,15 +3,45 @@ import { useEffect, useRef, useState } from "react";
 import * as Tone from "tone";
 import up from "./up.wav";
 import down from "./down.wav";
+import upA from "./upA.wav";
+import downA from "./downA.wav";
+import upM from "./upM.wav";
+import downM from "./downM.wav";
+import x from "./X.wav";
 import click1 from "./click1.wav";
 import click2 from "./click2.wav";
 
 // Создание Tone.Players для воспроизведения звуков
 const keys = new Tone.Players({
-  urls: { up: up, down: down, click1: click1, click2: click2 },
+  urls: {
+    up: up,
+    down: down,
+    upA: upA,
+    downA: downA,
+    upM: upM,
+    downM: downM,
+    x: x,
+    click1: click1,
+    click2: click2,
+  },
   onload: () => console.log("loaded"), // Обработчик загрузки
 }).toDestination(); // Отправка звуков на выход аудио
 
+const actions = {
+  1: (note, time) =>
+    note % 2 === 0
+      ? keys.player("down").start(time)
+      : keys.player("up").start(time),
+  c: (note, time) =>
+    note % 2 === 0
+      ? keys.player("downM").start(time)
+      : keys.player("upM").start(time),
+  x: (note, time) => keys.player("x").start(time),
+  A: (note, time) =>
+    note % 2 === 0
+      ? keys.player("downA").start(time)
+      : keys.player("upA").start(time),
+};
 // Функция для воспроизведения ноты
 const playNote = (
   time,
@@ -22,12 +52,8 @@ const playNote = (
   noteSize,
 ) => {
   // Проверка наличия звука для бита и его воспроизведение
-  if (isBeatSound && beatPattern[note] !== "0") {
-    if (note % 2 === 0) {
-      keys.player("down").start(time);
-    } else {
-      keys.player("up").start(time);
-    }
+  if (isBeatSound && beatPattern[note] in actions) {
+    actions[beatPattern[note]](note, time);
   }
   // Проверка наличия метронома и его воспроизведение
   if (isMetronomeSound) {
