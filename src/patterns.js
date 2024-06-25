@@ -125,11 +125,11 @@ export const patterns = [
   },
   {
     title: "ГСН 12 урок",
-    pattern: "x0A0x0A0x0A0x0A0",
+    pattern: "c0A0c0A0",
   },
   {
     title: "ГСН 13 Кино",
-    pattern: "xxA0A0xA0AxxA0xx",
+    pattern: "ccA0A0cA0AccA0cc",
   },
   {
     title: "ГСН 13 Ямайка",
@@ -141,7 +141,7 @@ export const patterns = [
   },
   {
     title: "ГСН 15 урок",
-    pattern: "10c111c1",
+    pattern: "10x111x1",
   },
   {
     title: "ГСН 16 урок",
