@@ -77,7 +77,6 @@ function App() {
             alignItems="center"
           >
             <MetronomeWrapper isSmallDevice={isSmallDevice} />
-            <ButtonPlayStop isPlaying={config.isPlaying} dispatch={dispatch} />
           </Stack>
         </Box>
         <Box sx={{ gridArea: "edit", alignSelf: "end" }}>
@@ -112,10 +111,14 @@ function App() {
         <Box
           sx={{
             gridArea: "tempo",
-            alignSelf: "center",
             p: "15px",
+            display: "flex",
+            flexDirection: "column",
+            alignSelf: "center",
+            justifyContent: "flex-end",
           }}
         >
+          <ButtonPlayStop isPlaying={config.isPlaying} dispatch={dispatch} />
           <TempoSelector tempo={config.tempo} dispatch={dispatch} />
         </Box>
         <Box
