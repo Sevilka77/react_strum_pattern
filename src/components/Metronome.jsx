@@ -16,33 +16,23 @@ const MetronomeNM = ({ noteSize, isSmd, beatPattern, activeBeat }) => {
     setBeats(beatPattern);
   }, [beatPattern, activeBeat]);
 
-  return (
+  return beats.map((b, index) => (
     <Stack
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-      flexBasis="content"
-      sx={{ height: "50vh" }}
+      key={index}
+      orientation="vertical"
+      sx={{
+        width: "auto",
+      }}
     >
-      {beats.map((b, index) => (
-        <Stack
-          key={index}
-          orientation="vertical"
-          sx={{
-            width: "auto",
-          }}
-        >
-          <MetronomeBeatName id={index} noteSize={noteSize} fSize={fSize} />
-          <MetronomeBeat
-            id={index}
-            beatStatus={b}
-            fSize={fSize}
-            active={activeBeat == index}
-          />
-        </Stack>
-      ))}
+      <MetronomeBeatName id={index} noteSize={noteSize} fSize={fSize} />
+      <MetronomeBeat
+        id={index}
+        beatStatus={b}
+        fSize={fSize}
+        active={activeBeat == index}
+      />
     </Stack>
-  );
+  ));
 };
 
 const Metronome = memo(MetronomeNM);

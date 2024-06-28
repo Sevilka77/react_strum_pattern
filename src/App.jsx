@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Stack, Box, useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 
 import ButtonPatternList from "./components/ButtonPatternList.jsx";
 import TempoSelector from "./components/TempoSelector";
@@ -70,14 +70,16 @@ function App() {
         }
       >
         <Header />
-        <Box sx={{ gridArea: "main" }}>
-          <Stack
-            direction="column"
-            justifyContent="flex-start"
-            alignItems="center"
-          >
-            <MetronomeWrapper isSmallDevice={isSmallDevice} />
-          </Stack>
+        <Box
+          sx={{
+            gridArea: "main",
+            display: "flex",
+            fledDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <MetronomeWrapper isSmallDevice={isSmallDevice} />
         </Box>
         <Box sx={{ gridArea: "edit", alignSelf: "end" }}>
           {showPB && (
