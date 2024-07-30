@@ -77,6 +77,7 @@ function App() {
             fledDirection: "column",
             justifyContent: "center",
             alignItems: "center",
+            columnGap: "1%",
           }}
         >
           <MetronomeWrapper isSmallDevice={isSmallDevice} />

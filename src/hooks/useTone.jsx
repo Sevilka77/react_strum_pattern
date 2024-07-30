@@ -60,7 +60,13 @@ const playNote = (
     if (note % noteSize === 0) {
       keys.player("click2").start(time);
     } else {
-      keys.player("click1").start(time);
+      if (noteSize > 5) {
+        if (note % 2 == 0) {
+          keys.player("click1").start(time);
+        }
+      } else {
+        keys.player("click1").start(time);
+      }
     }
   }
 };

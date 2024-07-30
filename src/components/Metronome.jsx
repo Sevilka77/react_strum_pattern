@@ -3,6 +3,7 @@ import MetronomeBeat from "./MetronomeBeat";
 import MetronomeBeatName from "./MetronomeBeatName";
 import { Stack } from "@mui/system";
 import { memo } from "react";
+import { Paper } from "@mui/material";
 
 const MetronomeNM = ({ noteSize, isSmd, beatPattern, activeBeat }) => {
   const [beats, setBeats] = useState(beatPattern);
@@ -24,13 +25,15 @@ const MetronomeNM = ({ noteSize, isSmd, beatPattern, activeBeat }) => {
         width: "auto",
       }}
     >
-      <MetronomeBeatName id={index} noteSize={noteSize} fSize={fSize} />
-      <MetronomeBeat
-        id={index}
-        beatStatus={b}
-        fSize={fSize}
-        active={activeBeat == index}
-      />
+      <Paper elevation={3} sx={{ borderRadius: "8px" }}>
+        <MetronomeBeatName id={index} noteSize={noteSize} fSize={fSize} />
+        <MetronomeBeat
+          id={index}
+          beatStatus={b}
+          fSize={fSize}
+          active={activeBeat == index}
+        />
+      </Paper>
     </Stack>
   ));
 };

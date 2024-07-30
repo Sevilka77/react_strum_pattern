@@ -4,7 +4,6 @@ import { ArrowD, ArrowU, XDownIcon, XUpIcon, XIcon } from "./Icons";
 export default function MetronomeBeat({ id, beatStatus, active, fSize }) {
   const isUp = id % 2 !== 0;
   let icon;
-  let aColor = active ? "#ed6c02" : "#ffffff0";
   let bColor = active ? "currentColor" : "#ffffff0";
 
   switch (beatStatus) {
@@ -43,7 +42,6 @@ export default function MetronomeBeat({ id, beatStatus, active, fSize }) {
 
   return (
     <>
-      <Box sx={{ height: "1vh", bgcolor: aColor }} />
       <Box
         sx={{
           display: "flex",
@@ -51,7 +49,8 @@ export default function MetronomeBeat({ id, beatStatus, active, fSize }) {
           justifyContent: "space-around",
           borderRadius: 1,
           marginTop: "1vh",
-          fontSize: fSize + "vw",
+          fontSize: fSize - 1 + "vw",
+          paddingBottom: "15px",
         }}
       >
         {icon}

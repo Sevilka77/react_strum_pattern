@@ -16,7 +16,6 @@ const ButtonPlayStopNM = ({ isPlaying, dispatch }) => {
       sx={{
         color: "text.primary",
         fontSize: "60px",
-        borderRadius: "50%",
       }}
       onClick={handleClick}
     >

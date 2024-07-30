@@ -6,7 +6,7 @@ import { memo } from "react";
 const Header = memo(function Header() {
   return (
     <Box sx={{ gridArea: "header", flexGrow: 1 }}>
-      <AppBar position="static" color="primary">
+      <AppBar position="static" elevation={1} enableColorOnDark>
         <Toolbar
           sx={{
             display: "flex",

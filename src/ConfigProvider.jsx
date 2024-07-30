@@ -10,7 +10,7 @@ export const ConfigProvider = ({ children }) => {
     tempo: 60,
     noteSize: 4,
     isPlaying: false,
-    isMetronomeSound: false,
+    isMetronomeSound: true,
     isBeatSound: false,
   });
 

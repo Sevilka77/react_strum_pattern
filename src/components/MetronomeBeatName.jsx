@@ -2,8 +2,14 @@ import { Box } from "@mui/material";
 
 export default function MetronomeBeatName({ id, fSize, noteSize }) {
   const isUp = id % 2 !== 0;
-  let nameId = isUp ? "и" : (id + 2) / 2;
-  let color = id % noteSize === 0 ? "warning.main" : "primary.main";
+  let nameId;
+  if (noteSize > 5) {
+    nameId = isUp ? "и" : (id % noteSize) / 2 + 1;
+  } else {
+    nameId = (id % noteSize) + 1;
+  }
+
+  let color = id % noteSize === 0 ? "warning.main" : "text.primary";
 
   return (
     <Box
@@ -11,7 +17,7 @@ export default function MetronomeBeatName({ id, fSize, noteSize }) {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
-        fontSize: fSize + "vw",
+        fontSize: fSize / 2 + "vw",
         color: color,
       }}
     >
