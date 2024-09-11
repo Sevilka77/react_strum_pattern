@@ -1,5 +1,4 @@
-import { IconButton, Tooltip } from "@mui/material";
-import { DrumIcon } from "./Icons";
+import { FormControlLabel, Switch, Tooltip } from "@mui/material";
 
 import { memo } from "react";
 
@@ -9,21 +8,19 @@ const ButtonBeatSoundNM = ({ isBeatSound, dispatch }) => {
   };
   return (
     <Tooltip title="Включить звук боя" placement="top">
-      <IconButton
-        sx={{
-          color: "text.primary",
-          fontSize: "40px",
-          borderRadius: "50%",
-        }}
-        selected={isBeatSound}
-        onClick={onClick}
-      >
-        {isBeatSound ? (
-          <DrumIcon color="primary" fontSize="inherit" />
-        ) : (
-          <DrumIcon fontSize="inherit" />
-        )}
-      </IconButton>
+      <FormControlLabel
+        label="Бой"
+        labelPlacement="end"
+        control={
+          <Switch
+            checked={isBeatSound}
+            onChange={onClick}
+            inputProps={{ "aria-label": "controlled" }}
+            label="Метроном"
+            labelPlacement="end"
+          />
+        }
+      />
     </Tooltip>
   );
 };

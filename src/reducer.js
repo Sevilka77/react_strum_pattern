@@ -20,6 +20,10 @@ const setIsMetronomeSound = (state, isMetronomeSound) => ({
   ...state,
   isMetronomeSound,
 });
+const setIsDownbeatSound = (state, isDownbeatSound) => ({
+  ...state,
+  isDownbeatSound,
+});
 
 export default function reducer(state, action) {
   switch (action.type) {
@@ -35,6 +39,8 @@ export default function reducer(state, action) {
       return setIsBeatSound(state, action.data);
     case "setIsMetronomSound":
       return setIsMetronomeSound(state, action.data);
+    case "setIsDownbeatSound":
+      return setIsDownbeatSound(state, action.data);
     default:
       return state;
   }

@@ -39,7 +39,7 @@ const TempoSelectorNM = ({ tempo, dispatch }) => {
     <Box>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
-          <Typography id="input-slider">Tempo</Typography>
+          <Typography id="input-slider">Темп</Typography>
         </Grid>
         <Grid item xs>
           <Slider

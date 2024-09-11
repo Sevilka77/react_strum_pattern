@@ -7,11 +7,13 @@ import TempoSelector from "./components/TempoSelector";
 import MetronomeWrapper from "./components/MetronomeWrapper";
 import ButtonPlayStop from "./components/ButtonPlayStop.jsx";
 import ButtonMetronomeSound from "./components/ButtonMetronomeSound.jsx";
+import ButtonDownbeatSound from "./components/ButtonDownbeatSound.jsx";
 import ButtonBeatSound from "./components/ButtonBeatSound";
 import ButtonShare from "./components/ButtonShare.jsx";
 import ButtonNoteSize from "./components/ButtonNoteSize.jsx";
 import ButtonPatternEdit from "./components/ButtonPatternEdit.jsx";
 import PatternEdit from "./components/PatternEdit";
+import ButtonI from "./components/ButtonI.jsx";
 
 import ThemeContextProvider from "./components/ThemeContextProvider"; // Импортируем новый компонент
 
@@ -97,20 +99,23 @@ function App() {
             isMetronomeSound={config.isMetronomeSound}
             dispatch={dispatch}
           />
-        </Box>
-        <Box
-          sx={{ gridArea: "BB", alignSelf: "center", justifySelf: "center" }}
-        >
+          <ButtonDownbeatSound
+            isDownbeatSound={config.isDownbeatSound}
+            dispatch={dispatch}
+          />
           <ButtonBeatSound
             isBeatSound={config.isBeatSound}
             dispatch={dispatch}
           />
-        </Box>
-        <Box
-          sx={{ gridArea: "NB", alignSelf: "center", justifySelf: "center" }}
-        >
+          <ButtonI noteSize={config.noteSize} dispatch={dispatch} />
           <ButtonNoteSize noteSize={config.noteSize} dispatch={dispatch} />
         </Box>
+        <Box
+          sx={{ gridArea: "BB", alignSelf: "center", justifySelf: "center" }}
+        ></Box>
+        <Box
+          sx={{ gridArea: "NB", alignSelf: "center", justifySelf: "center" }}
+        ></Box>
         <Box
           sx={{
             gridArea: "tempo",

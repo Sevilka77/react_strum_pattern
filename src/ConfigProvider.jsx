@@ -12,6 +12,7 @@ export const ConfigProvider = ({ children }) => {
     isPlaying: false,
     isMetronomeSound: true,
     isBeatSound: false,
+    isDownbeatSound: true,
   });
 
   return (

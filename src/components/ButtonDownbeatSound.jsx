@@ -2,22 +2,22 @@ import { FormControlLabel, Tooltip, Switch } from "@mui/material";
 
 import { memo } from "react";
 
-const ButtonMetronomeSoundNM = ({ isMetronomeSound, dispatch }) => {
+const ButtonDownBeatNM = ({ isDownbeatSound, dispatch }) => {
   const onClick = () => {
     dispatch({
-      type: "setIsMetronomSound",
-      data: !isMetronomeSound,
+      type: "setIsDownbeatSound",
+      data: !isDownbeatSound,
     });
   };
 
   return (
     <Tooltip title="Включить звук метронома" placement="top">
       <FormControlLabel
-        label="Метроном"
+        label="Акцент метронома"
         labelPlacement="end"
         control={
           <Switch
-            checked={isMetronomeSound}
+            checked={isDownbeatSound}
             onChange={onClick}
             inputProps={{ "aria-label": "controlled" }}
             label="Метроном"
@@ -28,5 +28,5 @@ const ButtonMetronomeSoundNM = ({ isMetronomeSound, dispatch }) => {
     </Tooltip>
   );
 };
-const ButtonMetronomeSound = memo(ButtonMetronomeSoundNM);
-export default ButtonMetronomeSound;
+const ButtonDownbeatSound = memo(ButtonDownBeatNM);
+export default ButtonDownbeatSound;
