@@ -11,7 +11,7 @@ const ThemeContextProvider = ({ children }) => {
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        setMode((prevMode) => (prevMode === "light" ? "dare" : "light"));
       },
     }),
     [],
