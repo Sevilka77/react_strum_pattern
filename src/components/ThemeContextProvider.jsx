@@ -92,7 +92,7 @@ const ThemeContextProvider = ({ children }) => {
   //   --accent2: #fb74b5;
   //   --accent3: #7cd9e9;
   // }
-  console.log(theme.palette);
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>

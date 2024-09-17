@@ -36,7 +36,7 @@ const TempoSelectorNM = ({ tempo, dispatch }) => {
   };
 
   return (
-    <Box>
+    <Box sx={{ width: "100%" }}>
       <Grid container spacing={2} alignItems="center">
         <Grid item>
           <Typography id="input-slider">Темп</Typography>

@@ -24,11 +24,15 @@ const setIsDownbeatSound = (state, isDownbeatSound) => ({
   ...state,
   isDownbeatSound,
 });
-const setIsUpbeatClickSound = (state, isUpbeatClickSound) => ({
+const setIsUpbeatSound = (state, isUpbeatSound) => ({
   ...state,
-  isUpbeatClickSound,
+  isUpbeatSound,
 });
 
+const setIsAcsentbeatSound = (state, isAcsentbeatSound) => ({
+  ...state,
+  isAcsentbeatSound,
+});
 export default function reducer(state, action) {
   switch (action.type) {
     case "setTempo":
@@ -45,8 +49,11 @@ export default function reducer(state, action) {
       return setIsMetronomeSound(state, action.data);
     case "setIsDownbeatSound":
       return setIsDownbeatSound(state, action.data);
-    case "setIsUpbeatClickSound":
-      return setIsUpbeatClickSound(state, action.data);
+    case "setIsUpbeatSound":
+      return setIsUpbeatSound(state, action.data);
+    case "setIsAcsentbeatSound":
+      return setIsAcsentbeatSound(state, action.data);
+
     default:
       return state;
   }

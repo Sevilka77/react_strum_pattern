@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useMemo } from "react";
 import reducer from "./reducer";
 
 // Создаем контекст
@@ -13,12 +13,13 @@ export const ConfigProvider = ({ children }) => {
     isMetronomeSound: true,
     isBeatSound: false,
     isDownbeatSound: true,
-    isUpbeatClickSound: false,
+    isUpbeatSound: false,
+    isAcsentbeatSound: true,
   });
 
+  // Мемоизируем значение контекста для предотвращения лишних рендеров
+  const value = useMemo(() => ({ config, dispatch }), [config, dispatch]);
   return (
-    <ConfigContext.Provider value={{ config, dispatch }}>
-      {children}
-    </ConfigContext.Provider>
+    <ConfigContext.Provider value={value}>{children}</ConfigContext.Provider>
   );
 };

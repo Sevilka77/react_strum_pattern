@@ -1,12 +1,19 @@
-import { Typography, Box, AppBar, Toolbar } from "@mui/material";
+import { Typography, Box, AppBar, Toolbar, IconButton } from "@mui/material";
 import ButtonShare from "./ButtonShare.jsx";
 import ButtonPatternList from "./ButtonPatternList.jsx";
 import ButtonPatternEdit from "./ButtonPatternEdit.jsx";
 import ButtonThemeToggle from "./ButtonThemeToggle";
 import About from "./About";
 import { memo } from "react";
+import { SettingsIcon } from "lucide-react";
 
-const Header = memo(function Header({ dispatch, config, handleTogglePB }) {
+const Header = memo(function Header({
+  dispatch,
+  beatPattern,
+  handleTogglePB,
+  isSmallDevice,
+  onOpenModalSettings,
+}) {
   return (
     <Box sx={{ gridArea: "header", flexGrow: 1 }}>
       <AppBar position="static" elevation={1} enableColorOnDark>
@@ -19,28 +26,40 @@ const Header = memo(function Header({ dispatch, config, handleTogglePB }) {
           }}
         >
           {/* Левый блок с тремя кнопками */}
-          <Box sx={{ display: "flex", gap: "10px" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexGrow: 1,
+              gap: "10px",
+              justifyContent: isSmallDevice ? "space-around" : "flex-start",
+            }}
+          >
             <ButtonPatternList
               sx={{
                 borderRadius: "8px",
-                bgcolor: "background.paper",
               }}
+              isSmallDevice={isSmallDevice}
               dispatch={dispatch}
             />
             <ButtonPatternEdit
               sx={{
                 borderRadius: "8px",
-                bgcolor: "background.paper",
               }}
+              isSmallDevice={isSmallDevice}
               onChanged={handleTogglePB}
             />
             <ButtonShare
               sx={{
                 borderRadius: "8px",
-                bgcolor: "background.paper",
               }}
-              beatPattern={config.beatPattern}
+              beatPattern={beatPattern}
+              isSmallDevice={isSmallDevice}
             />
+            {isSmallDevice && (
+              <IconButton onClick={onOpenModalSettings} color="inherit">
+                <SettingsIcon />
+              </IconButton>
+            )}
           </Box>
           {/* Центр с заголовком */}
           <Typography
@@ -51,18 +70,27 @@ const Header = memo(function Header({ dispatch, config, handleTogglePB }) {
               left: "50%", // Центр по горизонтали
               transform: "translateX(-50%)", // Смещение на половину ширины текста
               textAlign: "center",
+              display: isSmallDevice ? "none" : "block", // Скрываем заголовок на маленьких экранах
             }}
           >
-            Тренажер гитарного боя
+            Тренажер Гитарного Боя
           </Typography>
           {/* Правый блок с кнопками About и ThemeToggle */}
-          <Box sx={{ display: "flex", gap: "10px" }}>
+          <Box
+            sx={{
+              display: "flex",
+              gap: "10px",
+              flexGrow: 1,
+              justifyContent: "flex-end",
+            }}
+          >
             <About color="inherit" />
-            <ButtonThemeToggle color="inherit">Login</ButtonThemeToggle>
+            <ButtonThemeToggle color="inherit" />
           </Box>
         </Toolbar>
       </AppBar>
     </Box>
   );
 });
+
 export default Header;

@@ -1,17 +1,25 @@
 import Metronome from "./Metronome";
 import useTone from "../hooks/useTone";
 import { useConfig } from "../useConfig";
+import { useMemo } from "react";
 
 function MetronomeWrapper({ isSmallDevice }) {
   const { config } = useConfig();
-  const { beatPattern } = config;
+  const { beatPattern, noteSize } = config;
   const [activeBeat] = useTone(config);
+
+  // Мемоизация значений, которые передаются в Metronome
+  const memoizedBeatPattern = useMemo(
+    () => beatPattern.split(""),
+    [beatPattern],
+  );
+  const memoizedNoteSize = useMemo(() => noteSize, [noteSize]);
 
   return (
     <Metronome
-      noteSize={config.noteSize}
+      noteSize={memoizedNoteSize}
       isSmd={isSmallDevice}
-      beatPattern={beatPattern.split("")}
+      beatPattern={memoizedBeatPattern}
       activeBeat={activeBeat}
     />
   );

@@ -15,7 +15,9 @@ const ButtonPlayStopNM = ({ isPlaying, dispatch }) => {
     <IconButton
       sx={{
         color: "text.primary",
-        fontSize: "60px",
+        width: "80px", // Фиксированная ширина кнопки
+        height: "80px", // Фиксированная высота кнопки
+        fontSize: "60px", // Размер иконки
       }}
       onClick={handleClick}
     >

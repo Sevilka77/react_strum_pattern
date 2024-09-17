@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, Drawer, useMediaQuery } from "@mui/material";
 
 import TempoSelector from "./components/TempoSelector";
 import MetronomeWrapper from "./components/MetronomeWrapper";
@@ -19,7 +19,8 @@ import ThemeContextProvider from "./components/ThemeContextProvider"; // Имп�
 import Header from "./components/Header";
 import { useConfig } from "./useConfig";
 import useWakeLock from "./hooks/useWakeLock.jsx";
-import ButtonUpbeatClickSound from "./components/ButtonUpbeatClickSound.jsx";
+import ButtonUpbeatSound from "./components/ButtonUpbeatSound.jsx";
+import ButtonAcsentbeatSound from "./components/ButtonAcsentbeatSound.jsx";
 
 function App() {
   useWakeLock();
@@ -30,6 +31,11 @@ function App() {
   const [searchParams, setSearchParams] = useSearchParams();
   const handleTogglePB = useCallback(() => {
     setPB((prevShowPB) => !prevShowPB);
+  }, []);
+
+  const [modalOpenSettings, setModalOpenSettings] = useState(false);
+  const handleToggleModalSettings = useCallback(() => {
+    setModalOpenSettings((prevShowPB) => !prevShowPB);
   }, []);
 
   useEffect(() => {
@@ -55,7 +61,7 @@ function App() {
                               "main main main main main main main main main main"
                                ". . edit edit edit edit edit edit . ."
                                ". . . tempo tempo tempo tempo . . ."
-                             ". . . MB BB NB . .  . ."
+                             ". . . MB BB NB DU .  . ."
                               `,
           }) ||
           (isSmallDevice && {
@@ -63,20 +69,21 @@ function App() {
             height: "100vh",
             display: "grid",
             gridTemplateColumns: "repeat(3,1fr)",
-            gridTemplateRows: "1fr 2fr 1fr 1fr 1fr 1fr",
+            gridTemplateRows: "1fr 2fr 1fr 1fr",
             gridTemplateAreas: `"header  header header"
                               "main main  main"
                               "edit edit  edit"
                               "tempo tempo  tempo"
-                              "MB BB NB"
-                              "PLB PEB SB"`,
+                              `,
           })
         }
       >
         <Header
           dispatch={dispatch}
-          config={config}
+          beatPattern={config.beatPattern}
           handleTogglePB={handleTogglePB}
+          isSmallDevice={isSmallDevice}
+          onOpenModalSettings={handleToggleModalSettings}
         />
         <Box
           sx={{
@@ -95,52 +102,111 @@ function App() {
             <PatternEdit beatPattern={config.beatPattern} dispatch={dispatch} />
           )}
         </Box>
-        <Box
-          sx={{ gridArea: "PB", alignSelf: "center", justifySelf: "center" }}
-        ></Box>
-        <Box
-          sx={{ gridArea: "MB", alignSelf: "center", justifySelf: "center" }}
-        >
-          <ButtonMetronomeSound
-            isMetronomeSound={config.isMetronomeSound}
-            dispatch={dispatch}
-          />
-          <ButtonDownbeatSound
-            isDownbeatSound={config.isDownbeatSound}
-            dispatch={dispatch}
-          />
-        </Box>
-        <Box
-          sx={{ gridArea: "BB", alignSelf: "center", justifySelf: "center" }}
-        >
-          <ButtonBeatSound
-            isBeatSound={config.isBeatSound}
-            dispatch={dispatch}
-          />
-        </Box>
-        <Box
-          sx={{ gridArea: "NB", alignSelf: "center", justifySelf: "center" }}
-        >
-          <ButtonI noteSize={config.noteSize} dispatch={dispatch} />
-          <ButtonUpbeatClickSound
-            isUpbeatClickSound={config.isUpbeatClickSound}
-            dispatch={dispatch}
-          />
-          <ButtonNoteSize noteSize={config.noteSize} dispatch={dispatch} />
-        </Box>
+        {/* Контент для среднего экрана */}
+        {isMediumDevice && (
+          <Box
+            sx={{ gridArea: "MB", alignSelf: "center", justifySelf: "center" }}
+          >
+            <ButtonMetronomeSound
+              isMetronomeSound={config.isMetronomeSound}
+              dispatch={dispatch}
+            />
+            {config.isMetronomeSound && (
+              <ButtonAcsentbeatSound
+                isAcsentbeatSound={config.isAcsentbeatSound}
+                dispatch={dispatch}
+              />
+            )}
+          </Box>
+        )}
+        {isMediumDevice && (
+          <Box
+            sx={{ gridArea: "BB", alignSelf: "center", justifySelf: "center" }}
+          >
+            <ButtonBeatSound
+              isBeatSound={config.isBeatSound}
+              dispatch={dispatch}
+            />
+          </Box>
+        )}
+        {isMediumDevice && (
+          <Box
+            sx={{ gridArea: "NB", alignSelf: "center", justifySelf: "center" }}
+          >
+            <ButtonI noteSize={config.noteSize} dispatch={dispatch} />
+            <ButtonNoteSize noteSize={config.noteSize} dispatch={dispatch} />
+          </Box>
+        )}
+
+        {config.noteSize > 4 && isMediumDevice && (
+          <Box
+            sx={{ gridArea: "DU", alignSelf: "center", justifySelf: "center" }}
+          >
+            <ButtonDownbeatSound
+              isDownbeatSound={config.isDownbeatSound}
+              dispatch={dispatch}
+            />
+            <ButtonUpbeatSound
+              isUpbeatSound={config.isUpbeatSound}
+              dispatch={dispatch}
+            />
+          </Box>
+        )}
+
         <Box
           sx={{
             gridArea: "tempo",
             p: "15px",
             display: "flex",
             flexDirection: "column",
-            alignSelf: "center",
-            justifyContent: "flex-end",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "16px",
           }}
         >
           <ButtonPlayStop isPlaying={config.isPlaying} dispatch={dispatch} />
+
           <TempoSelector tempo={config.tempo} dispatch={dispatch} />
         </Box>
+
+        {/* Модальное окно для маленького экрана */}
+        <Drawer
+          anchor="right"
+          keepMounted
+          open={modalOpenSettings}
+          onClose={handleToggleModalSettings}
+        >
+          <Box sx={{ width: 250, padding: 2 }}>
+            <ButtonMetronomeSound
+              isMetronomeSound={config.isMetronomeSound}
+              dispatch={dispatch}
+            />
+            {config.isMetronomeSound && (
+              <ButtonAcsentbeatSound
+                isAcsentbeatSound={config.isAcsentbeatSound}
+                dispatch={dispatch}
+              />
+            )}
+            <ButtonBeatSound
+              isBeatSound={config.isBeatSound}
+              dispatch={dispatch}
+            />
+            <ButtonI noteSize={config.noteSize} dispatch={dispatch} />
+            <ButtonNoteSize noteSize={config.noteSize} dispatch={dispatch} />
+            {config.noteSize > 4 && (
+              <>
+                <ButtonDownbeatSound
+                  isDownbeatSound={config.isDownbeatSound}
+                  dispatch={dispatch}
+                />
+                <ButtonUpbeatSound
+                  isUpbeatSound={config.isUpbeatSound}
+                  dispatch={dispatch}
+                />
+              </>
+            )}
+          </Box>
+        </Drawer>
       </Box>
     </ThemeContextProvider>
   );

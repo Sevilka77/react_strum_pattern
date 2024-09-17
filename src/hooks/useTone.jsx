@@ -50,7 +50,8 @@ const playNote = (
   isBeatSound,
   isMetronomeSound,
   isDownbeatSound,
-  isUpbeatClickSound,
+  isUpbeatSound,
+  isAcsentbeatSound,
   noteSize,
 ) => {
   // Проверка наличия звука для бита и его воспроизведение
@@ -59,15 +60,14 @@ const playNote = (
   }
   // Проверка наличия метронома и его воспроизведение isDownbeatSound
   if (isMetronomeSound) {
-    if (note % noteSize === 0 && isDownbeatSound) {
+    if (note % noteSize === 0 && isAcsentbeatSound) {
       keys.player("click2").start(time);
     } else {
       if (noteSize > 5) {
-        console.log(isUpbeatClickSound);
-        if (note % 2 != 0 && isUpbeatClickSound) {
+        if (note % 2 != 0 && isUpbeatSound) {
           keys.player("click1").start(time);
         }
-        if (note % 2 == 0) {
+        if (note % 2 == 0 && isDownbeatSound) {
           keys.player("click1").start(time);
         }
       } else {
@@ -103,7 +103,8 @@ export default function useTone(config) {
           config.isBeatSound,
           config.isMetronomeSound,
           config.isDownbeatSound,
-          config.isUpbeatClickSound,
+          config.isUpbeatSound,
+          config.isAcsentbeatSound,
           config.noteSize || 4,
         );
         setActiveBeat(note); // Установка активного бита
@@ -123,7 +124,8 @@ export default function useTone(config) {
     config.isBeatSound,
     config.isMetronomeSound,
     config.isDownbeatSound,
-    config.isUpbeatClickSound,
+    config.isUpbeatSound,
+    config.isAcsentbeatSound,
     config.noteSize,
     config.tempo,
   ]);

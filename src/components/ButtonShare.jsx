@@ -1,6 +1,7 @@
 import Snackbar from "@mui/material/Snackbar";
+import { ShareIcon } from "lucide-react";
 
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import { useState } from "react";
 import { memo } from "react";
 
@@ -8,7 +9,7 @@ async function copyToClip(url) {
   await navigator.clipboard.writeText(url);
 }
 
-const ButtonShareNM = ({ beatPattern }) => {
+const ButtonShareNM = ({ beatPattern, isSmallDevice }) => {
   const [open, setOpen] = useState(false);
 
   const url = `${location.href}?p=${beatPattern}`;
@@ -26,26 +27,35 @@ const ButtonShareNM = ({ beatPattern }) => {
   };
 
   return (
-    <Box sx={{ gridArea: "SB" }}>
-      <Button
-        sx={{
-          borderRadius: "8px",
-          bgcolor: "background.paper",
-          flexDirection: "column", // Устанавливаем направление элементов в столбец
-          height: "100%", // Занимает всю доступную высоту ячейки Grid
-          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
-          alignItems: "center", // Выравниваем по центру по вертикали
-          justifyContent: "center", // Выравниваем по центру по горизонтали
-        }}
-        value="chplayeck"
-        onClick={handleClick}
-      >
-        Сохранить
-      </Button>
+    <Box>
+      {!isSmallDevice ? (
+        <Button
+          color="inherit"
+          sx={{
+            borderRadius: "8px",
+          }}
+          value="chplayeck"
+          onClick={handleClick}
+        >
+          Сохранить
+        </Button>
+      ) : (
+        <IconButton
+          value="chplayeck"
+          onClick={handleClick}
+          color="inherit"
+          sx={{
+            fontSize: "40px",
+            borderRadius: "50%",
+          }}
+        >
+          <ShareIcon />
+        </IconButton>
+      )}
 
       <Snackbar
         open={open}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
         autoHideDuration={2000}
         onClose={handleClose}
         message="Ссылка на гитарйный бой скопирована!"

@@ -2,21 +2,21 @@ import { FormControlLabel, Switch } from "@mui/material";
 
 import { memo } from "react";
 
-const ButtonUpbeatClickSoundNM = ({ isUpbeatClickSound, dispatch }) => {
+const ButtonUpbeatClickSoundNM = ({ isUpbeatSound, dispatch }) => {
   const onClick = () => {
     dispatch({
-      type: "setIsUpbeatClickSound",
-      data: !isUpbeatClickSound,
+      type: "setIsUpbeatSound",
+      data: !isUpbeatSound,
     });
   };
 
   return (
     <FormControlLabel
-      label='Клик на "И"'
+      label="Клик на слабую долю"
       labelPlacement="end"
       control={
         <Switch
-          checked={isUpbeatClickSound}
+          checked={isUpbeatSound}
           onChange={onClick}
           inputProps={{ "aria-label": "controlled" }}
         />
@@ -24,5 +24,5 @@ const ButtonUpbeatClickSoundNM = ({ isUpbeatClickSound, dispatch }) => {
     />
   );
 };
-const ButtonUpbeatClickSound = memo(ButtonUpbeatClickSoundNM);
-export default ButtonUpbeatClickSound;
+const ButtonUpbeatSound = memo(ButtonUpbeatClickSoundNM);
+export default ButtonUpbeatSound;

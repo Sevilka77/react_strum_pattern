@@ -1,29 +1,41 @@
-import { Button, Tooltip } from "@mui/material";
-
+import { Button, IconButton } from "@mui/material";
+import { PencilIcon } from "lucide-react";
 import { memo } from "react";
 
-const ButtonPatternEditNM = ({ onChanged }) => {
+const ButtonPatternEditNM = ({ onChanged, isSmallDevice }) => {
   return (
-    <Tooltip title="Редактировать бой" placement="top">
-      <Button
-        value="check"
-        onClick={() => {
-          onChanged();
-        }}
-        sx={{
-          borderRadius: "8px",
-          bgcolor: "background.paper",
-          flexDirection: "column", // Устанавливаем направление элементов в столбец
-          height: "100%", // Занимает всю доступную высоту ячейки Grid
-          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
-          alignItems: "center", // Выравниваем по центру по вертикали
-          justifyContent: "center", // Выравниваем по центру по горизонтали
-        }}
-      >
-        Рекдактировать
-      </Button>
-    </Tooltip>
+    <>
+      {isSmallDevice ? (
+        <IconButton
+          color="inherit"
+          value="check"
+          onClick={() => {
+            onChanged();
+          }}
+          sx={{
+            fontSize: "40px",
+            borderRadius: "50%",
+          }}
+        >
+          <PencilIcon />
+        </IconButton>
+      ) : (
+        <Button
+          color="inherit"
+          value="check"
+          onClick={() => {
+            onChanged();
+          }}
+          sx={{
+            borderRadius: "8px",
+          }}
+        >
+          Редактировать
+        </Button>
+      )}
+    </>
   );
 };
+
 const ButtonPatternEdit = memo(ButtonPatternEditNM);
 export default ButtonPatternEdit;
