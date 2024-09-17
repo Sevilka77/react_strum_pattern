@@ -50,6 +50,7 @@ const playNote = (
   isBeatSound,
   isMetronomeSound,
   isDownbeatSound,
+  isUpbeatClickSound,
   noteSize,
 ) => {
   // Проверка наличия звука для бита и его воспроизведение
@@ -62,6 +63,10 @@ const playNote = (
       keys.player("click2").start(time);
     } else {
       if (noteSize > 5) {
+        console.log(isUpbeatClickSound);
+        if (note % 2 != 0 && isUpbeatClickSound) {
+          keys.player("click1").start(time);
+        }
         if (note % 2 == 0) {
           keys.player("click1").start(time);
         }
@@ -72,9 +77,6 @@ const playNote = (
   }
 };
 
-// Создание Tone.Sequence для управления последовательностью звуков
-const seq = new Tone.Sequence(playNote, [], "4n").start(0);
-
 // Функция для подсчета шагов в последовательности
 function countSteps(beats) {
   return beats.map((value, index) => index);
@@ -83,39 +85,58 @@ function countSteps(beats) {
 // Хук useTone для управления воспроизведением звуков
 export default function useTone(config) {
   const [activeBeat, setActiveBeat] = useState(0); // Состояние активного бита
-  Tone.getTransport().bpm.value = config.tempo || 120; // Установка значения BPM
-
-  const seqRef = useRef(seq); // Ссылка на объект Tone.Sequence
+  const seqRef = useRef(null); // Ссылка на объект Tone.Sequence
 
   useEffect(() => {
     if (!config.isPlaying) {
       return; // Если метроном не запущен, выходим из useEffect
     }
 
-    // Установка колбэка для последовательности
-    seqRef.current.callback = (time, note) => {
-      playNote(
-        time,
-        note,
-        config.beatPattern,
-        config.isBeatSound,
-        config.isMetronomeSound,
-        config.isDownbeatSound,
-        config.noteSize || 4,
-      );
-      setActiveBeat(note); // Установка активного бита
-    };
+    Tone.getTransport().bpm.value = config.tempo || 120; // Установка значения BPM
 
-    seqRef.current.events = countSteps(config.beatPattern.split("")); // Установка шагов последовательности
+    const seq = new Tone.Sequence(
+      (time, note) => {
+        playNote(
+          time,
+          note,
+          config.beatPattern,
+          config.isBeatSound,
+          config.isMetronomeSound,
+          config.isDownbeatSound,
+          config.isUpbeatClickSound,
+          config.noteSize || 4,
+        );
+        setActiveBeat(note); // Установка активного бита
+      },
+      countSteps(config.beatPattern.split("")),
+      config.noteSize > 4 ? "8n" : "4n",
+    ).start(0);
+    seqRef.current = seq; // Сохранение ссылки на новую последовательность
+
+    return () => {
+      // Очистка последовательности перед созданием новой
+      seq.dispose();
+    };
   }, [
     config.isPlaying,
     config.beatPattern,
     config.isBeatSound,
     config.isMetronomeSound,
     config.isDownbeatSound,
+    config.isUpbeatClickSound,
     config.noteSize,
+    config.tempo,
   ]);
 
-  // Возвращаем activeBeat только если метроном запущен
+  // Старт/остановка воспроизведения
+  useEffect(() => {
+    if (config.isPlaying) {
+      Tone.start();
+      Tone.getTransport().start();
+    } else {
+      Tone.getTransport().stop();
+    }
+  }, [config.isPlaying]);
+
   return config.isPlaying ? [activeBeat] : [null];
 }

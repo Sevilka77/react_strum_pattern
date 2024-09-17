@@ -2,16 +2,15 @@ import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Box, useMediaQuery } from "@mui/material";
 
-import ButtonPatternList from "./components/ButtonPatternList.jsx";
 import TempoSelector from "./components/TempoSelector";
 import MetronomeWrapper from "./components/MetronomeWrapper";
 import ButtonPlayStop from "./components/ButtonPlayStop.jsx";
 import ButtonMetronomeSound from "./components/ButtonMetronomeSound.jsx";
 import ButtonDownbeatSound from "./components/ButtonDownbeatSound.jsx";
 import ButtonBeatSound from "./components/ButtonBeatSound";
-import ButtonShare from "./components/ButtonShare.jsx";
+
 import ButtonNoteSize from "./components/ButtonNoteSize.jsx";
-import ButtonPatternEdit from "./components/ButtonPatternEdit.jsx";
+
 import PatternEdit from "./components/PatternEdit";
 import ButtonI from "./components/ButtonI.jsx";
 
@@ -20,6 +19,7 @@ import ThemeContextProvider from "./components/ThemeContextProvider"; // Имп�
 import Header from "./components/Header";
 import { useConfig } from "./useConfig";
 import useWakeLock from "./hooks/useWakeLock.jsx";
+import ButtonUpbeatClickSound from "./components/ButtonUpbeatClickSound.jsx";
 
 function App() {
   useWakeLock();
@@ -50,11 +50,13 @@ function App() {
             height: "100vh",
             display: "grid",
             gridTemplateColumns: "repeat(10,1fr)",
-            gridTemplateRows: "1fr 2fr 1fr 1fr",
+            gridTemplateRows: "1fr 2fr 1fr 1fr 1fr",
             gridTemplateAreas: `"header header header header header header header header header header"
                               "main main main main main main main main main main"
-                              ". . . . . . edit edit edit edit"
-                              "MB BB NB tempo tempo tempo tempo PLB PEB SB"`,
+                               ". . edit edit edit edit edit edit . ."
+                               ". . . tempo tempo tempo tempo . . ."
+                             ". . . MB BB NB . .  . ."
+                              `,
           }) ||
           (isSmallDevice && {
             boxSizing: "border-box",
@@ -71,7 +73,11 @@ function App() {
           })
         }
       >
-        <Header />
+        <Header
+          dispatch={dispatch}
+          config={config}
+          handleTogglePB={handleTogglePB}
+        />
         <Box
           sx={{
             gridArea: "main",
@@ -84,7 +90,7 @@ function App() {
         >
           <MetronomeWrapper isSmallDevice={isSmallDevice} />
         </Box>
-        <Box sx={{ gridArea: "edit", alignSelf: "end" }}>
+        <Box sx={{ gridArea: "edit", alignSelf: "start" }}>
           {showPB && (
             <PatternEdit beatPattern={config.beatPattern} dispatch={dispatch} />
           )}
@@ -103,19 +109,25 @@ function App() {
             isDownbeatSound={config.isDownbeatSound}
             dispatch={dispatch}
           />
+        </Box>
+        <Box
+          sx={{ gridArea: "BB", alignSelf: "center", justifySelf: "center" }}
+        >
           <ButtonBeatSound
             isBeatSound={config.isBeatSound}
             dispatch={dispatch}
           />
-          <ButtonI noteSize={config.noteSize} dispatch={dispatch} />
-          <ButtonNoteSize noteSize={config.noteSize} dispatch={dispatch} />
         </Box>
         <Box
-          sx={{ gridArea: "BB", alignSelf: "center", justifySelf: "center" }}
-        ></Box>
-        <Box
           sx={{ gridArea: "NB", alignSelf: "center", justifySelf: "center" }}
-        ></Box>
+        >
+          <ButtonI noteSize={config.noteSize} dispatch={dispatch} />
+          <ButtonUpbeatClickSound
+            isUpbeatClickSound={config.isUpbeatClickSound}
+            dispatch={dispatch}
+          />
+          <ButtonNoteSize noteSize={config.noteSize} dispatch={dispatch} />
+        </Box>
         <Box
           sx={{
             gridArea: "tempo",
@@ -128,21 +140,6 @@ function App() {
         >
           <ButtonPlayStop isPlaying={config.isPlaying} dispatch={dispatch} />
           <TempoSelector tempo={config.tempo} dispatch={dispatch} />
-        </Box>
-        <Box
-          sx={{ gridArea: "PLB", alignSelf: "center", justifySelf: "center" }}
-        >
-          <ButtonPatternList dispatch={dispatch} />
-        </Box>
-        <Box
-          sx={{ gridArea: "PEB", alignSelf: "center", justifySelf: "center" }}
-        >
-          <ButtonPatternEdit onChanged={handleTogglePB} />
-        </Box>
-        <Box
-          sx={{ gridArea: "SB", alignSelf: "center", justifySelf: "center" }}
-        >
-          <ButtonShare beatPattern={config.beatPattern} />
         </Box>
       </Box>
     </ThemeContextProvider>

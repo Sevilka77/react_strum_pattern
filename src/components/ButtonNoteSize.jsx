@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { FormControlLabel, Switch, Tooltip } from "@mui/material";
+import { FormControlLabel, Switch } from "@mui/material";
 
 const ButtonNoteSizeNM = ({ noteSize, dispatch }) => {
   const handleChange = () => {
@@ -20,21 +20,17 @@ const ButtonNoteSizeNM = ({ noteSize, dispatch }) => {
   };
 
   return (
-    <Tooltip title="Изменить размер" placement="top">
-      <FormControlLabel
-        label='Счет до "3"'
-        labelPlacement="end"
-        control={
-          <Switch
-            checked={noteSize % 3 == 0}
-            onChange={handleChange}
-            inputProps={{ "aria-label": "controlled" }}
-            label="Счет"
-            labelPlacement="end"
-          />
-        }
-      />
-    </Tooltip>
+    <FormControlLabel
+      label='Счет до "3"'
+      labelPlacement="end"
+      control={
+        <Switch
+          checked={noteSize % 3 == 0}
+          onChange={handleChange}
+          inputProps={{ "aria-label": "controlled" }}
+        />
+      }
+    />
   );
 };
 const ButtonNoteSize = memo(ButtonNoteSizeNM);

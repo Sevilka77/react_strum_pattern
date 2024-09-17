@@ -4,8 +4,8 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { Box, Drawer, IconButton, Tooltip } from "@mui/material";
-import { ListIcon } from "./Icons";
+import { Box, Drawer, Button, Tooltip } from "@mui/material";
+
 import BeatImage from "./BeatImage";
 
 const Child = ({ value, onClick }) => {
@@ -61,16 +61,20 @@ const PatternListNotMemo = ({ dispatch }) => {
   return (
     <Tooltip title="Выбрать бой" placement="top">
       <Box>
-        <IconButton
+        <Button
           sx={{
-            color: "text.primary",
-            fontSize: "40px",
-            borderRadius: "50%",
+            borderRadius: "8px",
+            bgcolor: "background.paper",
+            flexDirection: "column", // Устанавливаем направление элементов в столбец
+            height: "100%", // Занимает всю доступную высоту ячейки Grid
+            display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
+            alignItems: "center", // Выравниваем по центру по вертикали
+            justifyContent: "center", // Выравниваем по центру по горизонтали
           }}
           onClick={toggleDrawer(true)}
         >
-          <ListIcon fontSize="inherit" />
-        </IconButton>
+          Загрузить
+        </Button>
         <Drawer keepMounted open={open} onClose={toggleDrawer(false)}>
           {DrawerList}
         </Drawer>

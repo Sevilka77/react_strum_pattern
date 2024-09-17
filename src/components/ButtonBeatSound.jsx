@@ -1,4 +1,4 @@
-import { FormControlLabel, Switch, Tooltip } from "@mui/material";
+import { FormControlLabel, Switch } from "@mui/material";
 
 import { memo } from "react";
 
@@ -7,21 +7,17 @@ const ButtonBeatSoundNM = ({ isBeatSound, dispatch }) => {
     dispatch({ type: "setIsBeatSound", data: !isBeatSound });
   };
   return (
-    <Tooltip title="Включить звук боя" placement="top">
-      <FormControlLabel
-        label="Бой"
-        labelPlacement="end"
-        control={
-          <Switch
-            checked={isBeatSound}
-            onChange={onClick}
-            inputProps={{ "aria-label": "controlled" }}
-            label="Метроном"
-            labelPlacement="end"
-          />
-        }
-      />
-    </Tooltip>
+    <FormControlLabel
+      label="Бой"
+      labelPlacement="end"
+      control={
+        <Switch
+          checked={isBeatSound}
+          onChange={onClick}
+          inputProps={{ "aria-label": "controlled" }}
+        />
+      }
+    />
   );
 };
 const ButtonBeatSound = memo(ButtonBeatSoundNM);

@@ -1,6 +1,6 @@
 import Snackbar from "@mui/material/Snackbar";
-import { ShareIcon } from "./Icons";
-import { Box, IconButton, Tooltip } from "@mui/material";
+
+import { Box, Button } from "@mui/material";
 import { useState } from "react";
 import { memo } from "react";
 
@@ -27,19 +27,22 @@ const ButtonShareNM = ({ beatPattern }) => {
 
   return (
     <Box sx={{ gridArea: "SB" }}>
-      <Tooltip title="Поделиться ссылкой на гитарный бой" placement="top">
-        <IconButton
-          sx={{
-            color: "text.primary",
-            fontSize: "40px",
-            borderRadius: "50%",
-          }}
-          value="chplayeck"
-          onClick={handleClick}
-        >
-          <ShareIcon fontSize="inherit" />
-        </IconButton>
-      </Tooltip>
+      <Button
+        sx={{
+          borderRadius: "8px",
+          bgcolor: "background.paper",
+          flexDirection: "column", // Устанавливаем направление элементов в столбец
+          height: "100%", // Занимает всю доступную высоту ячейки Grid
+          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
+          alignItems: "center", // Выравниваем по центру по вертикали
+          justifyContent: "center", // Выравниваем по центру по горизонтали
+        }}
+        value="chplayeck"
+        onClick={handleClick}
+      >
+        Сохранить
+      </Button>
+
       <Snackbar
         open={open}
         anchorOrigin={{ vertical: "top", horizontal: "right" }}

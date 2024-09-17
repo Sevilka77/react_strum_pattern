@@ -13,6 +13,7 @@ export const ConfigProvider = ({ children }) => {
     isMetronomeSound: true,
     isBeatSound: false,
     isDownbeatSound: true,
+    isUpbeatClickSound: false,
   });
 
   return (

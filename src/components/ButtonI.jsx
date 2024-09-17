@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { FormControlLabel, Switch, Tooltip } from "@mui/material";
+import { FormControlLabel, Switch } from "@mui/material";
 
 const BurronINM = ({ noteSize, dispatch }) => {
   const handleChange = () => {
@@ -11,21 +11,17 @@ const BurronINM = ({ noteSize, dispatch }) => {
   };
 
   return (
-    <Tooltip title="Изменить размер" placement="top">
-      <FormControlLabel
-        label='Счет через "И"'
-        labelPlacement="end"
-        control={
-          <Switch
-            checked={noteSize > 4}
-            onChange={handleChange}
-            inputProps={{ "aria-label": "controlled" }}
-            label="Счет"
-            labelPlacement="end"
-          />
-        }
-      />
-    </Tooltip>
+    <FormControlLabel
+      label='Счет через "И"'
+      labelPlacement="end"
+      control={
+        <Switch
+          checked={noteSize > 4}
+          onChange={handleChange}
+          inputProps={{ "aria-label": "controlled" }}
+        />
+      }
+    />
   );
 };
 const BurronI = memo(BurronINM);

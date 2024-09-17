@@ -32,9 +32,11 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
   };
 
   return (
-    <Stack direction="row" flexWrap="wrap" justifyContent="center">
+    <Stack direction="row" gap={1} flexWrap="wrap" justifyContent="center">
       <Button
         sx={{
+          borderRadius: "8px",
+          bgcolor: "background.paper",
           flexDirection: "column", // Устанавливаем направление элементов в столбец
           height: "100%", // Занимает всю доступную высоту ячейки Grid
           display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
@@ -44,11 +46,12 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
         onClick={() => handleChange("A")}
       >
         <ArrowD color="warning" />
-        Aкцент
       </Button>
 
       <Button
         sx={{
+          borderRadius: "8px",
+          bgcolor: "background.paper",
           flexDirection: "column", // Устанавливаем направление элементов в столбец
           height: "100%", // Занимает всю доступную высоту ячейки Grid
           display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
@@ -58,11 +61,12 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
         onClick={() => handleChange("1")}
       >
         <ArrowD color="warning.main" />
-        Удар
       </Button>
 
       <Button
         sx={{
+          borderRadius: "8px",
+          bgcolor: "background.paper",
           flexDirection: "column", // Устанавливаем направление элементов в столбец
           height: "100%", // Занимает всю доступную высоту ячейки Grid
           display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
@@ -72,12 +76,13 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
         onClick={() => handleChange("c")}
       >
         <XDownIcon />
-        Удар по заглушенным
       </Button>
 
       <Button
         sx={{
-          flexDirection: "column", // Устанавливаем направление элементов в столбец
+          flexDirection: "column", //
+          borderRadius: "8px",
+          bgcolor: "background.paper",
           height: "100%", // Занимает всю доступную высоту ячейки Grid
           display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
           alignItems: "center", // Выравниваем по центру по вертикали
@@ -86,11 +91,12 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
         onClick={() => handleChange("x")}
       >
         <XIcon />
-        Заглушка
       </Button>
 
       <Button
         sx={{
+          borderRadius: "8px",
+          bgcolor: "background.paper",
           flexDirection: "column", // Устанавливаем направление элементов в столбец
           height: "100%", // Занимает всю доступную высоту ячейки Grid
           display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
@@ -100,11 +106,12 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
         onClick={() => handleChange("0")}
       >
         <ArrowD color="disabled" />
-        Пропуск
       </Button>
 
       <Button
         sx={{
+          borderRadius: "8px",
+          bgcolor: "background.paper",
           flexDirection: "column", // Устанавливаем направление элементов в столбец
           height: "100%", // Занимает всю доступную высоту ячейки Grid
           display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
@@ -114,7 +121,6 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
         onClick={() => handleChange("del")}
       >
         <DeleteIcon />
-        Удалить
       </Button>
     </Stack>
   );
