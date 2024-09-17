@@ -37,7 +37,7 @@ export const patterns = [
     pattern: "100111",
   },
   {
-    title: "Hjr",
+    title: "Рок",
     pattern: "1010A011",
   },
   {
