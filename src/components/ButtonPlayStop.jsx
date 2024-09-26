@@ -20,6 +20,7 @@ const ButtonPlayStopNM = ({ isPlaying, dispatch }) => {
         fontSize: "60px", // Размер иконки
       }}
       onClick={handleClick}
+      aria-label="Старт/стоп воспроизведения"
     >
       {isPlaying ? (
         <SquareIcon fontSize="inherit" />

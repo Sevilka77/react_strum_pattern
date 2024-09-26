@@ -36,6 +36,7 @@ const ButtonShareNM = ({ beatPattern, isSmallDevice }) => {
           }}
           value="chplayeck"
           onClick={handleClick}
+          aria-label="Скопировать ссылку на гитарный бой"
         >
           Сохранить
         </Button>
@@ -48,6 +49,7 @@ const ButtonShareNM = ({ beatPattern, isSmallDevice }) => {
             fontSize: "40px",
             borderRadius: "50%",
           }}
+          aria-label="Поделиться гитарным боем"
         >
           <ShareIcon />
         </IconButton>

@@ -16,6 +16,7 @@ const ButtonPatternEditNM = ({ onChanged, isSmallDevice }) => {
             fontSize: "40px",
             borderRadius: "50%",
           }}
+          aria-label="Редактировать гитарный бой"
         >
           <PencilIcon />
         </IconButton>
@@ -29,6 +30,7 @@ const ButtonPatternEditNM = ({ onChanged, isSmallDevice }) => {
           sx={{
             borderRadius: "8px",
           }}
+          aria-label="Редактировать гитарный бой"
         >
           Редактировать
         </Button>

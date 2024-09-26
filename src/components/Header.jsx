@@ -56,7 +56,11 @@ const Header = memo(function Header({
               isSmallDevice={isSmallDevice}
             />
             {isSmallDevice && (
-              <IconButton onClick={onOpenModalSettings} color="inherit">
+              <IconButton
+                aria-label="Настройки тренажера"
+                onClick={onOpenModalSettings}
+                color="inherit"
+              >
                 <SettingsIcon />
               </IconButton>
             )}

@@ -95,6 +95,7 @@ const PatternList = ({ dispatch, isSmallDevice }) => {
             fontSize: "40px",
             borderRadius: "50%",
           }}
+          aria-label="Открыть бибилиотека гитарных боев"
         >
           <MenuIcon />
         </IconButton>
@@ -106,8 +107,9 @@ const PatternList = ({ dispatch, isSmallDevice }) => {
             justifyContent: "center", // Выравниваем по центру по горизонтали
           }}
           onClick={toggleDrawer(true)}
+          aria-label="Открыть бибилиотеку гитарных боев"
         >
-          Загрузить
+          Библиотека боев
         </Button>
       )}
       <Drawer keepMounted open={open} onClose={toggleDrawer(false)}>

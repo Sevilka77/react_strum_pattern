@@ -96,6 +96,7 @@ export default function useTone(config) {
 
     const seq = new Tone.Sequence(
       (time, note) => {
+        setActiveBeat(note);
         playNote(
           time,
           note,
@@ -107,10 +108,10 @@ export default function useTone(config) {
           config.isAcsentbeatSound,
           config.noteSize || 4,
         );
-        setActiveBeat(note); // Установка активного бита
+        // Установка активного бита
       },
       countSteps(config.beatPattern.split("")),
-      config.noteSize > 4 ? "8n" : "4n",
+      config.noteSize > 4 ? "4n" : "4n", //заглушка если что ускорить метроном.
     ).start(0);
     seqRef.current = seq; // Сохранение ссылки на новую последовательность
 

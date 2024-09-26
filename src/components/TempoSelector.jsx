@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
+
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
@@ -36,37 +36,35 @@ const TempoSelectorNM = ({ tempo, dispatch }) => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <Grid container spacing={2} alignItems="center">
-        <Grid item>
-          <Typography id="input-slider">Темп</Typography>
-        </Grid>
-        <Grid item xs>
-          <Slider
-            min={40}
-            max={300}
-            value={typeof value === "number" ? value : 0}
-            onChange={handleSliderChange}
-            aria-labelledby="input-slider"
-          />
-        </Grid>
-        <Grid item>
-          <Input
-            value={value}
-            size="small"
-            onChange={handleInputChange}
-            onBlur={handleBlur}
-            inputProps={{
-              step: 10,
-              min: 40,
-              max: 300,
-              type: "number",
-              "aria-labelledby": "input-slider",
-            }}
-          />
-        </Grid>
+    <Grid container spacing={2} alignItems="center">
+      <Grid item>
+        <Typography id="input-slider">Темп</Typography>
       </Grid>
-    </Box>
+      <Grid item xs>
+        <Slider
+          min={40}
+          max={300}
+          value={typeof value === "number" ? value : 0}
+          onChange={handleSliderChange}
+          aria-labelledby="input-slider"
+        />
+      </Grid>
+      <Grid item>
+        <Input
+          value={value}
+          size="small"
+          onChange={handleInputChange}
+          onBlur={handleBlur}
+          inputProps={{
+            step: 10,
+            min: 40,
+            max: 300,
+            type: "number",
+            "aria-labelledby": "input-slider",
+          }}
+        />
+      </Grid>
+    </Grid>
   );
 };
 const TempoSelector = memo(TempoSelectorNM);

@@ -13,7 +13,7 @@ const ButtonThemeToggleNM = () => {
     <IconButton
       onClick={colorMode.toggleColorMode}
       size="large"
-      aria-label="account switch theme"
+      aria-label="Смена цвета темы"
       color="inherit"
     >
       {theme.palette.mode === "dark" ? <MoonIcon /> : <SunIcon />}
