@@ -6,6 +6,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { Box, Drawer, Button, IconButton } from "@mui/material";
 import { MenuIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 import BeatImage from "./BeatImage";
 
@@ -52,18 +53,18 @@ const PatternListItem = ({ pattern, onClick, isSmallDevice, onClose }) => (
 );
 const MemoizedPatternListItem = memo(PatternListItem);
 
-const PatternList = ({ dispatch, isSmallDevice }) => {
+const PatternList = ({ isSmallDevice }) => {
   const [open, setOpen] = useState(false);
-
+  const navigate = useNavigate();
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+
   const onClick = useCallback(
-    (value) => {
-      dispatch({ type: "setBeatPattern", data: value });
-      console.log(value);
+    (patternValue) => {
+      navigate(`/?p=${patternValue}`);
     },
-    [dispatch],
+    [navigate], // Указываем зависимости для useCallback
   );
 
   const DrawerList = ({ isSmallDevice, onClick, onClose }) => (

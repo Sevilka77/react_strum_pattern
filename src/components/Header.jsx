@@ -8,7 +8,6 @@ import { memo } from "react";
 import { SettingsIcon } from "lucide-react";
 
 const Header = memo(function Header({
-  dispatch,
   beatPattern,
   handleTogglePB,
   isSmallDevice,
@@ -39,7 +38,6 @@ const Header = memo(function Header({
                 borderRadius: "8px",
               }}
               isSmallDevice={isSmallDevice}
-              dispatch={dispatch}
             />
             <ButtonPatternEdit
               sx={{

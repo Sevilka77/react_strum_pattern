@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Box, Drawer, useMediaQuery } from "@mui/material";
 
 import TempoSelector from "./components/TempoSelector";
@@ -28,7 +28,8 @@ function App() {
   const isMediumDevice = useMediaQuery("only screen and (min-width : 770px)");
   const [showPB, setPB] = useState(false);
   const { config, dispatch } = useConfig();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const handleTogglePB = useCallback(() => {
     setPB((prevShowPB) => !prevShowPB);
   }, []);
@@ -41,11 +42,11 @@ function App() {
   useEffect(() => {
     if (searchParams.has("p")) {
       dispatch({ type: "setBeatPattern", data: searchParams.get("p") });
-      setSearchParams();
+      navigate(window.location.pathname, { replace: true });
     } else {
       dispatch({ type: "setBeatPattern", data: config.beatPattern });
     }
-  }, [config.beatPattern, dispatch, searchParams, setSearchParams]);
+  }, [config.beatPattern, dispatch, navigate, searchParams]);
 
   return (
     <ThemeContextProvider>
@@ -79,7 +80,6 @@ function App() {
         }
       >
         <Header
-          dispatch={dispatch}
           beatPattern={config.beatPattern}
           handleTogglePB={handleTogglePB}
           isSmallDevice={isSmallDevice}
