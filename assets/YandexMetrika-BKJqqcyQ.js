@@ -1,0 +1,1 @@
+import{r as e}from"./tonejs-rV-iHjYB.js";const r=()=>(e.useEffect(()=>{typeof window<"u"&&window.ym&&window.ym(97080505,"init",{clickmap:!0,trackLinks:!0,accurateTrackBounce:!0})},[]),null);export{r as default};
