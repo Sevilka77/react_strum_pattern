@@ -138,7 +138,7 @@ function App() {
           </Box>
         )}
 
-        {config.noteSize > 4 && isMediumDevice && (
+        {config.noteSize > 4 && isMediumDevice && config.isMetronomeSound && (
           <Box
             sx={{ gridArea: "DU", alignSelf: "center", justifySelf: "center" }}
           >
@@ -193,7 +193,7 @@ function App() {
             />
             <ButtonI noteSize={config.noteSize} dispatch={dispatch} />
             <ButtonNoteSize noteSize={config.noteSize} dispatch={dispatch} />
-            {config.noteSize > 4 && (
+            {config.noteSize > 4 && config.isMetronomeSound && (
               <>
                 <ButtonDownbeatSound
                   isDownbeatSound={config.isDownbeatSound}

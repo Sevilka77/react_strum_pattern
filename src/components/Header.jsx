@@ -29,7 +29,7 @@ const Header = memo(function Header({
           <Box
             sx={{
               display: "flex",
-              flexGrow: 1,
+
               gap: "10px",
               justifyContent: isSmallDevice ? "space-around" : "flex-start",
             }}
@@ -84,7 +84,7 @@ const Header = memo(function Header({
             sx={{
               display: "flex",
               gap: "10px",
-              flexGrow: 1,
+
               justifyContent: "flex-end",
             }}
           >
