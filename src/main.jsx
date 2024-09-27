@@ -3,9 +3,10 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ConfigProvider } from "./ConfigProvider.jsx";
+// eslint-disable-next-line react-refresh/only-export-components
 const YandexMetrika =
   import.meta.env.MODE === "production"
-    ? React.lazy(() => import("./components/YandexMetrika"))
+    ? React.lazy(() => import("./components/YandexMetrika.jsx")) // Ленивая загрузка компонента
     : null;
 
 ReactDOM.createRoot(document.getElementById("root")).render(

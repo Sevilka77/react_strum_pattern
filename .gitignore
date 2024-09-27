@@ -23,4 +23,4 @@ dist-ssr
 *.sw?
 src/react-strum1.code-workspace
 
-/src/components/YandexMetrika.js
+/src/components/YandexMetrika.jsx
