@@ -65,7 +65,7 @@ const Header = memo(function Header({
           </Box>
           {/* Центр с заголовком */}
           <Typography
-            variant="h6"
+            variant="h1"
             component="div"
             sx={{
               position: "absolute", // Абсолютное позиционирование
@@ -73,9 +73,10 @@ const Header = memo(function Header({
               transform: "translateX(-50%)", // Смещение на половину ширины текста
               textAlign: "center",
               display: isSmallDevice ? "none" : "block", // Скрываем заголовок на маленьких экранах
+              fontSize: "1.5rem",
             }}
           >
-            Тренажер Гитарного Боя
+            ТРЕНАЖЕР ГИТАРНОГО БОЯ
           </Typography>
           {/* Правый блок с кнопками About и ThemeToggle */}
           <Box
