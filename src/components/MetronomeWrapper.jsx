@@ -6,9 +6,8 @@ import { useMemo } from "react";
 function MetronomeWrapper({ isSmallDevice }) {
   const { config } = useConfig();
   const { beatPattern, noteSize } = config;
-  const [activeBeat] = useTone(config);
+  const activeBeat = useTone(config);
 
-  // Мемоизация значений, которые передаются в Metronome
   const memoizedBeatPattern = useMemo(
     () => beatPattern.split(""),
     [beatPattern],

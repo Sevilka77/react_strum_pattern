@@ -141,5 +141,5 @@ export default function useTone(config) {
     }
   }, [config.isPlaying]);
 
-  return config.isPlaying ? [activeBeat] : [null];
+  return config.isPlaying ? activeBeat : null;
 }
