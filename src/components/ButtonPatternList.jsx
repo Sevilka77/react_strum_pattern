@@ -19,6 +19,7 @@ const PatternListItem = ({ pattern, onClick, isSmallDevice, onClose }) => (
           onClose(); // Закрытие Drawer на маленьких экранах
         }
       }}
+      aria-label={`Выбрать бой: ${pattern.title}`} // Доступность
     >
       <Box
         sx={{
@@ -96,7 +97,7 @@ const PatternList = ({ isSmallDevice }) => {
             fontSize: "40px",
             borderRadius: "50%",
           }}
-          aria-label="Открыть бибилиотека гитарных боев"
+          aria-label="Открыть бибилиотеку гитарных боев"
         >
           <MenuIcon />
         </IconButton>
