@@ -136,12 +136,12 @@ export default function useTone(config) {
     }
 
     Tone.getTransport().bpm.value = config.tempo || 120; // Установка значения BPM
+
     const steps = countSteps(config.beatPattern);
     const durations = calcDurations(steps);
 
     const seq = new Tone.Sequence(
       (time, index) => {
-        console.log(index, steps[index], durations[index]);
         const sound = steps[index];
         setActiveBeat(index);
         playNote(sound, time, durations[index], config.isBeatSound);
@@ -179,8 +179,9 @@ export default function useTone(config) {
   // Старт/остановка воспроизведения
   useEffect(() => {
     if (config.isPlaying) {
-      Tone.start();
-      Tone.getTransport().start();
+      Tone.start().then(() => {
+        Tone.getTransport().start();
+      });
     } else {
       Tone.getTransport().stop();
     }
