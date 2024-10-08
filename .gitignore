@@ -24,3 +24,4 @@ dist-ssr
 src/react-strum1.code-workspace
 
 /src/components/YandexMetrika.jsx
+src/hooks/.useTone copy.jsx
