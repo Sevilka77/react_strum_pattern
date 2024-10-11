@@ -4,7 +4,7 @@ import { memo, useCallback, useEffect } from "react";
 import { MoveLeftIcon } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Header = memo(function Header() {
+const Header = memo(function Header({ title }) {
   const location = useLocation(); // Получаем текущий путь
   const navigate = useNavigate();
 
@@ -13,14 +13,10 @@ const Header = memo(function Header() {
     switch (location.pathname) {
       case "/":
         return "Strumming.ru - Онлайн тренажер гитарного боя"; // Заголовок для главной страницы
-      // case "/pattern":
-      //   return "Выбор паттерна"; // Заголовок для страницы паттерна
-      // case "/pattern/somePattern": // Пример для конкретного паттерна
-      //   return `Текущий паттерн: ${p.title}`; // Заголовок для страницы конкретного паттерна
       default:
-        return `Текущий бой: ${location.state.title}`; // Название по умолчанию
+        return `Текущий бой: ${title}`; // Название по умолчанию
     }
-  }, [location]);
+  }, [location.pathname, title]);
 
   useEffect(() => {
     document.title = getTitle();

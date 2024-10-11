@@ -4,6 +4,7 @@ import { Button, Stack } from "@mui/material";
 import { DeleteIcon } from "lucide-react";
 import { ArrowD, XDownIcon, XIcon } from "./Icons";
 import { memo } from "react";
+import ButtonShare from "./ButtonShare";
 
 const PatternEditNM = ({ beatPattern, dispatch }) => {
   const [beats] = useState(beatPattern.split(""));
@@ -29,6 +30,7 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
     }
 
     dispatch({ type: "setBeatPattern", data: beats.join("") });
+    console.log(beatPattern);
   };
 
   return (
@@ -121,6 +123,20 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
         onClick={() => handleChange("del")}
       >
         <DeleteIcon />
+      </Button>
+      <Button
+        sx={{
+          borderRadius: "8px",
+          bgcolor: "background.paper",
+          flexDirection: "column", // Устанавливаем направление элементов в столбец
+          height: "100%", // Занимает всю доступную высоту ячейки Grid
+          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
+          alignItems: "center", // Выравниваем по центру по вертикали
+          justifyContent: "center", // Выравниваем по центру по горизонтали
+        }}
+        onClick={() => handleChange("del")}
+      >
+        <ButtonShare beatPattern={beatPattern} />
       </Button>
     </Stack>
   );

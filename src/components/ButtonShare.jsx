@@ -1,18 +1,18 @@
 import Snackbar from "@mui/material/Snackbar";
 import { ShareIcon } from "lucide-react";
-
-import { Box, Button, IconButton } from "@mui/material";
-import { useState } from "react";
-import { memo } from "react";
+import { Box, IconButton } from "@mui/material";
+import { useState, memo } from "react";
 
 async function copyToClip(url) {
   await navigator.clipboard.writeText(url);
 }
 
-const ButtonShareNM = ({ beatPattern, isSmallDevice }) => {
+const ButtonShareNM = ({ beatPattern }) => {
   const [open, setOpen] = useState(false);
 
-  const url = `${location.href}?p=${beatPattern}`;
+  // Создаем URL для копирования
+  const url = `${window.location.origin}/pattern/${beatPattern}`; // Используем динамическое получение origin
+
   const handleClick = () => {
     copyToClip(url);
     setOpen(true);
@@ -28,42 +28,28 @@ const ButtonShareNM = ({ beatPattern, isSmallDevice }) => {
 
   return (
     <Box>
-      {!isSmallDevice ? (
-        <Button
-          color="inherit"
-          sx={{
-            borderRadius: "8px",
-          }}
-          value="chplayeck"
-          onClick={handleClick}
-          aria-label="Скопировать ссылку на гитарный бой"
-        >
-          Сохранить
-        </Button>
-      ) : (
-        <IconButton
-          value="chplayeck"
-          onClick={handleClick}
-          color="inherit"
-          sx={{
-            fontSize: "40px",
-            borderRadius: "50%",
-          }}
-          aria-label="Поделиться гитарным боем"
-        >
-          <ShareIcon />
-        </IconButton>
-      )}
+      <IconButton
+        onClick={handleClick}
+        color="inherit"
+        sx={{
+          fontSize: "40px",
+          borderRadius: "50%",
+        }}
+        aria-label="Поделиться гитарным боем"
+      >
+        <ShareIcon />
+      </IconButton>
 
       <Snackbar
         open={open}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         autoHideDuration={2000}
         onClose={handleClose}
-        message="Ссылка на гитарйный бой скопирована!"
+        message="Ссылка на гитарный бой скопирована!"
       />
     </Box>
   );
 };
+
 const ButtonShare = memo(ButtonShareNM);
 export default ButtonShare;

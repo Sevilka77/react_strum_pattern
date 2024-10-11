@@ -4,7 +4,14 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { Card, CardContent, Divider, Grid, Toolbar } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Divider,
+  Grid,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import BeatImage from "./BeatImage";
@@ -43,6 +50,30 @@ const PatternList = () => {
           <Card variant="outlined">
             <CardContent>
               <List>
+                <ListItem alignItems="flex-start" sx={{ py: 0 }}>
+                  <ListItemButton
+                    sx={{ py: 0 }}
+                    aria-label={`Создать свой бой`}
+                    onClick={() => {
+                      // Добавляем навигацию на маршрут /pattern/0000
+                      navigate(`/pattern/0000`, { state: { editMode: true } });
+                    }}
+                  >
+                    <ListItemText
+                      sx={{ py: 0 }}
+                      primary={
+                        <Typography
+                          color="primary"
+                          variant="h5"
+                          component="div"
+                        >
+                          Создать свой бой
+                        </Typography>
+                      }
+                    />
+                  </ListItemButton>
+                </ListItem>
+                <Divider component="li" />
                 {patterns.map((p) => (
                   <div key={`${p.title}-div`}>
                     <PatternListItem
