@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { ConfigProvider } from "./ConfigProvider.jsx";
 
 // Ленивое импортирование YandexMetrika только в production
@@ -13,7 +13,7 @@ const YandexMetrika =
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <ConfigProvider>
         <App />
         {YandexMetrika && (
@@ -22,6 +22,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           </React.Suspense>
         )}
       </ConfigProvider>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>,
 );
