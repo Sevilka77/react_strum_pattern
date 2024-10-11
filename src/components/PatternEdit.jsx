@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Button, Stack } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
 import { DeleteIcon } from "lucide-react";
 import { ArrowD, XDownIcon, XIcon } from "./Icons";
 import { memo } from "react";
@@ -34,111 +34,63 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
   };
 
   return (
-    <Stack direction="row" gap={1} flexWrap="wrap" justifyContent="center">
-      <Button
+    <Box
+      elevation={4}
+      sx={{ display: "flex", width: "100%", justifyContent: "center" }}
+    >
+      <BottomNavigation
         sx={{
-          borderRadius: "8px",
-          bgcolor: "background.paper",
-          flexDirection: "column", // Устанавливаем направление элементов в столбец
-          height: "100%", // Занимает всю доступную высоту ячейки Grid
-          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
-          alignItems: "center", // Выравниваем по центру по вертикали
-          justifyContent: "center", // Выравниваем по центру по горизонтали
-        }}
-        onClick={() => handleChange("A")}
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "flex-end",
+          flexWrap: "wrap",
+          height: "auto",
+        }} // Чтобы разместить элементы по краям
       >
-        <ArrowD color="warning" />
-      </Button>
+        <BottomNavigationAction
+          onClick={() => handleChange("A")}
+          value="disable"
+          icon={<ArrowD color="warning" />}
+          sx={{ flex: "1 1 auto", p: 2 }} // Отступы и размеры
+        />
+        <BottomNavigationAction
+          onClick={() => handleChange("1")}
+          value="disable"
+          icon={<ArrowD color="primary" />}
+          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
+        />
+        <BottomNavigationAction
+          onClick={() => handleChange("c")}
+          value="disable"
+          icon={<XDownIcon color="primary" />}
+          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
+        />
+        <BottomNavigationAction
+          onClick={() => handleChange("x")}
+          value="disable"
+          icon={<XIcon color="primary" />}
+          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
+        />
+        <BottomNavigationAction
+          onClick={() => handleChange("0")}
+          value="disable"
+          icon={<ArrowD color="disabled" />}
+          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
+        />
+        <BottomNavigationAction
+          onClick={() => handleChange("del")}
+          value="delete"
+          icon={<DeleteIcon />}
+          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
+        />
 
-      <Button
-        sx={{
-          borderRadius: "8px",
-          bgcolor: "background.paper",
-          flexDirection: "column", // Устанавливаем направление элементов в столбец
-          height: "100%", // Занимает всю доступную высоту ячейки Grid
-          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
-          alignItems: "center", // Выравниваем по центру по вертикали
-          justifyContent: "center", // Выравниваем по центру по горизонтали
-        }}
-        onClick={() => handleChange("1")}
-      >
-        <ArrowD color="warning.main" />
-      </Button>
-
-      <Button
-        sx={{
-          borderRadius: "8px",
-          bgcolor: "background.paper",
-          flexDirection: "column", // Устанавливаем направление элементов в столбец
-          height: "100%", // Занимает всю доступную высоту ячейки Grid
-          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
-          alignItems: "center", // Выравниваем по центру по вертикали
-          justifyContent: "center", // Выравниваем по центру по горизонтали
-        }}
-        onClick={() => handleChange("c")}
-      >
-        <XDownIcon />
-      </Button>
-
-      <Button
-        sx={{
-          flexDirection: "column", //
-          borderRadius: "8px",
-          bgcolor: "background.paper",
-          height: "100%", // Занимает всю доступную высоту ячейки Grid
-          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
-          alignItems: "center", // Выравниваем по центру по вертикали
-          justifyContent: "center", // Выравниваем по центру по горизонтали
-        }}
-        onClick={() => handleChange("x")}
-      >
-        <XIcon />
-      </Button>
-
-      <Button
-        sx={{
-          borderRadius: "8px",
-          bgcolor: "background.paper",
-          flexDirection: "column", // Устанавливаем направление элементов в столбец
-          height: "100%", // Занимает всю доступную высоту ячейки Grid
-          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
-          alignItems: "center", // Выравниваем по центру по вертикали
-          justifyContent: "center", // Выравниваем по центру по горизонтали
-        }}
-        onClick={() => handleChange("0")}
-      >
-        <ArrowD color="disabled" />
-      </Button>
-
-      <Button
-        sx={{
-          borderRadius: "8px",
-          bgcolor: "background.paper",
-          flexDirection: "column", // Устанавливаем направление элементов в столбец
-          height: "100%", // Занимает всю доступную высоту ячейки Grid
-          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
-          alignItems: "center", // Выравниваем по центру по вертикали
-          justifyContent: "center", // Выравниваем по центру по горизонтали
-        }}
-        onClick={() => handleChange("del")}
-      >
-        <DeleteIcon />
-      </Button>
-      <Button
-        sx={{
-          borderRadius: "8px",
-          bgcolor: "background.paper",
-          flexDirection: "column", // Устанавливаем направление элементов в столбец
-          height: "100%", // Занимает всю доступную высоту ячейки Grid
-          display: "flex", // Устанавливаем flex, чтобы кнопка растягивалась
-          alignItems: "center", // Выравниваем по центру по вертикали
-          justifyContent: "center", // Выравниваем по центру по горизонтали
-        }}
-        onClick={() => handleChange("del")}
-      >
-        <ButtonShare beatPattern={beatPattern} />
-      </Button>
-    </Stack>
+        <BottomNavigationAction
+          value="settings"
+          icon={<ButtonShare beatPattern={beatPattern} />}
+          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
+        />
+      </BottomNavigation>
+    </Box>
   );
 };
 
