@@ -38,7 +38,7 @@ const TempoSelectorNM = ({ tempo, dispatch }) => {
   return (
     <Grid container spacing={2} alignItems="center">
       <Grid item>
-        <Typography id="input-slider">Темп</Typography>
+        <Typography id="input-slider">BPM</Typography>
       </Grid>
       <Grid item xs>
         <Slider

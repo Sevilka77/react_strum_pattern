@@ -1,22 +1,36 @@
 import { Typography, Box, AppBar, Toolbar, IconButton } from "@mui/material";
-import ButtonShare from "./ButtonShare.jsx";
-import ButtonPatternList from "./ButtonPatternList.jsx";
-import ButtonPatternEdit from "./ButtonPatternEdit.jsx";
-import ButtonThemeToggle from "./ButtonThemeToggle";
-import About from "./About";
-import { memo } from "react";
-import { SettingsIcon } from "lucide-react";
 
-const Header = memo(function Header({
-  beatPattern,
-  handleTogglePB,
-  isSmallDevice,
-  onOpenModalSettings,
-}) {
+import { memo, useCallback, useEffect } from "react";
+import { MoveLeftIcon } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+const Header = memo(function Header() {
+  const location = useLocation(); // Получаем текущий путь
+  const navigate = useNavigate();
+
+  // Функция для получения заголовка в зависимости от маршрута
+  const getTitle = useCallback(() => {
+    switch (location.pathname) {
+      case "/":
+        return "Strumming.ru - Онлайн тренажер гитарного боя"; // Заголовок для главной страницы
+      // case "/pattern":
+      //   return "Выбор паттерна"; // Заголовок для страницы паттерна
+      // case "/pattern/somePattern": // Пример для конкретного паттерна
+      //   return `Текущий паттерн: ${p.title}`; // Заголовок для страницы конкретного паттерна
+      default:
+        return `Текущий бой: ${location.state.title}`; // Название по умолчанию
+    }
+  }, [location]);
+
+  useEffect(() => {
+    document.title = getTitle();
+  }, [getTitle, location.pathname]); // Обновляем заголовок при изменении пути
+
   return (
-    <Box sx={{ gridArea: "header", flexGrow: 1 }}>
-      <AppBar position="static" elevation={1} enableColorOnDark>
+    <Box>
+      <AppBar position="fixed" elevation={1}>
         <Toolbar
+          variant="dense"
           sx={{
             display: "flex",
             justifyContent: "space-between",
@@ -24,72 +38,38 @@ const Header = memo(function Header({
             position: "relative",
           }}
         >
-          {/* Левый блок с тремя кнопками */}
-          <Box
-            sx={{
-              display: "flex",
-
-              gap: "10px",
-              justifyContent: isSmallDevice ? "space-around" : "flex-start",
-            }}
-          >
-            <ButtonPatternList
-              sx={{
-                borderRadius: "8px",
-              }}
-              isSmallDevice={isSmallDevice}
-            />
-            <ButtonPatternEdit
-              sx={{
-                borderRadius: "8px",
-              }}
-              isSmallDevice={isSmallDevice}
-              onChanged={handleTogglePB}
-            />
-            <ButtonShare
-              sx={{
-                borderRadius: "8px",
-              }}
-              beatPattern={beatPattern}
-              isSmallDevice={isSmallDevice}
-            />
-            {isSmallDevice && (
-              <IconButton
-                aria-label="Настройки тренажера"
-                onClick={onOpenModalSettings}
-                color="inherit"
+          {/* Если мы на главной странице, отображаем только заголовок */}
+          {location.pathname === "/" ? (
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              {getTitle()}{" "}
+            </Typography>
+          ) : (
+            <>
+              {/* Левый блок с тремя кнопками */}
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: "10px",
+                }}
               >
-                <SettingsIcon />
-              </IconButton>
-            )}
-          </Box>
-          {/* Центр с заголовком */}
-          <Typography
-            variant="h1"
-            component="div"
-            sx={{
-              position: "absolute", // Абсолютное позиционирование
-              left: "50%", // Центр по горизонтали
-              transform: "translateX(-50%)", // Смещение на половину ширины текста
-              textAlign: "center",
-              display: isSmallDevice ? "none" : "block", // Скрываем заголовок на маленьких экранах
-              fontSize: "1.5rem",
-            }}
-          >
-            ТРЕНАЖЕР ГИТАРНОГО БОЯ
-          </Typography>
+                <IconButton
+                  size="large"
+                  edge="start"
+                  color="inherit"
+                  aria-label="menu"
+                  sx={{ mr: 2 }}
+                  onClick={() => navigate(`/`)}
+                >
+                  <MoveLeftIcon />
+                </IconButton>
+              </Box>
+              {/* Центр с заголовком для других страниц */}
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                {getTitle()} {/* Заголовок для других страниц */}
+              </Typography>
+            </>
+          )}
           {/* Правый блок с кнопками About и ThemeToggle */}
-          <Box
-            sx={{
-              display: "flex",
-              gap: "10px",
-
-              justifyContent: "flex-end",
-            }}
-          >
-            <About color="inherit" />
-            <ButtonThemeToggle color="inherit" />
-          </Box>
         </Toolbar>
       </AppBar>
     </Box>

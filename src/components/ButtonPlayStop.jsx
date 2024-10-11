@@ -1,4 +1,3 @@
-import { IconButton } from "@mui/material";
 import { PlayIcon, SquareIcon } from "./Icons";
 import * as Tone from "tone";
 import { memo } from "react";
@@ -12,22 +11,13 @@ const ButtonPlayStopNM = ({ isPlaying, dispatch }) => {
     dispatch({ type: "setIsPlay", data: !isPlaying });
   };
   return (
-    <IconButton
-      sx={{
-        color: "text.primary",
-        width: "80px", // Фиксированная ширина кнопки
-        height: "80px", // Фиксированная высота кнопки
-        fontSize: "60px", // Размер иконки
-      }}
+    <span
+      color="inherit"
       onClick={handleClick}
       aria-label="Старт/стоп воспроизведения"
     >
-      {isPlaying ? (
-        <SquareIcon fontSize="inherit" />
-      ) : (
-        <PlayIcon color="primary" fontSize="inherit" />
-      )}
-    </IconButton>
+      {isPlaying ? <SquareIcon /> : <PlayIcon />}
+    </span>
   );
 };
 const ButtonPlayStop = memo(ButtonPlayStopNM);
