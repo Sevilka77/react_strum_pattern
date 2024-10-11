@@ -11,7 +11,7 @@ const ButtonShareNM = ({ beatPattern }) => {
   const [open, setOpen] = useState(false);
 
   // Создаем URL для копирования
-  const url = `${window.location.origin}/pattern/${beatPattern}`; // Используем динамическое получение origin
+  const url = `${window.location.origin}/#/pattern/${beatPattern}`; // Используем динамическое получение origin
 
   const handleClick = () => {
     copyToClip(url);
