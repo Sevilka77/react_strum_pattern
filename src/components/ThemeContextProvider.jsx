@@ -24,11 +24,11 @@ const ThemeContextProvider = ({ children }) => {
       palette: {
         mode: mode,
         primary: {
-          main: mode === "dark" ? "#0f0" : "#2aa298",
+          main: mode === "dark" ? "#2AA298" : "#2aa298",
         },
         background: {
-          default: mode === "dark" ? "#111111" : "#fdf6e3",
-          paper: mode === "dark" ? "#212121" : "#ede7d4",
+          default: mode === "dark" ? "#002B36" : "#fdf6e3",
+          paper: mode === "dark" ? "#00242d" : "#ede7d4",
         },
         text: {
           primary: mode === "dark" ? "#bbc4c4" : "#657b83",
@@ -49,6 +49,11 @@ const ThemeContextProvider = ({ children }) => {
           fontWeight: 900,
         },
         overline: { fontFamily: "Ubuntu Mono" },
+      },
+      components: {
+        MuiAppBar: {
+          styleOverrides: { root: { background: "#FB74B5" } },
+        },
       },
     });
   }, [mode]); // Зависит от текущей темы

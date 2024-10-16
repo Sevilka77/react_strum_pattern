@@ -15,7 +15,7 @@ const Footer = () => {
         padding: "10px",
       }}
     >
-      <Typography variant="body2">
+      <Typography variant="body2" component="h4">
         {"Коментарии и пожелания в "}
         <Link href="https://t.me/+v5HFvtdzhgUyOWYy" underline="hover">
           Телеграм

@@ -4,14 +4,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import {
-  Card,
-  CardContent,
-  Divider,
-  Grid,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { Paper, Divider, Grid, Toolbar, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import BeatImage from "./BeatImage";
@@ -24,8 +17,12 @@ const PatternListItem = ({ pattern, onClick }) => (
       aria-label={`Выбрать бой: ${pattern.title}`}
     >
       <ListItemText
-        sx={{ py: 0 }}
-        primary={pattern.title}
+        sx={{ py: 1 }}
+        primary={
+          <Typography variant="h6" component="h4">
+            {pattern.title}
+          </Typography>
+        }
         secondary={<BeatImage beatString={pattern.pattern} />}
       />
     </ListItemButton>
@@ -46,47 +43,41 @@ const PatternList = () => {
     <>
       <Toolbar />
       <Grid container spacing={2} justifyContent="center">
-        <Grid item xs={12} md={4}>
-          <Card variant="outlined">
-            <CardContent>
-              <List>
-                <ListItem alignItems="flex-start" sx={{ py: 0 }}>
-                  <ListItemButton
+        <Grid item xs={10} md={4}>
+          <Paper>
+            <List component="nav">
+              <ListItem alignItems="flex-start" sx={{ py: 0 }}>
+                <ListItemButton
+                  sx={{ py: 0 }}
+                  aria-label={`Создать свой бой`}
+                  onClick={() => {
+                    // Добавляем навигацию на маршрут /pattern/0000
+                    navigate(`/pattern/0000`, { state: { editMode: true } });
+                  }}
+                >
+                  <ListItemText
                     sx={{ py: 0 }}
-                    aria-label={`Создать свой бой`}
-                    onClick={() => {
-                      // Добавляем навигацию на маршрут /pattern/0000
-                      navigate(`/pattern/0000`, { state: { editMode: true } });
-                    }}
-                  >
-                    <ListItemText
-                      sx={{ py: 0 }}
-                      primary={
-                        <Typography
-                          color="primary"
-                          variant="h5"
-                          component="div"
-                        >
-                          Создать свой бой
-                        </Typography>
-                      }
-                    />
-                  </ListItemButton>
-                </ListItem>
-                <Divider component="li" />
-                {patterns.map((p) => (
-                  <div key={`${p.title}-div`}>
-                    <PatternListItem
-                      key={p.title}
-                      pattern={p}
-                      onClick={onClick}
-                    />
-                    <Divider component="li" key={`${p.title}-divider`} />
-                  </div>
-                ))}
-              </List>
-            </CardContent>
-          </Card>
+                    primary={
+                      <Typography color="#e4bed3" variant="h5" component="h3">
+                        Создать свой бой
+                      </Typography>
+                    }
+                  />
+                </ListItemButton>
+              </ListItem>
+              <Divider component="li" />
+              {patterns.map((p) => (
+                <div key={`${p.title}-div`}>
+                  <PatternListItem
+                    key={p.title}
+                    pattern={p}
+                    onClick={onClick}
+                  />
+                  <Divider component="li" key={`${p.title}-divider`} />
+                </div>
+              ))}
+            </List>
+          </Paper>
         </Grid>
       </Grid>
     </>
