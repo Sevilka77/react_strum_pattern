@@ -23,6 +23,8 @@ function PatternPage() {
       }
       setTitle(p.title || "Пользовательский бой");
       dispatch({ type: "setBeatPattern", data: p.pattern });
+      dispatch({ type: "setNoteDuration", data: p.note });
+      dispatch({ type: "setTempo", data: p.temp });
     } else if (beatPattern) {
       const foundPattern = patterns.find(
         (pattern) => pattern.pattern === beatPattern,
@@ -31,6 +33,8 @@ function PatternPage() {
       if (foundPattern) {
         setTitle(foundPattern.title || "Выбор боя"); // Заголовок по умолчанию
         dispatch({ type: "setBeatPattern", data: foundPattern.pattern });
+        dispatch({ type: "setNoteDuration", data: foundPattern.note });
+        dispatch({ type: "setTempo", data: foundPattern.temp });
       } else {
         console.log("Паттерн не найден в массиве patterns.");
         setTitle("Пользовательский бой");

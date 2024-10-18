@@ -7,14 +7,16 @@ export const ConfigContext = createContext();
 export const ConfigProvider = ({ children }) => {
   const [config, dispatch] = useReducer(reducer, {
     beatPattern: "1101",
-    tempo: 60,
+    tempo: 70,
     noteSize: 4,
     isPlaying: false,
     isMetronomeSound: true,
     isBeatSound: false,
-    isDownbeatSound: true,
-    isUpbeatSound: false,
-    isAcsentbeatSound: true,
+    noteDuration: "4n",
+    clickAlways: false,
+    clickMainBeat: true,
+    clickSubbeat: false,
+    clickTaktBeat: false,
   });
 
   // Мемоизируем значение контекста для предотвращения лишних рендеров

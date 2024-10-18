@@ -6,7 +6,7 @@ import { memo } from "react";
 import { Paper } from "@mui/material";
 import { ArrowD, ArrowU, XDownIcon, XUpIcon, XIcon } from "./Icons";
 
-const MetronomeNM = ({ noteSize, isSmd, beatPattern, activeBeat }) => {
+const MetronomeNM = ({ noteDuration, isSmd, beatPattern, activeBeat }) => {
   let fSize = isSmd ? 14 : 6;
   const beats = beatPattern;
   const columns = isSmd ? 4 : 16;
@@ -53,7 +53,11 @@ const MetronomeNM = ({ noteSize, isSmd, beatPattern, activeBeat }) => {
         <Grid item xs={12 / columns} key={index}>
           {/* Разбиваем на строки по 4 или 2 элемента */}
           <Paper elevation={3} sx={{ borderRadius: "8px" }}>
-            <MetronomeBeatName id={index} noteSize={noteSize} fSize={fSize} />
+            <MetronomeBeatName
+              id={index}
+              noteDuration={noteDuration}
+              fSize={fSize}
+            />
             <MetronomeBeat
               id={index}
               icon={icons[index]} // Передаем готовую иконку

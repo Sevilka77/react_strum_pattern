@@ -5,7 +5,8 @@ import { useMemo } from "react";
 import { useMediaQuery } from "@mui/material";
 function MetronomeWrapper() {
   const { config } = useConfig();
-  const { beatPattern, noteSize } = config;
+  const { beatPattern, noteDuration } = config;
+
   const activeBeat = useTone(config);
   const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
 
@@ -13,11 +14,11 @@ function MetronomeWrapper() {
     () => beatPattern.split(""),
     [beatPattern],
   );
-  const memoizedNoteSize = useMemo(() => noteSize, [noteSize]);
+  const memoizedNoteDuration = useMemo(() => noteDuration, [noteDuration]);
 
   return (
     <Metronome
-      noteSize={memoizedNoteSize}
+      noteDuration={memoizedNoteDuration}
       isSmd={isSmallDevice}
       beatPattern={memoizedBeatPattern}
       activeBeat={activeBeat}

@@ -29,6 +29,7 @@ keys.player("downA").volume.value = 1;
 
 function playNote(note, time, duration, isBeatSound) {
   // Проверяем, воспроизводится ли звук для бита
+
   if (isBeatSound && note !== "nothing") {
     keys.player(note).start(time, 0, duration);
   }
@@ -38,26 +39,38 @@ const playMetronome = (
   time,
   index,
   isMetronomeSound,
-  isDownbeatSound,
-  isUpbeatSound,
-  isAcsentbeatSound,
-  noteSize,
+  clickMainBeat,
+  clickSubbeat,
+  clickTaktBeat,
+  noteDuration,
 ) => {
-  // Проверка наличия метронома и его воспроизведение isDownbeatSound
   if (isMetronomeSound) {
-    if (index % noteSize === 0 && isAcsentbeatSound) {
-      keys.player("click2").start(time);
+    if (clickTaktBeat && index === 0) {
+      keys.player("click2").start(time); // Звук для такта
     } else {
-      if (noteSize > 5) {
-        if (index % 2 != 0 && isUpbeatSound) {
-          keys.player("click1").start(time);
-        }
-        if (index % 2 == 0 && isDownbeatSound) {
-          keys.player("click1").start(time);
-        }
-      } else {
+      if (noteDuration === "4n") {
         keys.player("click1").start(time);
-      }
+      } else if (noteDuration === "8n") {
+        if (index % 2 === 0) {
+          if (clickMainBeat) {
+            keys.player("click1").start(time);
+          }
+        } else {
+          if (clickSubbeat) {
+            keys.player("click1").start(time);
+          }
+        }
+      } else if (noteDuration === "16n") {
+        if (index % 4 === 0) {
+          if (clickMainBeat) {
+            keys.player("click1").start(time);
+          }
+        } else {
+          if (clickSubbeat) {
+            keys.player("click1").start(time);
+          }
+        }
+      } // Звук для бита
     }
   }
 };
@@ -91,21 +104,22 @@ function countSteps(beatPattern) {
     return sound; // Возвращаем звук и его длительность для каждого шага
   });
 }
-function calcDurations(soundArray) {
+function calcDurations(soundArray, noteDuration) {
   const durations = new Array(soundArray.length); // Создаем массив для длительностей
-  let currentDuration = { "4n": 1 }; // Начальная длительность
+  let currentDuration = { [noteDuration]: 1 };
+  console.log(currentDuration); // Начальная длительность
 
   // Обходим массив с конца
   for (let i = soundArray.length - 1; i >= 0; i--) {
     if (soundArray[i] !== "nothing") {
       // Если звук не "nothing", присваиваем текущую длительность
       durations[i] = currentDuration;
-      currentDuration = { "4n": 1 }; // Сбрасываем длительность для следующего элемента
+      currentDuration = { [noteDuration]: 1 }; // Сбрасываем длительность для следующего элемента
     } else {
       // Если звук "nothing"
-      durations[i] = { "4n": 1 }; // Присваиваем текущую длительность
+      durations[i] = { [noteDuration]: 1 }; // Присваиваем текущую длительность
       // Увеличиваем длительность для следующего элемента
-      currentDuration = increaseDuration(currentDuration);
+      currentDuration = increaseDuration(currentDuration, [noteDuration]);
     }
   }
 
@@ -113,15 +127,15 @@ function calcDurations(soundArray) {
 }
 
 // Функция для увеличения длительности
-function increaseDuration(duration) {
-  if (duration["4n"] === 1) {
-    return { "4n": 2 };
-  } else if (duration["4n"] === 2) {
-    return { "4n": 3 };
-  } else if (duration["4n"] === 3) {
-    return { "4n": 4 };
+function increaseDuration(duration, noteDuration) {
+  if (duration[noteDuration] === 1) {
+    return { [noteDuration]: 2 };
+  } else if (duration[noteDuration] === 2) {
+    return { [noteDuration]: 3 };
+  } else if (duration[noteDuration] === 3) {
+    return { [noteDuration]: 4 };
   } else {
-    return { "4n": duration["4n"] + 1 };
+    return { [noteDuration]: duration[noteDuration] + 1 };
   }
 }
 
@@ -138,7 +152,8 @@ export default function useTone(config) {
     Tone.getTransport().bpm.value = config.tempo || 120; // Установка значения BPM
 
     const steps = countSteps(config.beatPattern);
-    const durations = calcDurations(steps);
+    const durations = calcDurations(steps, config.noteDuration);
+    console.log(durations);
 
     const seq = new Tone.Sequence(
       (time, index) => {
@@ -149,14 +164,14 @@ export default function useTone(config) {
           time,
           index,
           config.isMetronomeSound,
-          config.isDownbeatSound,
-          config.isUpbeatSound,
-          config.isAcsentbeatSound,
-          config.noteSize,
+          config.clickMainBeat,
+          config.clickSubbeat,
+          config.clickTaktBeat,
+          config.noteDuration,
         );
       },
       Array.from({ length: steps.length }, (_, i) => i),
-      "4n", //заглушка если что ускорить метроном.
+      config.noteDuration || "8n", //заглушка если что ускорить метроном.
     ).start(0);
     seqRef.current = seq; // Сохранение ссылки на новую последовательность
 
@@ -172,8 +187,11 @@ export default function useTone(config) {
     config.isDownbeatSound,
     config.isUpbeatSound,
     config.isAcsentbeatSound,
-    config.noteSize,
     config.tempo,
+    config.noteDuration,
+    config.clickMainBeat,
+    config.clickSubbeat,
+    config.clickTaktBeat,
   ]);
 
   // Старт/остановка воспроизведения

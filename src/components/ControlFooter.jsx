@@ -31,7 +31,7 @@ export default function ControlFooter() {
           sx={{ maxWidth: "30px", px: 0 }} // Отступы и размеры
         />
 
-        <TempoSelector tempo={config.tempo} dispatch={dispatch} />
+        <TempoSelector />
         <BottomNavigationAction
           value="settings"
           icon={<SettingsDialog />}

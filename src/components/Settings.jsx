@@ -1,21 +1,19 @@
 import * as React from "react";
-
 import Dialog from "@mui/material/Dialog";
-
 import { SettingsIcon, XIcon } from "lucide-react";
-import { Box, DialogTitle, IconButton } from "@mui/material";
+import {
+  Box,
+  DialogTitle,
+  IconButton,
+  FormControlLabel,
+  Switch,
+  Divider,
+  Select,
+  MenuItem,
+} from "@mui/material";
 
-import ButtonMetronomeSound from "./ButtonMetronomeSound.jsx";
-import ButtonDownbeatSound from "./ButtonDownbeatSound.jsx";
-import ButtonBeatSound from "./ButtonBeatSound";
-
-import ButtonNoteSize from "./ButtonNoteSize.jsx";
-
-import ButtonI from "./ButtonI.jsx";
-
-import ButtonUpbeatSound from "./ButtonUpbeatSound.jsx";
-import ButtonAcsentbeatSound from "./ButtonAcsentbeatSound.jsx";
 import { useConfig } from "../useConfig";
+
 export default function SettingsDialog() {
   const [open, setOpen] = React.useState(false);
   const { config, dispatch } = useConfig();
@@ -39,7 +37,6 @@ export default function SettingsDialog() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        {" "}
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           Настройки
         </DialogTitle>
@@ -64,34 +61,113 @@ export default function SettingsDialog() {
               "0 3px 4px 0 rgba(0,0,0,.16),0 1px 7px 0 rgba(0,0,0,.12)",
           }}
         >
-          <ButtonMetronomeSound
-            isMetronomeSound={config.isMetronomeSound}
-            dispatch={dispatch}
-          />
-          {config.isMetronomeSound && (
-            <ButtonAcsentbeatSound
-              isAcsentbeatSound={config.isAcsentbeatSound}
-              dispatch={dispatch}
-            />
-          )}
-          <ButtonBeatSound
-            isBeatSound={config.isBeatSound}
-            dispatch={dispatch}
-          />
-          <ButtonI noteSize={config.noteSize} dispatch={dispatch} />
-          <ButtonNoteSize noteSize={config.noteSize} dispatch={dispatch} />
-          {config.noteSize > 4 && config.isMetronomeSound && (
-            <>
-              <ButtonDownbeatSound
-                isDownbeatSound={config.isDownbeatSound}
-                dispatch={dispatch}
+          <FormControlLabel
+            label="Воспроизвести бой"
+            labelPlacement="end"
+            control={
+              <Switch
+                checked={config.isBeatSound}
+                onChange={() =>
+                  dispatch({
+                    type: "setIsBeatSound",
+                    data: !config.isBeatSound,
+                  })
+                }
+                inputProps={{ "aria-label": "click-always" }}
               />
-              <ButtonUpbeatSound
-                isUpbeatSound={config.isUpbeatSound}
-                dispatch={dispatch}
+            }
+          />
+          <Divider />
+          <FormControlLabel
+            label="Метроном"
+            labelPlacement="end"
+            control={
+              <Switch
+                checked={config.isMetronomeSound}
+                onChange={() =>
+                  dispatch({
+                    type: "setIsMetronomSound",
+                    data: !config.isMetronomeSound,
+                  })
+                }
+                inputProps={{ "aria-label": "click-always" }}
               />
-            </>
-          )}
+            }
+          />
+
+          <FormControlLabel
+            label="Кликаем на 1234"
+            labelPlacement="end"
+            control={
+              <Switch
+                checked={config.clickMainBeat}
+                onChange={() =>
+                  dispatch({
+                    type: "setClickMainBeat",
+                    data: !config.clickMainBeat,
+                  })
+                }
+                inputProps={{ "aria-label": "click-main-beat" }}
+              />
+            }
+          />
+          <FormControlLabel
+            label="Кликаем на И"
+            labelPlacement="end"
+            control={
+              <Switch
+                checked={config.clickSubbeat}
+                onChange={() =>
+                  dispatch({
+                    type: "setClickSubbeat",
+                    data: !config.clickSubbeat,
+                  })
+                }
+                inputProps={{ "aria-label": "click-subbeat" }}
+              />
+            }
+          />
+          <FormControlLabel
+            label="Выделяем '1'"
+            labelPlacement="end"
+            control={
+              <Switch
+                checked={config.clickTaktBeat}
+                onChange={() =>
+                  dispatch({
+                    type: "setClickTaktBeat",
+                    data: !config.clickTaktBeat,
+                  })
+                }
+                inputProps={{ "aria-label": "click-takt-beat" }}
+              />
+            }
+          />
+          <Divider />
+          <FormControlLabel
+            label="Длительность"
+            labelPlacement="end"
+            control={
+              <Select
+                value={config.noteDuration}
+                onChange={(event) =>
+                  dispatch({
+                    type: "setNoteDuration", // Убедитесь, что это правильный тип действия
+                    data: event.target.value, // Передаем значение, полученное из события
+                  })
+                }
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={"4n"}>4</MenuItem>
+                <MenuItem value={"8n"}>8</MenuItem>
+                <MenuItem value={"16n"}>16</MenuItem>
+              </Select>
+            }
+          />
         </Box>
       </Dialog>
     </React.Fragment>

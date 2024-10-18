@@ -9,9 +9,9 @@ const setBeatPattern = (state, beatPattern) => {
   return { ...state, beatPattern: beatPattern };
 };
 
-const setNoteSize = (state, noteSize) => {
-  if (noteSize === undefined) return state;
-  return { ...state, noteSize };
+const setNoteDuration = (state, noteDuration) => {
+  if (noteDuration === undefined) return state;
+  return { ...state, noteDuration };
 };
 
 const setIsPlaying = (state, isPlaying) => ({ ...state, isPlaying });
@@ -20,18 +20,21 @@ const setIsMetronomeSound = (state, isMetronomeSound) => ({
   ...state,
   isMetronomeSound,
 });
-const setIsDownbeatSound = (state, isDownbeatSound) => ({
+const setClickAlways = (state, clickAlways) => ({
   ...state,
-  isDownbeatSound,
+  clickAlways,
 });
-const setIsUpbeatSound = (state, isUpbeatSound) => ({
+const setClickMainBeat = (state, clickMainBeat) => ({
   ...state,
-  isUpbeatSound,
+  clickMainBeat,
 });
-
-const setIsAcsentbeatSound = (state, isAcsentbeatSound) => ({
+const setClickSubbeat = (state, clickSubbeat) => ({
   ...state,
-  isAcsentbeatSound,
+  clickSubbeat,
+});
+const setClickTaktBeat = (state, clickTaktBeat) => ({
+  ...state,
+  clickTaktBeat,
 });
 export default function reducer(state, action) {
   switch (action.type) {
@@ -39,21 +42,22 @@ export default function reducer(state, action) {
       return setTempo(state, action.data);
     case "setBeatPattern":
       return setBeatPattern(state, action.data);
-    case "setNoteSize":
-      return setNoteSize(state, action.data);
     case "setIsPlay":
       return setIsPlaying(state, action.data);
     case "setIsBeatSound":
       return setIsBeatSound(state, action.data);
     case "setIsMetronomSound":
       return setIsMetronomeSound(state, action.data);
-    case "setIsDownbeatSound":
-      return setIsDownbeatSound(state, action.data);
-    case "setIsUpbeatSound":
-      return setIsUpbeatSound(state, action.data);
-    case "setIsAcsentbeatSound":
-      return setIsAcsentbeatSound(state, action.data);
-
+    case "setClickAlways":
+      return setClickAlways(state, action.data);
+    case "setClickMainBeat":
+      return setClickMainBeat(state, action.data);
+    case "setClickSubbeat":
+      return setClickSubbeat(state, action.data);
+    case "setClickTaktBeat":
+      return setClickTaktBeat(state, action.data);
+    case "setNoteDuration":
+      return setNoteDuration(state, action.data);
     default:
       return state;
   }

@@ -6,18 +6,24 @@ import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import MuiInput from "@mui/material/Input";
 import { memo } from "react";
+import { useConfig } from "../useConfig";
 
 const Input = styled(MuiInput)`
   width: 42px;
 `;
 
-const TempoSelectorNM = ({ tempo, dispatch }) => {
-  const [value, setValue] = useState(tempo);
+const TempoSelectorNM = () => {
+  const { config, dispatch } = useConfig();
+  const [value, setValue] = useState(config.tempo);
 
   // Этот useEffect для отправки изменений в контекст
   useEffect(() => {
     dispatch({ type: "setTempo", data: value });
   }, [value, dispatch]);
+
+  useEffect(() => {
+    setValue(config.tempo);
+  }, [config.tempo]);
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);

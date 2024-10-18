@@ -2,8 +2,14 @@ import { Routes, Route } from "react-router-dom"; // Убедитесь, что 
 import PatternPage from "./pages/PatternPage";
 import ThemeContextProvider from "./components/ThemeContextProvider";
 import HomePage from "./pages/HomePage";
+import useWakeLock from "./hooks/useWakeLock";
+import "@fontsource/inter/300.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/700.css";
 
 function App() {
+  useWakeLock();
   return (
     <ThemeContextProvider>
       <Routes>
