@@ -107,7 +107,7 @@ function countSteps(beatPattern) {
 function calcDurations(soundArray, noteDuration) {
   const durations = new Array(soundArray.length); // Создаем массив для длительностей
   let currentDuration = { [noteDuration]: 1 };
-  console.log(currentDuration); // Начальная длительность
+  // Начальная длительность
 
   // Обходим массив с конца
   for (let i = soundArray.length - 1; i >= 0; i--) {
@@ -153,7 +153,6 @@ export default function useTone(config) {
 
     const steps = countSteps(config.beatPattern);
     const durations = calcDurations(steps, config.noteDuration);
-    console.log(durations);
 
     const seq = new Tone.Sequence(
       (time, index) => {

@@ -132,7 +132,7 @@ export const patterns = [
     note: "16n",
   },
   {
-    title: "Четверка с загулшкой",
+    title: "Четверка с заглушкой",
     pattern: "11x111x1",
     temp: 70,
     note: "8n",
@@ -189,12 +189,6 @@ export const patterns = [
   {
     title: "Рок",
     pattern: "1010A011",
-    temp: 70,
-    note: "8n",
-  },
-  {
-    title: "шестерка обычная",
-    pattern: "10110111",
     temp: 70,
     note: "8n",
   },
