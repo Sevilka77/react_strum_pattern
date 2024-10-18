@@ -43,12 +43,12 @@ const Header = memo(function Header({ title }) {
               color="#25111b"
               onClick={() => navigate(`/`)}
             >
-              <MoveLeftIcon color="#25111b" />
+              <MoveLeftIcon color="#ffffff" />
             </IconButton>
 
             <Typography
               variant="h6"
-              color="#25111b"
+              color="#ffffff"
               align="center"
               component="h1"
               sx={{ flexGrow: 1 }}
