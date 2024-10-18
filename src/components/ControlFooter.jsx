@@ -19,7 +19,10 @@ export default function ControlFooter() {
     };
   }, [dispatch, config.isPlaying]);
   return (
-    <Paper elevation={4} sx={{ width: "100%" }}>
+    <Paper
+      elevation={4}
+      sx={{ width: "100%", position: "fixed", bottom: 0, left: 0, right: 0 }}
+    >
       <BottomNavigation
         sx={{ display: "flex", justifyContent: "space-between" }} // Чтобы разместить элементы по краям
       >

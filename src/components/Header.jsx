@@ -30,7 +30,7 @@ const Header = memo(function Header({ title }) {
           <Typography
             variant="h6"
             component="h1"
-            color="#25111b"
+            color="#ffffff"
             align="center"
             sx={{ flexGrow: 1 }}
           >
