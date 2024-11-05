@@ -1,40 +1,176 @@
 import { useEffect, useRef, useState } from "react";
 
 import * as Tone from "tone";
-import up from "./up.wav";
-import down from "./down.wav";
-import upM from "./upM.wav";
-import downM from "./downM.wav";
-import x from "./X.wav";
+
 import click1 from "./click1.wav";
 import click2 from "./click2.wav";
+import g1 from "./g1.mp3";
+import g2 from "./g2.mp3";
+import g3 from "./g3.mp3";
+import g4 from "./g4.mp3";
+import g5 from "./g5.mp3";
+import g6 from "./g6.mp3";
+import g1L from "./g1L.mp3";
+import g2L from "./g2L.mp3";
+import g3L from "./g3L.mp3";
+import g4L from "./g4L.mp3";
+import g5L from "./g5L.mp3";
+import g6L from "./g6L.mp3";
 
-// Создание Tone.Players для воспроизведения звуков
-const keys = new Tone.Players({
-  urls: {
-    up: up,
-    down: down,
-    upA: up,
-    downA: down,
-    upM: upM,
-    downM: downM,
-    x: x,
-    click1: click1,
-    click2: click2,
+const samples = {
+  g1: new Tone.Player(g1).toDestination(),
+  g2: new Tone.Player(g2).toDestination(),
+  g3: new Tone.Player(g3).toDestination(),
+  g4: new Tone.Player(g4).toDestination(),
+  g5: new Tone.Player(g5).toDestination(),
+  g6: new Tone.Player(g6).toDestination(),
+  g1L: new Tone.Player(g1L).toDestination(),
+  g2L: new Tone.Player(g2L).toDestination(),
+  g3L: new Tone.Player(g3L).toDestination(),
+  g4L: new Tone.Player(g4L).toDestination(),
+  g5L: new Tone.Player(g5L).toDestination(),
+  g6L: new Tone.Player(g6L).toDestination(),
+  click1: new Tone.Player(click1).toDestination(),
+  click2: new Tone.Player(click2).toDestination(),
+};
+
+const dataset = {
+  down: {
+    samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
+    spread: 4,
+    bias: [5, 1, 2, 3, 4, 6],
   },
-  onload: () => console.log("loaded"), // Обработчик загрузки
-}).toDestination(); // Отправка звуков на выход аудио
-keys.player("upA").volume.value = 1;
-keys.player("downA").volume.value = 1;
+  downA: {
+    samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
+    spread: 6,
+    bias: [1, 2, 3, 4, 5, 6],
+  },
+  up: {
+    samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
+    spread: 4,
+    bias: [6, 6, 3, 1, 2, 4],
+  },
+  upA: {
+    samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
+    spread: 5,
+    bias: [6, 5, 3, 1, 2, 4],
+  },
+  x: {
+    samples: ["g6L", "g5L", "g4L", "g3L", "g2L", "g1L"],
+    spread: 6,
+    bias: [1, 2, 3, 4, 5, 6],
+  },
+  upM: {
+    samples: ["g6L", "g5L", "g4L", "g3L", "g2L", "g1L"],
+    spread: 4,
+    bias: [6, 6, 3, 1, 2, 4],
+  },
+  downM: {
+    samples: ["g6L", "g5L", "g4L", "g3L", "g2L", "g1L"],
+    spread: 4,
+    bias: [5, 1, 2, 3, 4, 6],
+  },
+};
+function calculateStringVolumes(s, h) {
+  const i = [-1, 0, 0, 0, 0, 0];
+  const lerp = (start, end, alpha) => {
+    return start * (1 - alpha) + end * alpha;
+  };
+
+  const randomPlusMinus = (value) => {
+    if (value === 0) {
+      return 0;
+    }
+    return Math.random() * value * 2 - value;
+  };
+
+  const spread = lerp(0, s, 0.75) + randomPlusMinus(0.4);
+
+  for (let t = 0; t < 6; t++) {
+    if (!isNaN(i[t])) {
+      // Проверяем, больше ли h максимального spread
+      if (h[t] > Math.ceil(spread)) {
+        i[t] = NaN;
+      } else if (h[t] > Math.floor(spread)) {
+        i[t] =
+          spread % 1 > 0.25
+            ? i[t] - 26 * (1 - Math.log10(1 + (spread % 1) * 9))
+            : NaN;
+      }
+    }
+  }
+  return i;
+}
+
+function calculateStringOffsets(direction) {
+  const m = 0.003; // Задержка между строками
+  const offsetResults = {};
+  const maxStringIndex = 5;
+
+  // Устанавливаем начальные параметры
+  const startIndex = direction === "up" ? maxStringIndex : 0;
+  const endIndex = direction === "up" ? 0 : maxStringIndex;
+  const step = direction === "up" ? -1 : 1;
+
+  // Цикл для подсчета смещений
+  for (
+    let t = 0, r = startIndex;
+    direction === "up" ? r >= endIndex : r <= endIndex;
+    r += step, t++
+  ) {
+    const offset =
+      t * m +
+      (direction === "down" && r === 0 && t > 0 ? Math.min(m, 0.01) : 0) +
+      0.001 * Math.random();
+    offsetResults[r] = offset;
+  }
+  return offsetResults;
+}
 
 function playNote(note, time, duration, isBeatSound) {
-  // Проверяем, воспроизводится ли звук для бита
+  if (isBeatSound) {
+    let noteData, direction, offsets, dbs;
 
-  if (isBeatSound && note !== "nothing") {
-    keys.player(note).start(time, 0, duration);
+    switch (note) {
+      case "nothing":
+        return;
+      case "up":
+      case "upA":
+      case "upM":
+        noteData = dataset[note];
+        direction = "up";
+        break;
+      case "down":
+      case "downA":
+      case "downM":
+      case "x":
+        noteData = dataset[note];
+        direction = "down";
+        break;
+      default:
+        console.log("Note not found in dataset or unsupported note type.");
+        return; // Выходим из функции, если note не соответствует ожидаемым значениям
+    }
+    offsets = calculateStringOffsets(direction);
+    dbs = calculateStringVolumes(noteData.spread, noteData.bias);
+    noteData.samples.forEach((item, index) => {
+      const offset = offsets[index];
+      const db = dbs[index];
+      console.log(index, item, offset, db);
+
+      if (!isNaN(db)) {
+        if (samples[item]) {
+          samples[item].volume.value = db;
+          samples[item].fadeOut = 0.12;
+          samples[item].start(time + offset, 0.05, duration);
+        }
+      } else {
+        // Громкость струны равна NaN, звук не воспроизводится
+      }
+    });
   }
 }
-// Функция для воспроизведения ноты
+
 const playMetronome = (
   time,
   index,
@@ -46,28 +182,28 @@ const playMetronome = (
 ) => {
   if (isMetronomeSound) {
     if (clickTaktBeat && index === 0) {
-      keys.player("click2").start(time); // Звук для такта
+      samples["click2"].start(time); // Звук для такта
     } else {
       if (noteDuration === "4n") {
-        keys.player("click1").start(time);
+        samples["click1"].start(time);
       } else if (noteDuration === "8n") {
         if (index % 2 === 0) {
           if (clickMainBeat) {
-            keys.player("click1").start(time);
+            samples["click1"].start(time);
           }
         } else {
           if (clickSubbeat) {
-            keys.player("click1").start(time);
+            samples["click1"].start(time);
           }
         }
       } else if (noteDuration === "16n") {
         if (index % 4 === 0) {
           if (clickMainBeat) {
-            keys.player("click1").start(time);
+            samples["click1"].start(time);
           }
         } else {
           if (clickSubbeat) {
-            keys.player("click1").start(time);
+            samples["click1"].start(time);
           }
         }
       } // Звук для бита
@@ -149,7 +285,7 @@ export default function useTone(config) {
       return; // Если метроном не запущен, выходим из useEffect
     }
 
-    Tone.getTransport().bpm.value = config.tempo || 120; // Установка значения BPM
+    Tone.getTransport().bpm.value = config.tempo || 120;
 
     const steps = countSteps(config.beatPattern);
     const durations = calcDurations(steps, config.noteDuration);
@@ -170,7 +306,7 @@ export default function useTone(config) {
         );
       },
       Array.from({ length: steps.length }, (_, i) => i),
-      config.noteDuration || "8n", //заглушка если что ускорить метроном.
+      config.noteDuration || "8n",
     ).start(0);
     seqRef.current = seq; // Сохранение ссылки на новую последовательность
 

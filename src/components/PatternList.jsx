@@ -10,26 +10,31 @@ import { useNavigate } from "react-router-dom";
 import BeatImage from "./BeatImage";
 
 const PatternListItem = ({ pattern, onClick }) => (
-  <ListItem alignItems="flex-start" sx={{ py: 0 }}>
+  <ListItem
+    alignItems="flex-start"
+    disableGutters
+    sx={{ flexDirection: "column", py: 0 }}
+  >
+    <ListItemText
+      sx={{ py: 1 }}
+      primary={
+        <Typography variant="h6" component="h4">
+          {pattern.title}
+        </Typography>
+      }
+    />
     <ListItemButton
+      disableGutters
       sx={{ py: 0 }}
       onClick={() => onClick(pattern)}
       aria-label={`Выбрать бой: ${pattern.title}`}
     >
-      <ListItemText
-        sx={{ py: 1 }}
-        primary={
-          <Typography variant="h6" component="h4">
-            {pattern.title}
-          </Typography>
-        }
-        secondary={<BeatImage beatString={pattern.pattern} />}
-      />
+      <BeatImage beatString={pattern.pattern} />
     </ListItemButton>
   </ListItem>
 );
 
-const PatternList = () => {
+const PatternList = ({ level }) => {
   const navigate = useNavigate();
 
   const onClick = useCallback(
@@ -39,34 +44,16 @@ const PatternList = () => {
     [navigate], // Указываем зависимости для useCallback
   );
 
+  // Фильтруем паттерны по уровню сложности
+  const filteredPatterns = patterns.filter((p) => p.level === level);
   return (
     <>
-      <List component="nav">
-        <ListItem alignItems="flex-start" sx={{ py: 0 }}>
-          <ListItemButton
-            sx={{ py: 0 }}
-            aria-label={`Создать свой бой`}
-            onClick={() => {
-              // Добавляем навигацию на маршрут /pattern/0000
-              navigate(`/pattern/0000`, { state: { editMode: true } });
-            }}
-          >
-            <ListItemText
-              sx={{ py: 0 }}
-              primary={
-                <Typography color="#e4bed3" variant="h5" component="h3">
-                  Создать свой бой
-                </Typography>
-              }
-            />
-          </ListItemButton>
-        </ListItem>
-        <Divider component="li" />
-        {patterns.map((p) => (
-          <div key={`${p.title}-div`}>
+      <List component="ul">
+        {filteredPatterns.map((p) => (
+          <>
             <PatternListItem key={p.title} pattern={p} onClick={onClick} />
             <Divider component="li" key={`${p.title}-divider`} />
-          </div>
+          </>
         ))}
       </List>
     </>

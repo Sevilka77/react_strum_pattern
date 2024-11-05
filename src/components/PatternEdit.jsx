@@ -1,45 +1,51 @@
 import { useState } from "react";
-
-import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
-import { DeleteIcon } from "lucide-react";
+import Snackbar from "@mui/material/Snackbar";
+import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { DeleteIcon, ShareIcon } from "lucide-react";
 import { ArrowD, XDownIcon, XIcon } from "./Icons";
 import { memo } from "react";
-import ButtonShare from "./ButtonShare";
 
 const PatternEditNM = ({ beatPattern, dispatch }) => {
-  const [beats] = useState(beatPattern.split(""));
+  const [beats, setBeats] = useState(beatPattern.split(""));
+  const [open, setOpen] = useState(false);
+  const url = `${window.location.origin}/#/pattern/${beatPattern}`;
+
+  const copyToClip = async (url) => {
+    await navigator.clipboard.writeText(url);
+  };
+
+  const handleClick = () => {
+    copyToClip(url);
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   const handleChange = (event) => {
-    if (event === "A") {
-      beats.push("A");
-    }
-    if (event === "1") {
-      beats.push("1");
-    }
-    if (event === "0") {
-      beats.push("0");
-    }
-    if (event === "x") {
-      beats.push("x");
-    }
-    if (event === "c") {
-      beats.push("c");
-    }
-    if (event === "del") {
-      if (beats.length > 0) beats.pop();
+    const newBeats = [...beats]; // Создаем новый массив для обновления состояния
+    if (["A", "1", "0", "x", "c"].includes(event)) {
+      newBeats.push(event);
+    } else if (event === "del") {
+      if (newBeats.length > 0) newBeats.pop();
     }
 
-    dispatch({ type: "setBeatPattern", data: beats.join("") });
-    console.log(beatPattern);
+    setBeats(newBeats); // Обновляем состояние beats
+    dispatch({ type: "setBeatPattern", data: newBeats.join("") });
   };
 
   return (
-    <Box
-      elevation={4}
-      sx={{ display: "flex", width: "100%", justifyContent: "center" }}
-    >
+    <>
       <BottomNavigation
         sx={{
+          position: "fixed",
+          bottom: 56,
+          left: 0,
+          right: 0,
           display: "flex",
           justifyContent: "center",
           alignContent: "flex-end",
@@ -83,14 +89,21 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
           icon={<DeleteIcon />}
           sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
         />
-
         <BottomNavigationAction
           value="settings"
-          icon={<ButtonShare beatPattern={beatPattern} />}
+          onClick={handleClick} // Исправлено: добавлены скобки
+          icon={<ShareIcon />}
           sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
         />
       </BottomNavigation>
-    </Box>
+      <Snackbar
+        open={open}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        message="Ссылка на гитарный бой скопирована!"
+      />
+    </>
   );
 };
 

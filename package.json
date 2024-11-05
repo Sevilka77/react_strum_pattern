@@ -17,6 +17,7 @@
     "@mui/lab": "^5.0.0-alpha.161",
     "@mui/material": "^5.15.5",
     "lucide-react": "^0.302.0",
+    "node-fetch": "^3.3.2",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",

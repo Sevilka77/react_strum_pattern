@@ -1,101 +1,129 @@
-import { Card, Grid, Toolbar } from "@mui/material";
+import { Card, Grid, Toolbar, Typography } from "@mui/material";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import PatternList from "../components/PatternList";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
+  const navigate = useNavigate();
   return (
     <>
       <Header />
-      <Toolbar></Toolbar>
-      <Grid container spacing={2} justifyContent="center">
-        <Grid item xs={10} md={4}>
-          {/* <Card
+      <Toolbar />
+      <Grid container component="main" spacing={2} justifyContent="center">
+        <Grid item xs={12}>
+          <Card
             sx={{
-              borderRadius: "1rem",
-              borderWidth: "2px",
-              border: "solid",
-              borderColor: "#7bd8e9",
-            }}
-          >
-            <CardContent>
-              <Typography component="h2" variant="h5">
-                {"Привет, друг!"}
-              </Typography>
+              mb: 2,
+              width: "100%",
+              p: 0.5, // минимальные отступы
+              textAlign: "center",
 
-              <Typography variant="subtitle1" paragraph>
-                {
-                  "Рады видеть тебя на нашем сайте, посвященном тренировке гитарного чеса! Здесь ты сможешь развить свои навыки и стать настоящим              гитаристом."
-                }
-              </Typography>
-            </CardContent>
+              height: "2rem", // фиксированная высота для тонкой полоски
+            }}
+          >
+            <Typography
+              component="a"
+              variant="h6"
+              color="#e0f7fa"
+              sx={{ cursor: "pointer", lineHeight: "2rem" }} // центрирование текста по вертикали
+              onClick={() => {
+                navigate(`/pattern/0000`, { state: { editMode: true } });
+              }}
+            >
+              Создать свой бой
+            </Typography>
           </Card>
+        </Grid>
+        <Grid item component="section" xs={11} md={2}>
+          <Card
+            sx={{
+              borderRadius: "1rem",
+              borderWidth: "2px",
+              border: "solid",
+              borderColor: "#7be98d",
+              mb: 2,
+              p: 2,
+            }}
+          >
+            <Typography variant="h5" color="#e0f7fa" sx={{ mb: 1 }}>
+              Начать можно с
+            </Typography>
+            <PatternList level="learn" />
+          </Card>
+        </Grid>
+        {/* Блок для легкого уровня */}
+        <Grid item component="section" xs={11} md={2}>
           <Card
             sx={{
               borderRadius: "1rem",
               borderWidth: "2px",
               border: "solid",
               borderColor: "#7bd8e9",
+              mb: 2,
+              p: 2,
             }}
           >
-            <CardContent>
-              <Typography variant="subtitle1" paragraph>
-                Если ты только начинаешь свой путь, рекомендуем перейти по
-                ссылке, где мы вместе освоим основные маятниковые движения.
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small" color="primary" href="/beginner">
-                Учимся маятниковым движениям
-              </Button>
-            </CardActions>
+            <Typography variant="h5" color="#e0f7fa" sx={{ mb: 1 }}>
+              Легкие бои
+            </Typography>
+            <PatternList level="easy" />
           </Card>
-          <Card
-            sx={{
-              borderRadius: "1rem",
-              borderWidth: "2px",
-              border: "solid",
-              borderColor: "#7bd8e9",
-            }}
-          >
-            <CardContent>
-              <Typography variant="subtitle1" paragraph>
-                Если ты уже знаком с основами и хочешь поработать над своим
-                чувством ритма, переходи по ссылке с рандомными боями — каждый
-                раз тебя будет ждать что-то новое!
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small" color="primary" href="/random-strums">
-                Тренировать ритм с рандомными боями
-              </Button>
-            </CardActions>
-          </Card>
+        </Grid>
 
+        {/* Блок для среднего уровня */}
+        <Grid item component="section" xs={11} md={2}>
           <Card
             sx={{
               borderRadius: "1rem",
               borderWidth: "2px",
               border: "solid",
-              borderColor: "#7bd8e9",
+              borderColor: "#ffcc80",
+              mb: 2,
+              p: 2,
             }}
           >
-            <CardContent>
-              <Typography variant="subtitle1" paragraph>
-                А если тебе нужно поотрабатывать стандартные бои, просто смотри
-                список ниже и выбирай, что тебе интересно.
-              </Typography>
-            </CardContent>
-          </Card> */}
+            <Typography variant="h5" color="#fff3e0" sx={{ mb: 1 }}>
+              Средней сложности сбои
+            </Typography>
+            <PatternList level="medium" />
+          </Card>
+        </Grid>
+
+        {/* Блок для сложного уровня */}
+        <Grid item component="section" xs={11} md={2}>
           <Card
             sx={{
               borderRadius: "1rem",
               borderWidth: "2px",
               border: "solid",
-              borderColor: "#7bd8e9",
+              borderColor: "#ff8a80",
+              mb: 2,
+              p: 2,
             }}
           >
-            <PatternList />
+            <Typography variant="h5" color="#ffebee" sx={{ mb: 1 }}>
+              Сложные бои
+            </Typography>
+            <PatternList level="hard" />
+          </Card>
+        </Grid>
+        {/* Блок для сложного уровня */}
+        <Grid item component="section" xs={11} md={2}>
+          <Card
+            sx={{
+              borderRadius: "1rem",
+              borderWidth: "2px",
+              border: "solid",
+              borderColor: "#ff80f4",
+              mb: 2,
+              p: 2,
+            }}
+          >
+            <Typography variant="h5" color="#ffebee" sx={{ mb: 1 }}>
+              Разные бои
+            </Typography>
+            <PatternList level="other" />
           </Card>
         </Grid>
       </Grid>

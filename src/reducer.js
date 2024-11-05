@@ -1,6 +1,6 @@
 const setTempo = (state, tempo) => {
   if (tempo === undefined) return state;
-  const newTempo = Math.max(40, Math.min(500, tempo));
+  const newTempo = Math.max(40, Math.min(300, tempo));
   return { ...state, tempo: newTempo };
 };
 

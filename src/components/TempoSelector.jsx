@@ -36,8 +36,8 @@ const TempoSelectorNM = () => {
   const handleBlur = () => {
     if (value < 40) {
       setValue(40);
-    } else if (value > 500) {
-      setValue(500);
+    } else if (value > 300) {
+      setValue(300);
     }
   };
 
@@ -49,7 +49,7 @@ const TempoSelectorNM = () => {
       <Grid item xs>
         <Slider
           min={40}
-          max={500}
+          max={300}
           value={typeof value === "number" ? value : 0}
           onChange={handleSliderChange}
           aria-labelledby="input-slider"
@@ -64,7 +64,7 @@ const TempoSelectorNM = () => {
           inputProps={{
             step: 10,
             min: 40,
-            max: 500,
+            max: 300,
             type: "number",
             "aria-labelledby": "input-slider",
           }}
