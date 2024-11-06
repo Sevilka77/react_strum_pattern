@@ -1,6 +1,8 @@
 import Header from "../components/Header";
+import { lazy, Suspense } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import MetronomeWrapper from "../components/MetronomeWrapper";
+const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
+
 import PatternEdit from "../components/PatternEdit";
 import { Box } from "@mui/material";
 import { useConfig } from "../useConfig";
@@ -62,7 +64,9 @@ function PatternPage() {
         alignItems="center" // Центрируем содержимое по вертикали
         sx={{ pb: 3 }} // Отступ снизу, если нужно
       >
-        <MetronomeWrapper />
+        <Suspense fallback={<div>Загрузка...</div>}>
+          <MetronomeWrapper />
+        </Suspense>
       </Box>
 
       {edit && (
