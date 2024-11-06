@@ -6,10 +6,11 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { Divider, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"; // Импортируем Link
 
 import BeatImage from "./BeatImage";
 
-const PatternListItem = ({ pattern, onClick }) => (
+const PatternListItem = ({ pattern }) => (
   <ListItem
     alignItems="flex-start"
     disableGutters
@@ -26,10 +27,15 @@ const PatternListItem = ({ pattern, onClick }) => (
     <ListItemButton
       disableGutters
       sx={{ py: 0 }}
-      onClick={() => onClick(pattern)}
       aria-label={`Выбрать бой: ${pattern.title}`}
     >
-      <BeatImage beatString={pattern.pattern} />
+      <Link
+        to={`/pattern/${pattern.pattern}`}
+        state={pattern}
+        style={{ textDecoration: "none" }}
+      >
+        <BeatImage beatString={pattern.pattern} />
+      </Link>
     </ListItemButton>
   </ListItem>
 );

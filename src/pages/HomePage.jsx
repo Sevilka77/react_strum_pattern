@@ -2,11 +2,11 @@ import { Card, Grid, Toolbar, Typography } from "@mui/material";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import PatternList from "../components/PatternList";
-import { useNavigate } from "react-router-dom";
+
 import Schema from "../components/schema";
+import { Link } from "react-router-dom";
 
 function HomePage() {
-  const navigate = useNavigate();
   return (
     <>
       <Header />
@@ -18,19 +18,21 @@ function HomePage() {
             sx={{
               mb: 2,
               width: "100%",
-              p: 0.5, // минимальные отступы
+              p: 0.5,
               textAlign: "center",
-
-              height: "2rem", // фиксированная высота для тонкой полоски
+              height: "2rem",
             }}
           >
             <Typography
-              component="a"
+              component={Link} // Заменили компонент на Link
+              to="/pattern/0000"
+              state={{ editMode: true }}
               variant="h6"
               color="#e0f7fa"
-              sx={{ cursor: "pointer", lineHeight: "2rem" }} // центрирование текста по вертикали
-              onClick={() => {
-                navigate(`/pattern/0000`, { state: { editMode: true } });
+              sx={{
+                cursor: "pointer",
+                lineHeight: "2rem",
+                textDecoration: "none", // убираем подчеркивание
               }}
             >
               Создать свой бой
