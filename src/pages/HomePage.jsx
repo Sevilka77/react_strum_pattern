@@ -1,11 +1,13 @@
+import { lazy, Suspense } from "react";
 import { Card, Grid, Toolbar, Typography } from "@mui/material";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-import PatternList from "../components/PatternList";
-
 import Schema from "../components/schema";
 import { Link } from "react-router-dom";
+
+// Динамический импорт PatternList
+const PatternList = lazy(() => import("../components/PatternList"));
 
 function HomePage() {
   return (
@@ -40,6 +42,8 @@ function HomePage() {
             </Typography>
           </Card>
         </Grid>
+
+        {/* Блок для легкого уровня */}
         <Grid item component="section" xs={11} md={2}>
           <Card
             sx={{
@@ -54,9 +58,13 @@ function HomePage() {
             <Typography variant="h5" color="#e0f7fa" sx={{ mb: 1 }}>
               Начать можно с
             </Typography>
-            <PatternList level="learn" />
+            {/* Используем Suspense для оборачивания динамически загружаемого компонента */}
+            <Suspense fallback={<div>Загрузка...</div>}>
+              <PatternList level="learn" />
+            </Suspense>
           </Card>
         </Grid>
+
         {/* Блок для легкого уровня */}
         <Grid item component="section" xs={11} md={2}>
           <Card
@@ -72,7 +80,9 @@ function HomePage() {
             <Typography variant="h5" color="#e0f7fa" sx={{ mb: 1 }}>
               Легкие бои
             </Typography>
-            <PatternList level="easy" />
+            <Suspense fallback={<div>Загрузка...</div>}>
+              <PatternList level="easy" />
+            </Suspense>
           </Card>
         </Grid>
 
@@ -91,7 +101,9 @@ function HomePage() {
             <Typography variant="h5" color="#fff3e0" sx={{ mb: 1 }}>
               Средней сложности сбои
             </Typography>
-            <PatternList level="medium" />
+            <Suspense fallback={<div>Загрузка...</div>}>
+              <PatternList level="medium" />
+            </Suspense>
           </Card>
         </Grid>
 
@@ -110,10 +122,13 @@ function HomePage() {
             <Typography variant="h5" color="#ffebee" sx={{ mb: 1 }}>
               Сложные бои
             </Typography>
-            <PatternList level="hard" />
+            <Suspense fallback={<div>Загрузка...</div>}>
+              <PatternList level="hard" />
+            </Suspense>
           </Card>
         </Grid>
-        {/* Блок для сложного уровня */}
+
+        {/* Блок для разных боев */}
         <Grid item component="section" xs={11} md={2}>
           <Card
             sx={{
@@ -128,7 +143,9 @@ function HomePage() {
             <Typography variant="h5" color="#ffebee" sx={{ mb: 1 }}>
               Разные бои
             </Typography>
-            <PatternList level="other" />
+            <Suspense fallback={<div>Загрузка...</div>}>
+              <PatternList level="other" />
+            </Suspense>
           </Card>
         </Grid>
       </Grid>
