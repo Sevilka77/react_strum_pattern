@@ -21,8 +21,8 @@ export default defineConfig({
       output: {
         // Manual chunks
         manualChunks(id) {
-          if (id.includes("tone")) {
-            return "tonejs"; // Группировка сторонних модулей в один чанк
+          if (id.includes("node_modules")) {
+            return "vendor"; // Разделение сторонних зависимостей
           }
         },
       },
