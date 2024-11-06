@@ -1,6 +1,7 @@
 import { Card, Grid, Toolbar, Typography } from "@mui/material";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+
 import PatternList from "../components/PatternList";
 
 import Schema from "../components/schema";

@@ -20,10 +20,9 @@ export default defineConfig({
     rollupOptions: {
       output: {
         // Manual chunks
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            return "vendor"; // Разделение сторонних зависимостей
-          }
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          ui: ["@mui/material"],
         },
       },
     },
