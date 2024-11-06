@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import PatternList from "../components/PatternList";
 import { useNavigate } from "react-router-dom";
+import Schema from "../components/schema";
 
 function HomePage() {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ function HomePage() {
     <>
       <Header />
       <Toolbar />
+      <Schema />
       <Grid container component="main" spacing={2} justifyContent="center">
         <Grid item xs={12}>
           <Card

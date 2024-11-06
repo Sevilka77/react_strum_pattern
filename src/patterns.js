@@ -5,6 +5,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "learn",
+    position: 38,
   },
   {
     title: "Упражнение 1.2",
@@ -12,6 +13,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "learn",
+    position: 39,
   },
   {
     title: "Упражнение 1.3",
@@ -19,6 +21,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "learn",
+    position: 40,
   },
   {
     title: "Упражнение 1.4",
@@ -26,6 +29,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "learn",
+    position: 41,
   },
   {
     title: "Упражнение 1.5",
@@ -33,6 +37,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "learn",
+    position: 42,
   },
   {
     title: "Упражнение 1.6",
@@ -40,6 +45,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "learn",
+    position: 43,
   },
   {
     title: "Упражнение 2.1",
@@ -47,6 +53,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "learn",
+    position: 44,
   },
   {
     title: "Упражнение 2.2",
@@ -54,6 +61,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "learn",
+    position: 45,
   },
   {
     title: "Упражнение 2.3",
@@ -61,6 +69,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "learn",
+    position: 46,
   },
   {
     title: "Упражнение 2.4",
@@ -68,6 +77,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "learn",
+    position: 47,
   },
   {
     title: "Упражнение 2.5",
@@ -75,6 +85,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "learn",
+    position: 48,
   },
   {
     title: "Упражнение 2.6",
@@ -82,6 +93,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "learn",
+    position: 49,
   },
   {
     title: "Упражнение 3.1",
@@ -89,6 +101,7 @@ export const patterns = [
     temp: 40,
     note: "16n",
     level: "learn",
+    position: 50,
   },
   {
     title: "Упражнение 3.2",
@@ -96,6 +109,7 @@ export const patterns = [
     temp: 40,
     note: "16n",
     level: "learn",
+    position: 51,
   },
   {
     title: "Упражнение 3.3",
@@ -103,6 +117,7 @@ export const patterns = [
     temp: 40,
     note: "16n",
     level: "learn",
+    position: 52,
   },
   {
     title: "Упражнение 4.1",
@@ -110,6 +125,7 @@ export const patterns = [
     temp: 40,
     note: "16n",
     level: "learn",
+    position: 53,
   },
   {
     title: "Упражнение 4.2",
@@ -117,6 +133,7 @@ export const patterns = [
     temp: 40,
     note: "16n",
     level: "learn",
+    position: 54,
   },
   {
     title: "Упражнение 4.3",
@@ -124,6 +141,7 @@ export const patterns = [
     temp: 40,
     note: "16n",
     level: "learn",
+    position: 55,
   },
   {
     title: "Упражнение 4.4",
@@ -131,6 +149,7 @@ export const patterns = [
     temp: 40,
     note: "16n",
     level: "learn",
+    position: 56,
   },
   {
     title: "Упражнение 4.5",
@@ -138,6 +157,7 @@ export const patterns = [
     temp: 40,
     note: "16n",
     level: "learn",
+    position: 57,
   },
   {
     title: "Упражнение 4.6",
@@ -145,6 +165,7 @@ export const patterns = [
     temp: 40,
     note: "16n",
     level: "learn",
+    position: 58,
   },
   {
     title: "Упражнение 4.7",
@@ -152,6 +173,7 @@ export const patterns = [
     temp: 40,
     note: "16n",
     level: "learn",
+    position: 59,
   },
   {
     title: "Четверка",
@@ -159,6 +181,7 @@ export const patterns = [
     temp: 70,
     note: "4n",
     level: "easy",
+    position: 1,
   },
   {
     title: "Четверка с заглушкой",
@@ -166,6 +189,7 @@ export const patterns = [
     temp: 70,
     note: "4n",
     level: "easy",
+    position: 4,
   },
   {
     title: "Шестерка обычная",
@@ -173,13 +197,15 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "medium",
+    position: 2,
   },
   {
-    title: "Шестерка с заглушкой ",
+    title: "Шестерка с заглушкой",
     pattern: "10x101x1",
     temp: 70,
     note: "8n",
     level: "medium",
+    position: 3,
   },
   {
     title: "Шестерка кантри",
@@ -187,6 +213,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "medium",
+    position: 37,
   },
   {
     title: "шестерка кантри2",
@@ -194,6 +221,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "medium",
+    position: 36,
   },
   {
     title: "шестерка кантри c заглушкой",
@@ -201,6 +229,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "medium",
+    position: 35,
   },
   {
     title: "Восьмерка стандартная",
@@ -208,6 +237,7 @@ export const patterns = [
     temp: 70,
     note: "16n",
     level: "hard",
+    position: 6,
   },
   {
     title: "Галоп",
@@ -215,6 +245,7 @@ export const patterns = [
     temp: 70,
     note: "16n",
     level: "hard",
+    position: 7,
   },
 
   {
@@ -223,6 +254,7 @@ export const patterns = [
     temp: 70,
     note: "4n",
     level: "easy",
+    position: 34,
   },
   {
     title: "Стандартный бой на 3/4",
@@ -230,6 +262,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "medium",
+    position: 8,
   },
   {
     title: "Дополнительный бой на 3/4",
@@ -237,6 +270,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "medium",
+    position: 33,
   },
   {
     title: "Комбинированный (3/4 внутри 4/4)",
@@ -244,6 +278,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "medium",
+    position: 32,
   },
   {
     title: "Рок",
@@ -251,6 +286,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "easy",
+    position: 5,
   },
 
   {
@@ -259,6 +295,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "easy",
+    position: 9,
   },
   {
     title: "8Упрощенная",
@@ -266,6 +303,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "easy",
+    position: 10,
   },
 
   {
@@ -274,6 +312,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 31,
   },
   {
     title: "Рэгги",
@@ -281,6 +320,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "medium",
+    position: 30,
   },
 
   {
@@ -289,6 +329,7 @@ export const patterns = [
     temp: 70,
     note: "16n",
     level: "hard",
+    position: 11,
   },
   {
     title: "8 перк (перкуссионная)",
@@ -296,6 +337,7 @@ export const patterns = [
     temp: 70,
     note: "16n",
     level: "hard",
+    position: 29,
   },
   {
     title: "8ка слабые доли",
@@ -303,6 +345,7 @@ export const patterns = [
     temp: 70,
     note: "16n",
     level: "hard",
+    position: 28,
   },
   {
     title: "8ка с заглушками",
@@ -310,13 +353,15 @@ export const patterns = [
     temp: 70,
     note: "16n",
     level: "hard",
+    position: 12,
   },
   {
-    title: "8ка два коробля",
+    title: "восьмерка два коробля",
     pattern: "1001101101011011",
     temp: 70,
     note: "16n",
     level: "hard",
+    position: 13,
   },
   {
     title: "Я так соскучился",
@@ -324,6 +369,7 @@ export const patterns = [
     temp: 70,
     note: "16n",
     level: "other",
+    position: 14,
   },
 
   {
@@ -332,6 +378,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 15,
   },
 
   {
@@ -340,6 +387,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 16,
   },
   {
     title: "ГСН 7 Упражнение",
@@ -347,6 +395,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 17,
   },
   {
     title: "ГСН 11 Упражнение",
@@ -354,6 +403,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 18,
   },
   {
     title: "ГСН 12 Упражнение",
@@ -361,6 +411,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 19,
   },
   {
     title: "ГСН 13 Кино",
@@ -368,6 +419,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 24,
   },
   {
     title: "ГСН 13 Ямайка",
@@ -375,6 +427,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 20,
   },
   {
     title: "ГСН 14 Упражнение",
@@ -382,6 +435,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 21,
   },
   {
     title: "ГСН 15 Упражнение",
@@ -389,6 +443,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 22,
   },
   {
     title: "ГСН 16 Упражнение",
@@ -396,6 +451,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 23,
   },
   {
     title: "ГСН 17 Упражнение",
@@ -403,6 +459,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 25,
   },
   {
     title: "ГСН 20 Упражнение",
@@ -410,6 +467,7 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 26,
   },
   {
     title: "ГСН 21 Упражнение",
@@ -417,5 +475,6 @@ export const patterns = [
     temp: 70,
     note: "8n",
     level: "other",
+    position: 27,
   },
 ];
