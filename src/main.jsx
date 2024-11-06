@@ -13,14 +13,14 @@ const YandexMetrika =
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    {YandexMetrika && (
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <YandexMetrika />
+      </React.Suspense>
+    )}
     <HashRouter>
       <ConfigProvider>
         <App />
-        {YandexMetrika && (
-          <React.Suspense fallback={<div>Loading...</div>}>
-            <YandexMetrika />
-          </React.Suspense>
-        )}
       </ConfigProvider>
     </HashRouter>
   </React.StrictMode>,

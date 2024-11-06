@@ -1,5 +1,5 @@
 import { patterns } from "../patterns";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -46,6 +46,30 @@ const PatternList = ({ level }) => {
 
   // Фильтруем паттерны по уровню сложности
   const filteredPatterns = patterns.filter((p) => p.level === level);
+
+  useEffect(() => {
+    const schemaData = {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      itemListElement: filteredPatterns.map((pattern, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: pattern.title,
+        url: `/pattern/${pattern.pattern}`,
+        image: `data:image/svg+xml;utf8,${encodeURIComponent(pattern.pattern)}`,
+      })),
+    };
+
+    const script = document.createElement("script");
+    script.type = "application/ld+json";
+    script.innerHTML = JSON.stringify(schemaData);
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, [filteredPatterns]);
+
   return (
     <>
       <List component="ul">
