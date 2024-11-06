@@ -46,28 +46,35 @@ const PatternList = ({ level }) => {
 
   // Фильтруем паттерны по уровню сложности
   const filteredPatterns = patterns.filter((p) => p.level === level);
-
   useEffect(() => {
+    const existingScript = document.querySelector(
+      'script[type="application/ld+json"]',
+    );
+
     const schemaData = {
       "@context": "https://schema.org",
       "@type": "ItemList",
+      name: "Список гитарных боев",
       itemListElement: filteredPatterns.map((pattern, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        name: pattern.title,
+        name: `Гитарный бой ${pattern.title}`,
         url: `/pattern/${pattern.pattern}`,
         image: `data:image/svg+xml;utf8,${encodeURIComponent(pattern.pattern)}`,
       })),
     };
 
-    const script = document.createElement("script");
-    script.type = "application/ld+json";
-    script.innerHTML = JSON.stringify(schemaData);
-    document.head.appendChild(script);
-
-    return () => {
-      document.head.removeChild(script);
-    };
+    if (existingScript) {
+      const existingData = JSON.parse(existingScript.innerHTML);
+      // Объединяем старые и новые элементы
+      existingData.itemListElement.push(...schemaData.itemListElement);
+      existingScript.innerHTML = JSON.stringify(existingData);
+    } else {
+      const script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.innerHTML = JSON.stringify(schemaData);
+      document.head.appendChild(script);
+    }
   }, [filteredPatterns]);
 
   return (
