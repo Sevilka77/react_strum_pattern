@@ -1,5 +1,5 @@
 import { patterns } from "../patterns";
-import { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -61,13 +61,21 @@ const PatternList = ({ level }) => {
         name: `Гитарный бой ${pattern.title}`,
         url: `/pattern/${pattern.pattern}`,
         image: `data:image/svg+xml;utf8,${encodeURIComponent(pattern.pattern)}`,
+        key: pattern.pattern || index,
       })),
     };
 
     if (existingScript) {
       const existingData = JSON.parse(existingScript.innerHTML);
-      // Объединяем старые и новые элементы
-      existingData.itemListElement.push(...schemaData.itemListElement);
+      // Убедитесь, что itemListElement существует
+      if (
+        existingData.itemListElement &&
+        Array.isArray(existingData.itemListElement)
+      ) {
+        existingData.itemListElement.push(...schemaData.itemListElement);
+      } else {
+        existingData.itemListElement = schemaData.itemListElement;
+      }
       existingScript.innerHTML = JSON.stringify(existingData);
     } else {
       const script = document.createElement("script");
@@ -81,10 +89,10 @@ const PatternList = ({ level }) => {
     <>
       <List component="ul">
         {filteredPatterns.map((p) => (
-          <>
+          <React.Fragment key={p.title}>
             <PatternListItem key={p.title} pattern={p} onClick={onClick} />
             <Divider component="li" key={`${p.title}-divider`} />
-          </>
+          </React.Fragment>
         ))}
       </List>
     </>
