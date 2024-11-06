@@ -1,10 +1,8 @@
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { useConfig } from "../useConfig";
 import ButtonPlayStop from "./ButtonPlayStop";
 import TempoSelector from "./TempoSelector";
 import SettingsDialog from "./Settings";
-import { Paper } from "@mui/material";
+import { Paper, BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useEffect } from "react";
 
 export default function ControlFooter() {

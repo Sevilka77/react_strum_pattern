@@ -1,8 +1,7 @@
 // components/ThemeContextProvider.js
 import { useState, useMemo, createContext } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-
+import { ThemeProvider } from "@mui/system";
+import { createTheme, CssBaseline } from '@mui/material';
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const ThemeContextProvider = ({ children }) => {

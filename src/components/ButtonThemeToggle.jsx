@@ -1,10 +1,9 @@
 // components/ThemeToggleButton.js
 import { useContext } from "react";
-import IconButton from "@mui/material/IconButton";
-import { useTheme } from "@mui/material/styles";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { ColorModeContext } from "./ThemeContextProvider";
 import { memo } from "react";
+import { IconButton, useTheme } from '@mui/material';
 const ButtonThemeToggleNM = () => {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);

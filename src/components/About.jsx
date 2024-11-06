@@ -1,8 +1,5 @@
 import * as React from "react";
-import IconButton from "@mui/material/IconButton";
-import { Box, Container, Typography } from "@mui/material";
-import Dialog from "@mui/material/Dialog";
-import Slide from "@mui/material/Slide";
+import { Box, Container, Typography, IconButton, Dialog, Slide } from "@mui/material";
 
 import { HelpCircleIcon, XCircleIcon } from "lucide-react";
 import { memo } from "react";

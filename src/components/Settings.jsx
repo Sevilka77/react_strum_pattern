@@ -1,5 +1,4 @@
 import * as React from "react";
-import Dialog from "@mui/material/Dialog";
 import { SettingsIcon, XIcon } from "lucide-react";
 import {
   Box,
@@ -10,6 +9,7 @@ import {
   Divider,
   Select,
   MenuItem,
+  Dialog,
 } from "@mui/material";
 
 import { useConfig } from "../useConfig";

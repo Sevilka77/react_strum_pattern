@@ -1,12 +1,8 @@
 import { useState, useEffect } from "react";
-import { styled } from "@mui/material/styles";
-
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import Slider from "@mui/material/Slider";
-import MuiInput from "@mui/material/Input";
 import { memo } from "react";
 import { useConfig } from "../useConfig";
+import { styled } from "@mui/system";
+import { Grid, Typography, Slider, Input as MuiInput } from "@mui/material";
 
 const Input = styled(MuiInput)`
   width: 42px;

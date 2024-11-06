@@ -1,10 +1,6 @@
 import { patterns } from "../patterns";
 import React, { useCallback } from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import { Divider, Typography } from "@mui/material";
+import { Divider, Typography, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom"; // Импортируем Link
 

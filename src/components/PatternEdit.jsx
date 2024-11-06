@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Snackbar from "@mui/material/Snackbar";
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Snackbar } from "@mui/material";
 import { DeleteIcon, ShareIcon } from "lucide-react";
 import { ArrowD, XDownIcon, XIcon } from "./Icons";
 import { memo } from "react";
