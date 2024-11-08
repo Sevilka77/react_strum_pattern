@@ -16,6 +16,12 @@ import g3L from "./g3L.mp3";
 import g4L from "./g4L.mp3";
 import g5L from "./g5L.mp3";
 import g6L from "./g6L.mp3";
+import g1C from "./g1C.mp3";
+import g2C from "./g2C.mp3";
+import g3C from "./g3C.mp3";
+import g4C from "./g4C.mp3";
+import g5C from "./g5C.mp3";
+import g6C from "./g6C.mp3";
 
 const samples = {
   g1: new Tone.Player(g1).toDestination(),
@@ -30,6 +36,12 @@ const samples = {
   g4L: new Tone.Player(g4L).toDestination(),
   g5L: new Tone.Player(g5L).toDestination(),
   g6L: new Tone.Player(g6L).toDestination(),
+  g1C: new Tone.Player(g1C).toDestination(),
+  g2C: new Tone.Player(g2C).toDestination(),
+  g3C: new Tone.Player(g3C).toDestination(),
+  g4C: new Tone.Player(g4C).toDestination(),
+  g5C: new Tone.Player(g5C).toDestination(),
+  g6C: new Tone.Player(g6C).toDestination(),
   click1: new Tone.Player(click1).toDestination(),
   click2: new Tone.Player(click2).toDestination(),
 };
@@ -38,74 +50,65 @@ const dataset = {
   down: {
     samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
     spread: 4,
-    bias: [5, 1, 2, 3, 4, 6],
+    bias: [1, 2, 3, 4, 5, 6],
+    volumes: [0.8, 0.75, 0.7, 0.65, 0.6, 0.5],
   },
   downA: {
     samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
     spread: 6,
     bias: [1, 2, 3, 4, 5, 6],
+    volumes: [0.8, 0.75, 0.7, 0.65, 0.6, 0.5],
   },
   up: {
     samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
-    spread: 4,
-    bias: [6, 6, 3, 1, 2, 4],
+    spread: 4.5,
+    bias: [4, 3, 2, 1, 5, 6],
+    volumes: [0.5, 0.6, 0.65, 0.07, 0.75, 0.8],
   },
   upA: {
     samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
-    spread: 5,
-    bias: [6, 5, 3, 1, 2, 4],
+    spread: 4.5,
+    bias: [6, 5, 4, 3, 2, 1],
+    volumes: [0.5, 0.6, 0.65, 0.07, 0.75, 0.8],
   },
   x: {
-    samples: ["g6L", "g5L", "g4L", "g3L", "g2L", "g1L"],
+    samples: ["g6C", "g5C", "g4C", "g3C", "g2C", "g1C"],
     spread: 6,
     bias: [1, 2, 3, 4, 5, 6],
+    volumes: [-10, -10, -10, -8, -5, -4],
   },
   upM: {
     samples: ["g6L", "g5L", "g4L", "g3L", "g2L", "g1L"],
-    spread: 4,
-    bias: [6, 6, 3, 1, 2, 4],
+    spread: 3,
+    bias: [1, 2, 3, 4, 5, 6],
+    volumes: [0.5, 0.6, 0.65, 0.07, 0.75, 0.8],
   },
   downM: {
     samples: ["g6L", "g5L", "g4L", "g3L", "g2L", "g1L"],
-    spread: 4,
-    bias: [5, 1, 2, 3, 4, 6],
+    spread: 3,
+    bias: [1, 2, 3, 4, 5, 6],
+    volumes: [0.8, 0.75, 0.7, 0.65, 0.6, 0.5],
   },
 };
-function calculateStringVolumes(s, h) {
-  const i = [-1, 0, 0, 0, 0, 0];
-  const lerp = (start, end, alpha) => {
-    return start * (1 - alpha) + end * alpha;
-  };
-
-  const randomPlusMinus = (value) => {
-    if (value === 0) {
-      return 0;
-    }
-    return Math.random() * value * 2 - value;
-  };
-
-  const spread = lerp(0, s, 0.75) + randomPlusMinus(0.4);
+function calculateStringVolumes(s, h, v) {
+  const i = v;
 
   for (let t = 0; t < 6; t++) {
     if (!isNaN(i[t])) {
       // Проверяем, больше ли h максимального spread
-      if (h[t] > Math.ceil(spread)) {
+      if (h[t] > s) {
         i[t] = NaN;
-      } else if (h[t] > Math.floor(spread)) {
-        i[t] =
-          spread % 1 > 0.25
-            ? i[t] - 26 * (1 - Math.log10(1 + (spread % 1) * 9))
-            : NaN;
       }
     }
   }
+  console.log(i);
   return i;
 }
 
 function calculateStringOffsets(direction) {
-  const m = 0.003; // Задержка между строками
+  const m = 0.002; // Задержка между строками
   const offsetResults = {};
-  const maxStringIndex = 5;
+  const maxStringIndex = 5; // Максимальный индекс строки
 
   // Устанавливаем начальные параметры
   const startIndex = direction === "up" ? maxStringIndex : 0;
@@ -118,16 +121,23 @@ function calculateStringOffsets(direction) {
     direction === "up" ? r >= endIndex : r <= endIndex;
     r += step, t++
   ) {
-    const offset =
-      t * m +
-      (direction === "down" && r === 0 && t > 0 ? Math.min(m, 0.01) : 0) +
-      0.001 * Math.random();
+    let offset = t * m;
+
+    // Дополнительное смещение для первой строки при движении вниз
+    if (direction === "down" && r === 0 && t > 0) {
+      offset += Math.min(m, 0.01);
+    }
+
+    // Добавляем случайное смещение
+    offset += 0.001 * Math.random();
+
+    // Сохраняем результат в объект
     offsetResults[r] = offset;
   }
   return offsetResults;
 }
 
-function playNote(note, time, duration, isBeatSound) {
+function playNote(note, time, isBeatSound) {
   if (isBeatSound) {
     let noteData, direction, offsets, dbs;
 
@@ -152,17 +162,30 @@ function playNote(note, time, duration, isBeatSound) {
         return; // Выходим из функции, если note не соответствует ожидаемым значениям
     }
     offsets = calculateStringOffsets(direction);
-    dbs = calculateStringVolumes(noteData.spread, noteData.bias);
+    dbs = calculateStringVolumes(
+      noteData.spread,
+      noteData.bias,
+      noteData.volumes,
+    );
     noteData.samples.forEach((item, index) => {
       const offset = offsets[index];
       const db = dbs[index];
-      console.log(index, item, offset, db);
 
       if (!isNaN(db)) {
         if (samples[item]) {
-          samples[item].volume.value = db;
-          samples[item].fadeOut = 0.12;
-          samples[item].start(time + offset, 0.05, duration);
+          samples[item].fadeOut = 0.15;
+          if (samples[item].state === "started") {
+            samples[item].stop();
+          }
+          if (item.endsWith("L") || item.endsWith("C")) {
+            const baseSampleName = item.slice(0, -1);
+            if (samples[baseSampleName].state === "started") {
+              samples[baseSampleName].stop();
+            }
+          }
+
+          samples[item].volume.value = db - 2;
+          samples[item].start(time + offset, 0.05);
         }
       } else {
         // Громкость струны равна NaN, звук не воспроизводится
@@ -240,40 +263,40 @@ function countSteps(beatPattern) {
     return sound; // Возвращаем звук и его длительность для каждого шага
   });
 }
-function calcDurations(soundArray, noteDuration) {
-  const durations = new Array(soundArray.length); // Создаем массив для длительностей
-  let currentDuration = { [noteDuration]: 1 };
-  // Начальная длительность
+// function calcDurations(soundArray, noteDuration) {
+//   const durations = new Array(soundArray.length); // Создаем массив для длительностей
+//   let currentDuration = { [noteDuration]: 1 };
+//   // Начальная длительность
 
-  // Обходим массив с конца
-  for (let i = soundArray.length - 1; i >= 0; i--) {
-    if (soundArray[i] !== "nothing") {
-      // Если звук не "nothing", присваиваем текущую длительность
-      durations[i] = currentDuration;
-      currentDuration = { [noteDuration]: 1 }; // Сбрасываем длительность для следующего элемента
-    } else {
-      // Если звук "nothing"
-      durations[i] = { [noteDuration]: 1 }; // Присваиваем текущую длительность
-      // Увеличиваем длительность для следующего элемента
-      currentDuration = increaseDuration(currentDuration, [noteDuration]);
-    }
-  }
+//   // Обходим массив с конца
+//   for (let i = soundArray.length - 1; i >= 0; i--) {
+//     if (soundArray[i] !== "nothing") {
+//       // Если звук не "nothing", присваиваем текущую длительность
+//       durations[i] = currentDuration;
+//       currentDuration = { [noteDuration]: 1 }; // Сбрасываем длительность для следующего элемента
+//     } else {
+//       // Если звук "nothing"
+//       durations[i] = { [noteDuration]: 1 }; // Присваиваем текущую длительность
+//       // Увеличиваем длительность для следующего элемента
+//       currentDuration = increaseDuration(currentDuration, [noteDuration]);
+//     }
+//   }
 
-  return durations; // Разворачиваем массив перед возвратом
-}
+//   return durations; // Разворачиваем массив перед возвратом
+// }
 
 // Функция для увеличения длительности
-function increaseDuration(duration, noteDuration) {
-  if (duration[noteDuration] === 1) {
-    return { [noteDuration]: 2 };
-  } else if (duration[noteDuration] === 2) {
-    return { [noteDuration]: 3 };
-  } else if (duration[noteDuration] === 3) {
-    return { [noteDuration]: 4 };
-  } else {
-    return { [noteDuration]: duration[noteDuration] + 1 };
-  }
-}
+// function increaseDuration(duration, noteDuration) {
+//   if (duration[noteDuration] === 1) {
+//     return { [noteDuration]: 2 };
+//   } else if (duration[noteDuration] === 2) {
+//     return { [noteDuration]: 3 };
+//   } else if (duration[noteDuration] === 3) {
+//     return { [noteDuration]: 4 };
+//   } else {
+//     return { [noteDuration]: duration[noteDuration] + 1 };
+//   }
+// }
 
 // Хук useTone для управления воспроизведением звуков
 export default function useTone(config) {
@@ -288,13 +311,15 @@ export default function useTone(config) {
     Tone.getTransport().bpm.value = config.tempo || 120;
 
     const steps = countSteps(config.beatPattern);
-    const durations = calcDurations(steps, config.noteDuration);
+    // const durations = calcDurations(steps, config.noteDuration);
 
     const seq = new Tone.Sequence(
       (time, index) => {
         const sound = steps[index];
         setActiveBeat(index);
-        playNote(sound, time, durations[index], config.isBeatSound);
+        // playNote(sound, time, durations[index], config.isBeatSound);
+        playNote(sound, time, config.isBeatSound);
+
         playMetronome(
           time,
           index,

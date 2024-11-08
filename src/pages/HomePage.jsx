@@ -25,7 +25,7 @@ function HomePage() {
         justifyContent="center"
       >
         {/* Блок для легкого уровня */}
-        <Grid component="section" size={{ xs: 9, md: 2 }}>
+        <Grid component="section" size={{ xs: 12, md: 2 }}>
           <Typography
             component="h2"
             variant="h5"
@@ -51,7 +51,7 @@ function HomePage() {
         </Grid>
 
         {/* Блок для легкого уровня */}
-        <Grid component="section" size={{ xs: 9, md: 2 }}>
+        <Grid component="section" size={{ xs: 12, md: 2 }}>
           <Typography
             component="h2"
             variant="h5"
@@ -78,7 +78,7 @@ function HomePage() {
         </Grid>
 
         {/* Блок для среднего уровня */}
-        <Grid component="section" size={{ xs: 9, md: 2 }}>
+        <Grid component="section" size={{ xs: 12, md: 2 }}>
           <Typography
             component="h2"
             variant="h5"
@@ -105,7 +105,7 @@ function HomePage() {
         </Grid>
 
         {/* Блок для сложного уровня */}
-        <Grid component="section" size={{ xs: 9, md: 2 }}>
+        <Grid component="section" size={{ xs: 12, md: 2 }}>
           <Typography
             component="h2"
             variant="h5"
@@ -132,7 +132,7 @@ function HomePage() {
         </Grid>
 
         {/* Блок для разных боев */}
-        <Grid component="section" size={{ xs: 9, md: 2 }}>
+        <Grid component="section" size={{ xs: 12, md: 2 }}>
           <Typography
             component="h2"
             variant="h5"
