@@ -119,6 +119,9 @@ const XUpIcon = createSvgIcon(
     strokeWidth={2}
     stroke="currentColor"
   >
+    <filter id="blurMe">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+    </filter>
     <path
       strokeLinecap="round"
       d="M10.567 27.867 8 30.37M10.567 30.37 8 27.867M10.567 23.434 8 25.936M10.567 25.936 8 23.434M10.625 19 8 21.56M10.625 21.56 8 19M16 27.867l-2.567 2.503M16 30.37l-2.567-2.503M16 23.434l-2.567 2.502M16 25.936l-2.567-2.502M16 19l-2.567 2.503M16 21.503 13.433 19"

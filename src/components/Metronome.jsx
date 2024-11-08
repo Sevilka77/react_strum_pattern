@@ -17,29 +17,21 @@ const MetronomeNM = ({ noteDuration, beatPattern, activeBeat }) => {
       switch (beat) {
         case "0":
           return isUp ? (
-            <ArrowU fontSize="inherit" color="disabled" />
+            <ArrowU color="disabled" />
           ) : (
-            <ArrowD fontSize="inherit" color="disabled" />
+            <ArrowD color="disabled" />
           );
         case "1":
-          return isUp ? (
-            <ArrowU fontSize="inherit" color="primary" />
-          ) : (
-            <ArrowD fontSize="inherit" color="primary" />
-          );
+          return isUp ? <ArrowU color="primary" /> : <ArrowD color="primary" />;
         case "A":
-          return isUp ? (
-            <ArrowU fontSize="inherit" color="warning" />
-          ) : (
-            <ArrowD fontSize="inherit" color="warning" />
-          );
+          return isUp ? <ArrowU color="warning" /> : <ArrowD color="warning" />;
         case "x":
-          return <XIcon fontSize="inherit" color="primary" />;
+          return <XIcon color="primary" />;
         case "c":
           return isUp ? (
-            <XUpIcon fontSize="inherit" color="primary" />
+            <XUpIcon color="primary" />
           ) : (
-            <XDownIcon fontSize="inherit" color="primary" />
+            <XDownIcon color="primary" />
           );
         default:
           return null;
@@ -66,6 +58,7 @@ const MetronomeNM = ({ noteDuration, beatPattern, activeBeat }) => {
             justifyContent: "center",
             alignItems: "center",
             minWidth: "max-content",
+
             // border: "1px solid #60ff90",
           }}
         >

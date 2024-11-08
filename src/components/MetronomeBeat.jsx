@@ -7,11 +7,17 @@ const MetronomeBeatNM = ({ icon, active }) => {
       fill: active ? "currentColor" : "#ffffff0",
       fontSize: "inherit",
     }),
-    [active], // Изменяется только при изменении active
+    [active],
   );
 
   return (
-    <Typography variant="h2" sx={{ display: "flex", alignItems: "center" }}>
+    <Typography
+      variant="h1"
+      sx={{
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
       {React.cloneElement(icon, { sx: iconStyles })}
     </Typography>
   );

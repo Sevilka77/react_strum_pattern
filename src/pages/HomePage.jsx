@@ -29,7 +29,9 @@ function HomePage() {
           <Typography
             component="h2"
             variant="h5"
+            color="#39F1FF"
             sx={{
+              textShadow: `0 0 42px `,
               textAlign: "center",
               pb: 2,
             }}
@@ -40,7 +42,7 @@ function HomePage() {
             sx={{
               borderRadius: "1rem",
               border: "4px solid #39F1FF", // Единственная рамка 4px
-              filter: "drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.04))",
+              boxShadow: "0 0 0.3rem #39F1FF,inset 0 0 0.3rem #39F1FF;",
             }}
           >
             {/* Используем Suspense для оборачивания динамически загружаемого компонента */}
@@ -55,7 +57,9 @@ function HomePage() {
           <Typography
             component="h2"
             variant="h5"
+            color="#4495F4"
             sx={{
+              textShadow: `0 0 42px `,
               textAlign: "center",
               pb: 2,
             }}
@@ -66,8 +70,7 @@ function HomePage() {
             sx={{
               borderRadius: "1rem",
               border: "4px solid #4495F4", // Единственная рамка 4px
-              filter: "drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.04))",
-              mb: 2,
+              boxShadow: "0 0 0.3rem #4495F4,inset 0 0 0.3rem #4495F4;",
               p: 2,
             }}
           >
@@ -82,7 +85,9 @@ function HomePage() {
           <Typography
             component="h2"
             variant="h5"
+            color="#A660FF"
             sx={{
+              textShadow: `0 0 42px `,
               textAlign: "center",
               pb: 2,
             }}
@@ -93,8 +98,8 @@ function HomePage() {
             sx={{
               borderRadius: "1rem",
               border: "4px solid #A660FF", // Единственная рамка 4px
-              filter: "drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.04))",
-              mb: 2,
+              boxShadow: "0 0 0.3rem #A660FF,inset 0 0 0.3rem #A660FF;",
+
               p: 2,
             }}
           >
@@ -109,7 +114,9 @@ function HomePage() {
           <Typography
             component="h2"
             variant="h5"
+            color="#FF6084"
             sx={{
+              textShadow: `0 0 42px `,
               textAlign: "center",
               pb: 2,
             }}
@@ -120,8 +127,7 @@ function HomePage() {
             sx={{
               borderRadius: "1rem",
               border: "4px solid #FF6084", // Единственная рамка 4px
-              filter: "drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.04))",
-              mb: 2,
+              boxShadow: "0 0 0.3rem #FF6084,inset 0 0 0.3rem #FF6084;",
               p: 2,
             }}
           >
@@ -136,7 +142,9 @@ function HomePage() {
           <Typography
             component="h2"
             variant="h5"
+            color="#FFC755"
             sx={{
+              textShadow: `0 0 42px `,
               textAlign: "center",
               pb: 2,
             }}
@@ -147,8 +155,8 @@ function HomePage() {
             sx={{
               borderRadius: "1rem",
               border: "4px solid #FFC755", // Единственная рамка 4px
-              filter: "drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.04))",
-              mb: 2,
+              boxShadow: "0 0 0.3rem #FFC755,inset 0 0 0.3rem #FFC755;",
+
               p: 2,
             }}
           >

@@ -61,13 +61,13 @@ const dataset = {
   },
   up: {
     samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
-    spread: 4.5,
+    spread: 4,
     bias: [4, 3, 2, 1, 5, 6],
     volumes: [0.5, 0.6, 0.65, 0.07, 0.75, 0.8],
   },
   upA: {
     samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
-    spread: 4.5,
+    spread: 6,
     bias: [6, 5, 4, 3, 2, 1],
     volumes: [0.5, 0.6, 0.65, 0.07, 0.75, 0.8],
   },
@@ -79,13 +79,13 @@ const dataset = {
   },
   upM: {
     samples: ["g6L", "g5L", "g4L", "g3L", "g2L", "g1L"],
-    spread: 3,
+    spread: 4,
     bias: [1, 2, 3, 4, 5, 6],
     volumes: [0.5, 0.6, 0.65, 0.07, 0.75, 0.8],
   },
   downM: {
     samples: ["g6L", "g5L", "g4L", "g3L", "g2L", "g1L"],
-    spread: 3,
+    spread: 4,
     bias: [1, 2, 3, 4, 5, 6],
     volumes: [0.8, 0.75, 0.7, 0.65, 0.6, 0.5],
   },
@@ -173,7 +173,7 @@ function playNote(note, time, isBeatSound) {
 
       if (!isNaN(db)) {
         if (samples[item]) {
-          samples[item].fadeOut = 0.15;
+          samples[item].fadeOut = 0.2;
           if (samples[item].state === "started") {
             samples[item].stop();
           }
