@@ -8,11 +8,11 @@ const useWakeLock = () => {
       try {
         wakeLock = await navigator.wakeLock.request("screen");
         wakeLock.addEventListener("release", () => {
-          console.log("Wake Lock was released");
+          // console.log("Wake Lock was released");
         });
-        console.log("Wake Lock is active");
+        // console.log("Wake Lock is active");
       } catch (err) {
-        console.error(`${err.name}, ${err.message}`);
+        // console.error(`${err.name}, ${err.message}`);
       }
     };
 

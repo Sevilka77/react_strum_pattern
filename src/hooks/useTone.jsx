@@ -101,7 +101,7 @@ function calculateStringVolumes(s, h, v) {
       }
     }
   }
-  console.log(i);
+  // console.log(i);
   return i;
 }
 
