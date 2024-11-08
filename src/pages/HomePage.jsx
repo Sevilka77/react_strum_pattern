@@ -27,6 +27,7 @@ function HomePage() {
         {/* Блок для легкого уровня */}
         <Grid component="section" size={{ xs: 9, md: 2 }}>
           <Typography
+            component="h2"
             variant="h5"
             sx={{
               textAlign: "center",
@@ -52,6 +53,7 @@ function HomePage() {
         {/* Блок для легкого уровня */}
         <Grid component="section" size={{ xs: 9, md: 2 }}>
           <Typography
+            component="h2"
             variant="h5"
             sx={{
               textAlign: "center",
@@ -78,6 +80,7 @@ function HomePage() {
         {/* Блок для среднего уровня */}
         <Grid component="section" size={{ xs: 9, md: 2 }}>
           <Typography
+            component="h2"
             variant="h5"
             sx={{
               textAlign: "center",
@@ -104,6 +107,7 @@ function HomePage() {
         {/* Блок для сложного уровня */}
         <Grid component="section" size={{ xs: 9, md: 2 }}>
           <Typography
+            component="h2"
             variant="h5"
             sx={{
               textAlign: "center",
@@ -130,6 +134,7 @@ function HomePage() {
         {/* Блок для разных боев */}
         <Grid component="section" size={{ xs: 9, md: 2 }}>
           <Typography
+            component="h2"
             variant="h5"
             sx={{
               textAlign: "center",

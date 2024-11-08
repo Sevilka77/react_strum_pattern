@@ -66,5 +66,5 @@ export default function BeatImage({ beatString, fill }) {
     );
   });
 
-  return <span style={{ display: "flex" }}>{beatIcons}</span>;
+  return beatIcons;
 }

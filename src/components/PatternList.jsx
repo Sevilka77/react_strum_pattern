@@ -1,14 +1,14 @@
 import { patterns } from "../patterns";
-import React, { useCallback } from "react";
+
 import {
-  Divider,
   Typography,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
+  ListItemIcon,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+
 import { Link } from "react-router-dom"; // Импортируем Link
 
 import BeatImage from "./BeatImage";
@@ -32,37 +32,29 @@ const PatternListItem = ({ pattern }) => (
         to={`/pattern/${pattern.pattern}`}
         state={pattern}
         style={{ textDecoration: "none" }}
+        aria-label={`Ссылка на паттерн боя с названием: ${pattern.title}`}
       >
-        <BeatImage beatString={pattern.pattern} />
+        <ListItemIcon
+          sx={{ flexWrap: "wrap" }}
+          alt={`Изображение паттерна боя с названием: ${pattern.title}`}
+        >
+          <BeatImage beatString={pattern.pattern} />
+        </ListItemIcon>
       </Link>
     </ListItemButton>
   </ListItem>
 );
 
 const PatternList = ({ level }) => {
-  const navigate = useNavigate();
-
-  const onClick = useCallback(
-    (p) => {
-      navigate(`/pattern/${p.pattern}`, { state: p });
-    },
-    [navigate], // Указываем зависимости для useCallback
-  );
-
   // Фильтруем паттерны по уровню сложности
   const filteredPatterns = patterns.filter((p) => p.level === level);
 
   return (
-    <>
-      <List component="ul">
-        {filteredPatterns.map((p) => (
-          <React.Fragment key={p.title}>
-            <PatternListItem key={p.title} pattern={p} onClick={onClick} />
-            <Divider component="li" key={`${p.title}-divider`} />
-          </React.Fragment>
-        ))}
-      </List>
-    </>
+    <List component="ul">
+      {filteredPatterns.map((p) => (
+        <PatternListItem key={p.title} pattern={p} s />
+      ))}
+    </List>
   );
 };
 

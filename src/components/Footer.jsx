@@ -9,12 +9,11 @@ const Footer = () => {
         left: 0,
         bottom: 0,
         width: "100%",
-
         textAlign: "center",
         padding: "10px",
       }}
     >
-      <Typography variant="body2" component="h4">
+      <Typography variant="body1">
         {"Коментарии и пожелания в "}
         <Link href="https://t.me/+v5HFvtdzhgUyOWYy" underline="hover">
           Телеграм
