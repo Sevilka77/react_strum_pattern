@@ -10,12 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "@fontsource/inter": "^5.1.0",
+    "@fontsource/montserrat": "^5.1.0",
     "@fontsource/roboto": "^5.1.0",
+    "@mui/icons-material": "^6.1.6",
     "@mui/lab": "^5.0.0-alpha.161",
-    "@mui/material": "^5.15.5",
+    "@mui/material": "^6.1.6",
+    "@mui/system": "^6.1.6",
     "lucide-react": "^0.302.0",
     "node-fetch": "^3.3.2",
     "react": "^18.2.0",

@@ -4,7 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
 
 import PatternEdit from "../components/PatternEdit";
-import { Box } from "@mui/material";
+
 import { useConfig } from "../useConfig";
 import { useEffect, useState } from "react";
 import ControlFooter from "../components/ControlFooter"; // Исправлено имя компонента
@@ -54,27 +54,19 @@ function PatternPage() {
   }, [dispatch, p, beatPattern, config.defaultPattern]); // Обязательно добавляем зависимости
 
   return (
-    <Box display="flex" flexDirection="column" height="100vh">
-      {/* Основной контейнер с флекс-расположением */}
+    <>
       <Header title={title} />
-      <Box
-        display="flex"
-        flexGrow={1}
-        justifyContent="center" // Центрируем содержимое по горизонтали
-        alignItems="center" // Центрируем содержимое по вертикали
-        sx={{ pb: 3 }} // Отступ снизу, если нужно
-      >
-        <Suspense fallback={<div>Загрузка...</div>}>
-          <MetronomeWrapper />
-        </Suspense>
-      </Box>
+
+      <Suspense fallback={<div>Загрузка...</div>}>
+        <MetronomeWrapper />
+      </Suspense>
 
       {edit && (
         <PatternEdit beatPattern={config.beatPattern} dispatch={dispatch} />
       )}
 
       <ControlFooter />
-    </Box>
+    </>
   );
 }
 

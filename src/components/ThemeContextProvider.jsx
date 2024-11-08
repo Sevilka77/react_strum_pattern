@@ -1,54 +1,101 @@
 // components/ThemeContextProvider.js
-import { useState, useMemo, createContext } from "react";
+import { useMemo } from "react";
 import { ThemeProvider } from "@mui/system";
-import { createTheme, CssBaseline } from '@mui/material';
-export const ColorModeContext = createContext({ toggleColorMode: () => {} });
+import { createTheme, CssBaseline } from "@mui/material";
+import { responsiveFontSizes } from "@mui/material/styles";
+import "@fontsource/inter/300.css"; // Импортируем шрифты
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/700.css";
+import "@fontsource/montserrat/400.css";
+import "@fontsource/montserrat/600.css";
+import "@fontsource/montserrat/700.css";
 
 const ThemeContextProvider = ({ children }) => {
-  const [mode, setMode] = useState("dark"); // По умолчанию тема тёмная
-
-  // Функция для переключения темы
-  const colorMode = useMemo(
-    () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "dark" ? "light" : "dark"));
-      },
-    }),
-    [],
-  );
-
-  // Опции темы, зависящие от текущего состояния (светлая/тёмная тема)
+  // Создаем тему с фиксированными значениями, без переключения
   const theme = useMemo(() => {
-    return createTheme({
+    const baseTheme = createTheme({
       palette: {
-        mode: mode,
-        primary: {
-          main: mode === "dark" ? "#2AA298" : "#2aa298",
-        },
+        mode: "dark", // Задаем фиксированный режим
         background: {
-          default: mode === "dark" ? "#002B36" : "#fdf6e3",
-          paper: mode === "dark" ? "#00242d" : "#ede7d4",
+          default: "#121212", // Темный фон
+          paper: "#1d1d1d", // Фон для компонентов
         },
         text: {
-          primary: mode === "dark" ? "#bbc4c4" : "#657b83",
+          primary: "#FFFFFF",
         },
       },
-
+      typography: {
+        fontFamily: "Inter, sans-serif", // Основной шрифт
+        h1: {
+          fontFamily: "Montserrat, sans-serif",
+          fontWeight: 600,
+          color: "#917AEA",
+        },
+        h2: {
+          fontFamily: "Montserrat, sans-serif",
+          fontWeight: 600,
+          color: "#FFFFFF",
+        },
+        h3: {
+          fontFamily: "Montserrat, sans-serif",
+          fontWeight: 600,
+          color: "#FFFFFF",
+        },
+        h4: {
+          fontFamily: "Montserrat, sans-serif",
+          fontWeight: 600,
+          color: "#FFFFFF",
+        },
+        h5: {
+          fontFamily: "Montserrat, sans-serif",
+          fontWeight: 600,
+          color: "#FFFFFF",
+        },
+        body1: {
+          fontFamily: "Montserrat, sans-serif",
+          fontWeight: 400,
+          color: "#FFFFFF",
+        },
+        button: {
+          fontFamily: "'Montserrat', sans-serif",
+          textTransform: "none", // Отключаем преобразование в верхний регистр
+        },
+      },
       components: {
-        MuiAppBar: {
-          styleOverrides: { root: { background: "#FB74B5" } },
+        MuiCard: {
+          styleOverrides: {
+            root: {
+              background: "transparent",
+            },
+          },
+        },
+        MuiPaper: {
+          styleOverrides: {
+            root: {
+              background: "transparent",
+            },
+          },
+        },
+        MuiBottomNavigation: {
+          styleOverrides: {
+            root: {
+              background: "transparent",
+            },
+          },
         },
       },
     });
-  }, [mode]); // Зависит от текущей темы
+
+    // Применяем адаптивные размеры для шрифтов
+    return responsiveFontSizes(baseTheme);
+  }, []);
 
   return (
-    <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {children}
-      </ThemeProvider>
-    </ColorModeContext.Provider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      {children}
+    </ThemeProvider>
   );
 };
 

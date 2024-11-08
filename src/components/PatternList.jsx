@@ -1,6 +1,13 @@
 import { patterns } from "../patterns";
 import React, { useCallback } from "react";
-import { Divider, Typography, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import {
+  Divider,
+  Typography,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom"; // Импортируем Link
 
@@ -9,16 +16,12 @@ import BeatImage from "./BeatImage";
 const PatternListItem = ({ pattern }) => (
   <ListItem
     alignItems="flex-start"
-    disableGutters
+    // disableGutters
     sx={{ flexDirection: "column", py: 0 }}
   >
     <ListItemText
       sx={{ py: 1 }}
-      primary={
-        <Typography variant="h6" component="h4">
-          {pattern.title}
-        </Typography>
-      }
+      primary={<Typography variant="body1">{pattern.title}</Typography>}
     />
     <ListItemButton
       disableGutters

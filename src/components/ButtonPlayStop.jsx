@@ -1,6 +1,7 @@
 import { PlayIcon, SquareIcon } from "./Icons";
 import * as Tone from "tone";
 import { memo } from "react";
+import { IconButton, Typography } from "@mui/material";
 
 const ButtonPlayStopNM = ({ isPlaying, dispatch }) => {
   const handleClick = async () => {
@@ -11,13 +12,15 @@ const ButtonPlayStopNM = ({ isPlaying, dispatch }) => {
     dispatch({ type: "setIsPlay", data: !isPlaying });
   };
   return (
-    <span
-      color="inherit"
-      onClick={handleClick}
-      aria-label="Старт/стоп воспроизведения"
-    >
-      {isPlaying ? <SquareIcon /> : <PlayIcon />}
-    </span>
+    <Typography variant="body1">
+      <IconButton
+        sx={{ color: "inherit" }}
+        onClick={handleClick}
+        aria-label="Старт/стоп воспроизведения"
+      >
+        {isPlaying ? <SquareIcon /> : <PlayIcon />}
+      </IconButton>
+    </Typography>
   );
 };
 const ButtonPlayStop = memo(ButtonPlayStopNM);

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { memo } from "react";
 import { useConfig } from "../useConfig";
 import { styled } from "@mui/system";
-import { Grid, Typography, Slider, Input as MuiInput } from "@mui/material";
+import { Typography, Slider, Input as MuiInput, Stack } from "@mui/material";
 
 const Input = styled(MuiInput)`
   width: 42px;
@@ -38,23 +38,31 @@ const TempoSelectorNM = () => {
   };
 
   return (
-    <Grid container spacing={2} alignItems="center">
-      <Grid item>
-        <Typography id="input-slider">BPM</Typography>
-      </Grid>
-      <Grid item xs>
-        <Slider
-          min={40}
-          max={300}
-          value={typeof value === "number" ? value : 0}
-          onChange={handleSliderChange}
-          aria-labelledby="input-slider"
-        />
-      </Grid>
-      <Grid item>
+    <Stack
+      spacing={2}
+      direction="row"
+      sx={{ alignItems: "center", width: "100%" }}
+    >
+      <Typography variant="h5" id="input-slider">
+        BPM
+      </Typography>
+
+      <Slider
+        min={40}
+        max={300}
+        color="#FFFFFF"
+        value={typeof value === "number" ? value : 0}
+        onChange={handleSliderChange}
+        aria-labelledby="input-slider"
+      />
+      <Typography variant="h5" id="temp-slider">
         <Input
+          id="temp-input"
+          sx={{
+            fontSize: "inherit",
+            color: "inherit",
+          }}
           value={value}
-          size="small"
           onChange={handleInputChange}
           onBlur={handleBlur}
           inputProps={{
@@ -62,11 +70,11 @@ const TempoSelectorNM = () => {
             min: 40,
             max: 300,
             type: "number",
-            "aria-labelledby": "input-slider",
+            "aria-labelledby": "temp-slider",
           }}
         />
-      </Grid>
-    </Grid>
+      </Typography>
+    </Stack>
   );
 };
 const TempoSelector = memo(TempoSelectorNM);

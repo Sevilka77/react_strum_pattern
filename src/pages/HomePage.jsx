@@ -1,10 +1,10 @@
 import { lazy, Suspense } from "react";
-import { Card, Grid, Toolbar, Typography } from "@mui/material";
+import { Card, Typography } from "@mui/material";
+import Grid from "@mui/material/Grid2";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 import Schema from "../components/schema";
-import { Link } from "react-router-dom";
 
 // Динамический импорт PatternList
 const PatternList = lazy(() => import("../components/PatternList"));
@@ -13,51 +13,35 @@ function HomePage() {
   return (
     <>
       <Header />
-      <Toolbar />
+
       <Schema />
-      <Grid container component="main" spacing={2} justifyContent="center">
-        <Grid item xs={12}>
-          <Card
+      <Grid
+        container
+        component="main"
+        paddingTop={10}
+        paddingX={3}
+        spacing={1}
+        alignItems="start" // Вертикальное выравнивание по центру
+        justifyContent="center"
+      >
+        {/* Блок для легкого уровня */}
+        <Grid component="section" size={{ xs: 9, md: 2 }}>
+          <Typography
+            variant="h5"
             sx={{
-              mb: 2,
-              width: "100%",
-              p: 0.5,
               textAlign: "center",
-              height: "2rem",
+              pb: 2,
             }}
           >
-            <Typography
-              component={Link} // Заменили компонент на Link
-              to="/pattern/0000"
-              state={{ editMode: true }}
-              variant="h6"
-              color="#e0f7fa"
-              sx={{
-                cursor: "pointer",
-                lineHeight: "2rem",
-                textDecoration: "none", // убираем подчеркивание
-              }}
-            >
-              Создать свой бой
-            </Typography>
-          </Card>
-        </Grid>
-
-        {/* Блок для легкого уровня */}
-        <Grid item component="section" xs={11} md={2}>
+            Для начала
+          </Typography>
           <Card
             sx={{
               borderRadius: "1rem",
-              borderWidth: "2px",
-              border: "solid",
-              borderColor: "#7be98d",
-              mb: 2,
-              p: 2,
+              border: "4px solid #39F1FF", // Единственная рамка 4px
+              filter: "drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.04))",
             }}
           >
-            <Typography variant="h5" color="#e0f7fa" sx={{ mb: 1 }}>
-              Начать можно с
-            </Typography>
             {/* Используем Suspense для оборачивания динамически загружаемого компонента */}
             <Suspense fallback={<div>Загрузка...</div>}>
               <PatternList level="learn" />
@@ -66,20 +50,25 @@ function HomePage() {
         </Grid>
 
         {/* Блок для легкого уровня */}
-        <Grid item component="section" xs={11} md={2}>
+        <Grid component="section" size={{ xs: 9, md: 2 }}>
+          <Typography
+            variant="h5"
+            sx={{
+              textAlign: "center",
+              pb: 2,
+            }}
+          >
+            Легкие
+          </Typography>
           <Card
             sx={{
               borderRadius: "1rem",
-              borderWidth: "2px",
-              border: "solid",
-              borderColor: "#7bd8e9",
+              border: "4px solid #4495F4", // Единственная рамка 4px
+              filter: "drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.04))",
               mb: 2,
               p: 2,
             }}
           >
-            <Typography variant="h5" color="#e0f7fa" sx={{ mb: 1 }}>
-              Легкие бои
-            </Typography>
             <Suspense fallback={<div>Загрузка...</div>}>
               <PatternList level="easy" />
             </Suspense>
@@ -87,20 +76,25 @@ function HomePage() {
         </Grid>
 
         {/* Блок для среднего уровня */}
-        <Grid item component="section" xs={11} md={2}>
+        <Grid component="section" size={{ xs: 9, md: 2 }}>
+          <Typography
+            variant="h5"
+            sx={{
+              textAlign: "center",
+              pb: 2,
+            }}
+          >
+            Средние
+          </Typography>
           <Card
             sx={{
               borderRadius: "1rem",
-              borderWidth: "2px",
-              border: "solid",
-              borderColor: "#ffcc80",
+              border: "4px solid #A660FF", // Единственная рамка 4px
+              filter: "drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.04))",
               mb: 2,
               p: 2,
             }}
           >
-            <Typography variant="h5" color="#fff3e0" sx={{ mb: 1 }}>
-              Средней сложности сбои
-            </Typography>
             <Suspense fallback={<div>Загрузка...</div>}>
               <PatternList level="medium" />
             </Suspense>
@@ -108,20 +102,25 @@ function HomePage() {
         </Grid>
 
         {/* Блок для сложного уровня */}
-        <Grid item component="section" xs={11} md={2}>
+        <Grid component="section" size={{ xs: 9, md: 2 }}>
+          <Typography
+            variant="h5"
+            sx={{
+              textAlign: "center",
+              pb: 2,
+            }}
+          >
+            Сложные
+          </Typography>
           <Card
             sx={{
               borderRadius: "1rem",
-              borderWidth: "2px",
-              border: "solid",
-              borderColor: "#ff8a80",
+              border: "4px solid #FF6084", // Единственная рамка 4px
+              filter: "drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.04))",
               mb: 2,
               p: 2,
             }}
           >
-            <Typography variant="h5" color="#ffebee" sx={{ mb: 1 }}>
-              Сложные бои
-            </Typography>
             <Suspense fallback={<div>Загрузка...</div>}>
               <PatternList level="hard" />
             </Suspense>
@@ -129,20 +128,25 @@ function HomePage() {
         </Grid>
 
         {/* Блок для разных боев */}
-        <Grid item component="section" xs={11} md={2}>
+        <Grid component="section" size={{ xs: 9, md: 2 }}>
+          <Typography
+            variant="h5"
+            sx={{
+              textAlign: "center",
+              pb: 2,
+            }}
+          >
+            Разные бои
+          </Typography>
           <Card
             sx={{
               borderRadius: "1rem",
-              borderWidth: "2px",
-              border: "solid",
-              borderColor: "#ff80f4",
+              border: "4px solid #FFC755", // Единственная рамка 4px
+              filter: "drop-shadow(0px 4px 24px rgba(0, 0, 0, 0.04))",
               mb: 2,
               p: 2,
             }}
           >
-            <Typography variant="h5" color="#ffebee" sx={{ mb: 1 }}>
-              Разные бои
-            </Typography>
             <Suspense fallback={<div>Загрузка...</div>}>
               <PatternList level="other" />
             </Suspense>

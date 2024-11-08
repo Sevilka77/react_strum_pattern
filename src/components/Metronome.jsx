@@ -1,15 +1,15 @@
 import { useMemo } from "react";
 import MetronomeBeat from "./MetronomeBeat";
 import MetronomeBeatName from "./MetronomeBeatName";
-import { Grid } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+
 import { memo } from "react";
-import { Paper } from "@mui/material";
+
 import { ArrowD, ArrowU, XDownIcon, XUpIcon, XIcon } from "./Icons";
 
-const MetronomeNM = ({ noteDuration, isSmd, beatPattern, activeBeat }) => {
-  let fSize = isSmd ? 14 : 6;
+const MetronomeNM = ({ noteDuration, beatPattern, activeBeat }) => {
   const beats = beatPattern;
-  const columns = isSmd ? 4 : 16;
+
   // Вычисляем иконки один раз для всех тактов
   const icons = useMemo(() => {
     return beats.map((beat, index) => {
@@ -48,23 +48,31 @@ const MetronomeNM = ({ noteDuration, isSmd, beatPattern, activeBeat }) => {
   }, [beats]);
 
   return (
-    <Grid container spacing={2} sx={{ padding: 2 }} justifyContent="center">
+    <Grid
+      component="main"
+      container
+      columns={8}
+      alignItems="center" // Вертикальное выравнивание по центру
+      justifyContent="center"
+    >
       {beats.map((b, index) => (
-        <Grid item xs={12 / columns} key={index}>
-          {/* Разбиваем на строки по 4 или 2 элемента */}
-          <Paper elevation={3} sx={{ borderRadius: "8px" }}>
-            <MetronomeBeatName
-              id={index}
-              noteDuration={noteDuration}
-              fSize={fSize}
-            />
-            <MetronomeBeat
-              id={index}
-              icon={icons[index]} // Передаем готовую иконку
-              fSize={fSize}
-              active={activeBeat === index}
-            />
-          </Paper>
+        <Grid
+          key={index}
+          size={{ xs: 2, sm: 1, md: 1 }}
+          sx={{
+            boxSizing: "border-box",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            // border: "1px solid #60ff90",
+          }}
+        >
+          <MetronomeBeatName id={index} noteDuration={noteDuration} />
+          <MetronomeBeat
+            icon={icons[index]} // Передаем готовую иконку
+            active={activeBeat === index}
+          />
         </Grid>
       ))}
     </Grid>
