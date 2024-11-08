@@ -1,12 +1,21 @@
 import { useConfig } from "../useConfig";
-import ButtonPlayStop from "./ButtonPlayStop";
+
 import TempoSelector from "./TempoSelector";
 import SettingsDialog from "./Settings";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useEffect } from "react";
+import { PlayIcon, SquareIcon } from "./Icons";
+import * as Tone from "tone";
 
 export default function ControlFooter() {
   const { config, dispatch } = useConfig();
+  const handleClick = async () => {
+    // Убедитесь, что Tone.js запущен
+    await Tone.start();
+    config.isPlaying ? Tone.getTransport().stop() : Tone.getTransport().start();
+
+    dispatch({ type: "setIsPlay", data: !config.isPlaying });
+  };
   useEffect(() => {
     // Очистка состояния при размонтировании компонента
     return () => {
@@ -17,10 +26,6 @@ export default function ControlFooter() {
     };
   }, [dispatch, config.isPlaying]);
   return (
-    // <Paper
-    //   elevation={4}
-    //   sx={{ width: "100%", position: "fixed", bottom: 0, left: 0, right: 0 }}
-    // >
     <BottomNavigation
       sx={{
         display: "flex",
@@ -31,14 +36,13 @@ export default function ControlFooter() {
         bottom: 0,
         left: 0,
         right: 0,
-      }} // Чтобы разместить элементы по краям
+      }}
     >
       <BottomNavigationAction
         value="play"
-        icon={
-          <ButtonPlayStop isPlaying={config.isPlaying} dispatch={dispatch} />
-        }
-        sx={{ maxWidth: "30px", px: 0 }} // Отступы и размеры
+        onClick={handleClick}
+        icon={config.isPlaying ? <SquareIcon /> : <PlayIcon />}
+        sx={{ color: "#FFFFFF", maxWidth: "30px", px: 0 }} // Отступы и размеры
       />
       <TempoSelector />
       <BottomNavigationAction

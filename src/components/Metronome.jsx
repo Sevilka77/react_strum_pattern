@@ -65,6 +65,7 @@ const MetronomeNM = ({ noteDuration, beatPattern, activeBeat }) => {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
+            minWidth: "max-content",
             // border: "1px solid #60ff90",
           }}
         >
