@@ -1,7 +1,7 @@
 // components/ThemeContextProvider.js
 import { useMemo } from "react";
 import { ThemeProvider } from "@mui/system";
-import { createTheme, CssBaseline } from "@mui/material";
+import { createTheme, CssBaseline, GlobalStyles } from "@mui/material";
 import { responsiveFontSizes } from "@mui/material/styles";
 import "@fontsource/inter/300.css"; // Импортируем шрифты
 import "@fontsource/inter/400.css";
@@ -93,6 +93,23 @@ const ThemeContextProvider = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
+      {/* Глобальные стили для шрифтов */}
+      <GlobalStyles
+        styles={{
+          "@font-face": [
+            {
+              fontFamily: "Montserrat",
+              src: `url('/assets/montserrat.woff2') format('woff2')`,
+              fontDisplay: "swap", // Используем swap, чтобы текст сразу был виден
+            },
+            {
+              fontFamily: "Inter",
+              src: `url('/assets/inter.woff2') format('woff2')`,
+              fontDisplay: "swap",
+            },
+          ],
+        }}
+      />
       <CssBaseline />
       {children}
     </ThemeProvider>
