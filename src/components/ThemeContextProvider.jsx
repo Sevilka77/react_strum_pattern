@@ -73,7 +73,7 @@ const ThemeContextProvider = ({ children }) => {
         MuiPaper: {
           styleOverrides: {
             root: {
-              background: "transparent",
+              background: "#0C0F2A",
             },
           },
         },
