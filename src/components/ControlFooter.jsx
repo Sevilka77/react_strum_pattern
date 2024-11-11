@@ -30,25 +30,23 @@ export default function ControlFooter() {
       sx={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
-        width: "100%",
+        justifyContent: "center",
+
         position: "fixed",
         bottom: 0,
-        left: 0,
-        right: 0,
       }}
     >
       <BottomNavigationAction
         value="play"
         onClick={handleClick}
         icon={config.isPlaying ? <SquareIcon /> : <PlayIcon />}
-        sx={{ color: "#FFFFFF", maxWidth: "30px", px: 0 }} // Отступы и размеры
+        sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }} // Отступы и размеры
       />
       <TempoSelector />
       <BottomNavigationAction
         value="settings"
         icon={<SettingsDialog />}
-        sx={{ color: "#FFFFFF", maxWidth: "30px", px: 0 }} // Отступы и размеры
+        sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }} // Отступы и размеры
       />
     </BottomNavigation>
   );

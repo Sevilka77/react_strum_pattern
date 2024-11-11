@@ -9,6 +9,7 @@ import { useConfig } from "../useConfig";
 import { useEffect, useState } from "react";
 import ControlFooter from "../components/ControlFooter"; // Исправлено имя компонента
 import { patterns } from "../patterns";
+// import VolumeControls from "../components/VolumeControl";
 
 function PatternPage() {
   const location = useLocation();
@@ -56,15 +57,13 @@ function PatternPage() {
   return (
     <>
       <Header title={title} />
-
       <Suspense fallback={<div>Загрузка...</div>}>
         <MetronomeWrapper />
       </Suspense>
-
       {edit && (
         <PatternEdit beatPattern={config.beatPattern} dispatch={dispatch} />
       )}
-
+      {/* <VolumeControls /> */}
       <ControlFooter />
     </>
   );

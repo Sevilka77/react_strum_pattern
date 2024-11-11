@@ -365,8 +365,8 @@ export const patterns = [
   },
   {
     title: "Я так соскучился",
-    pattern: "100110",
-    temp: 70,
+    pattern: "100110h00110",
+    temp: 80,
     note: "8n",
     level: "other",
     position: 14,

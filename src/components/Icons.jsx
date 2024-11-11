@@ -61,6 +61,74 @@ const ArrowD = createSvgIcon(
   </svg>,
   "ArrowD",
 );
+const ArrowDH = createSvgIcon(
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 32"
+    strokeWidth={2}
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="m6.97,17.91l-4.9,0a0.5,0.5 0 0 0 -0.38,0.82l9.93,11.81a0.5,0.5 0 0 0 0.76,0l9.93,-11.81a0.5,0.5 0 0 0 -0.38,-0.82l-4.9,0l-10.06,0z"
+    />
+  </svg>,
+  "ArrowDH",
+);
+const ArrowDB = createSvgIcon(
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 32"
+    strokeWidth={2}
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="m6.97,1l-4.9,0a0.5,0.5 0 0 0 -0.38,0.83l9.93,11.92a0.5,0.5 0 0 0 0.76,0l9.93,-11.92a0.5,0.5 0 0 0 -0.38,-0.83l-4.9,0l-10.06,0z"
+    />
+  </svg>,
+  "ArrowDB",
+);
+const ArrowUH = createSvgIcon(
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 32"
+    strokeWidth={2}
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="m6.97,17.91l-4.9,0a0.5,0.5 0 0 0 -0.38,0.82l9.93,11.81a0.5,0.5 0 0 0 0.76,0l9.93,-11.81a0.5,0.5 0 0 0 -0.38,-0.82l-4.9,0l-10.06,0z"
+      id="svg_1"
+      transform="rotate(180 12 24.3125)"
+    />
+  </svg>,
+  "ArrowUH",
+);
+const ArrowUB = createSvgIcon(
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 32"
+    strokeWidth={2}
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="m6.97,1l-4.9,0a0.5,0.5 0 0 0 -0.38,0.83l9.93,11.92a0.5,0.5 0 0 0 0.76,0l9.93,-11.92a0.5,0.5 0 0 0 -0.38,-0.83l-4.9,0l-10.06,0z"
+      id="svg_2"
+      transform="rotate(180 12 7.46314)"
+    />
+  </svg>,
+  "ArrowUB",
+);
 const ArrowU = createSvgIcon(
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +228,11 @@ export {
   EditIcon,
   ListIcon,
   ArrowD,
+  ArrowDH,
+  ArrowDB,
   ArrowU,
+  ArrowUH,
+  ArrowUB,
   XDownIcon,
   XUpIcon,
   XIcon,

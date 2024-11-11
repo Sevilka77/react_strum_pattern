@@ -47,11 +47,14 @@ const gSamples = new Tone.ToneAudioBuffers({
   g4C,
   g5C,
   g6C,
-  click1,
-  click2,
 });
-const stringPlayers = Array.from({ length: 6 }, () =>
-  new Tone.Player().toDestination(),
+
+const channels = Array.from({ length: 6 }, () =>
+  new Tone.Channel().toDestination(),
+);
+
+const stringPlayers = Array.from({ length: 6 }, (_, i) =>
+  new Tone.Player().connect(channels[i]),
 );
 
 function playStringSound(note, stringIndex, time, volume, offset) {
@@ -70,25 +73,49 @@ const dataset = {
     samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
     spread: 4,
     bias: [1, 2, 3, 4, 5, 6],
-    volumes: [0.8, 0.75, 0.7, 0.65, 0.6, 0.5],
+    volumes: [-4, -3, 0, -3, -3, -5],
   },
   downA: {
     samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
     spread: 6,
     bias: [1, 2, 3, 4, 5, 6],
-    volumes: [0.8, 0.75, 0.7, 0.65, 0.6, 0.5],
+    volumes: [-4, -3, 0, -3, -3, -5],
+  },
+  downB: {
+    samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
+    spread: 2,
+    bias: [1, 2, 3, 4, 5, 6],
+    volumes: [-2, -1, 0, -3, -3, -5],
+  },
+  downH: {
+    samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
+    spread: 3,
+    bias: [4, 5, 6, 1, 2, 3],
+    volumes: [-4, -3, 0, -1, -1, -3],
   },
   up: {
     samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
     spread: 4,
     bias: [4, 3, 2, 1, 5, 6],
-    volumes: [0.5, 0.6, 0.65, 0.07, 0.75, 0.8],
+    volumes: [-4, -3, 0, -3, -3, -5],
   },
   upA: {
     samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
     spread: 6,
     bias: [6, 5, 4, 3, 2, 1],
-    volumes: [0.5, 0.6, 0.65, 0.07, 0.75, 0.8],
+    volumes: [-4, -3, 0, -3, -3, -5],
+  },
+  upB: {
+    samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
+    spread: 2,
+    bias: [2, 1, 3, 4, 5, 6],
+    volumes: [-2, -1, 0, -3, -3, -5],
+  },
+  upH: {
+    samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
+    spread: 3,
+    bias: [4, 5, 6, 3, 2, 1],
+    volumes: [-4, -3, 0, -1, -1, -3],
   },
   x: {
     samples: ["g6C", "g5C", "g4C", "g3C", "g2C", "g1C"],
@@ -100,13 +127,13 @@ const dataset = {
     samples: ["g6L", "g5L", "g4L", "g3L", "g2L", "g1L"],
     spread: 4,
     bias: [1, 2, 3, 4, 5, 6],
-    volumes: [0.5, 0.6, 0.65, 0.07, 0.75, 0.8],
+    volumes: [-4, -3, 0, -3, -3, -5],
   },
   downM: {
     samples: ["g6L", "g5L", "g4L", "g3L", "g2L", "g1L"],
     spread: 4,
     bias: [1, 2, 3, 4, 5, 6],
-    volumes: [0.8, 0.75, 0.7, 0.65, 0.6, 0.5],
+    volumes: [-4, -3, 0, -3, -3, -5],
   },
 };
 function calculateStringVolumes(s, h, v) {
@@ -125,7 +152,7 @@ function calculateStringVolumes(s, h, v) {
 }
 
 function calculateStringOffsets(direction) {
-  const m = 0.002; // Задержка между строками
+  const m = 0.004; // Задержка между строками
   const offsetResults = {};
   const maxStringIndex = 5; // Максимальный индекс строки
 
@@ -166,12 +193,16 @@ function playNote(note, time, isBeatSound) {
       case "up":
       case "upA":
       case "upM":
+      case "upB":
+      case "upH":
         noteData = dataset[note];
         direction = "up";
         break;
       case "down":
       case "downA":
       case "downM":
+      case "downB":
+      case "downH":
       case "x":
         noteData = dataset[note];
         direction = "down";
@@ -256,6 +287,12 @@ function countSteps(beatPattern) {
         break;
       case "c": // Удары с приглушением "downM" и "upM"
         sound = index % 2 === 0 ? "downM" : "upM";
+        break;
+      case "h": // Удары с приглушением "downM" и "upM"
+        sound = index % 2 === 0 ? "downH" : "upH";
+        break;
+      case "b": // Удары с приглушением "downM" и "upM"
+        sound = index % 2 === 0 ? "downB" : "upB";
         break;
       default:
         sound = "nothing"; // Если бит не распознан, ничего не играем

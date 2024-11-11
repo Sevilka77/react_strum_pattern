@@ -5,7 +5,17 @@ import Grid from "@mui/material/Grid2";
 
 import { memo } from "react";
 
-import { ArrowD, ArrowU, XDownIcon, XUpIcon, XIcon } from "./Icons";
+import {
+  ArrowD,
+  ArrowDB,
+  ArrowDH,
+  ArrowU,
+  ArrowUH,
+  ArrowUB,
+  XDownIcon,
+  XUpIcon,
+  XIcon,
+} from "./Icons";
 
 const MetronomeNM = ({ noteDuration, beatPattern, activeBeat }) => {
   const beats = beatPattern;
@@ -23,6 +33,18 @@ const MetronomeNM = ({ noteDuration, beatPattern, activeBeat }) => {
           );
         case "1":
           return isUp ? <ArrowU color="primary" /> : <ArrowD color="primary" />;
+        case "b":
+          return isUp ? (
+            <ArrowUB color="primary" />
+          ) : (
+            <ArrowDB color="primary" />
+          );
+        case "h":
+          return isUp ? (
+            <ArrowUH color="primary" />
+          ) : (
+            <ArrowDH color="primary" />
+          );
         case "A":
           return isUp ? <ArrowU color="warning" /> : <ArrowD color="warning" />;
         case "x":

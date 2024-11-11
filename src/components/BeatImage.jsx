@@ -1,4 +1,14 @@
-import { ArrowU, ArrowD, XIcon, XUpIcon, XDownIcon } from "./Icons"; // Замени на путь к своим иконкам
+import {
+  ArrowD,
+  ArrowDB,
+  ArrowDH,
+  ArrowU,
+  ArrowUH,
+  ArrowUB,
+  XDownIcon,
+  XUpIcon,
+  XIcon,
+} from "./Icons"; // Замени на путь к своим иконкам
 
 export default function BeatImage({ beatString, fill }) {
   const iconSize = 24; // Размер иконок
@@ -15,6 +25,24 @@ export default function BeatImage({ beatString, fill }) {
             <ArrowD color={iconColor} sx={{ fill: iconFill }} />
           ) : (
             <ArrowU color={iconColor} sx={{ fill: iconFill }} />
+          );
+
+        break;
+      case "b":
+        IconComponent =
+          index % 2 === 0 ? (
+            <ArrowDB color={iconColor} sx={{ fill: iconFill }} />
+          ) : (
+            <ArrowUB color={iconColor} sx={{ fill: iconFill }} />
+          );
+
+        break;
+      case "h":
+        IconComponent =
+          index % 2 === 0 ? (
+            <ArrowDH color={iconColor} sx={{ fill: iconFill }} />
+          ) : (
+            <ArrowUH color={iconColor} sx={{ fill: iconFill }} />
           );
 
         break;
