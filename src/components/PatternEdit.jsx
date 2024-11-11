@@ -1,7 +1,11 @@
 import { useState } from "react";
-import { BottomNavigation, BottomNavigationAction, Snackbar } from "@mui/material";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Snackbar,
+} from "@mui/material";
 import { DeleteIcon, ShareIcon } from "lucide-react";
-import { ArrowD, XDownIcon, XIcon } from "./Icons";
+import { ArrowD, ArrowDB, ArrowDH, XDownIcon, XIcon } from "./Icons";
 import { memo } from "react";
 
 const PatternEditNM = ({ beatPattern, dispatch }) => {
@@ -27,7 +31,7 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
 
   const handleChange = (event) => {
     const newBeats = [...beats]; // Создаем новый массив для обновления состояния
-    if (["A", "1", "0", "x", "c"].includes(event)) {
+    if (["A", "1", "0", "x", "c", "h", "b"].includes(event)) {
       newBeats.push(event);
     } else if (event === "del") {
       if (newBeats.length > 0) newBeats.pop();
@@ -68,6 +72,18 @@ const PatternEditNM = ({ beatPattern, dispatch }) => {
           onClick={() => handleChange("c")}
           value="disable"
           icon={<XDownIcon color="primary" />}
+          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
+        />
+        <BottomNavigationAction
+          onClick={() => handleChange("b")}
+          value="disable"
+          icon={<ArrowDB color="primary" />}
+          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
+        />
+        <BottomNavigationAction
+          onClick={() => handleChange("h")}
+          value="disable"
+          icon={<ArrowDH color="primary" />}
           sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
         />
         <BottomNavigationAction
