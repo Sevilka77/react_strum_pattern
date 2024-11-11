@@ -24,28 +24,47 @@ import g5C from "./g5C.mp3";
 import g6C from "./g6C.mp3";
 
 const samples = {
-  g1: new Tone.Player(g1).toDestination(),
-  g2: new Tone.Player(g2).toDestination(),
-  g3: new Tone.Player(g3).toDestination(),
-  g4: new Tone.Player(g4).toDestination(),
-  g5: new Tone.Player(g5).toDestination(),
-  g6: new Tone.Player(g6).toDestination(),
-  g1L: new Tone.Player(g1L).toDestination(),
-  g2L: new Tone.Player(g2L).toDestination(),
-  g3L: new Tone.Player(g3L).toDestination(),
-  g4L: new Tone.Player(g4L).toDestination(),
-  g5L: new Tone.Player(g5L).toDestination(),
-  g6L: new Tone.Player(g6L).toDestination(),
-  g1C: new Tone.Player(g1C).toDestination(),
-  g2C: new Tone.Player(g2C).toDestination(),
-  g3C: new Tone.Player(g3C).toDestination(),
-  g4C: new Tone.Player(g4C).toDestination(),
-  g5C: new Tone.Player(g5C).toDestination(),
-  g6C: new Tone.Player(g6C).toDestination(),
   click1: new Tone.Player(click1).toDestination(),
   click2: new Tone.Player(click2).toDestination(),
 };
 
+const gSamples = new Tone.ToneAudioBuffers({
+  g1,
+  g2,
+  g3,
+  g4,
+  g5,
+  g6,
+  g1L,
+  g2L,
+  g3L,
+  g4L,
+  g5L,
+  g6L,
+  g1C,
+  g2C,
+  g3C,
+  g4C,
+  g5C,
+  g6C,
+  click1,
+  click2,
+});
+const stringPlayers = Array.from({ length: 6 }, () =>
+  new Tone.Player().toDestination(),
+);
+
+function playStringSound(note, stringIndex, time, volume, offset) {
+  // console.log(stringIndex, "плеер", note, volume);
+  const player = stringPlayers[stringIndex];
+  if (player.state === "started") {
+    // console.log("player stopped", stringIndex);
+    player.stop(time);
+  }
+  player.buffer = gSamples.get(note); // Устанавливаем нужный буфер
+  player.volume.value = volume;
+  player.start(time + offset, 0.05);
+}
 const dataset = {
   down: {
     samples: ["g6", "g5", "g4", "g3", "g2", "g1"],
@@ -170,25 +189,8 @@ function playNote(note, time, isBeatSound) {
     noteData.samples.forEach((item, index) => {
       const offset = offsets[index];
       const db = dbs[index];
-
       if (!isNaN(db)) {
-        if (samples[item]) {
-          samples[item].fadeOut = 0.2;
-          if (samples[item].state === "started") {
-            samples[item].stop();
-          }
-          if (item.endsWith("L") || item.endsWith("C")) {
-            const baseSampleName = item.slice(0, -1);
-            if (samples[baseSampleName].state === "started") {
-              samples[baseSampleName].stop();
-            }
-          }
-
-          samples[item].volume.value = db - 2;
-          samples[item].start(time + offset, 0.05);
-        }
-      } else {
-        // Громкость струны равна NaN, звук не воспроизводится
+        playStringSound(item, index, time, db, offset);
       }
     });
   }
@@ -316,8 +318,9 @@ export default function useTone(config) {
     const seq = new Tone.Sequence(
       (time, index) => {
         const sound = steps[index];
-        setActiveBeat(index);
-        // playNote(sound, time, durations[index], config.isBeatSound);
+        Tone.getDraw().schedule(() => {
+          setActiveBeat(index);
+        }, time);
         playNote(sound, time, config.isBeatSound);
 
         playMetronome(
@@ -333,10 +336,9 @@ export default function useTone(config) {
       Array.from({ length: steps.length }, (_, i) => i),
       config.noteDuration || "8n",
     ).start(0);
-    seqRef.current = seq; // Сохранение ссылки на новую последовательность
+    seqRef.current = seq;
 
     return () => {
-      // Очистка последовательности перед созданием новой
       seq.dispose();
     };
   }, [
