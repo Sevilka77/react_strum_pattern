@@ -12,6 +12,11 @@ const TempoSelectorNM = () => {
 
   // Этот useEffect для отправки изменений в контекст
   useEffect(() => {
+    if (value < 40) {
+      setValue(40);
+    } else if (value > 300) {
+      setValue(300);
+    }
     dispatch({ type: "setTempo", data: value });
   }, [value, dispatch]);
 
