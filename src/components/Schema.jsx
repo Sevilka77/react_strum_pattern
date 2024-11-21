@@ -12,7 +12,7 @@ const Schema = () => {
         "@type": "ListItem",
         position: pattern.position,
         name: pattern.title,
-        url: `/pattern/${pattern.pattern}`,
+        url: `#/pattern/${pattern.pattern}`,
         image: `data:image/svg+xml;utf8,${encodeURIComponent(pattern.pattern)}`,
       })),
     };

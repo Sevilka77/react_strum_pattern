@@ -17,143 +17,6 @@ const chords = [
   ["022000", "Em", "e"],
   ["224432", "Bm", "aD"],
 ];
-const config = {
-  g: {
-    rootFifthSixth: [6, 4, 4],
-    crossPickOrder: [NaN, NaN, 1, 2, 3, 4],
-    crossPickPattern: [6, 4, 2, 1, 4, 3, 2, 1],
-    stringVolumes: [-1, 0, 0, 0, 0, 0],
-    bias: {
-      low: [6, 6, 1, 2, 3, 4],
-      mid: [6, 6, 3, 1, 2, 4],
-      high: [6, 6, 4, 3, 2, 1],
-      strum: [6, 6, 4, 1, 2, 3],
-      bass: [1, 2, 2, 3, 5, 6],
-      jazzD: [1, NaN, 2, 3, 4, 5],
-      jazzU: [NaN, NaN, 3, 2, 1, 4],
-      root: [1, 2, 2, 3, 5, 6],
-      afterRoot: [6, 5, 1, 2, 3, 4],
-      chuck1: [6, 6, 3, 1, 2, 4],
-      afterChuck1: [6, 6, 4, 3, 1, 2],
-      fifth: [4, 3, 1, 2, 5, 6],
-      afterFifth: [6, 6, 2, 1, 3, 4],
-      chuck2: [6, 6, 3, 2, 1, 4],
-      afterChuck2: [6, 6, 4, 3, 2, 1],
-      haye: [4, 4, 4, 4, 4, 4],
-    },
-  },
-  d: {
-    rootFifthSixth: [4, 5, 3],
-    crossPickOrder: [NaN, 1, NaN, 2, 3, 4],
-    crossPickPattern: [4, 3, 2, 1, 5, 3, 2, 1],
-    stringVolumes: [-5, -3, 1, 0, 0, 0],
-    bias: {
-      low: [6, 3, 1, 2, 4, 5],
-      mid: [6, 5, 3, 1, 2, 4],
-      high: [6, 5, 4, 3, 2, 1],
-      strum: [6, 5, 4, 2, 1, 3],
-      bass: [4, 2, 1, 3, 5, 6],
-      jazzD: [NaN, 5, 1, 2, 3, 4],
-      jazzU: [NaN, 5, 4, 3, 2, 1],
-      root: [5, 4, 1, 3, 5, 6],
-      afterRoot: [6, 5, 3, 1, 2, 4],
-      chuck1: [6, 5, 4, 2, 1, 3],
-      afterChuck1: [6, 5, 4, 3, 2, 1],
-      fifth: [6, 1, 2, 4, 5, 6],
-      afterFifth: [6, 5, 2, 1, 3, 4],
-      chuck2: [6, 5, 4, 2, 1, 3],
-      afterChuck2: [6, 5, 4, 3, 2, 1],
-      haye: [6, 5, 4, 4, 4, 4],
-    },
-  },
-  a: {
-    rootFifthSixth: [5, 4, 4],
-    crossPickOrder: [NaN, NaN, 1, 2, 3, 4],
-    crossPickPattern: [5, 4, 2, 1, 4, 3, 2, 1],
-    stringVolumes: [-3, 0, 0, 0, 0, 0],
-    bias: {
-      low: [6, 3, 1, 2, 4, 5],
-      mid: [6, 5, 3, 1, 2, 4],
-      high: [6, 5, 4, 3, 2, 1],
-      strum: [6, 5, 4, 1, 2, 3],
-      bass: [5, 1, 2, 3, 4, 6],
-      jazzD: [NaN, 1, 2, 3, 4, 5],
-      jazzU: [NaN, 5, 4, 3, 1, 1],
-      root: [4, 1, 2, 4, 5, 6],
-      afterRoot: [6, 5, 1, 2, 3, 4],
-      chuck1: [6, 6, 4, 2, 1, 3],
-      afterChuck1: [6, 6, 4, 3, 2, 1],
-      fifth: [5, 3, 1, 2, 4, 6],
-      afterFifth: [6, 6, 3, 1, 2, 4],
-      chuck2: [6, 6, 4, 2, 1, 3],
-      afterChuck2: [6, 6, 4, 3, 2, 1],
-      haye: [6, 5, 4, 4, 4, 4],
-    },
-  },
-  c: {
-    rootFifthSixth: [5, 6, 3],
-    crossPickOrder: [1, NaN, 2, 3, 4, NaN],
-    crossPickPattern: [5, 4, 3, 1, 6, 4, 2, 1],
-    stringVolumes: [-3, 0, 0, 0, 0, 0],
-    bias: {
-      low: [6, 3, 1, 2, 4, 5],
-      mid: [6, 5, 3, 1, 2, 4],
-      high: [6, 5, 4, 3, 2, 1],
-      strum: [6, 5, 4, 2, 1, 3],
-      bass: [2, 1, 3, 4, 5, 6],
-      jazzD: [NaN, 1, 2, 3, 4, 5],
-      jazzU: [NaN, 4, 3, 2, 1, NaN],
-      root: [2, 1, 3, 4, 5, 6],
-      afterRoot: [6, 5, 1, 2, 3, 4],
-      chuck1: [6, 6, 3, 1, 2, 4],
-      afterChuck1: [6, 6, 4, 3, 2, 1],
-      fifth: [1, 3, 4, 5, 6, 6],
-      afterFifth: [6, 6, 1, 2, 3, 4],
-      chuck2: [6, 6, 3, 1, 2, 4],
-      afterChuck2: [6, 6, 4, 3, 2, 1],
-      haye: [6, 4, 4, 4, 4, 4],
-    },
-  },
-  e: {
-    rootFifthSixth: [6, 5, 5],
-    crossPickOrder: [NaN, 1, NaN, 2, 3, 4],
-    crossPickPattern: [6, 4, 2, 1, 5, 3, 2, 1],
-    stringVolumes: [0, 0, 0, 0, 0, 0],
-    bias: {
-      low: [6, 5, 1, 2, 3, 4],
-      mid: [6, 5, 3, 1, 2, 4],
-      high: [6, 5, 4, 3, 2, 1],
-      strum: [6, 5, 1, 2, 3, 4],
-      bass: [1, 2, 3, 4, 5, 6],
-      jazzD: [1, 2, NaN, 3, 4, NaN],
-      jazzU: [5, 4, 3, 2, 1, NaN],
-      root: [1, 2, 3, 4, 5, 6],
-      afterRoot: [5, 1, 2, 3, 4, 6],
-      chuck1: [6, 6, 3, 1, 2, 4],
-      afterChuck1: [6, 6, 4, 3, 1, 2],
-      fifth: [3, 1, 2, 4, 5, 6],
-      afterFifth: [6, 3, 2, 1, 4, 5],
-      chuck2: [6, 6, 3, 2, 1, 4],
-      afterChuck2: [6, 6, 4, 3, 2, 1],
-      haye: [4, 4, 4, 4, 4, 4],
-    },
-  },
-  aD: {
-    rootFifthSixth: [5, 4, 4],
-    crossPickOrder: [NaN, NaN, 1, 2, 3, 4],
-    crossPickPattern: [5, 4, 3, 2, 5, 4, 3, 2],
-    stringVolumes: [0, 0, 0, 0, 0, 0],
-    bias: {
-      low: [4, 3, 1, 2, 5, 6],
-      mid: [6, 4, 3, 1, 2, 5],
-      high: [6, 5, 4, 2, 1, 3],
-      strum: [6, 5, 3, 2, 1, 4],
-      bass: [6, 1, 2, 3, 4, 5],
-      haye: [4, 4, 4, 4, 4, 4],
-    },
-    droning: !0,
-  },
-};
 const samplesClick = {
   click1: new Tone.Player(click1).toDestination(),
   click2: new Tone.Player(click2).toDestination(),
@@ -167,15 +30,17 @@ export const gSamples = new Tone.ToneAudioBuffers();
 
 const loadSample = (name, path) => {
   return new Promise((resolve, reject) => {
+    console.log(`Loading file: ${name} from ${path}`);
+
     gSamples.add(
       name,
       path,
       () => {
-        // console.log(`${name} loaded successfully`);
+        console.log(`${name} loaded successfully`);
         resolve();
       },
       (e) => {
-        // console.log(`Error loading ${name}`, e);
+        console.log(`Error loading ${name}`, e);
         reject(e);
       },
     );
@@ -187,6 +52,7 @@ const loadAllSamplesSequentially = async () => {
   const urls = Object.entries(sampleFiles).map(([path, module]) => {
     const fileName = path.replace("../assets/samples/", "").replace(".mp3", "");
     const filePath = module.default; // Получаем URL файла
+    console.log(`Preparing to load: ${fileName} from ${filePath}`);
     return [fileName, filePath];
   });
 
@@ -194,7 +60,7 @@ const loadAllSamplesSequentially = async () => {
   for (const [name, path] of urls) {
     try {
       await loadSample(name, path); // Ждем завершения загрузки каждого файла
-      // console.log(`${name} loaded successfully`);
+      console.log(`${name} loaded successfully`);
     } catch (error) {
       console.error(`Error loading ${name}`, error);
     }
@@ -225,19 +91,17 @@ function playStringSound(sample, type, stringIndex, time, db, offset) {
           : sample;
 
   const player = stringPlayers[stringIndex];
-
   if (player.state === "started") {
     player.stop(time);
   }
   player.buffer = gSamples.get(modifiedSample);
   player.volume.value = db;
   player.start(time + offset, 0.05);
-  console.log();
 }
 const ActionType = {
   down: {
     type: "play",
-    spread: 4,
+    spread: 5,
     bias: [6, 5, 1, 2, 3, 4],
     volumes: [-4, -3, 0, -3, -3, -5],
   },
@@ -251,13 +115,13 @@ const ActionType = {
     type: "play",
     spread: 2,
     bias: [1, 2, 3, 4, 5, 6],
-    volumes: [-4, -3, 0, -3, -3, -5],
+    volumes: [-2, -1, 0, -3, -3, -5],
   },
   downH: {
     type: "play",
     spread: 3,
     bias: [4, 5, 6, 1, 2, 3],
-    volumes: [-4, -3, 0, -3, -3, -5],
+    volumes: [-4, -3, 0, -1, -1, -3],
   },
   up: {
     type: "play",
@@ -275,7 +139,7 @@ const ActionType = {
     type: "play",
     spread: 2,
     bias: [2, 1, 3, 4, 5, 6],
-    volumes: [-4, -3, 0, -3, -3, -5],
+    volumes: [-2, -1, 0, -3, -3, -5],
   },
   upH: {
     type: "play",
@@ -287,23 +151,23 @@ const ActionType = {
     type: "chop",
     spread: 6,
     bias: [1, 2, 3, 4, 5, 6],
-    volumes: [-4, -3, 0, -3, -3, -5],
+    volumes: [-10, -10, -10, -8, -5, -4],
   },
   upM: {
     type: "mute",
-    spread: 6,
+    spread: 4,
     bias: [1, 2, 3, 4, 5, 6],
     volumes: [-4, -3, 0, -3, -3, -5],
   },
   downM: {
     type: "mute",
-    spread: 6,
+    spread: 4,
     bias: [1, 2, 3, 4, 5, 6],
     volumes: [-4, -3, 0, -3, -3, -5],
   },
   nothing: {
     type: "nothing",
-    spread: 0,
+    spread: 6,
     bias: [1, 2, 3, 4, 5, 6],
     volumes: [-4, -3, 0, -3, -3, -5],
   },
@@ -333,6 +197,15 @@ function calculateStringOffsets(direction) {
   ) {
     let offset = t * m;
 
+    // Дополнительное смещение для первой строки при движении вниз
+    if (direction === "down" && r === 0 && t > 0) {
+      offset += Math.min(m, 0.01);
+    }
+
+    // Добавляем случайное смещение
+    offset += 0.001 * Math.random();
+
+    // Сохраняем результат в объект
     offsetResults[r] = offset;
   }
   return offsetResults;
@@ -427,7 +300,7 @@ function countSteps(beatPattern) {
     h: (index) => (index % 2 === 0 ? "downH" : "upH"),
     b: (index) => (index % 2 === 0 ? "downB" : "upB"),
   };
-  const samples = getSamples("C");
+  const samples = getSamples("Fm");
 
   return beatPattern.split("").map((beat, index) => {
     const getAction = soundMap[beat] || (() => "nothing");
@@ -436,6 +309,8 @@ function countSteps(beatPattern) {
     const offsets = calculateStringOffsets(index % 2 === 0 ? "down" : "up");
     const actionData = ActionType[action] || {};
     const dbs = calculateStringVolumes(actionData);
+
+    console.log(samples);
     const instructions = samples.map((sample, sampleIndex) => ({
       type: actionData.type,
       sample,
