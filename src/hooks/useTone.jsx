@@ -164,47 +164,28 @@ const sampleFiles = import.meta.glob("../assets/samples/*.mp3", {
 });
 
 export const gSamples = new Tone.ToneAudioBuffers();
-
-const loadSample = (name, path) => {
-  return new Promise((resolve, reject) => {
-    gSamples.add(
-      name,
-      path,
-      () => {
-        // console.log(`${name} loaded successfully`);
-        resolve();
-      },
-      (e) => {
-        // console.log(`Error loading ${name}`, e);
-        reject(e);
-      },
+const loadSample = async (sampleName) => {
+  try {
+    // Находим путь к файлу по имени
+    const sampleEntry = Object.entries(sampleFiles).find(([path]) =>
+      path.includes(sampleName),
     );
-  });
-};
 
-// Функция для загрузки всех сэмплов последовательно
-const loadAllSamplesSequentially = async () => {
-  const urls = Object.entries(sampleFiles).map(([path, module]) => {
-    const fileName = path.replace("../assets/samples/", "").replace(".mp3", "");
-    const filePath = module.default; // Получаем URL файла
-    return [fileName, filePath];
-  });
-
-  // Загрузка каждого сэмпла по очереди
-  for (const [name, path] of urls) {
-    try {
-      await loadSample(name, path); // Ждем завершения загрузки каждого файла
-      // console.log(`${name} loaded successfully`);
-    } catch (error) {
-      console.error(`Error loading ${name}`, error);
+    if (!sampleEntry) {
+      throw new Error(`Sample ${sampleName} not found in sampleFiles`);
     }
+
+    const [, module] = sampleEntry;
+    const samplePath = module.default; // Получаем путь к файлу
+
+    // Загружаем буфер (замените на свою реализацию)
+
+    gSamples.add(sampleName, samplePath); // Сохраняем в коллекцию
+  } catch (error) {
+    console.error(`Error loading sample ${sampleName}:`, error);
+    throw error; // Пробрасываем ошибку
   }
-
-  console.log("All samples loaded sequentially");
 };
-
-// Запуск загрузки всех сэмплов
-loadAllSamplesSequentially();
 
 const channels = Array.from({ length: 6 }, () =>
   new Tone.Channel().toDestination(),
@@ -223,6 +204,12 @@ function playStringSound(sample, type, stringIndex, time, db, offset) {
         : type === "chop"
           ? sample.concat("C")
           : sample;
+
+  if (!gSamples.has(modifiedSample)) {
+    console.log(`Sample ${modifiedSample} not loaded, loading now...`);
+    loadSample(modifiedSample);
+    return;
+  }
 
   const player = stringPlayers[stringIndex];
 
