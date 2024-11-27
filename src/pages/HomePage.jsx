@@ -24,7 +24,7 @@ function HomePage() {
         alignItems="start" // Вертикальное выравнивание по центру
         justifyContent="center"
       >
-        {/* Блок для легкого уровня */}
+        {/* Блок для легкого уровня
         <Grid component="section" size={{ xs: 12, md: 2 }}>
           <Typography
             component="h2"
@@ -46,12 +46,11 @@ function HomePage() {
             }}
           >
             {/* Используем Suspense для оборачивания динамически загружаемого компонента */}
-            <Suspense fallback={<div>Загрузка...</div>}>
+        {/* <Suspense fallback={<div>Загрузка...</div>}>
               <PatternList level="learn" />
             </Suspense>
           </Card>
-        </Grid>
-
+        </Grid> */}{" "}
         {/* Блок для легкого уровня */}
         <Grid component="section" size={{ xs: 12, md: 2 }}>
           <Typography
@@ -79,7 +78,6 @@ function HomePage() {
             </Suspense>
           </Card>
         </Grid>
-
         {/* Блок для среднего уровня */}
         <Grid component="section" size={{ xs: 12, md: 2 }}>
           <Typography
@@ -108,7 +106,6 @@ function HomePage() {
             </Suspense>
           </Card>
         </Grid>
-
         {/* Блок для сложного уровня */}
         <Grid component="section" size={{ xs: 12, md: 2 }}>
           <Typography
@@ -136,7 +133,6 @@ function HomePage() {
             </Suspense>
           </Card>
         </Grid>
-
         {/* Блок для разных боев */}
         <Grid component="section" size={{ xs: 12, md: 2 }}>
           <Typography

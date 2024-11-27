@@ -4,6 +4,7 @@ import ThemeContextProvider from "./components/ThemeContextProvider";
 import HomePage from "./pages/HomePage";
 import useWakeLock from "./hooks/useWakeLock";
 import { Box } from "@mui/material";
+import LearnPage from "./pages/LearnPage";
 
 function App() {
   useWakeLock();
@@ -22,6 +23,7 @@ function App() {
       >
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/learn" element={<LearnPage />} />
           <Route path="/pattern/:beatPattern" element={<PatternPage />} />
         </Routes>
       </Box>

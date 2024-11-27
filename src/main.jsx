@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import { HashRouter } from "react-router-dom";
 import { ConfigProvider } from "./ConfigProvider.jsx";
+import { CycleProvider } from "./CycleProvider.jsx";
 
 // Ленивое импортирование YandexMetrika только в production
 // eslint-disable-next-line react-refresh/only-export-components
@@ -20,7 +21,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     )}
     <HashRouter>
       <ConfigProvider>
-        <App />
+        <CycleProvider>
+          <App />
+        </CycleProvider>
       </ConfigProvider>
     </HashRouter>
   </React.StrictMode>,

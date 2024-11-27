@@ -77,6 +77,16 @@ const ThemeContextProvider = ({ children }) => {
             },
           },
         },
+        MuiSnackbar: {
+          styleOverrides: {
+            root: {
+              background: "#0C0F2A",
+              borderRadius: "1rem",
+              border: "4px solid #39F1FF", // Единственная рамка 4px
+              boxShadow: "0 0 0.3rem #39F1FF,inset 0 0 0.3rem #39F1FF;",
+            },
+          },
+        },
         MuiBottomNavigation: {
           styleOverrides: {
             root: {

@@ -13,6 +13,8 @@ const Header = memo(function Header({ title }) {
     switch (location.pathname) {
       case "/":
         return "Онлайн тренажер гитарного боя"; // Заголовок для главной страницы
+      case "/learn":
+        return `${title}`;
       default:
         return `Текущий бой: ${title}`; // Название по умолчанию
     }

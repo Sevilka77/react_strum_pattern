@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
+import { useCycle } from "../useCycle";
 import * as Tone from "tone";
 import click1 from "./click1.wav";
 import click2 from "./click2.wav";
@@ -435,7 +435,9 @@ function countSteps(beatPattern) {
 
 // Хук useTone для управления воспроизведением звуков
 export default function useTone(config) {
+  const { incrementCycle, resetCycle } = useCycle();
   const [activeBeat, setActiveBeat] = useState(0); // Состояние активного бита
+
   const seqRef = useRef(null); // Ссылка на объект Tone.Sequence
 
   useEffect(() => {
@@ -466,7 +468,11 @@ export default function useTone(config) {
           config.clickTaktBeat,
           config.noteDuration,
         );
+        if (index === steps.length - 1) {
+          incrementCycle(); // Увеличиваем цикл, когда начинается новый
+        }
       },
+
       Array.from({ length: steps.length }, (_, i) => i),
       config.noteDuration || "8n",
     ).start(0);
@@ -474,7 +480,9 @@ export default function useTone(config) {
 
     return () => {
       seq.dispose();
+      resetCycle();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     config.isPlaying,
     config.beatPattern,
