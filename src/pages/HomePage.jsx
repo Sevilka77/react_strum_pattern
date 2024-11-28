@@ -1,167 +1,236 @@
-import { lazy, Suspense } from "react";
-import { Card, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Container,
+  Typography,
+} from "@mui/material";
+
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 import Schema from "../components/schema";
-
-// Динамический импорт PatternList
-const PatternList = lazy(() => import("../components/PatternList"));
+import { Link } from "react-router-dom";
 
 function HomePage() {
   return (
     <>
       <Header />
+      <Container component="main" maxWidth="xl" sx={{ minHeight: "100vh" }}>
+        <Box
+          sx={{
+            my: {
+              xs: 1, // Мобильные устройства
+              sm: 2, // Средние устройства
+              md: 14, // Большие устройства
+            },
+            color: "#FFFFFF", // Светлый текст
+            textAlign: "center", // Выравнивание по центру
+          }}
+        >
+          {/* Заголовок секции */}
+          <Typography
+            variant="body2"
+            sx={{
+              fontWeight: 600,
+              fontSize: "1.2rem",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "#39F1FF", // Акцентный цвет
+            }}
+          >
+            Strumming.ru
+          </Typography>
 
-      <Schema />
-      <Grid
-        container
-        component="main"
-        paddingTop={10}
-        paddingX={3}
-        spacing={1}
-        alignItems="start" // Вертикальное выравнивание по центру
-        justifyContent="center"
-      >
-        {/* Блок для легкого уровня
-        <Grid component="section" size={{ xs: 12, md: 2 }}>
+          {/* Основной заголовок */}
           <Typography
-            component="h2"
-            variant="h5"
-            color="#39F1FF"
+            variant="h2"
             sx={{
-              textShadow: `0 0 42px `,
-              textAlign: "center",
-              pb: 2,
+              fontWeight: 700,
+              margin: "1rem 0",
+              fontSize: { xs: "2rem", sm: "3rem" }, // Адаптивный размер
             }}
           >
-            Для начала
+            Освой гитарные бои{" "}
+            <span style={{ color: "#FFD700" }}>с легкостью!</span>
           </Typography>
-          <Card
-            sx={{
-              borderRadius: "1rem",
-              border: "4px solid #39F1FF", // Единственная рамка 4px
-              boxShadow: "0 0 0.3rem #39F1FF,inset 0 0 0.3rem #39F1FF;",
-            }}
-          >
-            {/* Используем Suspense для оборачивания динамически загружаемого компонента */}
-        {/* <Suspense fallback={<div>Загрузка...</div>}>
-              <PatternList level="learn" />
-            </Suspense>
-          </Card>
-        </Grid> */}{" "}
-        {/* Блок для легкого уровня */}
-        <Grid component="section" size={{ xs: 12, md: 2 }}>
+
+          {/* Подзаголовок */}
           <Typography
-            component="h2"
-            variant="h5"
-            color="#4495F4"
+            variant="body1"
             sx={{
-              textShadow: `0 0 42px `,
-              textAlign: "center",
-              pb: 2,
+              maxWidth: "600px", // Ограничиваем ширину текста
+              margin: "0 auto 2rem auto", // Центрируем
+              fontSize: "1.1rem",
+              lineHeight: "1.6",
             }}
           >
-            Легкие
+            Тренируй свои навыки ритма и чувства такта с помощью уникальных
+            упражнений, метрономов и гитарных бой. Сделай свой прогресс на
+            гитаре быстрее!
           </Typography>
+
+          <Schema />
+        </Box>
+        <Box
+          component="ul"
+          sx={{
+            display: "grid", // Устанавливаем Grid
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", // Сетка
+            gap: 2, // Расстояние между элементами
+            maxWidth: "100%",
+            padding: "1rem 1rem",
+            listStyle: "none", // Убираем маркеры списка
+          }}
+        >
           <Card
+            component="li"
             sx={{
+              minWidth: 275,
               borderRadius: "1rem",
               border: "4px solid #4495F4", // Единственная рамка 4px
               boxShadow: "0 0 0.3rem #4495F4,inset 0 0 0.3rem #4495F4;",
-              p: 2,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              "&:hover": {
+                boxShadow: "0 0 1rem #39F1FF, inset 0 0 0.5rem #39F1FF",
+              },
             }}
           >
-            <Suspense fallback={<div>Загрузка...</div>}>
-              <PatternList level="easy" />
-            </Suspense>
-          </Card>
-        </Grid>
-        {/* Блок для среднего уровня */}
-        <Grid component="section" size={{ xs: 12, md: 2 }}>
-          <Typography
-            component="h2"
-            variant="h5"
-            color="#A660FF"
-            sx={{
-              textShadow: `0 0 42px `,
-              textAlign: "center",
-              pb: 2,
-            }}
-          >
-            Средние
-          </Typography>
-          <Card
-            sx={{
-              borderRadius: "1rem",
-              border: "4px solid #A660FF", // Единственная рамка 4px
-              boxShadow: "0 0 0.3rem #A660FF,inset 0 0 0.3rem #A660FF;",
+            <CardContent>
+              <Typography variant="h5" component="div">
+                Создай свой бой
+              </Typography>
 
-              p: 2,
-            }}
-          >
-            <Suspense fallback={<div>Загрузка...</div>}>
-              <PatternList level="medium" />
-            </Suspense>
+              <Typography variant="body2">
+                Используй наш интуитивный конфигуратор, чтобы создать уникальные
+                ритмические паттерны. Настрой свои упражнения и тренируйся с
+                максимальной эффективностью.
+              </Typography>
+            </CardContent>
+            <CardActions style={{ justifyContent: "flex-end" }}>
+              <Button
+                component={Link} // Используем Link для маршрутизации
+                to="/create"
+                size="small"
+              >
+                Создать
+              </Button>
+            </CardActions>
           </Card>
-        </Grid>
-        {/* Блок для сложного уровня */}
-        <Grid component="section" size={{ xs: 12, md: 2 }}>
-          <Typography
-            component="h2"
-            variant="h5"
-            color="#FF6084"
-            sx={{
-              textShadow: `0 0 42px `,
-              textAlign: "center",
-              pb: 2,
-            }}
-          >
-            Сложные
-          </Typography>
-          <Card
-            sx={{
-              borderRadius: "1rem",
-              border: "4px solid #FF6084", // Единственная рамка 4px
-              boxShadow: "0 0 0.3rem #FF6084,inset 0 0 0.3rem #FF6084;",
-              p: 2,
-            }}
-          >
-            <Suspense fallback={<div>Загрузка...</div>}>
-              <PatternList level="hard" />
-            </Suspense>
-          </Card>
-        </Grid>
-        {/* Блок для разных боев */}
-        <Grid component="section" size={{ xs: 12, md: 2 }}>
-          <Typography
-            component="h2"
-            variant="h5"
-            color="#FFC755"
-            sx={{
-              textShadow: `0 0 42px `,
-              textAlign: "center",
-              pb: 2,
-            }}
-          >
-            Разные бои
-          </Typography>
-          <Card
-            sx={{
-              borderRadius: "1rem",
-              border: "4px solid #FFC755", // Единственная рамка 4px
-              boxShadow: "0 0 0.3rem #FFC755,inset 0 0 0.3rem #FFC755;",
 
-              p: 2,
+          <Card
+            component="li"
+            sx={{
+              minWidth: 275,
+              borderRadius: "1rem",
+              border: "4px solid #4495F4", // Единственная рамка 4px
+              boxShadow: "0 0 0.3rem #4495F4,inset 0 0 0.3rem #4495F4;",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              "&:hover": {
+                boxShadow: "0 0 1rem #39F1FF, inset 0 0 0.5rem #39F1FF",
+              },
             }}
           >
-            <Suspense fallback={<div>Загрузка...</div>}>
-              <PatternList level="other" />
-            </Suspense>
+            <CardContent>
+              <Typography variant="h5" component="div">
+                Тренировка
+              </Typography>
+
+              <Typography variant="body2">
+                Погрузись в непрерывную тренировку с 22 уникальными ритмическими
+                заданиями. Развивай чувство ритма и оттачивай мастерство с
+                каждым шагом.
+              </Typography>
+            </CardContent>
+            <CardActions style={{ justifyContent: "flex-end" }}>
+              <Button
+                component={Link} // Используем Link для маршрутизации
+                to="/learn"
+                size="small"
+              >
+                Играть
+              </Button>
+            </CardActions>
           </Card>
-        </Grid>
-      </Grid>
+
+          <Card
+            component="li"
+            sx={{
+              minWidth: 275,
+              borderRadius: "1rem",
+              border: "4px solid #4495F4", // Единственная рамка 4px
+              boxShadow: "0 0 0.3rem #4495F4,inset 0 0 0.3rem #4495F4;",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              "&:hover": {
+                boxShadow: "0 0 1rem #39F1FF, inset 0 0 0.5rem #39F1FF",
+              },
+            }}
+          >
+            <CardContent>
+              <Typography variant="h5" component="div">
+                Основные бои
+              </Typography>
+
+              <Typography variant="body2">
+                Овладей классическими ритмами, такими как шестерка и восьмерка.
+                Тренируйся под метроном и укрепляй свою технику
+              </Typography>
+            </CardContent>
+            <CardActions style={{ justifyContent: "flex-end" }}>
+              <Button
+                component={Link} // Используем Link для маршрутизации
+                to="/patterns"
+                size="small"
+              >
+                Смотреть
+              </Button>
+            </CardActions>
+          </Card>
+          <Card
+            component="li"
+            sx={{
+              minWidth: 275,
+              borderRadius: "1rem",
+              border: "4px solid #4495F4", // Единственная рамка 4px
+              boxShadow: "0 0 0.3rem #4495F4,inset 0 0 0.3rem #4495F4;",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              "&:hover": {
+                boxShadow: "0 0 1rem #39F1FF, inset 0 0 0.5rem #39F1FF",
+              },
+            }}
+          >
+            <CardContent>
+              <Typography variant="h5" component="div">
+                Пользовательские бои
+              </Typography>
+
+              <Typography variant="body2">
+                Открой для себя самые популярные ритмы, созданные пользователями
+                по всему миру. Учи и вдохновляйся уникальными идеями.
+              </Typography>
+            </CardContent>
+            <CardActions style={{ justifyContent: "flex-end" }}>
+              <Button
+                component={Link} // Используем Link для маршрутизации
+                to="/custom"
+                size="small"
+              >
+                Смотреть
+              </Button>
+            </CardActions>
+          </Card>
+        </Box>
+      </Container>
       <Footer />
     </>
   );

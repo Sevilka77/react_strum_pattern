@@ -4,7 +4,7 @@ export const patterns = [
     pattern: "1111",
     temp: 70,
     note: "4n",
-    level: "easy",
+    level: "main",
     position: 1,
   },
   {
@@ -12,7 +12,7 @@ export const patterns = [
     pattern: "11x1",
     temp: 70,
     note: "4n",
-    level: "easy",
+    level: "main",
     position: 4,
   },
   {
@@ -20,7 +20,7 @@ export const patterns = [
     pattern: "10110111",
     temp: 70,
     note: "8n",
-    level: "medium",
+    level: "main",
     position: 2,
   },
   {
@@ -28,7 +28,7 @@ export const patterns = [
     pattern: "10x101x1",
     temp: 70,
     note: "8n",
-    level: "medium",
+    level: "main",
     position: 3,
   },
   {
@@ -36,7 +36,7 @@ export const patterns = [
     pattern: "10A100A0",
     temp: 70,
     note: "8n",
-    level: "medium",
+    level: "main",
     position: 37,
   },
   {
@@ -44,7 +44,7 @@ export const patterns = [
     pattern: "10A111A1",
     temp: 70,
     note: "8n",
-    level: "medium",
+    level: "main",
     position: 36,
   },
   {
@@ -52,7 +52,7 @@ export const patterns = [
     pattern: "10x111x1",
     temp: 70,
     note: "8n",
-    level: "medium",
+    level: "main",
     position: 35,
   },
   {
@@ -60,7 +60,7 @@ export const patterns = [
     pattern: "1000A0010110A011",
     temp: 70,
     note: "16n",
-    level: "hard",
+    level: "main",
     position: 6,
   },
   {
@@ -68,7 +68,7 @@ export const patterns = [
     pattern: "A011A011A011A011",
     temp: 70,
     note: "16n",
-    level: "hard",
+    level: "main",
     position: 7,
   },
 
@@ -77,7 +77,7 @@ export const patterns = [
     pattern: "10x1",
     temp: 70,
     note: "4n",
-    level: "easy",
+    level: "main",
     position: 34,
   },
   {
@@ -85,7 +85,7 @@ export const patterns = [
     pattern: "101110",
     temp: 70,
     note: "8n",
-    level: "medium",
+    level: "main",
     position: 8,
   },
   {
@@ -93,7 +93,7 @@ export const patterns = [
     pattern: "101111",
     temp: 70,
     note: "8n",
-    level: "medium",
+    level: "main",
     position: 33,
   },
   {
@@ -101,7 +101,7 @@ export const patterns = [
     pattern: "100111",
     temp: 70,
     note: "8n",
-    level: "medium",
+    level: "main",
     position: 32,
   },
   {
@@ -109,7 +109,7 @@ export const patterns = [
     pattern: "1010A011",
     temp: 70,
     note: "8n",
-    level: "easy",
+    level: "main",
     position: 5,
   },
 
@@ -118,7 +118,7 @@ export const patterns = [
     pattern: "10001011",
     temp: 70,
     note: "8n",
-    level: "easy",
+    level: "main",
     position: 9,
   },
   {
@@ -126,7 +126,7 @@ export const patterns = [
     pattern: "10011111",
     temp: 70,
     note: "8n",
-    level: "easy",
+    level: "main",
     position: 10,
   },
 
@@ -135,7 +135,7 @@ export const patterns = [
     pattern: "A00Ax110",
     temp: 70,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 31,
   },
   {
@@ -143,7 +143,7 @@ export const patterns = [
     pattern: "1011x01x",
     temp: 70,
     note: "8n",
-    level: "medium",
+    level: "main",
     position: 30,
   },
 
@@ -152,7 +152,7 @@ export const patterns = [
     pattern: "A000A0111110A011",
     temp: 70,
     note: "16n",
-    level: "hard",
+    level: "main",
     position: 11,
   },
   {
@@ -160,7 +160,7 @@ export const patterns = [
     pattern: "A111A11A1A11A111",
     temp: 70,
     note: "16n",
-    level: "hard",
+    level: "main",
     position: 29,
   },
   {
@@ -168,7 +168,7 @@ export const patterns = [
     pattern: "A00A11A00A11A011",
     temp: 70,
     note: "16n",
-    level: "hard",
+    level: "main",
     position: 28,
   },
   {
@@ -176,7 +176,7 @@ export const patterns = [
     pattern: "1001x1100100x111",
     temp: 70,
     note: "16n",
-    level: "hard",
+    level: "main",
     position: 12,
   },
   {
@@ -184,7 +184,7 @@ export const patterns = [
     pattern: "1001101101011011",
     temp: 70,
     note: "16n",
-    level: "hard",
+    level: "main",
     position: 13,
   },
   {
@@ -192,7 +192,7 @@ export const patterns = [
     pattern: "100110h00110",
     temp: 80,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 14,
   },
 
@@ -201,7 +201,7 @@ export const patterns = [
     pattern: "A00110x01111",
     temp: 70,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 15,
   },
 
@@ -210,7 +210,7 @@ export const patterns = [
     pattern: "A0A0c011",
     temp: 70,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 16,
   },
   {
@@ -218,7 +218,7 @@ export const patterns = [
     pattern: "A0A0c111",
     temp: 70,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 17,
   },
   {
@@ -226,7 +226,7 @@ export const patterns = [
     pattern: "A011A011",
     temp: 70,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 18,
   },
   {
@@ -234,7 +234,7 @@ export const patterns = [
     pattern: "c0A0c0A0",
     temp: 70,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 19,
   },
   {
@@ -242,7 +242,7 @@ export const patterns = [
     pattern: "ccA0A0cA0AccA0cc",
     temp: 70,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 24,
   },
   {
@@ -250,7 +250,7 @@ export const patterns = [
     pattern: "c011c010",
     temp: 100,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 20,
   },
   {
@@ -258,7 +258,7 @@ export const patterns = [
     pattern: "A001x0A00110x111",
     temp: 70,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 21,
   },
   {
@@ -266,7 +266,7 @@ export const patterns = [
     pattern: "10x111x1",
     temp: 70,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 22,
   },
   {
@@ -274,7 +274,7 @@ export const patterns = [
     pattern: "c0cc10ccc0cc10cc",
     temp: 100,
     note: "16n",
-    level: "other",
+    level: "custom",
     position: 23,
   },
   {
@@ -282,7 +282,7 @@ export const patterns = [
     pattern: "A000x0ccccA0xccc",
     temp: 70,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 25,
   },
   {
@@ -290,7 +290,7 @@ export const patterns = [
     pattern: "1111x11A0A11x111",
     temp: 70,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 26,
   },
   {
@@ -298,7 +298,7 @@ export const patterns = [
     pattern: "A01111",
     temp: 70,
     note: "8n",
-    level: "other",
+    level: "custom",
     position: 27,
   },
 ];

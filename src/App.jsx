@@ -5,6 +5,8 @@ import HomePage from "./pages/HomePage";
 import useWakeLock from "./hooks/useWakeLock";
 import { Box } from "@mui/material";
 import LearnPage from "./pages/LearnPage";
+import EditorPage from "./pages/EditorPage";
+import ListPage from "./pages/ListPage";
 
 function App() {
   useWakeLock();
@@ -24,6 +26,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/learn" element={<LearnPage />} />
+          <Route path="/create" element={<EditorPage />} />
+          <Route path="/patterns" element={<ListPage level={"main"} />} />
+          <Route path="/custom" element={<ListPage level={"custom"} />} />
           <Route path="/pattern/:beatPattern" element={<PatternPage />} />
         </Routes>
       </Box>

@@ -15,7 +15,7 @@ function LearnPage() {
   const { cycleCount, resetCycle } = useCycle();
   const [currentPatternIndex, setCurrentPatternIndex] = useState(0);
   const [title, setTitle] = useState("Выбор боя");
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
