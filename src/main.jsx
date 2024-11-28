@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { ConfigProvider } from "./ConfigProvider.jsx";
 import { CycleProvider } from "./CycleProvider.jsx";
 
@@ -19,12 +19,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <YandexMetrika />
       </React.Suspense>
     )}
-    <HashRouter>
+    <BrowserRouter>
       <ConfigProvider>
         <CycleProvider>
           <App />
         </CycleProvider>
       </ConfigProvider>
-    </HashRouter>
+    </BrowserRouter>
   </React.StrictMode>,
 );

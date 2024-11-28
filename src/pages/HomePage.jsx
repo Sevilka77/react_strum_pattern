@@ -47,6 +47,7 @@ function HomePage() {
           {/* Основной заголовок */}
           <Typography
             variant="h2"
+            component="h1"
             sx={{
               fontWeight: 700,
               margin: "1rem 0",
@@ -101,7 +102,7 @@ function HomePage() {
             }}
           >
             <CardContent>
-              <Typography variant="h5" component="div">
+              <Typography variant="h5" component="h2">
                 Создай свой бой
               </Typography>
 
@@ -139,7 +140,7 @@ function HomePage() {
             }}
           >
             <CardContent>
-              <Typography variant="h5" component="div">
+              <Typography variant="h5" component="h2">
                 Тренировка
               </Typography>
 
@@ -177,7 +178,7 @@ function HomePage() {
             }}
           >
             <CardContent>
-              <Typography variant="h5" component="div">
+              <Typography variant="h5" component="h2">
                 Основные бои
               </Typography>
 
@@ -213,7 +214,7 @@ function HomePage() {
             }}
           >
             <CardContent>
-              <Typography variant="h5" component="div">
+              <Typography variant="h5" component="h2">
                 Пользовательские бои
               </Typography>
 

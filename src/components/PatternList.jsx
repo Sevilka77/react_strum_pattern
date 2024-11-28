@@ -65,11 +65,14 @@ const PatternListItem = ({ pattern, index }) => {
           onBlur={handleBlur}
           tabIndex={0} // Это позволяет фокусировать элемент с клавиатуры
           className={focusedCardIndex === index ? "Mui-focused" : ""}
-          component={Link} // Указываем, что Typography будет ссылкой
-          to={`/pattern/${pattern.pattern}`}
-          sx={{ textDecoration: "none" }}
+          component="h3"
         >
-          {pattern.title}
+          <Link
+            to={`/pattern/${pattern.pattern}`} // Ссылка на маршрут
+            style={{ textDecoration: "none", color: "inherit" }} // Сброс стилей ссылки
+          >
+            {pattern.title}
+          </Link>
         </TitleTypography>
 
         <Box sx={{ position: "relative", width: "100%" }}>

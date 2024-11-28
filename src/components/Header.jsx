@@ -19,9 +19,9 @@ const Header = memo(function Header({ title }) {
       case "/create":
         return `${title}`;
       case "/patterns":
-        return `Основные бои`;
+        return `Основные гитарные бои`;
       case "/custom":
-        return `Пользовтательские бои`;
+        return `Пользовтательские гитарные бои`;
       default:
         return `Текущий бой: ${title}`; // Название по умолчанию
     }
