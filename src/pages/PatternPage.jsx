@@ -5,11 +5,10 @@ const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
 
 import PatternEdit from "../components/PatternEdit";
 
-import { useConfig } from "../useConfig";
+import { useConfig } from "../hooks/useConfig";
 import { useEffect, useState } from "react";
 import ControlFooter from "../components/ControlFooter"; // Исправлено имя компонента
-import { patterns } from "../patterns";
-// import VolumeControls from "../components/VolumeControl";
+import { patterns } from "../provider/patterns";
 
 function PatternPage() {
   const location = useLocation();

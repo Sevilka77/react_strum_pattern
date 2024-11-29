@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { memo } from "react";
-import { useConfig } from "../useConfig";
+import { useConfig } from "../hooks/useConfig";
 
 import { Stack, Button, TextField } from "@mui/material";
 import { Minus, Plus } from "lucide-react";

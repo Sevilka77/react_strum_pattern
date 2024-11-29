@@ -1,4 +1,4 @@
-import { patterns } from "../patterns";
+import { patterns } from "../provider/patterns";
 import { Typography, Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { styled } from "@mui/material/styles";
@@ -47,7 +47,7 @@ const PatternListItem = ({ pattern, index }) => {
   };
 
   return (
-    <Grid item size={{ xs: 12, sm: 4 }}>
+    <Grid size={{ xs: 12, sm: 4 }}>
       <Box
         sx={{
           display: "flex",

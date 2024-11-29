@@ -3,10 +3,10 @@ import { lazy, Suspense } from "react";
 
 const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
 
-import { useConfig } from "../useConfig";
+import { useConfig } from "../hooks/useConfig";
 import { useEffect } from "react";
 import ControlFooter from "../components/ControlFooter";
-import { learnPatterns } from "../learnPatterns";
+import { learnPatterns } from "../provider/learnPatterns";
 
 import PatternEdit from "../components/PatternEdit";
 

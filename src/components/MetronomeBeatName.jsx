@@ -35,6 +35,7 @@ export default function MetronomeBeatName({ id, noteDuration }) {
   return (
     <Typography
       variant="h4"
+      component="p"
       sx={{
         textAlign: "center",
         color: color,

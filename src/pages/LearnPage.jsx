@@ -3,11 +3,11 @@ import { lazy, Suspense } from "react";
 
 const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
 
-import { useConfig } from "../useConfig";
+import { useConfig } from "../hooks/useConfig";
 import { useEffect, useState } from "react";
 import ControlFooter from "../components/ControlFooter";
-import { learnPatterns } from "../learnPatterns";
-import { useCycle } from "../useCycle";
+import { learnPatterns } from "../provider/learnPatterns";
+import { useCycle } from "../hooks/useCycle";
 import { Snackbar, Typography } from "@mui/material";
 
 function LearnPage() {

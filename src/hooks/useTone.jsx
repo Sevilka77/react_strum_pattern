@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import { useCycle } from "../useCycle";
+import { useEffect, useRef } from "react";
+import { useCycle } from "../hooks/useCycle";
 import * as Tone from "tone";
-import click1 from "./click1.wav";
-import click2 from "./click2.wav";
+import click1 from "../assets/samples/click1.wav";
+import click2 from "../assets/samples/click2.wav";
 
 const chords = [
   ["320003", "G", "g"],
@@ -373,34 +373,34 @@ const playMetronome = (
   clickTaktBeat,
   noteDuration,
 ) => {
-  if (isMetronomeSound) {
-    if (clickTaktBeat && index === 0) {
-      samplesClick["click2"].start(time); // Звук для такта
-    } else {
-      if (noteDuration === "4n") {
-        samplesClick["click1"].start(time);
-      } else if (noteDuration === "8n") {
-        if (index % 2 === 0) {
-          if (clickMainBeat) {
-            samplesClick["click1"].start(time);
-          }
-        } else {
-          if (clickSubbeat) {
-            samplesClick["click1"].start(time);
-          }
+  if (!isMetronomeSound) return;
+
+  if (clickTaktBeat && index === 0) {
+    samplesClick["click2"].start(time); // Звук для такта
+  } else {
+    if (noteDuration === "4n") {
+      samplesClick["click1"].start(time);
+    } else if (noteDuration === "8n") {
+      if (index % 2 === 0) {
+        if (clickMainBeat) {
+          samplesClick["click1"].start(time);
         }
-      } else if (noteDuration === "16n") {
-        if (index % 4 === 0) {
-          if (clickMainBeat) {
-            samplesClick["click1"].start(time);
-          }
-        } else {
-          if (clickSubbeat) {
-            samplesClick["click1"].start(time);
-          }
+      } else {
+        if (clickSubbeat) {
+          samplesClick["click1"].start(time);
         }
-      } // Звук для бита
-    }
+      }
+    } else if (noteDuration === "16n") {
+      if (index % 4 === 0) {
+        if (clickMainBeat) {
+          samplesClick["click1"].start(time);
+        }
+      } else {
+        if (clickSubbeat) {
+          samplesClick["click1"].start(time);
+        }
+      }
+    } // Звук для бита
   }
 };
 
@@ -435,8 +435,8 @@ function countSteps(beatPattern) {
 
 // Хук useTone для управления воспроизведением звуков
 export default function useTone(config) {
-  const { incrementCycle, resetCycle } = useCycle();
-  const [activeBeat, setActiveBeat] = useState(0); // Состояние активного бита
+  const { incrementCycle, resetCycle, setBeat } = useCycle();
+  // Состояние активного бита
 
   const seqRef = useRef(null); // Ссылка на объект Tone.Sequence
 
@@ -448,15 +448,17 @@ export default function useTone(config) {
     Tone.getTransport().bpm.value = config.tempo || 120;
 
     const steps = countSteps(config.beatPattern);
-    console.log(steps);
+    console.debug(steps);
     // const durations = calcDurations(steps, config.noteDuration);
 
     const seq = new Tone.Sequence(
       (time, index) => {
         const sound = steps[index].instructions;
+
         Tone.getDraw().schedule(() => {
-          setActiveBeat(index);
+          setBeat(index);
         }, time);
+
         playInstruction(sound, time, config.isBeatSound);
 
         playMetronome(
@@ -468,6 +470,7 @@ export default function useTone(config) {
           config.clickTaktBeat,
           config.noteDuration,
         );
+
         if (index === steps.length - 1) {
           incrementCycle(); // Увеличиваем цикл, когда начинается новый
         }
@@ -506,8 +509,9 @@ export default function useTone(config) {
       });
     } else {
       Tone.getTransport().stop();
+      setBeat(null);
     }
-  }, [config.isPlaying]);
+  }, [config.isPlaying, setBeat]);
 
-  return config.isPlaying ? activeBeat : null;
+  return;
 }

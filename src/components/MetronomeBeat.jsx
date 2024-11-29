@@ -13,6 +13,7 @@ const MetronomeBeatNM = ({ icon, active }) => {
   return (
     <Typography
       variant="h1"
+      component="p"
       sx={{
         display: "flex",
         alignItems: "center",

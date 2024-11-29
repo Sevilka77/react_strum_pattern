@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { patterns } from "../patterns";
+import { patterns } from "../provider/patterns";
 
 // Компонент для добавления JSON-LD схемы
 const Schema = () => {

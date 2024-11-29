@@ -16,9 +16,11 @@ import {
   XUpIcon,
   XIcon,
 } from "./Icons";
+import { useCycle } from "../hooks/useCycle";
 
-const MetronomeNM = ({ noteDuration, beatPattern, activeBeat }) => {
+const MetronomeNM = ({ noteDuration, beatPattern }) => {
   const beats = beatPattern;
+  const { activeBeat } = useCycle();
 
   // Вычисляем иконки один раз для всех тактов
   const icons = useMemo(() => {
@@ -80,8 +82,6 @@ const MetronomeNM = ({ noteDuration, beatPattern, activeBeat }) => {
             justifyContent: "center",
             alignItems: "center",
             minWidth: "max-content",
-
-            // border: "1px solid #60ff90",
           }}
         >
           <MetronomeBeatName id={index} noteDuration={noteDuration} />

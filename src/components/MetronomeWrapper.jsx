@@ -1,13 +1,12 @@
 import Metronome from "./Metronome";
 import useTone from "../hooks/useTone";
-import { useConfig } from "../useConfig";
+import { useConfig } from "../hooks/useConfig";
 import { useMemo } from "react";
 
 function MetronomeWrapper() {
   const { config } = useConfig();
   const { beatPattern, noteDuration } = config;
-
-  const activeBeat = useTone(config);
+  useTone(config);
 
   const memoizedBeatPattern = useMemo(
     () => beatPattern.split(""),
@@ -19,7 +18,6 @@ function MetronomeWrapper() {
     <Metronome
       noteDuration={memoizedNoteDuration}
       beatPattern={memoizedBeatPattern}
-      activeBeat={activeBeat}
     />
   );
 }

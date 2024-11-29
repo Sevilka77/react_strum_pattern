@@ -1,4 +1,4 @@
-import { useConfig } from "../useConfig";
+import { useConfig } from "../hooks/useConfig";
 
 import TempoSelector from "./TempoSelector";
 import SettingsDialog from "./Settings";
