@@ -3,10 +3,6 @@ import { useMemo } from "react";
 import { ThemeProvider } from "@mui/system";
 import { createTheme, CssBaseline, GlobalStyles } from "@mui/material";
 import { responsiveFontSizes } from "@mui/material/styles";
-import "@fontsource/inter/400.css"; // Используем только веса 400 и 700 для Inter
-import "@fontsource/inter/700.css";
-import "@fontsource/montserrat/400.css"; // Используем только веса 400 и 600 для Montserrat
-import "@fontsource/montserrat/600.css";
 
 const ThemeContextProvider = ({ children }) => {
   // Создаем тему с фиксированными значениями, без переключения

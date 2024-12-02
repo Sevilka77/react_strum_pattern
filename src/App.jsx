@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import React from "react";
+import { Suspense, lazy } from "react";
 import PatternPage from "./pages/PatternPage";
 import ThemeContextProvider from "./provider/ThemeContextProvider";
 import HomePage from "./pages/HomePage";
@@ -15,7 +15,7 @@ import { CycleProvider } from "./provider/CycleProvider";
 // eslint-disable-next-line react-refresh/only-export-components
 const YandexMetrika =
   import.meta.env.MODE === "production"
-    ? React.lazy(() => import("./components/YandexMetrika.jsx"))
+    ? lazy(() => import("./components/YandexMetrika.jsx"))
     : null;
 
 const App = () => {
@@ -23,9 +23,9 @@ const App = () => {
   return (
     <ThemeContextProvider>
       {YandexMetrika && (
-        <React.Suspense fallback={<div>Loading...</div>}>
+        <Suspense>
           <YandexMetrika />
-        </React.Suspense>
+        </Suspense>
       )}
       <BrowserRouter>
         <ConfigProvider>
