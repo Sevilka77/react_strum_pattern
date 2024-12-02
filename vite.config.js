@@ -29,7 +29,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        // Manual chunks
+        assetFileNames: "[name][extname]",
         manualChunks: {
           vendor: ["react", "react-dom"],
           ui: ["@mui/material"],

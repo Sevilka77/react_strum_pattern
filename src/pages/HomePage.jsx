@@ -141,7 +141,7 @@ function HomePage() {
           >
             <CardContent>
               <Typography variant="h5" component="h2">
-                Тренировка
+                Тренировка гитарного чёса
               </Typography>
 
               <Typography variant="body2">

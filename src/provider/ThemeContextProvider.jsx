@@ -3,13 +3,10 @@ import { useMemo } from "react";
 import { ThemeProvider } from "@mui/system";
 import { createTheme, CssBaseline, GlobalStyles } from "@mui/material";
 import { responsiveFontSizes } from "@mui/material/styles";
-import "@fontsource/inter/300.css"; // Импортируем шрифты
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
+import "@fontsource/inter/400.css"; // Используем только веса 400 и 700 для Inter
 import "@fontsource/inter/700.css";
-import "@fontsource/montserrat/400.css";
+import "@fontsource/montserrat/400.css"; // Используем только веса 400 и 600 для Montserrat
 import "@fontsource/montserrat/600.css";
-import "@fontsource/montserrat/700.css";
 
 const ThemeContextProvider = ({ children }) => {
   // Создаем тему с фиксированными значениями, без переключения
@@ -110,7 +107,7 @@ const ThemeContextProvider = ({ children }) => {
             {
               fontFamily: "Montserrat",
               src: `url('/assets/montserrat.woff2') format('woff2')`,
-              fontDisplay: "swap", // Используем swap, чтобы текст сразу был виден
+              fontDisplay: "swap",
             },
             {
               fontFamily: "Inter",
