@@ -221,7 +221,7 @@ function playStringSound(sample, type, stringIndex, time, db, offset) {
   player.start(time + offset, 0.05);
   console.log();
 }
-const ActionType = {
+const actionType = {
   down: {
     type: "play",
     spread: 4,
@@ -421,7 +421,7 @@ function countSteps(beatPattern) {
     const action = getAction(index);
 
     const offsets = calculateStringOffsets(index % 2 === 0 ? "down" : "up");
-    const actionData = ActionType[action] || {};
+    const actionData = actionType[action] || {};
     const dbs = calculateStringVolumes(actionData);
     const instructions = samples.map((sample, sampleIndex) => ({
       type: actionData.type,

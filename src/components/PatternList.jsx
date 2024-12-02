@@ -52,7 +52,7 @@ const PatternListItem = ({ pattern, index }) => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           gap: 1,
           height: "100%",
         }}
@@ -75,8 +75,8 @@ const PatternListItem = ({ pattern, index }) => {
           </Link>
         </TitleTypography>
 
-        <Box sx={{ position: "relative", width: "100%" }}>
-          <BeatImage beatString={pattern.pattern} />
+        <Box sx={{ position: "relative", height: "24px", maxHeight: "100%" }}>
+          <BeatImage title={pattern.title} beatString={pattern.pattern} />
         </Box>
       </Box>
     </Grid>

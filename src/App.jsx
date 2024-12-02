@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom"; // Убедитесь, что импортируете только Routes
 import PatternPage from "./pages/PatternPage";
-import ThemeContextProvider from "./components/ThemeContextProvider";
+import ThemeContextProvider from "./provider/ThemeContextProvider";
 import HomePage from "./pages/HomePage";
 import useWakeLock from "./hooks/useWakeLock";
 import { Box } from "@mui/material";

@@ -1,98 +1,109 @@
-import {
-  ArrowD,
-  ArrowDB,
-  ArrowDH,
-  ArrowU,
-  ArrowUH,
-  ArrowUB,
-  XDownIcon,
-  XUpIcon,
-  XIcon,
-} from "./Icons"; // Замени на путь к своим иконкам
+import { useTheme } from "@mui/material";
+import { ArrowPath, XPath, XArrowPath, HalfArrowPath } from "./Icons";
+export default function BeatImage({ beatString, title }) {
+  const theme = useTheme();
+  const iconSize = 24;
+  const beatNumbers = beatString.length;
 
-export default function BeatImage({ beatString, fill }) {
-  const iconSize = 24; // Размер иконок
+  const beatPath = beatString.split("").map((beat, index) => {
+    const transform = index % 2 === 0 ? "" : "rotate(180 12 12)";
+    const transformHalfBArrow = index % 2 === 0 ? "" : "rotate(180 12 6.5)";
+    const transformHalfHArrow =
+      index % 2 === 0 ? "translate(0 11)" : "rotate(180 12 12)";
+    const translate = `translate(${iconSize * index} 0)`;
 
-  const beatIcons = beatString.split("").map((beat, index) => {
-    let IconComponent;
-    let iconColor = "primary";
-    let iconFill = fill && "currentColor";
     switch (beat) {
       case "0":
-        iconColor = "disabled";
-        IconComponent =
-          index % 2 === 0 ? (
-            <ArrowD color={iconColor} sx={{ fill: iconFill }} />
-          ) : (
-            <ArrowU color={iconColor} sx={{ fill: iconFill }} />
-          );
-
-        break;
-      case "b":
-        IconComponent =
-          index % 2 === 0 ? (
-            <ArrowDB color={iconColor} sx={{ fill: iconFill }} />
-          ) : (
-            <ArrowUB color={iconColor} sx={{ fill: iconFill }} />
-          );
-
-        break;
-      case "h":
-        IconComponent =
-          index % 2 === 0 ? (
-            <ArrowDH color={iconColor} sx={{ fill: iconFill }} />
-          ) : (
-            <ArrowUH color={iconColor} sx={{ fill: iconFill }} />
-          );
-
-        break;
+        return (
+          <g
+            key={index}
+            fill="none"
+            stroke={theme.palette.action.disabled}
+            transform={`${translate} ${transform}`}
+          >
+            {ArrowPath}
+          </g>
+        );
       case "1":
-        IconComponent =
-          index % 2 === 0 ? (
-            <ArrowD color={iconColor} sx={{ fill: iconFill }} />
-          ) : (
-            <ArrowU color={iconColor} sx={{ fill: iconFill }} />
-          );
-
-        break;
-      case "A":
-        iconColor = "warning";
-        IconComponent =
-          index % 2 === 0 ? (
-            <ArrowD color={iconColor} sx={{ fill: iconFill }} />
-          ) : (
-            <ArrowU color={iconColor} sx={{ fill: iconFill }} />
-          );
-
-        break;
+        return (
+          <g
+            key={index}
+            fill="none"
+            stroke={theme.palette.primary.main}
+            transform={`${translate} ${transform}`}
+          >
+            {ArrowPath}
+          </g>
+        );
       case "x":
-        IconComponent = <XIcon color={iconColor} sx={{ fill: iconFill }} />;
-
-        break;
+        return (
+          <g
+            key={index}
+            fill="none"
+            stroke={theme.palette.primary.main}
+            transform={`${translate} ${transform}`}
+          >
+            {XPath}
+          </g>
+        );
+      case "A":
+        return (
+          <g
+            key={index}
+            fill="none"
+            stroke={theme.palette.warning.main}
+            transform={`${translate} ${transform}`}
+          >
+            {ArrowPath}
+          </g>
+        );
       case "c":
-        IconComponent =
-          index % 2 === 0 ? (
-            <XDownIcon color={iconColor} sx={{ fill: iconFill }} />
-          ) : (
-            <XUpIcon color={iconColor} sx={{ fill: iconFill }} />
-          );
-        break;
-      default:
-        IconComponent = null;
+        return (
+          <g
+            key={index}
+            fill="none"
+            stroke={theme.palette.primary.main}
+            transform={`${translate} ${transform}`}
+          >
+            {XArrowPath}
+          </g>
+        );
+      case "b":
+        return (
+          <g
+            key={index}
+            fill="none"
+            stroke={theme.palette.primary.main}
+            transform={`${translate} ${transformHalfBArrow}`}
+          >
+            {HalfArrowPath}
+          </g>
+        );
+      case "h":
+        return (
+          <g
+            key={index}
+            fill="none"
+            stroke={theme.palette.primary.main}
+            transform={`${translate} ${transformHalfHArrow}`}
+          >
+            {HalfArrowPath}
+          </g>
+        );
     }
-
-    return (
-      <svg
-        key={index}
-        xmlns="http://www.w3.org/2000/svg"
-        width={iconSize}
-        height={iconSize}
-        viewBox={`0 0 ${iconSize} ${iconSize}`}
-      >
-        <g>{IconComponent}</g>
-      </svg>
-    );
   });
-
-  return beatIcons;
+  return (
+    <svg
+      key={beatString}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox={`0 0 ${iconSize * beatNumbers} ${iconSize}`}
+      style={{ maxHeight: "100%" }}
+      role="img"
+      aria-labelledby="title desc"
+    >
+      <title id="title">{title}</title>
+      <desc id="desc">Cхема гитарного боя: {title}</desc>
+      {beatPath}
+    </svg>
+  );
 }
