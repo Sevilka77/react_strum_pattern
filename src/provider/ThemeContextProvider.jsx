@@ -100,23 +100,7 @@ const ThemeContextProvider = ({ children }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* Глобальные стили для шрифтов */}
-      <GlobalStyles
-        styles={{
-          "@font-face": [
-            {
-              fontFamily: "Montserrat",
-              src: `url('/assets/montserrat.woff2') format('woff2')`,
-              fontDisplay: "swap",
-            },
-            {
-              fontFamily: "Inter",
-              src: `url('/assets/inter.woff2') format('woff2')`,
-              fontDisplay: "swap",
-            },
-          ],
-        }}
-      />
+      <GlobalStyles />
       <CssBaseline />
       {children}
     </ThemeProvider>
