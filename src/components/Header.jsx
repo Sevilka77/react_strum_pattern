@@ -34,23 +34,14 @@ const Header = memo(function Header({ title }) {
   return (
     <AppBar
       position="absolute"
+      elevation={0}
       color="transparent"
-      sx={{ top: 0, left: 0, right: 0, boxShadow: "none" }}
+      sx={{ top: 0, left: 0, right: 0 }}
     >
       <Toolbar variant="dense">
         {/* Если мы на главной странице, отображаем только /* Онлайн тренажер гитарного боя */}
         {location.pathname === "/" ? (
-          <>
-            {/* <Typography
-              variant="h4"
-              component="h1"
-              color="#917AEA"
-              align="center"
-              sx={{ flexGrow: 1 }}
-            >
-              {getTitle()}{" "}
-            </Typography> */}
-          </>
+          <>{}</>
         ) : (
           <>
             <IconButton

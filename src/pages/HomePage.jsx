@@ -18,13 +18,13 @@ function HomePage() {
   return (
     <>
       <Header />
-      <Container component="main" maxWidth="xl" sx={{ minHeight: "100vh" }}>
+      <Container component="main" maxWidth="xl">
         <Box
           sx={{
             my: {
               xs: 1, // Мобильные устройства
               sm: 2, // Средние устройства
-              md: 14, // Большие устройства
+              md: 3, // Большие устройства
             },
             color: "#FFFFFF", // Светлый текст
             textAlign: "center", // Выравнивание по центру
