@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 
-import Footer from "../components/Footer";
 import Header from "../components/Header";
 import { Container } from "@mui/material";
 
@@ -10,12 +9,21 @@ function ListPage({ level }) {
   return (
     <>
       <Header />
-      <Container component="main" maxWidth="xl" sx={{ minHeight: "100vh" }}>
+      <Container
+        component="main"
+        sx={{
+          display: "flex",
+          minHeight: "80dvh",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "flex-start",
+        }}
+        maxWidth="xl"
+      >
         <Suspense fallback={<div>Загрузка...</div>}>
           <PatternList level={level} />
         </Suspense>
       </Container>
-      <Footer />
     </>
   );
 }

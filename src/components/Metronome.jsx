@@ -65,7 +65,6 @@ const MetronomeNM = ({ noteDuration, beatPattern }) => {
 
   return (
     <Grid
-      component="main"
       container
       columns={8}
       alignItems="center" // Вертикальное выравнивание по центру

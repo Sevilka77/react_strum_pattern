@@ -8,22 +8,13 @@ import { useEffect, useState } from "react";
 import ControlFooter from "../components/ControlFooter";
 import { learnPatterns } from "../provider/learnPatterns";
 import { useCycle } from "../hooks/useCycle";
-import { Snackbar, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 
 function LearnPage() {
   const { dispatch } = useConfig();
   const { cycleCount, resetCycle } = useCycle();
   const [currentPatternIndex, setCurrentPatternIndex] = useState(0);
   const [title, setTitle] = useState("Выбор боя");
-  const [open, setOpen] = useState(false);
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
 
   useEffect(() => {
     const firstPattern = learnPatterns[0];
@@ -59,36 +50,22 @@ function LearnPage() {
   return (
     <>
       <Header title={title} />
-      <Snackbar
-        color="#0C0F2A"
-        open={open}
-        autoHideDuration={5000}
-        anchorOrigin={{
-          vertical: "top", // Вертикальное расположение (top, bottom)
-          horizontal: "center", // Горизонтальное расположение (left, center, right)
+      <Container
+        component="main"
+        sx={{
+          display: "flex",
+          minHeight: "80dvh",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
         }}
-        onClose={handleClose}
+        maxWidth="xl"
       >
-        <Typography
-          component="h2"
-          variant="body1"
-          color="#39F1FF"
-          sx={{
-            position: "relative",
-            textShadow: `0 0 42px `,
-            textAlign: "center",
-          }}
-        >
-          Пройди {learnPatterns.length} упражнения, каждое из которых направлено
-          на развитие разных аспектов ритма. Эти упражнения помогут тебе не
-          только размяться, но и развить ощущение ритма.
-        </Typography>
-      </Snackbar>
-
-      <Suspense fallback={<div>Загрузка...</div>}>
-        <MetronomeWrapper />
-      </Suspense>
-      <ControlFooter />
+        <Suspense fallback={<div>Загрузка...</div>}>
+          <MetronomeWrapper />
+        </Suspense>
+        <ControlFooter />
+      </Container>
     </>
   );
 }

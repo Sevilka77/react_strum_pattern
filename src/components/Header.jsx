@@ -1,4 +1,4 @@
-import { Typography, AppBar, Toolbar, IconButton } from "@mui/material";
+import { Typography, AppBar, Toolbar, IconButton, Avatar } from "@mui/material";
 
 import { memo, useCallback, useEffect } from "react";
 import { MoveLeftIcon } from "lucide-react";
@@ -15,7 +15,7 @@ const Header = memo(function Header({ title }) {
       case "/":
         return "Онлайн тренажер гитарного боя"; // Заголовок для главной страницы
       case "/learn":
-        return `${title}`;
+        return `Тренировка гитарного боя`;
       case "/create":
         return `${title}`;
       case "/patterns":
@@ -33,7 +33,7 @@ const Header = memo(function Header({ title }) {
 
   return (
     <AppBar
-      position="absolute"
+      position="sticky"
       elevation={0}
       color="transparent"
       sx={{ top: 0, left: 0, right: 0 }}
@@ -44,6 +44,13 @@ const Header = memo(function Header({ title }) {
           <>{}</>
         ) : (
           <>
+            <Avatar
+              src="../favicon-32x32.png"
+              alt="Logo"
+              // sx={{ width: 40, height: 40, marginRight: 2 }}
+              onClick={() => navigate("/")}
+            />
+
             <IconButton
               aria-label="menu"
               color="#25111b"

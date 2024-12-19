@@ -22,7 +22,7 @@ const ThemeContextProvider = ({ children }) => {
         fontFamily: "Inter, sans-serif", // Основной шрифт
         h1: {
           fontFamily: "Montserrat, sans-serif",
-          fontWeight: 600,
+          fontWeight: 700,
           color: "#917AEA",
         },
         h2: {

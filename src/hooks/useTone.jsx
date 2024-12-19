@@ -196,15 +196,21 @@ const stringPlayers = Array.from({ length: 6 }, (_, i) =>
 );
 
 function playStringSound(sample, type, stringIndex, time, db, offset) {
-  const modifiedSample =
-    type === "play"
-      ? sample.concat("Z")
-      : type === "mute"
-        ? sample.replace(/[^o]/g, "F").concat("Z")
-        : type === "chop"
-          ? sample.concat("C")
-          : sample;
+  let modifiedSample;
 
+  switch (type) {
+    case "play":
+      modifiedSample = sample.concat("Z");
+      break;
+    case "mute":
+      modifiedSample = sample.replace(/[^o]/g, "F").concat("Z");
+      break;
+    case "chop":
+      modifiedSample = sample.concat("C");
+      break;
+    default:
+      modifiedSample = sample;
+  }
   if (!gSamples.has(modifiedSample)) {
     console.log(`Sample ${modifiedSample} not loaded, loading now...`);
     loadSample(modifiedSample);
@@ -219,14 +225,13 @@ function playStringSound(sample, type, stringIndex, time, db, offset) {
   player.buffer = gSamples.get(modifiedSample);
   player.volume.value = db;
   player.start(time + offset, 0.05);
-  console.log();
 }
 const actionType = {
   down: {
     type: "play",
     spread: 4,
-    bias: [6, 5, 1, 2, 3, 4],
-    volumes: [-4, -3, 0, -3, -3, -5],
+    bias: [1, 2, 3, 4, 5, 6],
+    volumes: [-6, -4, 0, -3, -3, -5],
   },
   downA: {
     type: "play",
@@ -249,8 +254,8 @@ const actionType = {
   up: {
     type: "play",
     spread: 4,
-    bias: [6, 5, 1, 2, 3, 4],
-    volumes: [-4, -3, 0, -3, -3, -5],
+    bias: [1, 2, 3, 4, 5, 6],
+    volumes: [-5, -4, 0, -3, -3, -5],
   },
   upA: {
     type: "play",
@@ -303,7 +308,7 @@ function calculateStringVolumes(actionData) {
   });
 }
 function calculateStringOffsets(direction) {
-  const m = 0.003; // Задержка между строками
+  const m = 0.004; // Задержка между строками
   const offsetResults = [];
   const maxStringIndex = 5; // Максимальный индекс строки
 

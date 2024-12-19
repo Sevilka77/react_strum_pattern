@@ -9,6 +9,7 @@ import ControlFooter from "../components/ControlFooter";
 import { learnPatterns } from "../provider/learnPatterns";
 
 import PatternEdit from "../components/PatternEdit";
+import { Container } from "@mui/material";
 
 function EditorPage() {
   const { config, dispatch } = useConfig();
@@ -30,13 +31,25 @@ function EditorPage() {
   return (
     <>
       <Header title={"Рекдактор боя"} />
-      <Suspense fallback={<div>Загрузка...</div>}>
-        <MetronomeWrapper />
-      </Suspense>
+      <Container
+        component="main"
+        sx={{
+          display: "flex",
+          minHeight: "80dvh",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        maxWidth="xl"
+      >
+        <Suspense fallback={<div>Загрузка...</div>}>
+          <MetronomeWrapper />
+        </Suspense>
 
-      <PatternEdit beatPattern={config.beatPattern} dispatch={dispatch} />
+        <PatternEdit beatPattern={config.beatPattern} dispatch={dispatch} />
 
-      <ControlFooter />
+        <ControlFooter />
+      </Container>
     </>
   );
 }
