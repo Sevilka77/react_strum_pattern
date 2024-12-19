@@ -11,7 +11,7 @@ import { memo } from "react";
 const PatternEditNM = ({ beatPattern, dispatch }) => {
   const [beats, setBeats] = useState(beatPattern.split(""));
   const [open, setOpen] = useState(false);
-  const url = `${window.location.origin}/#/pattern/${beatPattern}`;
+  const url = `${window.location.origin}/pattern/${beatPattern}`;
 
   const copyToClip = async (url) => {
     await navigator.clipboard.writeText(url);
