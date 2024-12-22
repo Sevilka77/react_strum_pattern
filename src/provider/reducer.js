@@ -40,6 +40,7 @@ const setEditMode = (state, editMode) => ({
   ...state,
   editMode,
 });
+const setCurrentChord = (state, currentChord) => ({ ...state, currentChord });
 export default function reducer(state, action) {
   switch (action.type) {
     case "setTempo":
@@ -64,6 +65,8 @@ export default function reducer(state, action) {
       return setNoteDuration(state, action.data);
     case "setEditMode":
       return setEditMode(state, action.data);
+    case "setCurrentChord":
+      return setCurrentChord(state, action.data);
     default:
       return state;
   }

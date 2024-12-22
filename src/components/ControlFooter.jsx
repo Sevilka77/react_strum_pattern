@@ -6,6 +6,7 @@ import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { useEffect } from "react";
 import { PlayIcon, SquareIcon } from "./Icons";
 import * as Tone from "tone";
+import ChordChange from "./ChordChange";
 
 export default function ControlFooter() {
   const { config, dispatch } = useConfig();
@@ -43,6 +44,11 @@ export default function ControlFooter() {
         sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }} // Отступы и размеры
       />
       <TempoSelector />
+      <BottomNavigationAction
+        value="settings"
+        icon={<ChordChange />}
+        sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }} // Отступы и размеры
+      />
       <BottomNavigationAction
         value="settings"
         icon={<SettingsDialog />}

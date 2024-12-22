@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import viteRemoveConsole from "vite-plugin-remove-console";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,6 +15,7 @@ export default defineConfig({
         configFile: true,
       },
     }),
+    viteRemoveConsole(),
   ],
   base: "/",
   build: {

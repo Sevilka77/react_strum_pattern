@@ -18,6 +18,7 @@ export const ConfigProvider = ({ children }) => {
     clickSubbeat: false,
     clickTaktBeat: false,
     editMode: false,
+    currentChord: "Em",
   });
 
   // Мемоизируем значение контекста для предотвращения лишних рендеров

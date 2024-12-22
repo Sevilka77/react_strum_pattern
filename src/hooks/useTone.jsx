@@ -25,16 +25,16 @@ const players = {};
 
 const chords = [
   ["320003", "G", "g"],
-  ["002220", "A", "a"],
-  ["332010", "C", "c"],
-  ["200232", "D", "d"],
+  ["_02220", "A", "a"],
+  ["_32010", "C", "c"],
+  ["__0232", "D", "d"],
   ["022100", "E", "e"],
   ["133211", "F", "e"],
   ["133111", "Fm", "e"],
-  ["002210", "Am", "a"],
-  ["_00231", "Dm", "d"],
+  ["_02210", "Am", "a"],
+  ["__0231", "Dm", "d"],
   ["022000", "Em", "e"],
-  ["224432", "Bm", "aD"],
+  ["_24432", "Bm", "aD"],
 ];
 function generateSampleName(stringIndex, note) {
   return ""
@@ -298,7 +298,7 @@ function playStringSound(sample, type, time, db, offset) {
   if (players[modifiedSample].state === "started") {
     players[modifiedSample].stop(time);
   }
-  players[modifiedSample];
+  players[modifiedSample].fadeOut = 0.02;
   players[modifiedSample].volume.value = db;
   players[modifiedSample].start(time + offset, 0.05);
 }
@@ -485,7 +485,7 @@ const playMetronome = (
   }
 };
 
-function countSteps(beatPattern) {
+function countSteps(beatPattern, currentChord) {
   const soundMap = {
     0: () => "nothing", // Пауза
     1: (index) => (index % 2 === 0 ? "down" : "up"),
@@ -495,7 +495,7 @@ function countSteps(beatPattern) {
     h: (index) => (index % 2 === 0 ? "downH" : "upH"),
     b: (index) => (index % 2 === 0 ? "downB" : "upB"),
   };
-  const samples = getSamples("Fm");
+  const samples = getSamples(currentChord);
 
   return beatPattern.split("").map((beat, index) => {
     const getAction = soundMap[beat] || (() => "nothing");
@@ -527,8 +527,8 @@ export default function useTone(config) {
     }
 
     Tone.getTransport().bpm.value = config.tempo || 120;
-    const steps = countSteps(config.beatPattern);
-    //console.debug(steps);
+    const steps = countSteps(config.beatPattern, config.currentChord);
+    console.debug(steps);
     // const durations = calcDurations(steps, config.noteDuration);
 
     const seq = new Tone.Sequence(
@@ -579,6 +579,7 @@ export default function useTone(config) {
     config.clickMainBeat,
     config.clickSubbeat,
     config.clickTaktBeat,
+    config.currentChord,
   ]);
 
   // Старт/остановка воспроизведения
