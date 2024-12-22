@@ -384,7 +384,7 @@ function calculateStringVolumes(actionData) {
   });
 }
 function calculateStringOffsets(direction) {
-  const m = 0.004; // Задержка между строками
+  const m = 0.012; // Задержка между строками
   const offsetResults = [];
   const maxStringIndex = 5; // Максимальный индекс строки
 
