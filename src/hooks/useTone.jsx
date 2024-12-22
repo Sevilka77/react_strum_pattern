@@ -73,7 +73,7 @@ const loadChord = async (chordName) => {
   const chordData = chords.find((chord) => chord[1] === chordName);
 
   if (!chordData) {
-    console.debug(`Аккорд ${chordName} не найден!`);
+    //console.debug(`Аккорд ${chordName} не найден!`);
     return [];
   }
 
@@ -104,9 +104,9 @@ const loadChord = async (chordName) => {
         players[sample] = new Tone.Player(samplePath).connect(
           stringChannels[5 - stringIndex],
         );
-        console.debug(
-          `Sample ${sample} loaded and connected to string ${6 - stringIndex}`,
-        );
+        //console.debug(
+        //   `Sample ${sample} loaded and connected to string ${6 - stringIndex}`,
+        // );
       } catch (error) {
         console.error(`Error loading sample ${sample}:`, error);
         return null;
@@ -116,7 +116,7 @@ const loadChord = async (chordName) => {
   });
 
   await Promise.all(promises);
-  console.debug("Chord loaded successfully:", players);
+  //console.debug("Chord loaded successfully:", players);
 };
 const loadAllChords = async () => {
   // Проходим по всем аккордам
@@ -124,12 +124,12 @@ const loadAllChords = async () => {
     await Promise.all(
       chords.map(async (chord) => {
         const chordName = chord[1]; // Берем название аккорда (например, "G", "A" и т.д.)
-        console.debug(`Загружаем аккорд: ${chordName}`);
+        //console.debug(`Загружаем аккорд: ${chordName}`);
         await loadChord(chordName); // Загружаем аккорд по имени
-        console.debug(`Аккорд ${chordName} успешно загружен!`);
+        //console.debug(`Аккорд ${chordName} успешно загружен!`);
       }),
     );
-    console.debug("Все аккорды успешно загружены!");
+    //console.debug("Все аккорды успешно загружены!");
   } catch (error) {
     console.error("Ошибка при загрузке аккордов:", error);
   }
@@ -292,7 +292,7 @@ function playStringSound(sample, type, time, db, offset) {
       modifiedSample = sample;
   }
   if (!players[modifiedSample]) {
-    console.debug(`Player ${modifiedSample} not loaded`);
+    //console.debug(`Player ${modifiedSample} not loaded`);
     return;
   }
   if (players[modifiedSample].state === "started") {
@@ -412,7 +412,7 @@ function getSamples(chordName) {
   const chordData = chords.find((chord) => chord[1] === chordName);
 
   if (!chordData) {
-    console.debug(`Аккорд ${chordName} не найден!`);
+    //console.debug(`Аккорд ${chordName} не найден!`);
     return [];
   }
   // Получаем строку аккорда
@@ -528,7 +528,7 @@ export default function useTone(config) {
 
     Tone.getTransport().bpm.value = config.tempo || 120;
     const steps = countSteps(config.beatPattern);
-    console.debug(steps);
+    //console.debug(steps);
     // const durations = calcDurations(steps, config.noteDuration);
 
     const seq = new Tone.Sequence(
