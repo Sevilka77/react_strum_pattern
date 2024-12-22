@@ -384,7 +384,7 @@ function calculateStringVolumes(actionData) {
   });
 }
 function calculateStringOffsets(direction) {
-  const m = 0.012; // Задержка между строками
+  const m = 0.015; // Задержка между строками
   const offsetResults = [];
   const maxStringIndex = 5; // Максимальный индекс строки
 
@@ -399,7 +399,7 @@ function calculateStringOffsets(direction) {
     direction === "up" ? r >= endIndex : r <= endIndex;
     r += step, t++
   ) {
-    let offset = t * m;
+    let offset = t * m + 0.001 * Math.random();
 
     offsetResults[r] = offset;
   }
