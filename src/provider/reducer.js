@@ -36,6 +36,10 @@ const setClickTaktBeat = (state, clickTaktBeat) => ({
   ...state,
   clickTaktBeat,
 });
+const setEditMode = (state, editMode) => ({
+  ...state,
+  editMode,
+});
 export default function reducer(state, action) {
   switch (action.type) {
     case "setTempo":
@@ -58,6 +62,8 @@ export default function reducer(state, action) {
       return setClickTaktBeat(state, action.data);
     case "setNoteDuration":
       return setNoteDuration(state, action.data);
+    case "setEditMode":
+      return setEditMode(state, action.data);
     default:
       return state;
   }

@@ -14,12 +14,10 @@ function LearnPage() {
   const { dispatch } = useConfig();
   const { cycleCount, resetCycle } = useCycle();
   const [currentPatternIndex, setCurrentPatternIndex] = useState(0);
-  const [title, setTitle] = useState("Выбор боя");
 
   useEffect(() => {
     const firstPattern = learnPatterns[0];
     if (firstPattern) {
-      setTitle(firstPattern.title || "Выбор боя");
       dispatch({ type: "setBeatPattern", data: firstPattern.pattern });
       dispatch({ type: "setNoteDuration", data: firstPattern.note });
       dispatch({ type: "setTempo", data: firstPattern.temp });
@@ -41,7 +39,6 @@ function LearnPage() {
 
       if (nextPattern) {
         setCurrentPatternIndex(nextIndex); // Обновляем текущий индекс
-        setTitle(nextPattern.title || "Выбор боя"); // Обновляем заголовок
         dispatch({ type: "setBeatPattern", data: nextPattern.pattern }); // Обновляем паттерн
       }
     }
@@ -49,7 +46,7 @@ function LearnPage() {
 
   return (
     <>
-      <Header title={title} />
+      <Header />
       <Container
         component="main"
         sx={{

@@ -33,9 +33,6 @@ const App = () => {
             <Box
               sx={{
                 minHeight: "100dvh",
-
-                // background: "linear-gradient(120deg, #0C0F2A 0%, #2D0966 100%)", // пример градиента
-                background: "#121C1D",
               }}
             >
               <Routes>

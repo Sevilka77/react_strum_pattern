@@ -1,123 +1,121 @@
 import { useState } from "react";
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Snackbar,
-} from "@mui/material";
-import { DeleteIcon, ShareIcon } from "lucide-react";
+import { Menu, MenuItem, IconButton, ListItemIcon } from "@mui/material";
+import { DeleteIcon, WrenchIcon } from "lucide-react";
 import { ArrowD, ArrowDB, ArrowDH, XDownIcon, XIcon } from "./Icons";
 import { memo } from "react";
+import { useConfig } from "../hooks/useConfig";
 
-const PatternEditNM = ({ beatPattern, dispatch }) => {
-  const [beats, setBeats] = useState(beatPattern.split(""));
-  const [open, setOpen] = useState(false);
-  const url = `${window.location.origin}/pattern/${beatPattern}`;
+const PatternEditNM = ({ index }) => {
+  const { config, dispatch } = useConfig();
+  const pattern = config.beatPattern || "";
 
-  const copyToClip = async (url) => {
-    await navigator.clipboard.writeText(url);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openMenu = Boolean(anchorEl);
+
+  const updateBeatInPattern = (newValue) => {
+    const updatedPattern = pattern
+      .split("") // Преобразуем строку в массив
+      .map((char, i) => (i === index ? newValue : char)) // Изменяем нужный символ
+      .join("");
+    dispatch({ type: "setBeatPattern", data: updatedPattern });
   };
 
-  const handleClick = () => {
-    copyToClip(url);
-    setOpen(true);
-  };
+  const deleteBeatByIndex = () => {
+    if (index >= 0) {
+      const updatedPattern = pattern
+        .split("") // Преобразуем строку в массив символов
+        .filter((_, i) => i !== index) // Удаляем элемент по индексу
+        .join(""); // Преобразуем обратно в строку
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
+      dispatch({ type: "setBeatPattern", data: updatedPattern });
     }
-    setOpen(false);
   };
-
   const handleChange = (event) => {
-    const newBeats = [...beats]; // Создаем новый массив для обновления состояния
     if (["A", "1", "0", "x", "c", "h", "b"].includes(event)) {
-      newBeats.push(event);
+      updateBeatInPattern(event);
     } else if (event === "del") {
-      if (newBeats.length > 0) newBeats.pop();
+      deleteBeatByIndex();
     }
+    handleCloseMenu();
+  };
 
-    setBeats(newBeats); // Обновляем состояние beats
-    dispatch({ type: "setBeatPattern", data: newBeats.join("") });
+  const handleClickMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
   };
 
   return (
     <>
-      <BottomNavigation
-        sx={{
-          position: "fixed",
-          bottom: 56,
-          left: 0,
-          right: 0,
-          display: "flex",
-          justifyContent: "center",
-          alignContent: "flex-end",
-          flexWrap: "wrap",
-          height: "auto",
-        }} // Чтобы разместить элементы по краям
+      <IconButton
+        id="basic-button"
+        aria-controls={openMenu ? "basic-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={openMenu ? "true" : undefined}
+        onClick={handleClickMenu}
+        sx={{ borderRadius: "8px", border: "2px solid #4A434B", mt: 1 }}
       >
-        <BottomNavigationAction
-          onClick={() => handleChange("A")}
-          value="disable"
-          icon={<ArrowD color="warning" />}
-          sx={{ flex: "1 1 auto", p: 2 }} // Отступы и размеры
-        />
-        <BottomNavigationAction
-          onClick={() => handleChange("1")}
-          value="disable"
-          icon={<ArrowD color="primary" />}
-          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
-        />
-        <BottomNavigationAction
-          onClick={() => handleChange("c")}
-          value="disable"
-          icon={<XDownIcon color="primary" />}
-          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
-        />
-        <BottomNavigationAction
-          onClick={() => handleChange("b")}
-          value="disable"
-          icon={<ArrowDB color="primary" />}
-          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
-        />
-        <BottomNavigationAction
-          onClick={() => handleChange("h")}
-          value="disable"
-          icon={<ArrowDH color="primary" />}
-          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
-        />
-        <BottomNavigationAction
-          onClick={() => handleChange("x")}
-          value="disable"
-          icon={<XIcon color="primary" />}
-          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
-        />
-        <BottomNavigationAction
-          onClick={() => handleChange("0")}
-          value="disable"
-          icon={<ArrowD color="disabled" />}
-          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
-        />
-        <BottomNavigationAction
-          onClick={() => handleChange("del")}
-          value="delete"
-          icon={<DeleteIcon />}
-          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
-        />
-        <BottomNavigationAction
-          value="settings"
-          onClick={handleClick} // Исправлено: добавлены скобки
-          icon={<ShareIcon />}
-          sx={{ flex: "1 1 auto", px: 0 }} // Отступы и размеры
-        />
-      </BottomNavigation>
-      <Snackbar
-        open={open}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        autoHideDuration={2000}
-        onClose={handleClose}
-        message="Ссылка на гитарный бой скопирована!"
-      />
+        <WrenchIcon />
+      </IconButton>
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={openMenu}
+        onClose={handleCloseMenu}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
+        <MenuItem onClick={() => handleChange("A")}>
+          <ListItemIcon>
+            <ArrowD color="warning" />
+          </ListItemIcon>
+          Акцент
+        </MenuItem>
+        <MenuItem onClick={() => handleChange("1")}>
+          <ListItemIcon>
+            <ArrowD color="primary" />
+          </ListItemIcon>
+          Удар
+        </MenuItem>
+        <MenuItem onClick={() => handleChange("c")}>
+          <ListItemIcon>
+            <XDownIcon color="primary" />
+          </ListItemIcon>
+          По заглушеным
+        </MenuItem>
+        <MenuItem onClick={() => handleChange("b")}>
+          <ListItemIcon>
+            <ArrowDB color="primary" />
+          </ListItemIcon>
+          По басам
+        </MenuItem>
+        <MenuItem onClick={() => handleChange("h")}>
+          <ListItemIcon>
+            <ArrowDH color="primary" />
+          </ListItemIcon>
+          По высоким
+        </MenuItem>
+        <MenuItem onClick={() => handleChange("x")}>
+          <ListItemIcon>
+            <XIcon color="primary" />
+          </ListItemIcon>
+          Заглушка
+        </MenuItem>
+        <MenuItem onClick={() => handleChange("0")}>
+          <ListItemIcon>
+            <ArrowD color="disabled" />
+          </ListItemIcon>
+          Пропуск
+        </MenuItem>
+        <MenuItem onClick={() => handleChange("del")}>
+          <ListItemIcon>
+            <DeleteIcon />
+          </ListItemIcon>
+          Удалить
+        </MenuItem>
+      </Menu>
     </>
   );
 };

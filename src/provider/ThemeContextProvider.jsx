@@ -11,11 +11,11 @@ const ThemeContextProvider = ({ children }) => {
       palette: {
         mode: "dark", // Задаем фиксированный режим
         background: {
-          default: "#121212", // Темный фон
-          paper: "#1d1d1d", // Фон для компонентов
+          default: "#121C1D", // Темный фон
+          paper: "#121C1D", // Фон для компонентов
         },
         text: {
-          primary: "#FFFFFF",
+          primary: "#9D9CA4",
         },
       },
       typography: {
@@ -23,7 +23,7 @@ const ThemeContextProvider = ({ children }) => {
         h1: {
           fontFamily: "Montserrat, sans-serif",
           fontWeight: 700,
-          color: "#917AEA",
+          color: "#121C1D",
         },
         h2: {
           fontFamily: "Montserrat, sans-serif",
@@ -66,17 +66,17 @@ const ThemeContextProvider = ({ children }) => {
         MuiPaper: {
           styleOverrides: {
             root: {
-              background: "#0C0F2A",
+              background: "#30393a",
             },
           },
         },
-        MuiSnackbar: {
+        MuiSnackbarContent: {
           styleOverrides: {
             root: {
-              background: "#0C0F2A",
-              borderRadius: "1rem",
-              border: "4px solid #39F1FF", // Единственная рамка 4px
-              boxShadow: "0 0 0.3rem #39F1FF,inset 0 0 0.3rem #39F1FF;",
+              background: "#121C1D",
+              color: "#ffffff",
+              borderRadius: "8px",
+              border: "2px solid #4A434B",
             },
           },
         },

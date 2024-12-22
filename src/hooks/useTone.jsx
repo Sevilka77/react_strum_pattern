@@ -4,6 +4,25 @@ import * as Tone from "tone";
 import click1 from "../assets/samples/click1.wav";
 import click2 from "../assets/samples/click2.wav";
 
+const sampleFiles = import.meta.glob("../assets/samples/*.mp3", {
+  query: "?url",
+  eager: true,
+});
+
+const clickChannel = new Tone.Channel().toDestination();
+const guitarChannel = new Tone.Channel().toDestination();
+
+const numberOfStrings = 6;
+// Создаем каналы для каждой струны и подключаем их к основному каналу
+const stringChannels = Array.from({ length: numberOfStrings }, () =>
+  new Tone.Channel().connect(guitarChannel),
+);
+const samplesClick = {
+  click1: new Tone.Player(click1).connect(clickChannel),
+  click2: new Tone.Player(click2).connect(clickChannel),
+};
+const players = {};
+
 const chords = [
   ["320003", "G", "g"],
   ["002220", "A", "a"],
@@ -17,6 +36,107 @@ const chords = [
   ["022000", "Em", "e"],
   ["224432", "Bm", "aD"],
 ];
+function generateSampleName(stringIndex, note) {
+  return ""
+    .concat("o".repeat(6 - stringIndex))
+    .concat(note)
+    .concat("o".repeat(stringIndex - 1));
+}
+
+function getSampleVariations(sampleName) {
+  const variations = ["play", "mute", "chop"];
+  const variationSamples = [];
+
+  variations.forEach((type) => {
+    let modifiedSample;
+    switch (type) {
+      case "play":
+        modifiedSample = sampleName + "Z"; // Пример для play
+        break;
+      case "mute":
+        modifiedSample = sampleName.replace(/[^o]/g, "F") + "Z"; // Пример для mute
+        break;
+      case "chop":
+        modifiedSample = sampleName + "C"; // Пример для chop
+        break;
+      default:
+        modifiedSample = sampleName;
+    }
+
+    variationSamples.push(modifiedSample);
+  });
+
+  return variationSamples;
+}
+
+const loadChord = async (chordName) => {
+  const chordData = chords.find((chord) => chord[1] === chordName);
+
+  if (!chordData) {
+    console.debug(`Аккорд ${chordName} не найден!`);
+    return [];
+  }
+
+  // Получаем строку аккорда
+  const chord = chordData[0];
+
+  // Пробегаем по каждой струне аккорда
+  const promises = chord.split("").map(async (note, stringIndex) => {
+    if (note === "_") {
+      note = "F"; // Заменяем "_" на "F"
+    }
+
+    const sampleName = generateSampleName(6 - stringIndex, note);
+    const variations = getSampleVariations(sampleName);
+
+    const variationPromises = variations.map(async (sample) => {
+      try {
+        const sampleEntry = Object.entries(sampleFiles).find(([path]) =>
+          path.includes(sample),
+        );
+        if (!sampleEntry) {
+          console.warn(`Sample ${sample} not found in sampleFiles`);
+          return;
+        }
+        const [, module] = sampleEntry;
+        const samplePath = module.default;
+
+        players[sample] = new Tone.Player(samplePath).connect(
+          stringChannels[5 - stringIndex],
+        );
+        console.debug(
+          `Sample ${sample} loaded and connected to string ${6 - stringIndex}`,
+        );
+      } catch (error) {
+        console.error(`Error loading sample ${sample}:`, error);
+        return null;
+      }
+    });
+    await Promise.all(variationPromises);
+  });
+
+  await Promise.all(promises);
+  console.debug("Chord loaded successfully:", players);
+};
+const loadAllChords = async () => {
+  // Проходим по всем аккордам
+  try {
+    await Promise.all(
+      chords.map(async (chord) => {
+        const chordName = chord[1]; // Берем название аккорда (например, "G", "A" и т.д.)
+        console.debug(`Загружаем аккорд: ${chordName}`);
+        await loadChord(chordName); // Загружаем аккорд по имени
+        console.debug(`Аккорд ${chordName} успешно загружен!`);
+      }),
+    );
+    console.debug("Все аккорды успешно загружены!");
+  } catch (error) {
+    console.error("Ошибка при загрузке аккордов:", error);
+  }
+};
+
+loadAllChords();
+
 const config = {
   g: {
     rootFifthSixth: [6, 4, 4],
@@ -154,48 +274,8 @@ const config = {
     droning: !0,
   },
 };
-const samplesClick = {
-  click1: new Tone.Player(click1).toDestination(),
-  click2: new Tone.Player(click2).toDestination(),
-};
-const sampleFiles = import.meta.glob("../assets/samples/*.mp3", {
-  query: "?url",
-  eager: true,
-});
 
-export const gSamples = new Tone.ToneAudioBuffers();
-const loadSample = async (sampleName) => {
-  try {
-    // Находим путь к файлу по имени
-    const sampleEntry = Object.entries(sampleFiles).find(([path]) =>
-      path.includes(sampleName),
-    );
-
-    if (!sampleEntry) {
-      throw new Error(`Sample ${sampleName} not found in sampleFiles`);
-    }
-
-    const [, module] = sampleEntry;
-    const samplePath = module.default; // Получаем путь к файлу
-
-    // Загружаем буфер (замените на свою реализацию)
-
-    gSamples.add(sampleName, samplePath); // Сохраняем в коллекцию
-  } catch (error) {
-    console.error(`Error loading sample ${sampleName}:`, error);
-    throw error; // Пробрасываем ошибку
-  }
-};
-
-const channels = Array.from({ length: 6 }, () =>
-  new Tone.Channel().toDestination(),
-);
-
-const stringPlayers = Array.from({ length: 6 }, (_, i) =>
-  new Tone.Player().connect(channels[i]),
-);
-
-function playStringSound(sample, type, stringIndex, time, db, offset) {
+function playStringSound(sample, type, time, db, offset) {
   let modifiedSample;
 
   switch (type) {
@@ -211,20 +291,16 @@ function playStringSound(sample, type, stringIndex, time, db, offset) {
     default:
       modifiedSample = sample;
   }
-  if (!gSamples.has(modifiedSample)) {
-    console.log(`Sample ${modifiedSample} not loaded, loading now...`);
-    loadSample(modifiedSample);
+  if (!players[modifiedSample]) {
+    console.debug(`Player ${modifiedSample} not loaded`);
     return;
   }
-
-  const player = stringPlayers[stringIndex];
-
-  if (player.state === "started") {
-    player.stop(time);
+  if (players[modifiedSample].state === "started") {
+    players[modifiedSample].stop(time);
   }
-  player.buffer = gSamples.get(modifiedSample);
-  player.volume.value = db;
-  player.start(time + offset, 0.05);
+  players[modifiedSample];
+  players[modifiedSample].volume.value = db;
+  players[modifiedSample].start(time + offset, 0.05);
 }
 const actionType = {
   down: {
@@ -336,7 +412,7 @@ function getSamples(chordName) {
   const chordData = chords.find((chord) => chord[1] === chordName);
 
   if (!chordData) {
-    console.log(`Аккорд ${chordName} не найден!`);
+    console.debug(`Аккорд ${chordName} не найден!`);
     return [];
   }
   // Получаем строку аккорда
@@ -359,12 +435,12 @@ function getSamples(chordName) {
 }
 
 function playInstruction(instructions, time, isBeatSound) {
-  instructions.forEach((instruction, index) => {
+  instructions.forEach((instruction) => {
     const { type, sample, db, offset } = instruction;
 
     // Убедимся, что это не "nothing", и что db - валидное число
     if (isBeatSound && type !== "nothing" && !isNaN(db)) {
-      playStringSound(sample, type, index, time, db, offset);
+      playStringSound(sample, type, time, db, offset);
     }
   });
 }
@@ -419,7 +495,7 @@ function countSteps(beatPattern) {
     h: (index) => (index % 2 === 0 ? "downH" : "upH"),
     b: (index) => (index % 2 === 0 ? "downB" : "upB"),
   };
-  const samples = getSamples("C");
+  const samples = getSamples("Fm");
 
   return beatPattern.split("").map((beat, index) => {
     const getAction = soundMap[beat] || (() => "nothing");
@@ -451,7 +527,6 @@ export default function useTone(config) {
     }
 
     Tone.getTransport().bpm.value = config.tempo || 120;
-
     const steps = countSteps(config.beatPattern);
     console.debug(steps);
     // const durations = calcDurations(steps, config.noteDuration);

@@ -47,7 +47,6 @@ const Header = memo(function Header({ title }) {
             <Avatar
               src="../favicon-32x32.png"
               alt="Logo"
-              // sx={{ width: 40, height: 40, marginRight: 2 }}
               onClick={() => navigate("/")}
             />
 
@@ -56,14 +55,14 @@ const Header = memo(function Header({ title }) {
               color="#25111b"
               onClick={() => navigate(-1)}
               variant="contained"
+              sx={{ ml: 2 }}
             >
-              <MoveLeftIcon color="#816EDC" />
+              <MoveLeftIcon />
             </IconButton>
 
             <Typography
-              variant="h4"
+              variant="h5"
               component="h1"
-              color="#917AEA"
               align="center"
               sx={{ flexGrow: 1 }}
             >

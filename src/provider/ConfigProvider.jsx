@@ -17,6 +17,7 @@ export const ConfigProvider = ({ children }) => {
     clickMainBeat: true,
     clickSubbeat: false,
     clickTaktBeat: false,
+    editMode: false,
   });
 
   // Мемоизируем значение контекста для предотвращения лишних рендеров
