@@ -25,13 +25,13 @@ const players = {};
 
 const chords = [
   ["320003", "G", "g"],
-  ["002220", "A", "a"],
+  ["_02220", "A", "a"],
   ["332010", "C", "c"],
   ["200232", "D", "d"],
   ["022100", "E", "e"],
   ["133211", "F", "e"],
   ["133111", "Fm", "e"],
-  ["002210", "Am", "a"],
+  ["_02210", "Am", "a"],
   ["_00231", "Dm", "d"],
   ["022000", "Em", "e"],
   ["224432", "Bm", "aD"],
@@ -298,7 +298,7 @@ function playStringSound(sample, type, time, db, offset) {
   if (players[modifiedSample].state === "started") {
     players[modifiedSample].stop(time);
   }
-  players[modifiedSample].fadeOut = 0.1;
+
   players[modifiedSample].volume.value = db;
   players[modifiedSample].start(time + offset, 0.05);
 }
