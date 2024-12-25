@@ -14,7 +14,7 @@ const guitarChannel = new Tone.Channel().toDestination();
 
 const numberOfStrings = 6;
 // Создаем каналы для каждой струны и подключаем их к основному каналу
-const stringChannels = Array.from({ length: numberOfStrings }, () =>
+export const stringChannels = Array.from({ length: numberOfStrings }, () =>
   new Tone.Channel().connect(guitarChannel),
 );
 const samplesClick = {

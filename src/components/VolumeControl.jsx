@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { channels } from "../hooks/useTone"; // Импортируем каналы из основного кода
+import { stringChannels } from "../hooks/useTone"; // Импортируем каналы из основного кода
 
 // Компонент для управления громкостью одного канала
 function VolumeControl({ index, volume, onVolumeChange }) {
@@ -31,7 +31,7 @@ export default function VolumeControls() {
     setVolumes(newVolumes);
 
     // Обновление громкости Tone.js канала
-    channels[index].volume.value = newVolume;
+    stringChannels[index].volume.value = newVolume;
   };
 
   return (
