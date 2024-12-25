@@ -24,6 +24,7 @@ const numberOfStrings = 6;
 export const stringChannels = Array.from({ length: numberOfStrings }, () =>
   new Tone.Channel().connect(guitarChannel),
 );
+
 const samplesClick = {
   click1: new Tone.Player(click1).connect(clickChannel),
   click2: new Tone.Player(click2).connect(clickChannel),
@@ -471,8 +472,8 @@ const loadChord = async (chordName) => {
           urls: {
             C4: samplePath, // Указываем путь к сэмплу для каждой ноты
           },
-          release: 1, // Время релиза
-          volume: -12, // Громкость
+          // attack: 0.4,
+          release: 1,
         }).connect(stringChannels[5 - stringIndex]);
         players[sample].stringId = 5 - stringIndex;
         //console.debug(
@@ -716,15 +717,16 @@ export default function useTone(config) {
     const seq = new Tone.Sequence(
       (time, index) => {
         const sound = steps[index].instructions;
+        const timeWithOfset = time + 0.15;
 
         Tone.getDraw().schedule(() => {
           setBeat(index);
-        }, time);
+        }, timeWithOfset);
 
-        playInstruction(sound, time, config.isBeatSound);
+        playInstruction(sound, timeWithOfset, config.isBeatSound);
 
         playMetronome(
-          time,
+          timeWithOfset,
           index,
           config.isMetronomeSound,
           config.clickMainBeat,
