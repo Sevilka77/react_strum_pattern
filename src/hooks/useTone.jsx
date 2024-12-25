@@ -10,8 +10,15 @@ const sampleFiles = import.meta.glob("../assets/samples/*.mp3", {
 });
 
 const clickChannel = new Tone.Channel().toDestination();
-const guitarChannel = new Tone.Channel().toDestination();
-
+const compressor = new Tone.Compressor({
+  threshold: -4, // Работает только на тихих звуках
+  ratio: 6, // Умеренная компрессия
+  attack: 0.05, // Быстрое срабатывание
+  release: 0.15,
+  knee: 8, //
+}).toDestination();
+const guitarChannel = new Tone.Channel().connect(compressor);
+// const guitarChannel = new Tone.Channel().toDestination();
 const numberOfStrings = 6;
 // Создаем каналы для каждой струны и подключаем их к основному каналу
 export const stringChannels = Array.from({ length: numberOfStrings }, () =>
@@ -22,6 +29,7 @@ const samplesClick = {
   click2: new Tone.Player(click2).connect(clickChannel),
 };
 const players = {};
+const active = {};
 
 const chordsWithConfig = {
   G: {
@@ -459,9 +467,14 @@ const loadChord = async (chordName) => {
         const [, module] = sampleEntry;
         const samplePath = module.default;
 
-        players[sample] = new Tone.Player(samplePath).connect(
-          stringChannels[5 - stringIndex],
-        );
+        players[sample] = new Tone.Sampler({
+          urls: {
+            C4: samplePath, // Указываем путь к сэмплу для каждой ноты
+          },
+          release: 1, // Время релиза
+          volume: -12, // Громкость
+        }).connect(stringChannels[5 - stringIndex]);
+        players[sample].stringId = 5 - stringIndex;
         //console.debug(
         //   `Sample ${sample} loaded and connected to string ${6 - stringIndex}`,
         // );
@@ -514,12 +527,20 @@ function playStringSound(sample, type, time, db, offset) {
     //console.debug(`Player ${modifiedSample} not loaded`);
     return;
   }
-  if (players[modifiedSample].state === "started") {
-    players[modifiedSample].stop(time);
-  }
 
-  players[modifiedSample].volume.value = db - 2;
-  players[modifiedSample].start(time + offset, 0.05);
+  if (active[players[modifiedSample].stringId]) {
+    let sample = active[players[modifiedSample].stringId]; // Получаем значение сэмпла для данного ключа
+    // Останавливаем сэмпл (например, при помощи triggerRelease)
+    if (players[sample]) {
+      players[sample].triggerRelease("C4", time - 0.1);
+      active[players[modifiedSample].stringId] = "";
+    }
+  }
+  players[modifiedSample].volume.value = db;
+  active[players[modifiedSample].stringId] = modifiedSample;
+
+  // players[modifiedSample].start(time + offset, 0.05);
+  players[modifiedSample].triggerAttack("C4", time + offset);
 }
 
 function calculateBaseStringVolumes(chordName, actionData) {

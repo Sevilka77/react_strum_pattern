@@ -75,7 +75,7 @@ function PatternPage() {
         {edit && (
           <PatternEdit beatPattern={config.beatPattern} dispatch={dispatch} />
         )}
-        <VolumeControl />
+        {/*  <VolumeControl /> */}
         <ControlFooter />
       </Container>
     </>
