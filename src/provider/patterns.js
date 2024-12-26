@@ -184,7 +184,7 @@ export const patterns = [
     pattern: "1001101101011011",
     temp: 70,
     note: "16n",
-    level: "main",
+    level: "custom",
     position: 13,
   },
   {

@@ -42,6 +42,7 @@ const chordsWithConfig = {
       crossPickPattern: [6, 4, 2, 1, 4, 3, 2, 1],
       stringVolumes: [-1, 0, 0, 0, 0, 0],
       bias: {
+        no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [6, 6, 1, 2, 3, 4],
         mid: [6, 6, 3, 1, 2, 4],
         high: [6, 6, 4, 3, 2, 1],
@@ -70,6 +71,7 @@ const chordsWithConfig = {
       crossPickPattern: [5, 4, 2, 1, 4, 3, 2, 1],
       stringVolumes: [-3, 0, 0, 0, 0, 0],
       bias: {
+        no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [6, 3, 1, 2, 4, 5],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
@@ -98,6 +100,7 @@ const chordsWithConfig = {
       crossPickPattern: [5, 4, 3, 1, 6, 4, 2, 1],
       stringVolumes: [-3, 0, 0, 0, 0, 0],
       bias: {
+        no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [6, 3, 1, 2, 4, 5],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
@@ -126,6 +129,7 @@ const chordsWithConfig = {
       crossPickPattern: [4, 3, 2, 1, 5, 3, 2, 1],
       stringVolumes: [-5, -3, 1, 0, 0, 0],
       bias: {
+        no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [6, 3, 1, 2, 4, 5],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
@@ -154,6 +158,7 @@ const chordsWithConfig = {
       crossPickPattern: [6, 4, 2, 1, 5, 3, 2, 1],
       stringVolumes: [0, 0, 0, 0, 0, 0],
       bias: {
+        no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [6, 5, 1, 2, 3, 4],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
@@ -182,6 +187,7 @@ const chordsWithConfig = {
       crossPickPattern: [6, 4, 2, 1, 5, 3, 2, 1],
       stringVolumes: [0, 0, 0, 0, 0, 0],
       bias: {
+        no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [6, 5, 1, 2, 3, 4],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
@@ -210,6 +216,7 @@ const chordsWithConfig = {
       crossPickPattern: [6, 4, 2, 1, 5, 3, 2, 1],
       stringVolumes: [0, 0, 0, 0, 0, 0],
       bias: {
+        no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [6, 5, 1, 2, 3, 4],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
@@ -238,6 +245,7 @@ const chordsWithConfig = {
       crossPickPattern: [5, 4, 2, 1, 4, 3, 2, 1],
       stringVolumes: [-3, 0, 0, 0, 0, 0],
       bias: {
+        no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [6, 3, 1, 2, 4, 5],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
@@ -266,6 +274,7 @@ const chordsWithConfig = {
       crossPickPattern: [4, 3, 2, 1, 5, 3, 2, 1],
       stringVolumes: [-5, -3, 1, 0, 0, 0],
       bias: {
+        no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [6, 3, 1, 2, 4, 5],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
@@ -294,6 +303,7 @@ const chordsWithConfig = {
       crossPickPattern: [6, 4, 2, 1, 5, 3, 2, 1],
       stringVolumes: [0, 0, 0, 0, 0, 0],
       bias: {
+        no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [6, 5, 1, 2, 3, 4],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
@@ -322,6 +332,7 @@ const chordsWithConfig = {
       crossPickPattern: [5, 4, 3, 2, 5, 4, 3, 2],
       stringVolumes: [0, 0, 0, 0, 0, 0],
       bias: {
+        no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [4, 3, 1, 2, 5, 6],
         mid: [6, 4, 3, 1, 2, 5],
         high: [6, 5, 4, 2, 1, 3],
@@ -400,7 +411,7 @@ const actionType = {
   nothing: {
     type: "nothing",
     spread: 0,
-    bias: "low",
+    bias: "no",
   },
 };
 function generateSampleName(stringIndex, note) {
@@ -468,13 +479,9 @@ const loadChord = async (chordName) => {
         const [, module] = sampleEntry;
         const samplePath = module.default;
 
-        players[sample] = new Tone.Sampler({
-          urls: {
-            C4: samplePath, // Указываем путь к сэмплу для каждой ноты
-          },
-          // attack: 0.4,
-          release: 1,
-        }).connect(stringChannels[5 - stringIndex]);
+        players[sample] = new Tone.Player(samplePath).connect(
+          stringChannels[5 - stringIndex],
+        );
         players[sample].stringId = 5 - stringIndex;
         //console.debug(
         //   `Sample ${sample} loaded and connected to string ${6 - stringIndex}`,
@@ -533,15 +540,17 @@ function playStringSound(sample, type, time, db, offset) {
     let sample = active[players[modifiedSample].stringId]; // Получаем значение сэмпла для данного ключа
     // Останавливаем сэмпл (например, при помощи triggerRelease)
     if (players[sample]) {
-      players[sample].triggerRelease("C4", time - 0.1);
+      players[sample].stop(time - 0.01);
       active[players[modifiedSample].stringId] = "";
     }
   }
-  players[modifiedSample].volume.value = db;
+
+  players[modifiedSample].volume.value =
+    type == "chop" ? db - 7 : type == "mute" ? db + 5 : db;
+
   active[players[modifiedSample].stringId] = modifiedSample;
 
-  // players[modifiedSample].start(time + offset, 0.05);
-  players[modifiedSample].triggerAttack("C4", time + offset);
+  players[modifiedSample].start(time + offset, 0.03);
 }
 
 function calculateBaseStringVolumes(chordName, actionData) {
@@ -551,13 +560,33 @@ function calculateBaseStringVolumes(chordName, actionData) {
     return [];
   }
   const { spread, bias } = actionData;
+
   const chordBias = chord.config.bias[bias];
+  const volumes = chord.config.stringVolumes.slice();
+  let spreadPlusRandom = spread + Math.random();
 
-  const volumes = chord.config.stringVolumes;
-
-  return volumes.map((val, t) => {
-    return !isNaN(val) && chordBias[t] > spread ? NaN : val;
-  });
+  for (let t = 0; t < 6; t++) {
+    if (!isNaN(volumes[t])) {
+      // Если значение chordBias[t] не задано, то сразу ставим NaN
+      if (isNaN(chordBias[t])) {
+        volumes[t] = NaN;
+      } else if (chordBias[t] > Math.ceil(spreadPlusRandom)) {
+        // Если значение chordBias[t] превышает значение spread, ставим NaN
+        volumes[t] = NaN;
+      } else if (chordBias[t] > Math.floor(spreadPlusRandom)) {
+        // Если значение p[t] в пределах spread, рассчитываем громкость
+        volumes[t] =
+          spreadPlusRandom % 1 > 0.25
+            ? volumes[t] - 26 * (1 - Math.log10(1 + (spreadPlusRandom % 1) * 9))
+            : NaN;
+      }
+    }
+  }
+  console.log(volumes);
+  return volumes;
+  // return volumes.map((val, t) => {
+  //   return !isNaN(val) && chordBias[t] > spread ? NaN : val;
+  // });
 }
 function calculateStringOffsets(direction) {
   const m = 0.003; // Задержка между строками
@@ -717,7 +746,7 @@ export default function useTone(config) {
     const seq = new Tone.Sequence(
       (time, index) => {
         const sound = steps[index].instructions;
-        const timeWithOfset = time + 0.15;
+        const timeWithOfset = time + 0.1;
 
         Tone.getDraw().schedule(() => {
           setBeat(index);

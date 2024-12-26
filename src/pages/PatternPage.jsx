@@ -4,7 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
 
 import PatternEdit from "../components/PatternEdit";
-import VolumeControl from "../components/VolumeControl";
+// import VolumeControl from "../components/VolumeControl";
 
 import { useConfig } from "../hooks/useConfig";
 import { useEffect, useState } from "react";
@@ -75,7 +75,7 @@ function PatternPage() {
         {edit && (
           <PatternEdit beatPattern={config.beatPattern} dispatch={dispatch} />
         )}
-        {/*  <VolumeControl /> */}
+        {/* <VolumeControl /> */}
         <ControlFooter />
       </Container>
     </>
