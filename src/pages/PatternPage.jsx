@@ -78,8 +78,9 @@ function PatternPage() {
         dispatch({ type: "setTempo", data: foundPattern.temp });
 
         import(`../assets/images/svg/${foundPattern.image}`).then((image) => {
-          setPatternImage(image.default); // путь к изображению, который обрабатывает Vite
-          updateOGMetaTags(foundPattern.title, image.default); // Обновляем мета-теги
+          const imageUrl = image.default; // путь к изображению, который обрабатывает Vite
+          setPatternImage(imageUrl); // Обновляем состояние с изображением
+          updateOGMetaTags(foundPattern.title, imageUrl); // Обновляем мета-теги
         });
       } else {
         console.log("Паттерн не найден в массиве patterns.");
