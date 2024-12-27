@@ -12,8 +12,8 @@ import { styled } from "@mui/material/styles";
 // import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-import Schema from "../components/schema";
 import { Link } from "react-router-dom";
+import LDJson from "../components/LDJson";
 
 const CardButton = styled(Button)({
   width: "100%",
@@ -27,8 +27,39 @@ const CardButton = styled(Button)({
 });
 
 function HomePage() {
+  const ldData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    url: "https://strumming.ru",
+    name: "Strumming - Онлайн тренажер гитарного боя",
+    description:
+      "Онлайн тренажер гитарного боя. Освойте схемы гитарных боев: шестерка, восьмерка, четверка, бой галоп.",
+    potentialAction: [
+      {
+        "@type": "ViewAction",
+        target: "https://strumming.ru/create",
+        name: "Создать гитарный бой",
+      },
+      {
+        "@type": "ViewAction",
+        target: "https://strumming.ru/learn",
+        name: "Изучить гитарный бой",
+      },
+      {
+        "@type": "ViewAction",
+        target: "https://strumming.ru/patterns",
+        name: "Список схем гитарного боя",
+      },
+      {
+        "@type": "ViewAction",
+        target: "https://strumming.ru/custom",
+        name: "Пользовательские схемы боя",
+      },
+    ],
+  };
   return (
     <>
+      <LDJson data={ldData} />
       <Header />
       <Container component="main" maxWidth="xl">
         <Box
@@ -70,8 +101,6 @@ function HomePage() {
             упражнений, гитарных боев и тренировок под метроном. Сделай свой
             прогресс на гитаре быстрее!
           </Typography>
-
-          <Schema />
         </Box>
         <Box component="section">
           <Box

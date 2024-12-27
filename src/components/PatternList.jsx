@@ -1,4 +1,3 @@
-import { patterns } from "../provider/patterns";
 import { Typography, Box } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { styled } from "@mui/material/styles";
@@ -83,10 +82,7 @@ const PatternListItem = ({ pattern, index }) => {
   );
 };
 
-const PatternList = ({ level }) => {
-  // Фильтруем паттерны по уровню сложности
-  const filteredPatterns = patterns.filter((p) => p.level === level);
-
+const PatternList = ({ patterns }) => {
   return (
     <Grid
       container
@@ -100,8 +96,8 @@ const PatternList = ({ level }) => {
         },
       }}
     >
-      {filteredPatterns.length > 0 ? (
-        filteredPatterns.map((pattern) => (
+      {patterns.length > 0 ? (
+        patterns.map((pattern) => (
           <PatternListItem key={pattern.title} pattern={pattern} />
         ))
       ) : (

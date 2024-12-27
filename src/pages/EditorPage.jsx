@@ -10,12 +10,23 @@ import ControlFooter from "../components/ControlFooter";
 import { learnPatterns } from "../provider/learnPatterns";
 
 import { Container, IconButton, Snackbar, Stack } from "@mui/material";
+import LDJson from "../components/LDJson";
 
 function EditorPage() {
   const { config, dispatch } = useConfig();
   const [open, setOpen] = useState(false);
   const pattern = config.beatPattern;
   const url = `${window.location.origin}/pattern/${config.beatPattern}`;
+  const ldData = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Редактор гитарного боя",
+    operatingSystem: "Все платформы",
+    applicationCategory: "Музыкальный инструмент",
+    url: "https://strumming.ru/create",
+    description:
+      "Создайте свой собственный гитарный бой с помощью редактора на Strumming.ru.",
+  };
 
   useEffect(() => {
     dispatch({ type: "setEditMode", data: true });
@@ -63,8 +74,10 @@ function EditorPage() {
       setOpen(true); // Показываем snackbar
     }
   };
+
   return (
     <>
+      <LDJson data={ldData} />
       <Header title={"Рекдактор боя"} />
       <Container
         component="main"

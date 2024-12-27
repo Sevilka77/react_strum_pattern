@@ -1,4 +1,5 @@
 import Header from "../components/Header";
+import LDJson from "../components/LDJson";
 import { lazy, Suspense } from "react";
 import { useLocation, useParams } from "react-router-dom";
 const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
@@ -10,47 +11,48 @@ import { useEffect, useState } from "react";
 import ControlFooter from "../components/ControlFooter";
 import { patterns } from "../provider/patterns";
 import { Container } from "@mui/material";
+// import OGMetaTags from "../components/OGMetaTags";
 
 // Функция для обновления Open Graph мета-тегов
-const updateOGMetaTags = (title, image) => {
-  let metaOGTitle = document.querySelector('meta[property="og:title"]');
-  if (metaOGTitle) {
-    metaOGTitle.setAttribute("content", `Схема гитарного боя - ${title}`);
-  } else {
-    metaOGTitle = document.createElement("meta");
-    metaOGTitle.setAttribute("property", "og:title");
-    metaOGTitle.setAttribute("content", `Схема гитарного боя - ${title}`);
-    document.head.appendChild(metaOGTitle);
-  }
+// const updateOGMetaTags = (title, image, pattern) => {
+//   let metaOGTitle = document.querySelector('meta[property="og:title"]');
+//   if (metaOGTitle) {
+//     metaOGTitle.setAttribute("content", `Схема гитарного боя - ${title}`);
+//   } else {
+//     metaOGTitle = document.createElement("meta");
+//     metaOGTitle.setAttribute("property", "og:title");
+//     metaOGTitle.setAttribute("content", `Схема гитарного боя - ${title}`);
+//     document.head.appendChild(metaOGTitle);
+//   }
 
-  let metaOGDescription = document.querySelector(
-    'meta[property="og:description"]',
-  );
-  if (metaOGDescription) {
-    metaOGDescription.setAttribute(
-      "content",
-      `Схема для гитарного боя ${title}, подходящая для практики`,
-    );
-  } else {
-    metaOGDescription = document.createElement("meta");
-    metaOGDescription.setAttribute("property", "og:description");
-    metaOGDescription.setAttribute(
-      "content",
-      `Схема для гитарного боя ${title}, подходящая для практики`,
-    );
-    document.head.appendChild(metaOGDescription);
-  }
+//   let metaOGDescription = document.querySelector(
+//     'meta[property="og:description"]',
+//   );
+//   if (metaOGDescription) {
+//     metaOGDescription.setAttribute(
+//       "content",
+//       `Схема для гитарного боя ${title}, подходящая для практики`,
+//     );
+//   } else {
+//     metaOGDescription = document.createElement("meta");
+//     metaOGDescription.setAttribute("property", "og:description");
+//     metaOGDescription.setAttribute(
+//       "content",
+//       `Схема для гитарного боя ${title}, подходящая для практики`,
+//     );
+//     document.head.appendChild(metaOGDescription);
+//   }
 
-  let metaOGImage = document.querySelector('meta[property="og:image"]');
-  if (metaOGImage) {
-    metaOGImage.setAttribute("content", image);
-  } else {
-    metaOGImage = document.createElement("meta");
-    metaOGImage.setAttribute("property", "og:image");
-    metaOGImage.setAttribute("content", image);
-    document.head.appendChild(metaOGImage);
-  }
-};
+//   let metaOGImage = document.querySelector('meta[property="og:image"]');
+//   if (metaOGImage) {
+//     metaOGImage.setAttribute("content", image);
+//   } else {
+//     metaOGImage = document.createElement("meta");
+//     metaOGImage.setAttribute("property", "og:image");
+//     metaOGImage.setAttribute("content", image);
+//     document.head.appendChild(metaOGImage);
+//   }
+// };
 
 function PatternPage() {
   const location = useLocation();
@@ -59,6 +61,7 @@ function PatternPage() {
   const p = location.state;
   const [title, setTitle] = useState("Выбор боя");
   const [patternImage, setPatternImage] = useState("");
+  const [ldData, setLdData] = useState({});
 
   useEffect(() => {
     if (p) {
@@ -79,7 +82,22 @@ function PatternPage() {
 
         const imageUrl = `/assets/images/svg/${foundPattern.image}`;
         setPatternImage(imageUrl); // Обновляем состояние с изображением
-        updateOGMetaTags(foundPattern.title, imageUrl);
+        // updateOGMetaTags(foundPattern.title, imageUrl, foundPattern.pattern);
+        // // Обновляем LD-разметку
+        const newLdData = {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "@id": `https://strumming.ru/pattern/${foundPattern.pattern}`,
+          url: `https://strumming.ru/pattern/${foundPattern.pattern}`,
+          name: `${foundPattern.title}`,
+          description: `Схема для гитарного боя ${foundPattern.title}`,
+          image: {
+            "@type": "ImageObject",
+            url: imageUrl,
+          },
+          mainEntityOfPage: `https://strumming.ru/pattern/${foundPattern.pattern}`,
+        };
+        setLdData(newLdData);
       } else {
         console.log("Паттерн не найден в массиве patterns.");
         setTitle("Пользовательский бой");
@@ -99,6 +117,8 @@ function PatternPage() {
   return (
     <>
       <Header title={title} />
+      <LDJson data={ldData} />
+      {/* <OGMetaTags title={title} image={patternImage} /> */}
       <Container
         component="main"
         sx={{

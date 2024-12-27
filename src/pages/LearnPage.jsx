@@ -9,11 +9,28 @@ import ControlFooter from "../components/ControlFooter";
 import { learnPatterns } from "../provider/learnPatterns";
 import { useCycle } from "../hooks/useCycle";
 import { Container } from "@mui/material";
+import LDJson from "../components/LDJson";
 
 function LearnPage() {
   const { dispatch } = useConfig();
   const { cycleCount, resetCycle } = useCycle();
   const [currentPatternIndex, setCurrentPatternIndex] = useState(0);
+  const ldData = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Тренажер гитарного боя",
+    operatingSystem: "Все платформы",
+    applicationCategory: "Музыкальный тренажер",
+    url: "https://strumming.ru/learn",
+    description:
+      "Практикуйтесь в игре на гитаре с помощью онлайн тренажера гитарного боя на Strumming.ru.",
+
+    potentialAction: {
+      "@type": "ExerciseAction",
+      target: "https://strumming.ru/learn",
+      name: "Начать тренировку",
+    },
+  };
 
   useEffect(() => {
     const firstPattern = learnPatterns[0];
@@ -46,6 +63,7 @@ function LearnPage() {
 
   return (
     <>
+      <LDJson data={ldData} />
       <Header />
       <Container
         component="main"

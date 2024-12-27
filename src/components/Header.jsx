@@ -72,6 +72,7 @@ const Header = memo(function Header({ title }) {
       document.head.appendChild(newMetaDescription);
     }
   }, [pageTitle, pageDescription]);
+
   return (
     <AppBar
       position="sticky"
