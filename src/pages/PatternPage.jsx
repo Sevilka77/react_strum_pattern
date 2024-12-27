@@ -3,14 +3,54 @@ import { lazy, Suspense } from "react";
 import { useLocation, useParams } from "react-router-dom";
 const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
 
-import PatternEdit from "../components/PatternEdit";
 // import VolumeControl from "../components/VolumeControl";
 
 import { useConfig } from "../hooks/useConfig";
 import { useEffect, useState } from "react";
-import ControlFooter from "../components/ControlFooter"; // Исправлено имя компонента
+import ControlFooter from "../components/ControlFooter";
 import { patterns } from "../provider/patterns";
 import { Container } from "@mui/material";
+
+// Функция для обновления Open Graph мета-тегов
+const updateOGMetaTags = (title, image) => {
+  let metaOGTitle = document.querySelector('meta[property="og:title"]');
+  if (metaOGTitle) {
+    metaOGTitle.setAttribute("content", `Схема гитарного боя - ${title}`);
+  } else {
+    metaOGTitle = document.createElement("meta");
+    metaOGTitle.setAttribute("property", "og:title");
+    metaOGTitle.setAttribute("content", `Схема гитарного боя - ${title}`);
+    document.head.appendChild(metaOGTitle);
+  }
+
+  let metaOGDescription = document.querySelector(
+    'meta[property="og:description"]',
+  );
+  if (metaOGDescription) {
+    metaOGDescription.setAttribute(
+      "content",
+      `Схема для гитарного боя ${title}, подходящая для практики`,
+    );
+  } else {
+    metaOGDescription = document.createElement("meta");
+    metaOGDescription.setAttribute("property", "og:description");
+    metaOGDescription.setAttribute(
+      "content",
+      `Схема для гитарного боя ${title}, подходящая для практики`,
+    );
+    document.head.appendChild(metaOGDescription);
+  }
+
+  let metaOGImage = document.querySelector('meta[property="og:image"]');
+  if (metaOGImage) {
+    metaOGImage.setAttribute("content", image);
+  } else {
+    metaOGImage = document.createElement("meta");
+    metaOGImage.setAttribute("property", "og:image");
+    metaOGImage.setAttribute("content", image);
+    document.head.appendChild(metaOGImage);
+  }
+};
 
 function PatternPage() {
   const location = useLocation();
@@ -18,13 +58,10 @@ function PatternPage() {
   const { config, dispatch } = useConfig();
   const p = location.state;
   const [title, setTitle] = useState("Выбор боя");
-  const [edit, setEdit] = useState(false);
+  const [patternImage, setPatternImage] = useState("");
 
   useEffect(() => {
     if (p) {
-      if (p.editMode) {
-        setEdit(true); // Устанавливаем режим редактирования, если editMode true
-      }
       setTitle(p.title || "Пользовательский бой");
       dispatch({ type: "setBeatPattern", data: p.pattern });
       dispatch({ type: "setNoteDuration", data: p.note });
@@ -39,6 +76,11 @@ function PatternPage() {
         dispatch({ type: "setBeatPattern", data: foundPattern.pattern });
         dispatch({ type: "setNoteDuration", data: foundPattern.note });
         dispatch({ type: "setTempo", data: foundPattern.temp });
+
+        import(`../assets/images/svg/${foundPattern.image}`).then((image) => {
+          setPatternImage(image.default); // путь к изображению, который обрабатывает Vite
+          updateOGMetaTags(foundPattern.title, image.default); // Обновляем мета-теги
+        });
       } else {
         console.log("Паттерн не найден в массиве patterns.");
         setTitle("Пользовательский бой");
@@ -53,7 +95,7 @@ function PatternPage() {
     return () => {
       dispatch({ type: "clearPattern" }); // Сбрасываем паттерн
     };
-  }, [dispatch, p, beatPattern, config.defaultPattern]); // Обязательно добавляем зависимости
+  }, [dispatch, p, beatPattern, config.defaultPattern, patternImage]);
 
   return (
     <>
@@ -72,9 +114,7 @@ function PatternPage() {
         <Suspense fallback={<div>Загрузка...</div>}>
           <MetronomeWrapper />
         </Suspense>
-        {edit && (
-          <PatternEdit beatPattern={config.beatPattern} dispatch={dispatch} />
-        )}
+
         {/* <VolumeControl /> */}
         <ControlFooter />
       </Container>
