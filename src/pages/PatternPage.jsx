@@ -77,11 +77,9 @@ function PatternPage() {
         dispatch({ type: "setNoteDuration", data: foundPattern.note });
         dispatch({ type: "setTempo", data: foundPattern.temp });
 
-        import(`../assets/images/svg/${foundPattern.image}`).then((image) => {
-          const imageUrl = image.default; // путь к изображению, который обрабатывает Vite
-          setPatternImage(imageUrl); // Обновляем состояние с изображением
-          updateOGMetaTags(foundPattern.title, imageUrl); // Обновляем мета-теги
-        });
+        const imageUrl = `/assets/images/svg/${foundPattern.image}`;
+        setPatternImage(imageUrl); // Обновляем состояние с изображением
+        updateOGMetaTags(foundPattern.title, imageUrl);
       } else {
         console.log("Паттерн не найден в массиве patterns.");
         setTitle("Пользовательский бой");
