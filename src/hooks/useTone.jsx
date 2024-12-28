@@ -3,31 +3,45 @@ import { useCycle } from "../hooks/useCycle";
 import * as Tone from "tone";
 import click1 from "../assets/samples/click1.wav";
 import click2 from "../assets/samples/click2.wav";
+import hit from "../assets/samples/hit.mp3";
+import hit2 from "../assets/samples/hit2.mp3";
+import hihat from "..//assets/samples/hihat.mp3";
 
 const sampleFiles = import.meta.glob("../assets/samples/*.mp3", {
   query: "?url",
   eager: true,
 });
 
-const clickChannel = new Tone.Channel().toDestination();
+const masterChannel = new Tone.Channel().toDestination();
+
 const compressor = new Tone.Compressor({
   threshold: -4, // Работает только на тихих звуках
   ratio: 6, // Умеренная компрессия
   attack: 0.05, // Быстрое срабатывание
   release: 0.15,
-  knee: 8, //
-}).toDestination();
-const guitarChannel = new Tone.Channel().connect(compressor);
-// const guitarChannel = new Tone.Channel().toDestination();
+  knee: 8,
+}).connect(masterChannel);
+
+export const channels = {
+  master: masterChannel,
+  clickChannel: new Tone.Channel().connect(masterChannel),
+  hitChannel: new Tone.Channel().connect(masterChannel),
+  guitarChannel: new Tone.Channel().connect(compressor),
+};
+
 const numberOfStrings = 6;
 // Создаем каналы для каждой струны и подключаем их к основному каналу
-export const stringChannels = Array.from({ length: numberOfStrings }, () =>
-  new Tone.Channel().connect(guitarChannel),
+const stringChannels = Array.from({ length: numberOfStrings }, () =>
+  new Tone.Channel().connect(channels.guitarChannel),
 );
-
+const samplesHit = {
+  hit: new Tone.Player(hit).connect(channels.hitChannel),
+  hit2: new Tone.Player(hit2).connect(channels.hitChannel),
+  hihat: new Tone.Player(hihat).connect(channels.hitChannel),
+};
 const samplesClick = {
-  click1: new Tone.Player(click1).connect(clickChannel),
-  click2: new Tone.Player(click2).connect(clickChannel),
+  click1: new Tone.Player(click1).connect(channels.clickChannel),
+  click2: new Tone.Player(click2).connect(channels.clickChannel),
 };
 const players = {};
 const active = {};
@@ -540,7 +554,8 @@ function playStringSound(sample, type, time, db, offset) {
     let sample = active[players[modifiedSample].stringId]; // Получаем значение сэмпла для данного ключа
     // Останавливаем сэмпл (например, при помощи triggerRelease)
     if (players[sample]) {
-      players[sample].stop(time - 0.01);
+      players[sample].fadeOut = 0.05;
+      players[sample].stop(time);
       active[players[modifiedSample].stringId] = "";
     }
   }
@@ -582,11 +597,8 @@ function calculateBaseStringVolumes(chordName, actionData) {
       }
     }
   }
-  console.log(volumes);
+
   return volumes;
-  // return volumes.map((val, t) => {
-  //   return !isNaN(val) && chordBias[t] > spread ? NaN : val;
-  // });
 }
 function calculateStringOffsets(direction) {
   const m = 0.003; // Задержка между строками
@@ -639,28 +651,30 @@ function getSamples(chordName) {
   });
 }
 
-function playInstruction(instructions, time, isBeatSound) {
+function playInstruction(instructions, time) {
   instructions.forEach((instruction) => {
     const { type, sample, db, offset } = instruction;
 
     // Убедимся, что это не "nothing", и что db - валидное число
-    if (isBeatSound && type !== "nothing" && !isNaN(db)) {
+    if (type !== "nothing" && !isNaN(db)) {
       playStringSound(sample, type, time, db, offset);
     }
   });
 }
 
+function playHit(sound, time) {
+  if (sound[0].type != "nothing") {
+    samplesHit["hihat"].start(time);
+  }
+}
 const playMetronome = (
   time,
   index,
-  isMetronomeSound,
   clickMainBeat,
   clickSubbeat,
   clickTaktBeat,
   noteDuration,
 ) => {
-  if (!isMetronomeSound) return;
-
   if (clickTaktBeat && index === 0) {
     samplesClick["click2"].start(time); // Звук для такта
   } else {
@@ -752,18 +766,22 @@ export default function useTone(config) {
           setBeat(index);
         }, timeWithOfset);
 
-        playInstruction(sound, timeWithOfset, config.isBeatSound);
-
-        playMetronome(
-          timeWithOfset,
-          index,
-          config.isMetronomeSound,
-          config.clickMainBeat,
-          config.clickSubbeat,
-          config.clickTaktBeat,
-          config.noteDuration,
-        );
-
+        if (config.isBeatSound) {
+          playInstruction(sound, timeWithOfset, config.isBeatSound);
+        }
+        if (config.isHitSound) {
+          playHit(sound, timeWithOfset);
+        }
+        if (config.isMetronomeSound) {
+          playMetronome(
+            timeWithOfset,
+            index,
+            config.clickMainBeat,
+            config.clickSubbeat,
+            config.clickTaktBeat,
+            config.noteDuration,
+          );
+        }
         if (index === steps.length - 1) {
           incrementCycle(); // Увеличиваем цикл, когда начинается новый
         }
@@ -783,6 +801,7 @@ export default function useTone(config) {
     config.isPlaying,
     config.beatPattern,
     config.isBeatSound,
+    config.isHitSound,
     config.isMetronomeSound,
     config.isDownbeatSound,
     config.isUpbeatSound,

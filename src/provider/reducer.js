@@ -16,6 +16,7 @@ const setNoteDuration = (state, noteDuration) => {
 
 const setIsPlaying = (state, isPlaying) => ({ ...state, isPlaying });
 const setIsBeatSound = (state, isBeatSound) => ({ ...state, isBeatSound });
+const setIsHitSound = (state, isHitSound) => ({ ...state, isHitSound });
 const setIsMetronomeSound = (state, isMetronomeSound) => ({
   ...state,
   isMetronomeSound,
@@ -51,6 +52,8 @@ export default function reducer(state, action) {
       return setIsPlaying(state, action.data);
     case "setIsBeatSound":
       return setIsBeatSound(state, action.data);
+    case "setIsHitSound":
+      return setIsHitSound(state, action.data);
     case "setIsMetronomSound":
       return setIsMetronomeSound(state, action.data);
     case "setClickAlways":

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { SettingsIcon, XIcon } from "lucide-react";
+import VolumeControl from "./VolumeControl";
 import {
   Box,
   DialogTitle,
@@ -54,11 +55,8 @@ export default function SettingsDialog() {
         </IconButton>
         <Box
           sx={{
-            width: 250,
-            padding: 2,
-            borderRadius: "6px",
-            boxShadow:
-              "0 3px 4px 0 rgba(0,0,0,.16),0 1px 7px 0 rgba(0,0,0,.12)",
+            width: 300,
+            padding: 3,
           }}
         >
           <FormControlLabel
@@ -94,7 +92,6 @@ export default function SettingsDialog() {
               />
             }
           />
-
           <FormControlLabel
             label="Кликаем на 1234"
             labelPlacement="end"
@@ -143,9 +140,24 @@ export default function SettingsDialog() {
               />
             }
           />
-          <Divider />
           <FormControlLabel
-            label="Длительность"
+            label="Отстучать бой"
+            labelPlacement="end"
+            control={
+              <Switch
+                checked={config.isHitSound}
+                onChange={() =>
+                  dispatch({
+                    type: "setIsHitSound",
+                    data: !config.isHitSound,
+                  })
+                }
+                inputProps={{ "aria-label": "click-takt-beat" }}
+              />
+            }
+          />{" "}
+          <FormControlLabel
+            label="Длительность нот"
             labelPlacement="end"
             control={
               <Select
@@ -167,7 +179,9 @@ export default function SettingsDialog() {
                 <MenuItem value={"16n"}>16</MenuItem>
               </Select>
             }
-          />
+          />{" "}
+          <Divider sx={{ pt: 1 }} />
+          <VolumeControl />
         </Box>
       </Dialog>
     </React.Fragment>

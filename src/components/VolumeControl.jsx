@@ -1,52 +1,86 @@
 import { useState } from "react";
-import { stringChannels } from "../hooks/useTone"; // Импортируем каналы из основного кода
+import { channels } from "../hooks/useTone"; // Импортируем каналы
+import Slider from "@mui/material/Slider";
+import { Typography } from "@mui/material";
 
-// Компонент для управления громкостью одного канала
-function VolumeControl({ index, volume, onVolumeChange }) {
+// Компонент управления громкостью для конкретного канала
+function VolumeControl({ channelName, channel, volume, onVolumeChange }) {
   return (
     <div>
-      <label>Channel {index + 1} Volume</label>
-      <input
-        type="range"
-        min="-60" // Минимальная громкость в децибелах
-        max="0" // Максимальная громкость в децибелах
-        step="1"
+      <Typography variant="body1">{channelName}</Typography>
+      <Slider
+        min={-50}
+        max={0}
+        step={1}
         value={volume}
-        onChange={(e) => onVolumeChange(index, e.target.value)}
+        onChange={(e, value) => onVolumeChange(channel, value)}
+        aria-label={`${channelName} Volume`}
+        valueLabelDisplay="auto"
       />
-      <span>{volume} dB</span>
     </div>
   );
 }
 
-// Компонент для управления громкостью всех каналов
+// Основной компонент
 export default function VolumeControls() {
-  // Изначальная громкость для каждого канала (в децибелах)
-  const [volumes, setVolumes] = useState(new Array(6).fill(0)); // Громкость от -60 до 0 dB
+  // Устанавливаем начальную громкость для каждого канала
+  const [clickVolume, setClickVolume] = useState(
+    channels.clickChannel.volume.value,
+  );
+  const [hitVolume, setHitVolume] = useState(channels.hitChannel.volume.value);
+  const [guitarVolume, setGuitarVolume] = useState(
+    channels.guitarChannel.volume.value,
+  );
+  const [masterVolume, setMasterVolume] = useState(
+    channels.master.volume.value,
+  );
 
-  // Функция для обновления громкости канала
-  const handleVolumeChange = (index, newVolume) => {
-    const newVolumes = [...volumes];
-    newVolumes[index] = newVolume;
-    setVolumes(newVolumes);
-
-    // Обновление громкости Tone.js канала
-    stringChannels[index].volume.value = newVolume;
+  // Обработчики изменения громкости для каждого канала
+  const handleClickVolumeChange = (newVolume) => {
+    setClickVolume(newVolume);
+    channels.clickChannel.volume.value = newVolume;
   };
 
+  const handleHitVolumeChange = (newVolume) => {
+    setHitVolume(newVolume);
+    channels.hitChannel.volume.value = newVolume;
+  };
+
+  const handleGuitarVolumeChange = (newVolume) => {
+    setGuitarVolume(newVolume);
+    channels.guitarChannel.volume.value = newVolume;
+  };
+  const handleMasterVolumeChange = (newVolume) => {
+    setMasterVolume(newVolume);
+    channels.master.volume.value = newVolume;
+  };
   return (
     <div>
-      <h2>Control Channel Volumes</h2>
-      <div>
-        {volumes.map((volume, index) => (
-          <VolumeControl
-            key={index}
-            index={index}
-            volume={volume}
-            onVolumeChange={handleVolumeChange}
-          />
-        ))}
-      </div>
+      <VolumeControl
+        channelName="Общая громкость"
+        channel={channels.master}
+        volume={masterVolume}
+        onVolumeChange={(_, value) => handleMasterVolumeChange(value)}
+      />
+      <VolumeControl
+        channelName="Громкость метронома"
+        channel={channels.clickChannel}
+        volume={clickVolume}
+        onVolumeChange={(_, value) => handleClickVolumeChange(value)}
+      />
+
+      <VolumeControl
+        channelName="Громкость гитары"
+        channel={channels.guitarChannel}
+        volume={guitarVolume}
+        onVolumeChange={(_, value) => handleGuitarVolumeChange(value)}
+      />
+      <VolumeControl
+        channelName="Громкость отстукивания"
+        channel={channels.hitChannel}
+        volume={hitVolume}
+        onVolumeChange={(_, value) => handleHitVolumeChange(value)}
+      />
     </div>
   );
 }

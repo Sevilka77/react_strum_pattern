@@ -12,6 +12,7 @@ export const ConfigProvider = ({ children }) => {
     isPlaying: false,
     isMetronomeSound: true,
     isBeatSound: false,
+    isHitSound: true,
     noteDuration: "4n",
     clickAlways: false,
     clickMainBeat: true,
