@@ -49,98 +49,50 @@ const active = {};
 const chordsWithConfig = {
   G: {
     frets: "320003",
-    shortName: "g",
+
     config: {
-      rootFifthSixth: [6, 4, 4],
-      crossPickOrder: [null, null, 1, 2, 3, 4],
-      crossPickPattern: [6, 4, 2, 1, 4, 3, 2, 1],
       stringVolumes: [-1, 0, 0, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
-        low: [6, 6, 1, 2, 3, 4],
+        low: [1, 2, 3, 4, 5, 6],
         mid: [6, 6, 3, 1, 2, 4],
         high: [6, 6, 4, 3, 2, 1],
         strum: [6, 6, 4, 1, 2, 3],
-        bass: [1, 2, 2, 3, 5, 6],
-        jazzD: [1, null, 2, 3, 4, 5],
-        jazzU: [null, null, 3, 2, 1, 4],
-        root: [1, 2, 2, 3, 5, 6],
-        afterRoot: [6, 5, 1, 2, 3, 4],
-        chuck1: [6, 6, 3, 1, 2, 4],
-        afterChuck1: [6, 6, 4, 3, 1, 2],
-        fifth: [4, 3, 1, 2, 5, 6],
-        afterFifth: [6, 6, 2, 1, 3, 4],
-        chuck2: [6, 6, 3, 2, 1, 4],
-        afterChuck2: [6, 6, 4, 3, 2, 1],
-        haye: [4, 4, 4, 4, 4, 4],
       },
     },
   },
   A: {
     frets: "_02220",
-    shortName: "a",
+
     config: {
-      rootFifthSixth: [5, 4, 4],
-      crossPickOrder: [null, null, 1, 2, 3, 4],
-      crossPickPattern: [5, 4, 2, 1, 4, 3, 2, 1],
       stringVolumes: [-3, 0, 0, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
-        low: [6, 3, 1, 2, 4, 5],
+        low: [6, 1, 2, 3, 4, 5],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 5, 4, 1, 2, 3],
-        bass: [5, 1, 2, 3, 4, 6],
-        jazzD: [null, 1, 2, 3, 4, 5],
-        jazzU: [null, 5, 4, 3, 1, 1],
-        root: [4, 1, 2, 4, 5, 6],
-        afterRoot: [6, 5, 1, 2, 3, 4],
-        chuck1: [6, 6, 4, 2, 1, 3],
-        afterChuck1: [6, 6, 4, 3, 2, 1],
-        fifth: [5, 3, 1, 2, 4, 6],
-        afterFifth: [6, 6, 3, 1, 2, 4],
-        chuck2: [6, 6, 4, 2, 1, 3],
-        afterChuck2: [6, 6, 4, 3, 2, 1],
-        haye: [6, 5, 4, 4, 4, 4],
       },
     },
   },
   C: {
     frets: "332010",
-    shortName: "c",
+
     config: {
-      rootFifthSixth: [5, 6, 3],
-      crossPickOrder: [1, null, 2, 3, 4, null],
-      crossPickPattern: [5, 4, 3, 1, 6, 4, 2, 1],
       stringVolumes: [-3, 0, 0, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
-        low: [6, 3, 1, 2, 4, 5],
+        low: [1, 2, 3, 4, 5, 6],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 5, 4, 2, 1, 3],
-        bass: [2, 1, 3, 4, 5, 6],
-        jazzD: [null, 1, 2, 3, 4, 5],
-        jazzU: [null, 4, 3, 2, 1, null],
-        root: [2, 1, 3, 4, 5, 6],
-        afterRoot: [6, 5, 1, 2, 3, 4],
-        chuck1: [6, 6, 3, 1, 2, 4],
-        afterChuck1: [6, 6, 4, 3, 2, 1],
-        fifth: [1, 3, 4, 5, 6, 6],
-        afterFifth: [6, 6, 1, 2, 3, 4],
-        chuck2: [6, 6, 3, 1, 2, 4],
-        afterChuck2: [6, 6, 4, 3, 2, 1],
-        haye: [6, 4, 4, 4, 4, 4],
       },
     },
   },
   D: {
     frets: "200232",
-    shortName: "d",
+
     config: {
-      rootFifthSixth: [4, 5, 3],
-      crossPickOrder: [null, 1, null, 2, 3, 4],
-      crossPickPattern: [4, 3, 2, 1, 5, 3, 2, 1],
       stringVolumes: [-5, -3, 1, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
@@ -148,144 +100,68 @@ const chordsWithConfig = {
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 5, 4, 2, 1, 3],
-        bass: [4, 2, 1, 3, 5, 6],
-        jazzD: [null, 5, 1, 2, 3, 4],
-        jazzU: [null, 5, 4, 3, 2, 1],
-        root: [5, 4, 1, 3, 5, 6],
-        afterRoot: [6, 5, 3, 1, 2, 4],
-        chuck1: [6, 5, 4, 2, 1, 3],
-        afterChuck1: [6, 5, 4, 3, 2, 1],
-        fifth: [6, 1, 2, 4, 5, 6],
-        afterFifth: [6, 5, 2, 1, 3, 4],
-        chuck2: [6, 5, 4, 2, 1, 3],
-        afterChuck2: [6, 5, 4, 3, 2, 1],
-        haye: [6, 5, 4, 4, 4, 4],
       },
     },
   },
   E: {
     frets: "022100",
-    shortName: "e",
+
     config: {
-      rootFifthSixth: [6, 5, 5],
-      crossPickOrder: [null, 1, null, 2, 3, 4],
-      crossPickPattern: [6, 4, 2, 1, 5, 3, 2, 1],
       stringVolumes: [0, 0, 0, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
-        low: [6, 5, 1, 2, 3, 4],
+        low: [1, 2, 3, 4, 5, 6],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 5, 1, 2, 3, 4],
-        bass: [1, 2, 3, 4, 5, 6],
-        jazzD: [1, 2, null, 3, 4, null],
-        jazzU: [5, 4, 3, 2, 1, null],
-        root: [1, 2, 3, 4, 5, 6],
-        afterRoot: [5, 1, 2, 3, 4, 6],
-        chuck1: [6, 6, 3, 1, 2, 4],
-        afterChuck1: [6, 6, 4, 3, 1, 2],
-        fifth: [3, 1, 2, 4, 5, 6],
-        afterFifth: [6, 3, 2, 1, 4, 5],
-        chuck2: [6, 6, 3, 2, 1, 4],
-        afterChuck2: [6, 6, 4, 3, 2, 1],
-        haye: [4, 4, 4, 4, 4, 4],
       },
     },
   },
   F: {
     frets: "133211",
-    shortName: "e",
     config: {
-      rootFifthSixth: [6, 5, 5],
-      crossPickOrder: [null, 1, null, 2, 3, 4],
-      crossPickPattern: [6, 4, 2, 1, 5, 3, 2, 1],
       stringVolumes: [0, 0, 0, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
-        low: [6, 5, 1, 2, 3, 4],
+        low: [1, 2, 3, 4, 5, 6],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 5, 1, 2, 3, 4],
         bass: [1, 2, 3, 4, 5, 6],
-        jazzD: [1, 2, null, 3, 4, null],
-        jazzU: [5, 4, 3, 2, 1, null],
-        root: [1, 2, 3, 4, 5, 6],
-        afterRoot: [5, 1, 2, 3, 4, 6],
-        chuck1: [6, 6, 3, 1, 2, 4],
-        afterChuck1: [6, 6, 4, 3, 1, 2],
-        fifth: [3, 1, 2, 4, 5, 6],
-        afterFifth: [6, 3, 2, 1, 4, 5],
-        chuck2: [6, 6, 3, 2, 1, 4],
-        afterChuck2: [6, 6, 4, 3, 2, 1],
-        haye: [4, 4, 4, 4, 4, 4],
       },
     },
   },
   Fm: {
     frets: "133111",
-    shortName: "e",
     config: {
-      rootFifthSixth: [6, 5, 5],
-      crossPickOrder: [null, 1, null, 2, 3, 4],
-      crossPickPattern: [6, 4, 2, 1, 5, 3, 2, 1],
       stringVolumes: [0, 0, 0, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
-        low: [6, 5, 1, 2, 3, 4],
+        low: [1, 2, 3, 4, 5, 6],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 5, 1, 2, 3, 4],
-        bass: [1, 2, 3, 4, 5, 6],
-        jazzD: [1, 2, null, 3, 4, null],
-        jazzU: [5, 4, 3, 2, 1, null],
-        root: [1, 2, 3, 4, 5, 6],
-        afterRoot: [5, 1, 2, 3, 4, 6],
-        chuck1: [6, 6, 3, 1, 2, 4],
-        afterChuck1: [6, 6, 4, 3, 1, 2],
-        fifth: [3, 1, 2, 4, 5, 6],
-        afterFifth: [6, 3, 2, 1, 4, 5],
-        chuck2: [6, 6, 3, 2, 1, 4],
-        afterChuck2: [6, 6, 4, 3, 2, 1],
-        haye: [4, 4, 4, 4, 4, 4],
       },
     },
   },
   Am: {
     frets: "_02210",
-    shortName: "a",
+
     config: {
-      rootFifthSixth: [5, 4, 4],
-      crossPickOrder: [null, null, 1, 2, 3, 4],
-      crossPickPattern: [5, 4, 2, 1, 4, 3, 2, 1],
       stringVolumes: [-3, 0, 0, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
-        low: [6, 3, 1, 2, 4, 5],
+        low: [6, 1, 2, 3, 4, 5],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 5, 4, 1, 2, 3],
-        bass: [5, 1, 2, 3, 4, 6],
-        jazzD: [null, 1, 2, 3, 4, 5],
-        jazzU: [null, 5, 4, 3, 1, 1],
-        root: [4, 1, 2, 4, 5, 6],
-        afterRoot: [6, 5, 1, 2, 3, 4],
-        chuck1: [6, 6, 4, 2, 1, 3],
-        afterChuck1: [6, 6, 4, 3, 2, 1],
-        fifth: [5, 3, 1, 2, 4, 6],
-        afterFifth: [6, 6, 3, 1, 2, 4],
-        chuck2: [6, 6, 4, 2, 1, 3],
-        afterChuck2: [6, 6, 4, 3, 2, 1],
-        haye: [6, 5, 4, 4, 4, 4],
       },
     },
   },
   Dm: {
     frets: "_00231",
-    shortName: "d",
+
     config: {
-      rootFifthSixth: [4, 5, 3],
-      crossPickOrder: [null, 1, null, 2, 3, 4],
-      crossPickPattern: [4, 3, 2, 1, 5, 3, 2, 1],
       stringVolumes: [-5, -3, 1, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
@@ -293,74 +169,34 @@ const chordsWithConfig = {
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 5, 4, 2, 1, 3],
-        bass: [4, 2, 1, 3, 5, 6],
-        jazzD: [null, 5, 1, 2, 3, 4],
-        jazzU: [null, 5, 4, 3, 2, 1],
-        root: [5, 4, 1, 3, 5, 6],
-        afterRoot: [6, 5, 3, 1, 2, 4],
-        chuck1: [6, 5, 4, 2, 1, 3],
-        afterChuck1: [6, 5, 4, 3, 2, 1],
-        fifth: [6, 1, 2, 4, 5, 6],
-        afterFifth: [6, 5, 2, 1, 3, 4],
-        chuck2: [6, 5, 4, 2, 1, 3],
-        afterChuck2: [6, 5, 4, 3, 2, 1],
-        haye: [6, 5, 4, 4, 4, 4],
       },
     },
   },
   Em: {
     frets: "022000",
-    shortName: "e",
+
     config: {
-      rootFifthSixth: [6, 5, 5],
-      crossPickOrder: [null, 1, null, 2, 3, 4],
-      crossPickPattern: [6, 4, 2, 1, 5, 3, 2, 1],
       stringVolumes: [0, 0, 0, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
-        low: [6, 5, 1, 2, 3, 4],
+        low: [1, 2, 3, 4, 5, 6],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 5, 1, 2, 3, 4],
-        bass: [1, 2, 3, 4, 5, 6],
-        jazzD: [1, 2, null, 3, 4, null],
-        jazzU: [5, 4, 3, 2, 1, null],
-        root: [1, 2, 3, 4, 5, 6],
-        afterRoot: [5, 1, 2, 3, 4, 6],
-        chuck1: [6, 6, 3, 1, 2, 4],
-        afterChuck1: [6, 6, 4, 3, 1, 2],
-        fifth: [3, 1, 2, 4, 5, 6],
-        afterFifth: [6, 3, 2, 1, 4, 5],
-        chuck2: [6, 6, 3, 2, 1, 4],
-        afterChuck2: [6, 6, 4, 3, 2, 1],
-        haye: [4, 4, 4, 4, 4, 4],
       },
     },
   },
   Bm: {
     frets: "224432",
-    shortName: "aD",
+
     config: {
-      rootFifthSixth: [5, 4, 4],
-      crossPickOrder: [null, null, 1, 2, 3, 4],
-      crossPickPattern: [5, 4, 3, 2, 5, 4, 3, 2],
       stringVolumes: [0, 0, 0, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
-        low: [4, 3, 1, 2, 5, 6],
+        low: [1, 2, 3, 4, 5, 6],
         mid: [6, 4, 3, 1, 2, 5],
         high: [6, 5, 4, 2, 1, 3],
         strum: [6, 5, 3, 2, 1, 4],
-        bass: [6, 1, 2, 3, 4, 5],
-        haye: [4, 4, 4, 4, 4, 4],
-        root: [1, 2, 3, 4, 5, 6],
-        afterRoot: [5, 1, 2, 3, 4, 6],
-        chuck1: [6, 6, 3, 1, 2, 4],
-        afterChuck1: [6, 6, 4, 3, 1, 2],
-        fifth: [3, 1, 2, 4, 5, 6],
-        afterFifth: [6, 3, 2, 1, 4, 5],
-        chuck2: [6, 6, 3, 2, 1, 4],
-        afterChuck2: [6, 6, 4, 3, 2, 1],
       },
       droning: true,
     },
@@ -370,12 +206,13 @@ const actionType = {
   down: {
     type: "play",
     spread: 4,
-    bias: "root",
+    bias: "strum",
   },
   downA: {
     type: "play",
     spread: 6,
-    bias: "root",
+    bias: "strum",
+    accent: true,
   },
   downB: {
     type: "play",
@@ -390,12 +227,13 @@ const actionType = {
   up: {
     type: "play",
     spread: 4,
-    bias: "afterRoot",
+    bias: "strum",
   },
   upA: {
     type: "play",
     spread: 6,
-    bias: "afterRoot",
+    bias: "strum",
+    accent: true,
   },
   upB: {
     type: "play",
@@ -600,8 +438,12 @@ function calculateBaseStringVolumes(chordName, actionData) {
 
   return volumes;
 }
-function calculateStringOffsets(direction) {
-  const m = 0.003; // Задержка между строками
+function calculateStringOffsets(direction, actionData) {
+  let m = 0.005; // Задержка между строками
+  if (actionData.accent) {
+    m = 0.001;
+  }
+
   const offsetResults = [];
   const maxStringIndex = 5; // Максимальный индекс строки
 
@@ -725,15 +567,15 @@ function countSteps(beatPattern, currentChord) {
     const action = getAction(index);
     const direction = index % 2 === 0 ? "down" : "up";
 
-    const offsets = calculateStringOffsets(direction);
     const actionData = actionType[action] || {};
-    const { type } = actionData;
+    const { type, accent } = actionData;
+    const offsets = calculateStringOffsets(direction, actionData);
     const dbs = calculateBaseStringVolumes(currentChord, actionData);
 
     const instructions = samples.map((sample, sampleIndex) => ({
       type,
       sample,
-      db: dbs[sampleIndex],
+      db: dbs[sampleIndex] + accent ? 0 : 0,
       offset: offsets[sampleIndex],
     }));
     return { index, instructions };
