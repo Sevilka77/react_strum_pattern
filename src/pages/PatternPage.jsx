@@ -38,7 +38,7 @@ function PatternPage() {
         dispatch({ type: "setNoteDuration", data: foundPattern.note });
         dispatch({ type: "setTempo", data: foundPattern.temp });
 
-        const imageUrl = `/assets/images/svg/${foundPattern.image}`;
+        const imageUrl = `https://strumming.ru/assets/images/svg/${foundPattern.image}`;
         setPatternImage(imageUrl); // Обновляем состояние с изображением
         // updateOGMetaTags(foundPattern.title, imageUrl, foundPattern.pattern);
         // // Обновляем LD-разметку
