@@ -568,6 +568,7 @@ function countSteps(beatPattern, currentChord) {
     const direction = index % 2 === 0 ? "down" : "up";
 
     const actionData = actionType[action] || {};
+
     const { type, accent } = actionData;
     const offsets = calculateStringOffsets(direction, actionData);
     const dbs = calculateBaseStringVolumes(currentChord, actionData);
@@ -575,9 +576,10 @@ function countSteps(beatPattern, currentChord) {
     const instructions = samples.map((sample, sampleIndex) => ({
       type,
       sample,
-      db: dbs[sampleIndex] + accent ? 0 : 0,
+      db: dbs[sampleIndex] + (accent ? 0 : 0),
       offset: offsets[sampleIndex],
     }));
+
     return { index, instructions };
   });
 }
@@ -596,7 +598,7 @@ export default function useTone(config) {
 
     Tone.getTransport().bpm.value = config.tempo || 120;
     const steps = countSteps(config.beatPattern, config.currentChord);
-    //console.debug(steps);
+    // console.log(steps);
     // const durations = calcDurations(steps, config.noteDuration);
 
     const seq = new Tone.Sequence(

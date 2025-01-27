@@ -16,13 +16,14 @@ import { Link } from "react-router-dom";
 import LDJson from "../components/LDJson";
 
 const CardButton = styled(Button)({
+  backgroundColor: "rgb(55,65,81)",
   width: "100%",
   textTransform: "uppercase",
-  borderRadius: "8px",
-  color: "#bdb8c9",
-  border: "2px solid #4A434B", // Цвет текста кнопки
+  borderRadius: "4px",
+  color: "#FFF",
+
   "&:hover": {
-    color: "#FFF", // Цвет текста при наведении
+    backgroundColor: "rgb(75,85,99)", // Цвет текста при наведении
   },
 });
 
@@ -88,7 +89,7 @@ function HomePage() {
             sx={{
               lineHeight: "1",
               textAlign: "center",
-              color: "#9D9CA4",
+              color: "rgb(156, 153, 175)",
               fontSize: "clamp(16px, 2.08vw, 40px)",
               mb: {
                 xs: 1, // Мобильные устройства
@@ -125,16 +126,22 @@ function HomePage() {
             <Card
               component="li"
               sx={{
+                backgroundColor: "rgb(31,41,55)",
                 minWidth: 275,
-                borderRadius: "16px",
-                border: "2px solid #4A434B", //
+                borderRadius: "8px",
+
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
               }}
             >
               <CardContent>
-                <Typography color="#FFA500" variant="h5" component="h2">
+                <Typography
+                  textAlign="center"
+                  color="#FFD700"
+                  variant="h5"
+                  component="h2"
+                >
                   Создай свой бой
                 </Typography>
 
@@ -156,16 +163,22 @@ function HomePage() {
             <Card
               component="li"
               sx={{
+                backgroundColor: "rgb(31,41,55)",
                 minWidth: 275,
-                borderRadius: "16px",
-                border: "2px solid #4A434B", //
+                borderRadius: "8px",
+
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
               }}
             >
               <CardContent>
-                <Typography color="#00BFFF" variant="h5" component="h2">
+                <Typography
+                  textAlign="center"
+                  color="rgb(99, 179, 237)"
+                  variant="h5"
+                  component="h2"
+                >
                   Тренировка боя
                 </Typography>
 
@@ -187,16 +200,22 @@ function HomePage() {
             <Card
               component="li"
               sx={{
+                backgroundColor: "rgb(31,41,55)",
                 minWidth: 275,
-                borderRadius: "16px",
-                border: "2px solid #4A434B", //
+                borderRadius: "8px",
+
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
               }}
             >
               <CardContent>
-                <Typography color="#00FA9A" variant="h5" component="h2">
+                <Typography
+                  textAlign="center"
+                  color="rgb(72, 187, 120)"
+                  variant="h5"
+                  component="h2"
+                >
                   Основные бои
                 </Typography>
 
@@ -217,16 +236,22 @@ function HomePage() {
             <Card
               component="li"
               sx={{
+                backgroundColor: "rgb(31,41,55)",
                 minWidth: 275,
-                borderRadius: "16px",
-                border: "2px solid #4A434B", //
+                borderRadius: "8px",
+
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
               }}
             >
               <CardContent>
-                <Typography color="#FF69B4" variant="h5" component="h2">
+                <Typography
+                  textAlign="center"
+                  color="rgb(237, 100, 166)"
+                  variant="h5"
+                  component="h2"
+                >
                   Пользовательские бои
                 </Typography>
 
