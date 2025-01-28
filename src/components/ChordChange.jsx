@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Menu, MenuItem } from "@mui/material";
 
 import { memo } from "react";
-import { useConfig } from "../hooks/useConfig";
+import { useConfigSelector } from "../hooks/useConfigSelector";
 
 const ChordChangeNM = () => {
-  const { config, dispatch } = useConfig();
-  const currentChord = config.currentChord || "";
+  const [currentChord, dispatch] = useConfigSelector(
+    (config) => config.currentChord,
+  );
 
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);

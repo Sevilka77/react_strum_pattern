@@ -20,6 +20,7 @@ export const ConfigProvider = ({ children }) => {
     clickTaktBeat: false,
     editMode: false,
     currentChord: "Em",
+    repeatCount: 5,
   });
 
   // Мемоизируем значение контекста для предотвращения лишних рендеров

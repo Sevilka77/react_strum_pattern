@@ -6,6 +6,7 @@ import click2 from "../assets/samples/click2.wav";
 import hit from "../assets/samples/hit.mp3";
 import hit2 from "../assets/samples/hit2.mp3";
 import hihat from "..//assets/samples/hihat.mp3";
+import { useConfig } from "./useConfig";
 
 const sampleFiles = import.meta.glob("../assets/samples/*.mp3", {
   query: "?url",
@@ -58,6 +59,8 @@ const chordsWithConfig = {
         mid: [6, 6, 3, 1, 2, 4],
         high: [6, 6, 4, 3, 2, 1],
         strum: [6, 6, 4, 1, 2, 3],
+        strumD: [1, 2, 3, 4, 5, 6],
+        strumU: [6, 5, 4, 3, 2, 1],
       },
     },
   },
@@ -65,13 +68,15 @@ const chordsWithConfig = {
     frets: "_02220",
 
     config: {
-      stringVolumes: [-3, 0, 0, 0, 0, 0],
+      stringVolumes: [-6, 0, 0, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [6, 1, 2, 3, 4, 5],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 5, 4, 1, 2, 3],
+        strumD: [6, 1, 2, 3, 4, 5],
+        strumU: [6, 5, 4, 3, 2, 1],
       },
     },
   },
@@ -79,18 +84,20 @@ const chordsWithConfig = {
     frets: "332010",
 
     config: {
-      stringVolumes: [-3, 0, 0, 0, 0, 0],
+      stringVolumes: [-6, 0, 0, 0, 0, 0],
       bias: {
         no: [NaN, NaN, NaN, NaN, NaN, NaN],
         low: [1, 2, 3, 4, 5, 6],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 5, 4, 2, 1, 3],
+        strumD: [6, 1, 2, 3, 4, 5],
+        strumU: [6, 5, 4, 3, 2, 1],
       },
     },
   },
   D: {
-    frets: "200232",
+    frets: "__0232",
 
     config: {
       stringVolumes: [-5, -3, 1, 0, 0, 0],
@@ -100,6 +107,8 @@ const chordsWithConfig = {
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 5, 4, 2, 1, 3],
+        strumD: [6, 5, 1, 2, 3, 5],
+        strumU: [6, 5, 4, 3, 2, 1],
       },
     },
   },
@@ -113,7 +122,9 @@ const chordsWithConfig = {
         low: [1, 2, 3, 4, 5, 6],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
-        strum: [6, 5, 1, 2, 3, 4],
+        strum: [6, 4, 1, 2, 3, 5],
+        strumD: [1, 2, 3, 4, 5, 6],
+        strumU: [6, 5, 4, 3, 2, 1],
       },
     },
   },
@@ -126,8 +137,10 @@ const chordsWithConfig = {
         low: [1, 2, 3, 4, 5, 6],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
-        strum: [6, 5, 1, 2, 3, 4],
+        strum: [6, 4, 1, 2, 3, 5],
         bass: [1, 2, 3, 4, 5, 6],
+        strumD: [1, 2, 3, 4, 5, 6],
+        strumU: [6, 5, 4, 3, 2, 1],
       },
     },
   },
@@ -140,7 +153,9 @@ const chordsWithConfig = {
         low: [1, 2, 3, 4, 5, 6],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
-        strum: [6, 5, 1, 2, 3, 4],
+        strum: [6, 4, 1, 2, 3, 5],
+        strumD: [1, 2, 3, 4, 5, 6],
+        strumU: [6, 5, 4, 3, 2, 1],
       },
     },
   },
@@ -154,12 +169,14 @@ const chordsWithConfig = {
         low: [6, 1, 2, 3, 4, 5],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
-        strum: [6, 5, 4, 1, 2, 3],
+        strum: [6, 4, 1, 2, 3, 5],
+        strumD: [6, 1, 2, 3, 4, 5],
+        strumU: [6, 5, 4, 3, 2, 1],
       },
     },
   },
   Dm: {
-    frets: "_00231",
+    frets: "__0231",
 
     config: {
       stringVolumes: [-5, -3, 1, 0, 0, 0],
@@ -168,7 +185,9 @@ const chordsWithConfig = {
         low: [6, 3, 1, 2, 4, 5],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
-        strum: [6, 5, 4, 2, 1, 3],
+        strum: [6, 4, 1, 2, 3, 5],
+        strumD: [6, 5, 1, 2, 3, 5],
+        strumU: [6, 5, 4, 3, 2, 1],
       },
     },
   },
@@ -182,7 +201,9 @@ const chordsWithConfig = {
         low: [1, 2, 3, 4, 5, 6],
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
-        strum: [6, 5, 1, 2, 3, 4],
+        strum: [6, 4, 1, 2, 3, 5],
+        strumD: [1, 2, 3, 4, 5, 6],
+        strumU: [6, 5, 4, 3, 2, 1],
       },
     },
   },
@@ -196,22 +217,23 @@ const chordsWithConfig = {
         low: [1, 2, 3, 4, 5, 6],
         mid: [6, 4, 3, 1, 2, 5],
         high: [6, 5, 4, 2, 1, 3],
-        strum: [6, 5, 3, 2, 1, 4],
+        strum: [6, 4, 1, 2, 3, 5],
+        strumD: [1, 2, 3, 4, 5, 6],
+        strumU: [6, 5, 4, 3, 2, 1],
       },
-      droning: true,
     },
   },
 };
 const actionType = {
   down: {
     type: "play",
-    spread: 4,
-    bias: "strum",
+    spread: 3.7,
+    bias: "strumD",
   },
   downA: {
     type: "play",
     spread: 6,
-    bias: "strum",
+    bias: "strumD",
     accent: true,
   },
   downB: {
@@ -226,8 +248,8 @@ const actionType = {
   },
   up: {
     type: "play",
-    spread: 4,
-    bias: "strum",
+    spread: 3.7,
+    bias: "strumU",
   },
   upA: {
     type: "play",
@@ -585,7 +607,8 @@ function countSteps(beatPattern, currentChord) {
 }
 
 // Хук useTone для управления воспроизведением звуков
-export default function useTone(config) {
+export default function useTone() {
+  const { config } = useConfig();
   const { incrementCycle, resetCycle, setBeat } = useCycle();
   // Состояние активного бита
 

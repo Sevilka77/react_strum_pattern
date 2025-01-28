@@ -19,10 +19,10 @@ import {
 } from "./Icons";
 import { useCycle } from "../hooks/useCycle";
 
-import { useConfig } from "../hooks/useConfig";
+import { useConfigSelector } from "../hooks/useConfigSelector";
 
 const MetronomeNM = ({ noteDuration, beatPattern }) => {
-  const { config } = useConfig();
+  const [editMode] = useConfigSelector((config) => config.editMode);
   const beats = beatPattern;
   const { activeBeat } = useCycle();
 
@@ -93,7 +93,7 @@ const MetronomeNM = ({ noteDuration, beatPattern }) => {
               icon={icons[index]} // Передаем готовую иконку
               active={activeBeat === index}
             />
-            {config.editMode && <PatternEdit index={index} />}
+            {editMode && <PatternEdit index={index} />}
           </Grid>
         ))}
       </Grid>

@@ -3,6 +3,11 @@ const setTempo = (state, tempo) => {
   const newTempo = Math.max(40, Math.min(300, tempo));
   return { ...state, tempo: newTempo };
 };
+const setRepeatCount = (state, count) => {
+  if (count === undefined) return state;
+
+  return { ...state, count };
+};
 
 const setBeatPattern = (state, beatPattern) => {
   if (beatPattern === undefined) return state;
@@ -70,6 +75,8 @@ export default function reducer(state, action) {
       return setEditMode(state, action.data);
     case "setCurrentChord":
       return setCurrentChord(state, action.data);
+    case "setRepeatCount":
+      return setRepeatCount(state, action.data);
     default:
       return state;
   }

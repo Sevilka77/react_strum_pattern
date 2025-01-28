@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useCallback } from "react";
 
 const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
 
@@ -8,13 +8,18 @@ import { useEffect, useState } from "react";
 import ControlFooter from "../components/ControlFooter";
 import { learnPatterns } from "../provider/learnPatterns";
 import { useCycle } from "../hooks/useCycle";
-import { Container } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import LDJson from "../components/LDJson";
+import { Box } from "@mui/system";
+import { Minus, Plus } from "lucide-react";
 
 function LearnPage() {
   const { dispatch } = useConfig();
   const { cycleCount, resetCycle } = useCycle();
   const [currentPatternIndex, setCurrentPatternIndex] = useState(0);
+  const [repeatCount, setRepeatCount] = useState(5);
+  const [autoNext, setAutoNext] = useState(false);
+
   const ldData = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -32,6 +37,32 @@ function LearnPage() {
     },
   };
 
+  // Функция для перехода к предыдущему уроку
+  const updatePattern = useCallback(
+    (index) => {
+      const pattern = learnPatterns[index];
+      if (pattern) {
+        dispatch({ type: "setBeatPattern", data: pattern.pattern });
+        dispatch({ type: "setNoteDuration", data: pattern.note });
+        dispatch({ type: "setTempo", data: pattern.temp });
+      }
+    },
+    [dispatch],
+  );
+
+  const goToPreviousLesson = useCallback(() => {
+    const previousIndex =
+      (currentPatternIndex - 1 + learnPatterns.length) % learnPatterns.length; // Цикличность
+    setCurrentPatternIndex(previousIndex);
+    updatePattern(previousIndex);
+  }, [currentPatternIndex, updatePattern]);
+
+  const goToNextLesson = useCallback(() => {
+    const nextIndex = (currentPatternIndex + 1) % learnPatterns.length; // Цикличность
+    setCurrentPatternIndex(nextIndex);
+    updatePattern(nextIndex);
+  }, [currentPatternIndex, updatePattern]);
+
   useEffect(() => {
     const firstPattern = learnPatterns[0];
     if (firstPattern) {
@@ -47,24 +78,17 @@ function LearnPage() {
   }, [dispatch]); // Обязательно добавляем зависимости
 
   useEffect(() => {
-    if (cycleCount >= 5) {
-      resetCycle(); // Сбросить счётчик
-
-      // Переключаемся на следующий паттерн
-      const nextIndex = (currentPatternIndex + 1) % learnPatterns.length; // Цикличность
-      const nextPattern = learnPatterns[nextIndex];
-
-      if (nextPattern) {
-        setCurrentPatternIndex(nextIndex); // Обновляем текущий индекс
-        dispatch({ type: "setBeatPattern", data: nextPattern.pattern }); // Обновляем паттерн
-      }
+    if (autoNext && cycleCount >= repeatCount) {
+      resetCycle();
+      goToNextLesson();
     }
-  }, [cycleCount, resetCycle, currentPatternIndex, dispatch]);
+  }, [cycleCount, resetCycle, repeatCount, autoNext, goToNextLesson]);
 
   return (
     <>
       <LDJson data={ldData} />
       <Header />
+
       <Container
         component="main"
         sx={{
@@ -79,7 +103,71 @@ function LearnPage() {
         <Suspense fallback={<div>Загрузка...</div>}>
           <MetronomeWrapper />
         </Suspense>
-        <ControlFooter />
+
+        <ControlFooter>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "8px",
+              marginBottom: "8px", // Отступ между строками
+            }}
+          >
+            {autoNext ? (
+              <>
+                <Button onClick={() => setAutoNext(false)}>
+                  Выключить автопереключение
+                </Button>
+                <Button
+                  sx={{
+                    color: "#FFFFFF",
+                    width: "40px",
+                    minWidth: "40px",
+                    px: 0,
+                  }}
+                  onClick={() =>
+                    setRepeatCount((prevValue) => Math.max(1, prevValue - 1))
+                  }
+                  color="primary"
+                >
+                  <Minus />
+                </Button>
+                <Typography alignSelf="center" textAlign="center" width="40px">
+                  {repeatCount}
+                </Typography>
+                <Button
+                  sx={{
+                    color: "#FFFFFF",
+                    width: "40px",
+                    minWidth: "40px",
+                    px: 0,
+                  }}
+                  onClick={() =>
+                    setRepeatCount((prevValue) => Math.min(100, prevValue + 1))
+                  }
+                  color="primary"
+                >
+                  <Plus />
+                </Button>
+              </>
+            ) : (
+              <Button variant="contained" onClick={() => setAutoNext(true)}>
+                Автопереключение
+              </Button>
+            )}
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "8px",
+              marginBottom: "8px", // Отступ между строками
+            }}
+          >
+            <Button onClick={goToPreviousLesson}>Предыдущий урок</Button>
+            <Button onClick={goToNextLesson}>Следующий урок</Button>
+          </Box>
+        </ControlFooter>
       </Container>
     </>
   );

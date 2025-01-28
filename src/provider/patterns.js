@@ -198,6 +198,15 @@ export const patterns = [
     image: "vosьmerka-s-zaglushkami.svg",
   },
   {
+    title: "пауэр бой",
+    pattern: "10b0b010b0b010b0",
+    temp: 70,
+    note: "16n",
+    level: "main",
+    position: 12,
+  },
+
+  {
     title: "восьмерка два коробля",
     pattern: "1001101101011011",
     temp: 70,
