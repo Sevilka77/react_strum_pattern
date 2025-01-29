@@ -38,9 +38,7 @@ export default function SettingsDialog() {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          Настройки
-        </DialogTitle>
+        <DialogTitle id="customized-dialog-title">Настройки</DialogTitle>
         <IconButton
           aria-label="close"
           onClick={handleClose}
@@ -55,8 +53,9 @@ export default function SettingsDialog() {
         </IconButton>
         <Box
           sx={{
-            width: 300,
-            padding: 3,
+            alignSelf: "center",
+            width: "90%",
+            padding: 2,
           }}
         >
           <FormControlLabel

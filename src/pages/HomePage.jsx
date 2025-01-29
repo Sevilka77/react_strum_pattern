@@ -141,6 +141,7 @@ function HomePage() {
                   color="#FFD700"
                   variant="h5"
                   component="h2"
+                  marginBottom={2}
                 >
                   Создай свой бой
                 </Typography>
@@ -178,6 +179,7 @@ function HomePage() {
                   color="rgb(99, 179, 237)"
                   variant="h5"
                   component="h2"
+                  marginBottom={2}
                 >
                   Тренировка боя
                 </Typography>
@@ -215,6 +217,7 @@ function HomePage() {
                   color="rgb(72, 187, 120)"
                   variant="h5"
                   component="h2"
+                  marginBottom={2}
                 >
                   Основные бои
                 </Typography>
@@ -251,6 +254,7 @@ function HomePage() {
                   color="rgb(237, 100, 166)"
                   variant="h5"
                   component="h2"
+                  marginBottom={2}
                 >
                   Пользовательские бои
                 </Typography>

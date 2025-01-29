@@ -10,7 +10,7 @@ import { learnPatterns } from "../provider/learnPatterns";
 import { useCycle } from "../hooks/useCycle";
 import { Button, Container, Typography } from "@mui/material";
 import LDJson from "../components/LDJson";
-import { Box } from "@mui/system";
+import { Box, Stack } from "@mui/system";
 import { Minus, Plus } from "lucide-react";
 
 function LearnPage() {
@@ -19,6 +19,7 @@ function LearnPage() {
   const [currentPatternIndex, setCurrentPatternIndex] = useState(0);
   const [repeatCount, setRepeatCount] = useState(5);
   const [autoNext, setAutoNext] = useState(false);
+  const [pattenName, setPatternName] = useState();
 
   const ldData = {
     "@context": "https://schema.org",
@@ -42,6 +43,7 @@ function LearnPage() {
     (index) => {
       const pattern = learnPatterns[index];
       if (pattern) {
+        setPatternName(pattern.title);
         dispatch({ type: "setBeatPattern", data: pattern.pattern });
         dispatch({ type: "setNoteDuration", data: pattern.note });
         dispatch({ type: "setTempo", data: pattern.temp });
@@ -66,6 +68,7 @@ function LearnPage() {
   useEffect(() => {
     const firstPattern = learnPatterns[0];
     if (firstPattern) {
+      setPatternName(firstPattern.title);
       dispatch({ type: "setBeatPattern", data: firstPattern.pattern });
       dispatch({ type: "setNoteDuration", data: firstPattern.note });
       dispatch({ type: "setTempo", data: firstPattern.temp });
@@ -88,7 +91,9 @@ function LearnPage() {
     <>
       <LDJson data={ldData} />
       <Header />
-
+      <Typography variant="h5" component="h3" align="center" flexGrow="1">
+        {pattenName}
+      </Typography>
       <Container
         component="main"
         sx={{
@@ -108,15 +113,17 @@ function LearnPage() {
           <Box
             sx={{
               display: "flex",
+              direction: "row",
               justifyContent: "center",
-              gap: "8px",
-              marginBottom: "8px", // Отступ между строками
             }}
           >
+            <Button variant="h6" onClick={goToPreviousLesson}>
+              Предыдущий урок
+            </Button>
             {autoNext ? (
               <>
-                <Button onClick={() => setAutoNext(false)}>
-                  Выключить автопереключение
+                <Button variant="h6" onClick={() => setAutoNext(false)}>
+                  Выключить
                 </Button>
                 <Button
                   sx={{
@@ -128,13 +135,29 @@ function LearnPage() {
                   onClick={() =>
                     setRepeatCount((prevValue) => Math.max(1, prevValue - 1))
                   }
-                  color="primary"
                 >
                   <Minus />
                 </Button>
-                <Typography alignSelf="center" textAlign="center" width="40px">
-                  {repeatCount}
-                </Typography>
+                <Stack justifyContent="center">
+                  <Typography
+                    sx={{
+                      width: "40px",
+                      minWidth: "40px",
+                    }}
+                    alignSelf="center"
+                    textAlign="center"
+                  >
+                    {repeatCount}
+                  </Typography>
+                  <Typography
+                    fontSize="11px"
+                    alignSelf="center"
+                    textAlign="center"
+                    s
+                  >
+                    повторений
+                  </Typography>
+                </Stack>
                 <Button
                   sx={{
                     color: "#FFFFFF",
@@ -145,27 +168,18 @@ function LearnPage() {
                   onClick={() =>
                     setRepeatCount((prevValue) => Math.min(100, prevValue + 1))
                   }
-                  color="primary"
                 >
                   <Plus />
                 </Button>
               </>
             ) : (
-              <Button variant="contained" onClick={() => setAutoNext(true)}>
-                Автопереключение
+              <Button variant="h6" onClick={() => setAutoNext(true)}>
+                Авто переключение
               </Button>
             )}
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "8px",
-              marginBottom: "8px", // Отступ между строками
-            }}
-          >
-            <Button onClick={goToPreviousLesson}>Предыдущий урок</Button>
-            <Button onClick={goToNextLesson}>Следующий урок</Button>
+            <Button variant="h6" onClick={goToNextLesson}>
+              Следующий урок
+            </Button>
           </Box>
         </ControlFooter>
       </Container>

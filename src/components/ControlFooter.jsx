@@ -1,8 +1,8 @@
 import { useConfigSelector } from "../hooks/useConfigSelector";
 
 import TempoSelector from "./TempoSelector";
-import SettingsDialog from "./Settings";
-import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
+
+import { Box, Button } from "@mui/material";
 import { memo, useEffect } from "react";
 import { PlayIcon, SquareIcon } from "./Icons";
 import * as Tone from "tone";
@@ -18,9 +18,7 @@ const ControlFooterNM = ({ children }) => {
     dispatch({ type: "setIsPlay", data: !isPlaying });
   };
   useEffect(() => {
-    // Очистка состояния при размонтировании компонента
     return () => {
-      // Остановить воспроизведение при размонтировании
       if (isPlaying) {
         dispatch({ type: "setIsPlay", data: false }); // Остановить воспроизведение
       }
@@ -51,33 +49,29 @@ const ControlFooterNM = ({ children }) => {
           {children}
         </Box>
       )}
-
-      <BottomNavigation
+      <Box
         sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
           width: "100%",
+          display: "flex",
+          flexDirection: "row", // Расставляем кнопки по строкам
+          justifyContent: "center",
+          marginBottom: 1, // Отступ перед нижней строкой
         }}
       >
-        <BottomNavigationAction
+        <Button
+          sx={{
+            width: "40px",
+            minWidth: "40px",
+            px: 0,
+          }}
           value="play"
           onClick={handleClick}
-          icon={isPlaying ? <SquareIcon /> : <PlayIcon />}
-          sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }}
-        />
+        >
+          {isPlaying ? <SquareIcon /> : <PlayIcon />}
+        </Button>
         <TempoSelector />
-        <BottomNavigationAction
-          value="settings"
-          icon={<ChordChange />}
-          sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }}
-        />
-        <BottomNavigationAction
-          value="settings"
-          icon={<SettingsDialog />}
-          sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }}
-        />
-      </BottomNavigation>
+        <ChordChange />
+      </Box>
     </Box>
   );
 };

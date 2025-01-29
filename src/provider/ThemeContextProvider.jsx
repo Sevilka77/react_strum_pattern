@@ -41,8 +41,14 @@ const ThemeContextProvider = ({ children }) => {
           color: "#FFFFFF",
         },
         h5: {
-          fontFamily: "Montserrat, sans-serif",
-          fontWeight: 600,
+          fontFamily: "Roboto",
+          fontWeight: 500,
+          color: "#FFFFFF",
+          fontSize: "18px",
+        },
+        h6: {
+          fontFamily: "Roboto",
+          fontWeight: 300,
           color: "#FFFFFF",
         },
         body1: {
@@ -51,7 +57,7 @@ const ThemeContextProvider = ({ children }) => {
           color: "#FFFFFF",
         },
         button: {
-          fontFamily: "'Montserrat', sans-serif",
+          fontFamily: "Roboto",
           textTransform: "none", // Отключаем преобразование в верхний регистр
         },
       },

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, MenuItem } from "@mui/material";
+import { Button, Menu, MenuItem } from "@mui/material";
 
 import { memo } from "react";
 import { useConfigSelector } from "../hooks/useConfigSelector";
@@ -34,7 +34,13 @@ const ChordChangeNM = () => {
 
   return (
     <>
-      <span
+      <Button
+        sx={{
+          color: "#FFFFFF",
+          width: "40px",
+          minWidth: "40px",
+          px: 0,
+        }}
         id="basic-button"
         aria-controls={openMenu ? "basic-menu" : undefined}
         aria-haspopup="true"
@@ -42,7 +48,7 @@ const ChordChangeNM = () => {
         onClick={handleClickMenu}
       >
         {currentChord}
-      </span>
+      </Button>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}

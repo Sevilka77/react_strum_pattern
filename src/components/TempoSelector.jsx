@@ -68,7 +68,7 @@ const TempoSelectorNM = () => {
     <Stack
       spacing={2}
       direction="row"
-      sx={{ alignItems: "center", justifyContent: "center", width: "100%" }}
+      sx={{ alignItems: "center", justifyContent: "center" }}
     >
       <Button
         sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }}

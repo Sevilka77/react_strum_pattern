@@ -4,6 +4,8 @@ import { memo, useMemo, useEffect } from "react";
 import { MoveLeftIcon } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import SettingsDialog from "./Settings";
+import { Stack } from "@mui/system";
 
 const Header = memo(function Header({ title }) {
   const location = useLocation(); // Получаем текущий путь
@@ -30,7 +32,7 @@ const Header = memo(function Header({ title }) {
   const getPageHeader = useMemo(() => {
     switch (location.pathname) {
       case "/":
-        return "Онлайн тренажер гитарного боя";
+        return "Strumming - Онлайн тренажер гитарного боя";
       case "/learn":
         return "Уроки гитарного боя";
       case "/create":
@@ -78,38 +80,46 @@ const Header = memo(function Header({ title }) {
       position="sticky"
       elevation={0}
       color="transparent"
-      sx={{ top: 0, left: 0, right: 0 }}
+      sx={{ top: 0, pt: 1 }}
     >
-      <Toolbar variant="dense">
+      <Toolbar>
         {/* Если мы на главной странице, отображаем только /* Онлайн тренажер гитарного боя */}
         {location.pathname === "/" ? (
-          <>{}</>
+          <></>
         ) : (
           <>
-            <Avatar
-              src="../favicon-32x32.png"
-              alt="Logo"
-              onClick={() => navigate("/")}
-            />
-
             <IconButton
               aria-label="menu"
               color="#25111b"
+              sx={{ mr: 1 }}
               onClick={() => navigate(-1)}
-              variant="contained"
-              sx={{ ml: 2 }}
             >
               <MoveLeftIcon />
             </IconButton>
 
-            <Typography
-              variant="h5"
-              component="h1"
-              align="center"
-              sx={{ flexGrow: 1 }}
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="center"
+              flexGrow="1"
             >
-              {getPageHeader}
-            </Typography>
+              <Avatar
+                src="../favicon-32x32.png"
+                alt="Logo"
+                onClick={() => navigate("/")}
+              />
+              <Typography
+                variant="h5"
+                component="h1"
+                align="center"
+                flexGrow="1"
+              >
+                {getPageHeader}
+              </Typography>
+            </Stack>
+            <IconButton aria-label="menu" color="#25111b">
+              <SettingsDialog />
+            </IconButton>
           </>
         )}
       </Toolbar>
