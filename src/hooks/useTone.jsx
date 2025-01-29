@@ -325,18 +325,16 @@ const loadChord = async (chordName) => {
   const chordData = chordsWithConfig[chordName];
 
   if (!chordData) {
-    //console.debug(`Аккорд ${chordName} не найден!`);
+    console.warn(`Аккорд ${chordName} не найден!`);
     return [];
   }
 
-  // Получаем строку аккорда
+  // Получаем лады аккорда
   const { frets } = chordData;
 
   // Пробегаем по каждой струне аккорда
   const promises = frets.split("").map(async (note, stringIndex) => {
-    if (note === "_") {
-      note = "F"; // Заменяем "_" на "F"
-    }
+    if (note === "_") note = "F";
 
     const sampleName = generateSampleName(6 - stringIndex, note);
     const variations = getSampleVariations(sampleName);
@@ -357,28 +355,21 @@ const loadChord = async (chordName) => {
           stringChannels[5 - stringIndex],
         );
         players[sample].stringId = 5 - stringIndex;
-        //console.debug(
-        //   `Sample ${sample} loaded and connected to string ${6 - stringIndex}`,
-        // );
       } catch (error) {
         console.error(`Error loading sample ${sample}:`, error);
-        return null;
       }
     });
     await Promise.all(variationPromises);
   });
 
   await Promise.all(promises);
-  //console.debug("Chord loaded successfully:", players);
 };
 const loadAllChords = async () => {
   // Проходим по всем аккордам
   try {
     await Promise.all(
       Object.keys(chordsWithConfig).map(async (chordName) => {
-        //console.debug(`Загружаем аккорд: ${chordName}`);
         await loadChord(chordName); // Загружаем аккорд по имени
-        //console.debug(`Аккорд ${chordName} успешно загружен!`);
       }),
     );
     console.debug("Все аккорды успешно загружены!");
@@ -406,13 +397,12 @@ function playStringSound(sample, type, time, db, offset) {
       modifiedSample = sample;
   }
   if (!players[modifiedSample]) {
-    //console.debug(`Player ${modifiedSample} not loaded`);
+    console.warn(`Player ${modifiedSample} not loaded`);
     return;
   }
 
   if (active[players[modifiedSample].stringId]) {
     let sample = active[players[modifiedSample].stringId]; // Получаем значение сэмпла для данного ключа
-    // Останавливаем сэмпл (например, при помощи triggerRelease)
     if (players[sample]) {
       players[sample].fadeOut = 0.05;
       players[sample].stop(time);
@@ -461,11 +451,7 @@ function calculateBaseStringVolumes(chordName, actionData) {
   return volumes;
 }
 function calculateStringOffsets(direction, actionData) {
-  let m = 0.005; // Задержка между строками
-  if (actionData.accent) {
-    m = 0.001;
-  }
-
+  const m = actionData.accent ? 0.001 : 0.005;
   const offsetResults = [];
   const maxStringIndex = 5; // Максимальный индекс строки
 
@@ -480,9 +466,7 @@ function calculateStringOffsets(direction, actionData) {
     direction === "up" ? r >= endIndex : r <= endIndex;
     r += step, t++
   ) {
-    let offset = t * m + 0.001 * Math.random();
-
-    offsetResults[r] = offset;
+    offsetResults[r] = t * m + 0.001 * Math.random();
   }
   return offsetResults;
 }
@@ -500,18 +484,12 @@ function getSamples(chordName) {
   const { frets } = chordData;
 
   // функция получене имени sampla
-  const sampleName = (e, t) => {
-    return ""
-      .concat("o".repeat(6 - e))
-      .concat(t)
-      .concat("o".repeat(e - 1));
-  };
 
   return frets.split("").map((currentChar, r) => {
     if (currentChar === "_") {
       currentChar = "F"; // Заменяем "_" на "F"
     }
-    return sampleName(6 - r, currentChar);
+    return generateSampleName(6 - r, currentChar);
   });
 }
 
