@@ -186,7 +186,7 @@ const chordsWithConfig = {
         mid: [6, 5, 3, 1, 2, 4],
         high: [6, 5, 4, 3, 2, 1],
         strum: [6, 4, 1, 2, 3, 5],
-        strumD: [6, 5, 1, 2, 3, 5],
+        strumD: [6, 5, 1, 2, 3, 4],
         strumU: [6, 5, 4, 3, 2, 1],
       },
     },
@@ -609,7 +609,7 @@ export default function useTone() {
 
         Tone.getDraw().schedule(() => {
           setBeat(index);
-        }, timeWithOfset);
+        }, timeWithOfset + 0.1);
 
         if (config.isBeatSound) {
           playInstruction(sound, timeWithOfset, config.isBeatSound);
@@ -670,6 +670,4 @@ export default function useTone() {
       setBeat(null);
     }
   }, [config.isPlaying, setBeat]);
-
-  return;
 }
