@@ -16,7 +16,7 @@ import {
   XDownIcon,
   XUpIcon,
   XIcon,
-} from "./Icons";
+} from "../shared/ui/Icons/Icons";
 import { useCycle } from "../hooks/useCycle";
 
 import { useConfigSelector } from "../hooks/useConfigSelector";

@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { patterns } from "../../app/providers/patterns";
 
-import Header from "../../components/Header";
+import Header from "../../features/header";
 import { Container } from "@mui/material";
 import LDJson from "../../components/LDJson";
 

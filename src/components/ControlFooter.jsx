@@ -4,7 +4,7 @@ import TempoSelector from "./TempoSelector";
 
 import { Box, Button } from "@mui/material";
 import { memo, useEffect } from "react";
-import { PlayIcon, SquareIcon } from "./Icons";
+import { PlayIcon, SquareIcon } from "../shared/ui/Icons/Icons";
 import * as Tone from "tone";
 import ChordChange from "./ChordChange";
 

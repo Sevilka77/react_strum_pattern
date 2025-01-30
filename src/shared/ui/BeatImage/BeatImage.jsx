@@ -1,5 +1,5 @@
 import { useTheme } from "@mui/material";
-import { ArrowPath, XPath, XArrowPath, HalfArrowPath } from "./Icons";
+import { ArrowPath, XPath, XArrowPath, HalfArrowPath } from "@/shared/ui/Icons";
 export default function BeatImage({ beatString, title }) {
   const theme = useTheme();
   const iconSize = 24;

@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { Menu, MenuItem, IconButton, ListItemIcon } from "@mui/material";
 import { DeleteIcon, WrenchIcon } from "lucide-react";
-import { ArrowD, ArrowDB, ArrowDH, XDownIcon, XIcon } from "./Icons";
+import {
+  ArrowD,
+  ArrowDB,
+  ArrowDH,
+  XDownIcon,
+  XIcon,
+} from "../shared/ui/Icons/Icons";
 import { memo } from "react";
 import { useConfig } from "../hooks/useConfig";
 

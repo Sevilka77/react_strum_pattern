@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import Header from "../features/header";
 import LDJson from "../components/LDJson";
 import { lazy, Suspense } from "react";
 import { useLocation, useParams } from "react-router-dom";

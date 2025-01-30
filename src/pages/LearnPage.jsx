@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import Header from "../features/header";
 import { lazy, Suspense, useCallback } from "react";
 
 const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));

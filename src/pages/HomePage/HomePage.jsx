@@ -1,7 +1,6 @@
 import { Box, Container, Typography } from "@mui/material";
 
-// import Footer from "../components/Footer";
-import Header from "../../components/Header";
+import Header from "../../features/header";
 import CardItem from "./ui/CardItem";
 import LDJson from "../../components/LDJson";
 

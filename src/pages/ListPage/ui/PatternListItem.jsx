@@ -2,7 +2,7 @@
 import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { Link } from "react-router-dom"; // Для перехода на другие страницы
-import BeatImage from "@/components/BeatImage";
+import BeatImage from "@/shared/ui/BeatImage";
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 const TitleTypography = styled(Typography)(({ theme }) => ({

@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import Header from "../features/header";
 import { lazy, Suspense, useState } from "react";
 import { PlusIcon, MinusIcon, Share2Icon } from "lucide-react";
 
