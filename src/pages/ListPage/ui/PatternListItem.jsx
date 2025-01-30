@@ -1,10 +1,10 @@
-import { Typography, Box } from "@mui/material";
+// src/pages/ListPage/ui/PatternListItem.jsx
+import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom"; // Для перехода на другие страницы
-import BeatImage from "./BeatImage";
+import BeatImage from "@/components/BeatImage";
 import { useState } from "react";
-
+import { styled } from "@mui/material/styles";
 const TitleTypography = styled(Typography)(({ theme }) => ({
   position: "relative",
   textDecoration: "none",
@@ -82,36 +82,4 @@ const PatternListItem = ({ pattern, index }) => {
   );
 };
 
-const PatternList = ({ patterns }) => {
-  return (
-    <Grid
-      container
-      spacing={2}
-      columns={12}
-      sx={{
-        my: {
-          xs: 4, // Мобильные устройства
-          sm: 4, // Средние устройства
-          md: 4, // Большие устройства
-        },
-      }}
-    >
-      {patterns.length > 0 ? (
-        patterns.map((pattern) => (
-          <PatternListItem key={pattern.title} pattern={pattern} />
-        ))
-      ) : (
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          align="center"
-          sx={{ width: "100%" }}
-        >
-          Нет паттернов для выбранного уровня
-        </Typography>
-      )}
-    </Grid>
-  );
-};
-
-export default PatternList;
+export default PatternListItem;

@@ -7,7 +7,7 @@ const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
 import { useConfig } from "../hooks/useConfig";
 import { useEffect } from "react";
 import ControlFooter from "../components/ControlFooter";
-import { learnPatterns } from "../provider/learnPatterns";
+import { learnPatterns } from "../app/providers/learnPatterns";
 
 import { Container, IconButton, Snackbar, Stack } from "@mui/material";
 import LDJson from "../components/LDJson";

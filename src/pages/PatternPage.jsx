@@ -9,7 +9,7 @@ const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
 import { useConfig } from "../hooks/useConfig";
 import { useEffect, useState } from "react";
 import ControlFooter from "../components/ControlFooter";
-import { patterns } from "../provider/patterns";
+import { patterns } from "../app/providers/patterns";
 import { Container } from "@mui/material";
 
 function PatternPage() {
