@@ -11,11 +11,14 @@ import { useEffect, useState } from "react";
 import ControlFooter from "../components/ControlFooter";
 import { patterns } from "../app/providers/patterns";
 import { Container } from "@mui/material";
+import { useBeatPattern } from "../hooks/useBeatPattern";
 
 function PatternPage() {
   const location = useLocation();
   const { beatPattern } = useParams();
-  const { config, dispatch } = useConfig();
+  const { dispatch } = useConfig();
+  const { pattern, updateBeatPattern } = useBeatPattern();
+
   const p = location.state;
   const [title, setTitle] = useState("Выбор боя");
   const [patternImage, setPatternImage] = useState("");
@@ -34,7 +37,7 @@ function PatternPage() {
 
       if (foundPattern) {
         setTitle(foundPattern.title || "Выбор боя"); // Заголовок по умолчанию
-        dispatch({ type: "setBeatPattern", data: foundPattern.pattern });
+        updateBeatPattern(foundPattern.pattern);
         dispatch({ type: "setNoteDuration", data: foundPattern.note });
         dispatch({ type: "setTempo", data: foundPattern.temp });
 
@@ -59,18 +62,18 @@ function PatternPage() {
       } else {
         console.log("Паттерн не найден в массиве patterns.");
         setTitle("Пользовательский бой");
-        dispatch({ type: "setBeatPattern", data: beatPattern });
+        updateBeatPattern(beatPattern);
       }
     } else {
       console.log("Pattern не передан, используется значение по умолчанию");
-      dispatch({ type: "setBeatPattern", data: config.defaultPattern });
+      updateBeatPattern(pattern);
     }
 
     // Очистка состояния при размонтировании компонента, если нужно
     return () => {
       dispatch({ type: "clearPattern" }); // Сбрасываем паттерн
     };
-  }, [dispatch, p, beatPattern, config.defaultPattern, patternImage]);
+  }, [dispatch, p, beatPattern, pattern, patternImage, updateBeatPattern]);
 
   return (
     <>

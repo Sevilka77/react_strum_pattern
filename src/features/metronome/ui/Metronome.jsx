@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import MetronomeBeat from "./MetronomeBeat";
+import MetronomeBeatIcon from "./MetronomeBeatIcon";
 import MetronomeBeatName from "./MetronomeBeatName";
-import PatternEdit from "./PatternEdit";
+import PatternEdit from "@/components/PatternEdit";
 import Grid from "@mui/material/Grid2";
 
 import { memo } from "react";
@@ -16,10 +16,10 @@ import {
   XDownIcon,
   XUpIcon,
   XIcon,
-} from "../shared/ui/Icons/Icons";
-import { useCycle } from "../hooks/useCycle";
+} from "@/shared/ui/Icons/Icons";
+import { useCycle } from "@/hooks/useCycle";
 
-import { useConfigSelector } from "../hooks/useConfigSelector";
+import { useConfigSelector } from "@/hooks/useConfigSelector";
 
 const MetronomeNM = ({ noteDuration, beatPattern }) => {
   const [editMode] = useConfigSelector((config) => config.editMode);
@@ -89,7 +89,7 @@ const MetronomeNM = ({ noteDuration, beatPattern }) => {
             }}
           >
             <MetronomeBeatName id={index} noteDuration={noteDuration} />
-            <MetronomeBeat
+            <MetronomeBeatIcon
               icon={icons[index]} // Передаем готовую иконку
               active={activeBeat === index}
             />

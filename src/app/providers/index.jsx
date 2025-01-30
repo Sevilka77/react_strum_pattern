@@ -1,12 +1,15 @@
 import ThemeContextProvider from "./ThemeContextProvider";
 import { ConfigProvider } from "./ConfigProvider";
 import { CycleProvider } from "./CycleProvider";
+import { BeatPatternProvider } from "./BeatPatternProvider";
 
 const Providers = ({ children }) => {
   return (
     <ThemeContextProvider>
       <ConfigProvider>
-        <CycleProvider>{children}</CycleProvider>
+        <CycleProvider>
+          <BeatPatternProvider>{children}</BeatPatternProvider>
+        </CycleProvider>
       </ConfigProvider>
     </ThemeContextProvider>
   );

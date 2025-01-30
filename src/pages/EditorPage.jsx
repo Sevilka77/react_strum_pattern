@@ -1,22 +1,23 @@
 import Header from "../features/header";
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { PlusIcon, MinusIcon, Share2Icon } from "lucide-react";
 
 const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
 
 import { useConfig } from "../hooks/useConfig";
-import { useEffect } from "react";
 import ControlFooter from "../components/ControlFooter";
 import { learnPatterns } from "../app/providers/learnPatterns";
 
 import { Container, IconButton, Snackbar, Stack } from "@mui/material";
 import LDJson from "../components/LDJson";
+import { useBeatPattern } from "../hooks/useBeatPattern";
 
 function EditorPage() {
-  const { config, dispatch } = useConfig();
+  const { dispatch } = useConfig();
   const [open, setOpen] = useState(false);
-  const pattern = config.beatPattern;
-  const url = `${window.location.origin}/pattern/${config.beatPattern}`;
+  const { beatPattern, updateBeatPattern } = useBeatPattern();
+
+  const url = `${window.location.origin}/pattern/${beatPattern}`;
   const ldData = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
@@ -29,19 +30,22 @@ function EditorPage() {
   };
 
   useEffect(() => {
-    dispatch({ type: "setEditMode", data: true });
     const firstPattern = learnPatterns[0];
     if (firstPattern) {
-      dispatch({ type: "setBeatPattern", data: firstPattern.pattern });
+      updateBeatPattern(firstPattern.pattern); // Устанавливаем паттерн
       dispatch({ type: "setNoteDuration", data: firstPattern.note });
       dispatch({ type: "setTempo", data: firstPattern.temp });
     }
 
+    // Инициализируем режим редактирования при монтировании компонента
+    dispatch({ type: "setEditMode", data: true });
+
     return () => {
+      // Очищаем состояние при размонтировании компонента
       dispatch({ type: "setEditMode", data: false });
-      dispatch({ type: "clearPattern" });
     };
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const copyToClip = async (url) => {
     await navigator.clipboard.writeText(url);
@@ -55,16 +59,15 @@ function EditorPage() {
   };
 
   const modifyBeatPattern = (event) => {
-    let updatedPattern = pattern.split(""); // Преобразуем строку в массив символов
-
+    let updatedPattern = beatPattern.split(""); // Преобразуем строку в массив символов
+    console.log(updatedPattern);
     if (event === "plus") {
       updatedPattern = updatedPattern.concat("0"); // Добавляем новый символ в конец
     } else if (event === "minus") {
       updatedPattern = updatedPattern.slice(0, -1); // Удаляем последний символ
     }
-
-    // Обновляем конфиг через dispatch
-    dispatch({ type: "setBeatPattern", data: updatedPattern.join("") });
+    console.log(updatedPattern);
+    updateBeatPattern(updatedPattern.join(""));
   };
   const handleChange = (event) => {
     if (event === "plus" || event === "minus") {

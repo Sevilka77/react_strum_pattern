@@ -9,11 +9,6 @@ const setRepeatCount = (state, count) => {
   return { ...state, count };
 };
 
-const setBeatPattern = (state, beatPattern) => {
-  if (beatPattern === undefined) return state;
-  return { ...state, beatPattern: beatPattern };
-};
-
 const setNoteDuration = (state, noteDuration) => {
   if (noteDuration === undefined) return state;
   return { ...state, noteDuration };
@@ -51,8 +46,6 @@ export default function reducer(state, action) {
   switch (action.type) {
     case "setTempo":
       return setTempo(state, action.data);
-    case "setBeatPattern":
-      return setBeatPattern(state, action.data);
     case "setIsPlay":
       return setIsPlaying(state, action.data);
     case "setIsBeatSound":

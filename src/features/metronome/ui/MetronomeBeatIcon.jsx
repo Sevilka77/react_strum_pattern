@@ -25,5 +25,5 @@ const MetronomeBeatNM = ({ icon, active }) => {
   );
 };
 
-const MetronomeBeat = memo(MetronomeBeatNM);
-export default MetronomeBeat;
+const MetronomeBeatIcon = memo(MetronomeBeatNM);
+export default MetronomeBeatIcon;

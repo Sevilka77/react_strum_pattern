@@ -1,29 +1,12 @@
-import { useConfigSelector } from "../hooks/useConfigSelector";
+import MetronomeTempoSelector from "@/features/metronome/ui/MetronomeTempoSelector";
 
-import TempoSelector from "./TempoSelector";
+import { Box } from "@mui/material";
+import { memo } from "react";
+import MetronomePlayButton from "@/features/metronome/ui/MetronomePlayButton";
 
-import { Box, Button } from "@mui/material";
-import { memo, useEffect } from "react";
-import { PlayIcon, SquareIcon } from "../shared/ui/Icons/Icons";
-import * as Tone from "tone";
 import ChordChange from "./ChordChange";
 
-const ControlFooterNM = ({ children }) => {
-  const [isPlaying, dispatch] = useConfigSelector((config) => config.isPlaying);
-  const handleClick = async () => {
-    // Убедитесь, что Tone.js запущен
-    await Tone.start();
-    isPlaying ? Tone.getTransport().stop() : Tone.getTransport().start();
-
-    dispatch({ type: "setIsPlay", data: !isPlaying });
-  };
-  useEffect(() => {
-    return () => {
-      if (isPlaying) {
-        dispatch({ type: "setIsPlay", data: false }); // Остановить воспроизведение
-      }
-    };
-  }, [dispatch, isPlaying]);
+const ControlFooterNM = () => {
   return (
     <Box
       sx={{
@@ -36,7 +19,7 @@ const ControlFooterNM = ({ children }) => {
         alignItems: "center",
       }}
     >
-      {children && (
+      {/* {children && (
         <Box
           sx={{
             width: "100%",
@@ -48,7 +31,7 @@ const ControlFooterNM = ({ children }) => {
         >
           {children}
         </Box>
-      )}
+      )} */}
       <Box
         sx={{
           width: "100%",
@@ -58,18 +41,8 @@ const ControlFooterNM = ({ children }) => {
           marginBottom: 1, // Отступ перед нижней строкой
         }}
       >
-        <Button
-          sx={{
-            width: "40px",
-            minWidth: "40px",
-            px: 0,
-          }}
-          value="play"
-          onClick={handleClick}
-        >
-          {isPlaying ? <SquareIcon /> : <PlayIcon />}
-        </Button>
-        <TempoSelector />
+        <MetronomePlayButton></MetronomePlayButton>
+        <MetronomeTempoSelector />
         <ChordChange />
       </Box>
     </Box>

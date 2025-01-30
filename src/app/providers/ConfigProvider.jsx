@@ -6,7 +6,6 @@ export const ConfigContext = createContext();
 
 export const ConfigProvider = ({ children }) => {
   const [config, dispatch] = useReducer(reducer, {
-    beatPattern: "1101",
     tempo: 70,
     noteSize: 4,
     isPlaying: false,

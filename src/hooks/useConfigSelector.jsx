@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 
-import { ConfigContext } from "../app/providers/ConfigProvider";
+import { ConfigContext } from "@/app/providers/ConfigProvider";
 
 export const useConfigSelector = (selector) => {
   const { config, dispatch } = useContext(ConfigContext);

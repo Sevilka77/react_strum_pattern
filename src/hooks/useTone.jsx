@@ -7,6 +7,7 @@ import hit from "../assets/samples/hit.mp3";
 import hit2 from "../assets/samples/hit2.mp3";
 import hihat from "..//assets/samples/hihat.mp3";
 import { useConfig } from "./useConfig";
+import { useBeatPattern } from "./useBeatPattern";
 
 const sampleFiles = import.meta.glob("../assets/samples/*.mp3", {
   query: "?url",
@@ -587,6 +588,7 @@ function countSteps(beatPattern, currentChord) {
 // Хук useTone для управления воспроизведением звуков
 export default function useTone() {
   const { config } = useConfig();
+  const { beatPattern } = useBeatPattern();
   const { incrementCycle, resetCycle, setBeat } = useCycle();
   // Состояние активного бита
 
@@ -598,7 +600,7 @@ export default function useTone() {
     }
 
     Tone.getTransport().bpm.value = config.tempo || 120;
-    const steps = countSteps(config.beatPattern, config.currentChord);
+    const steps = countSteps(beatPattern, config.currentChord);
     // console.log(steps);
     // const durations = calcDurations(steps, config.noteDuration);
 
@@ -644,7 +646,7 @@ export default function useTone() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     config.isPlaying,
-    config.beatPattern,
+    beatPattern,
     config.isBeatSound,
     config.isHitSound,
     config.isMetronomeSound,
