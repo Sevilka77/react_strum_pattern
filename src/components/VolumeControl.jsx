@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { channels } from "../hooks/useTone"; // Импортируем каналы
 import Slider from "@mui/material/Slider";
 import { Typography } from "@mui/material";
+import { channels } from "../features/tone/lib/toneSetup";
 
 // Компонент управления громкостью для конкретного канала
 function VolumeControl({ channelName, channel, volume, onVolumeChange }) {

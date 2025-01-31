@@ -1,13 +1,14 @@
 //import { Routes, Route } from "react-router-dom";
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import Providers from "./providers/index.jsx";
 
-import useWakeLock from "../hooks/useWakeLock.jsx";
+import useWakeLock from "@/hooks/useWakeLock";
 import { Box } from "@mui/material";
 
 import { BrowserRouter } from "react-router-dom";
 
 import AppRoutes from "./routes/index.jsx";
+import { loadAllChordsSamples } from "@/features/tone/lib/samplesUtil";
 
 const YandexMetrika =
   import.meta.env.MODE === "production"
@@ -16,6 +17,9 @@ const YandexMetrika =
 
 const App = () => {
   useWakeLock();
+  useEffect(() => {
+    loadAllChordsSamples(); // Загружаем сэмплы один раз
+  }, []);
   return (
     <Providers>
       {YandexMetrika && (

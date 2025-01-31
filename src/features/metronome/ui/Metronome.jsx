@@ -17,9 +17,9 @@ import {
   XUpIcon,
   XIcon,
 } from "@/shared/ui/Icons/Icons";
-import { useCycle } from "@/hooks/useCycle";
+import useCycle from "@/hooks/useCycle";
 
-import { useConfigSelector } from "@/hooks/useConfigSelector";
+import useConfigSelector from "@/hooks/useConfigSelector";
 
 const MetronomeNM = ({ noteDuration, beatPattern }) => {
   const [editMode] = useConfigSelector((config) => config.editMode);

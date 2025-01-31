@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function useTapTempo(onTempoChange) {
+export default function useTapTempo(onTempoChange) {
   const [tapTimes, setTapTimes] = useState([]);
 
   const handleTap = () => {

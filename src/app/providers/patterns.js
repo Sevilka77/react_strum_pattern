@@ -315,8 +315,8 @@ export const patterns = [
     image: "gsn-16-uprazhnenie.svg",
   },
   {
-    title: "ГСН 17 Вопрос-ответ",
-    pattern: "10x1110100101010110101x010",
+    title: "ГСН 17 Невеселая песня",
+    pattern: "1000x0ccccA0xccc",
     temp: 100,
     note: "16n",
     level: "custom",

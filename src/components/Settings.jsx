@@ -13,7 +13,7 @@ import {
   Dialog,
 } from "@mui/material";
 
-import { useConfig } from "../hooks/useConfig";
+import useConfig from "@/hooks/useConfig";
 
 export default function SettingsDialog() {
   const [open, setOpen] = React.useState(false);

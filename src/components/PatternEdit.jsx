@@ -7,33 +7,33 @@ import {
   ArrowDH,
   XDownIcon,
   XIcon,
-} from "../shared/ui/Icons/Icons";
+} from "@/shared/ui/Icons/Icons";
 import { memo } from "react";
-import { useConfig } from "../hooks/useConfig";
+import useBeatPattern from "@/hooks/useBeatPattern";
 
 const PatternEditNM = ({ index }) => {
-  const { config, dispatch } = useConfig();
-  const pattern = config.beatPattern || "";
+  const { beatPattern, updateBeatPattern } = useBeatPattern();
+  // const pattern = config.beatPattern || "";
 
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
 
   const updateBeatInPattern = (newValue) => {
-    const updatedPattern = pattern
+    const updatedPattern = beatPattern
       .split("") // Преобразуем строку в массив
       .map((char, i) => (i === index ? newValue : char)) // Изменяем нужный символ
       .join("");
-    dispatch({ type: "setBeatPattern", data: updatedPattern });
+    updateBeatPattern(updatedPattern);
   };
 
   const deleteBeatByIndex = () => {
     if (index >= 0) {
-      const updatedPattern = pattern
+      const updatedPattern = beatPattern
         .split("") // Преобразуем строку в массив символов
         .filter((_, i) => i !== index) // Удаляем элемент по индексу
         .join(""); // Преобразуем обратно в строку
 
-      dispatch({ type: "setBeatPattern", data: updatedPattern });
+      updateBeatPattern(updatedPattern);
     }
   };
   const handleChange = (event) => {

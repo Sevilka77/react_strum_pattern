@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { useBeatPattern } from "@/hooks/useBeatPattern";
+import useBeatPattern from "@/hooks/useBeatPattern";
 
-export function useEditor() {
+const useEditor = () => {
   const { beatPattern, updateBeatPattern } = useBeatPattern();
   const [open, setOpen] = useState(false);
 
@@ -45,4 +45,5 @@ export function useEditor() {
     open,
     updateBeatPattern,
   };
-}
+};
+export default useEditor;

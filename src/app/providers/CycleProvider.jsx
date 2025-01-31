@@ -5,7 +5,7 @@ export const CycleContext = createContext();
 
 export const CycleProvider = ({ children }) => {
   const [cycleCount, setCycleCount] = useState(0); // Счетчик циклов
-  const [activeBeat, setActiveBeat] = useState(null); // Текущий активный бит
+  const [activeBeat, setBeat] = useState(null); // Текущий активный бит
 
   // Функция для увеличения счетчика циклов
   const incrementCycle = () => {
@@ -18,8 +18,8 @@ export const CycleProvider = ({ children }) => {
   };
 
   // Функция для установки активного бита
-  const setBeat = (beatIndex) => {
-    setActiveBeat(beatIndex); // Устанавливаем активный бит
+  const setActiveBeat = (beatIndex) => {
+    setBeat(beatIndex); // Устанавливаем активный бит
   };
 
   return (
@@ -29,7 +29,7 @@ export const CycleProvider = ({ children }) => {
         incrementCycle,
         resetCycle,
         activeBeat,
-        setBeat, // Передаем управление активным битом
+        setActiveBeat, // Передаем управление активным битом
       }}
     >
       {children}

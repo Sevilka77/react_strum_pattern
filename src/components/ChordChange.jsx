@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Menu, MenuItem } from "@mui/material";
 
 import { memo } from "react";
-import { useConfigSelector } from "../hooks/useConfigSelector";
+import useConfigSelector from "../hooks/useConfigSelector";
 
 const ChordChangeNM = () => {
   const [currentChord, dispatch] = useConfigSelector(

@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { Button } from "@mui/material";
 import { PlayIcon, SquareIcon } from "@/shared/ui/Icons/Icons";
-import { useConfigSelector } from "@/hooks/useConfigSelector";
+import useConfigSelector from "@/hooks/useConfigSelector";
 import * as Tone from "tone";
 const MetronomePlayButton = () => {
   const [isPlaying, dispatch] = useConfigSelector((config) => config.isPlaying);

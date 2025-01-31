@@ -2,7 +2,7 @@ import { useContext, useMemo } from "react";
 
 import { ConfigContext } from "@/app/providers/ConfigProvider";
 
-export const useConfigSelector = (selector) => {
+const useConfigSelector = (selector) => {
   const { config, dispatch } = useContext(ConfigContext);
 
   // Вычисляем нужное состояние
@@ -10,3 +10,4 @@ export const useConfigSelector = (selector) => {
 
   return [selectedState, dispatch];
 };
+export default useConfigSelector;

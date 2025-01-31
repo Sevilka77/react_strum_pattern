@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useConfigSelector } from "@/hooks/useConfigSelector";
+import useConfigSelector from "@/hooks/useConfigSelector";
 import { Stack, Button, TextField } from "@mui/material";
-import { useTapTempo } from "../lib/useTapTempo";
+import useTapTempo from "../lib/useTapTempo";
 import { Minus, Plus } from "lucide-react";
 
 const MetronomeTempoSelector = () => {

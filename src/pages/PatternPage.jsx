@@ -6,12 +6,12 @@ const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
 
 // import VolumeControl from "../components/VolumeControl";
 
-import { useConfig } from "../hooks/useConfig";
+import useConfig from "@/hooks/useConfig";
 import { useEffect, useState } from "react";
-import ControlFooter from "../components/ControlFooter";
-import { patterns } from "../app/providers/patterns";
+import ControlFooter from "@/components/ControlFooter";
+import { patterns } from "@/app/providers/patterns";
 import { Container } from "@mui/material";
-import { useBeatPattern } from "../hooks/useBeatPattern";
+import useBeatPattern from "@/hooks/useBeatPattern";
 
 function PatternPage() {
   const location = useLocation();
