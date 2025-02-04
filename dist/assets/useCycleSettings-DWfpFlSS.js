@@ -1,1 +1,0 @@
-import{r as e}from"./vendor-Bn94jRP8.js";import{E as r}from"./index-BEXy74El.js";const n=()=>{const t=e.useContext(r);if(!t)throw new Error("useCycleSettings must be used within a CycleSettingsProvider");return t};export{n as u};

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Stack, Button, TextField } from "@mui/material";
 import useTapTempo from "../lib/useTapTempo";
@@ -7,6 +7,10 @@ import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
 const MetronomeTempoSelector = () => {
   const { toneSettings, dispatch } = useToneSettings();
   const [value, setValue] = useState(toneSettings.tempo);
+
+  useEffect(() => {
+    setValue(toneSettings.tempo);
+  }, [toneSettings.tempo]);
 
   // Обработчик увеличения темпа
   const handleIncrease = () => {

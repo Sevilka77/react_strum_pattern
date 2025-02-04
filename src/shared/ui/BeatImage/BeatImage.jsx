@@ -12,85 +12,80 @@ export default function BeatImage({ beatString, title }) {
       index % 2 === 0 ? "translate(0 11)" : "rotate(180 12 12)";
     const translate = `translate(${iconSize * index} 0)`;
 
-    switch (beat) {
-      case "0":
-        return (
-          <g
-            key={index}
-            fill="none"
-            stroke={theme.palette.action.disabled}
-            transform={`${translate} ${transform}`}
-          >
-            {ArrowPath}
-          </g>
-        );
-      case "1":
-        return (
-          <g
-            key={index}
-            fill="none"
-            stroke={theme.palette.primary.main}
-            transform={`${translate} ${transform}`}
-          >
-            {ArrowPath}
-          </g>
-        );
-      case "x":
-        return (
-          <g
-            key={index}
-            fill="none"
-            stroke={theme.palette.primary.main}
-            transform={`${translate} ${transform}`}
-          >
-            {XPath}
-          </g>
-        );
-      case "A":
-        return (
-          <g
-            key={index}
-            fill="none"
-            stroke={theme.palette.warning.main}
-            transform={`${translate} ${transform}`}
-          >
-            {ArrowPath}
-          </g>
-        );
-      case "c":
-        return (
-          <g
-            key={index}
-            fill="none"
-            stroke={theme.palette.primary.main}
-            transform={`${translate} ${transform}`}
-          >
-            {XArrowPath}
-          </g>
-        );
-      case "b":
-        return (
-          <g
-            key={index}
-            fill="none"
-            stroke={theme.palette.primary.main}
-            transform={`${translate} ${transformHalfBArrow}`}
-          >
-            {HalfArrowPath}
-          </g>
-        );
-      case "h":
-        return (
-          <g
-            key={index}
-            fill="none"
-            stroke={theme.palette.primary.main}
-            transform={`${translate} ${transformHalfHArrow}`}
-          >
-            {HalfArrowPath}
-          </g>
-        );
-    }
+    const beatComponents = {
+      0: (
+        <g
+          key={index}
+          fill="none"
+          stroke={theme.palette.action.disabled}
+          transform={`${translate} ${transform}`}
+        >
+          {ArrowPath}
+        </g>
+      ),
+      1: (
+        <g
+          key={index}
+          fill="none"
+          stroke={theme.palette.primary.main}
+          transform={`${translate} ${transform}`}
+        >
+          {ArrowPath}
+        </g>
+      ),
+      x: (
+        <g
+          key={index}
+          fill="none"
+          stroke={theme.palette.primary.main}
+          transform={`${translate} ${transform}`}
+        >
+          {XPath}
+        </g>
+      ),
+      A: (
+        <g
+          key={index}
+          fill="none"
+          stroke={theme.palette.warning.main}
+          transform={`${translate} ${transform}`}
+        >
+          {ArrowPath}
+        </g>
+      ),
+      c: (
+        <g
+          key={index}
+          fill="none"
+          stroke={theme.palette.primary.main}
+          transform={`${translate} ${transform}`}
+        >
+          {XArrowPath}
+        </g>
+      ),
+      b: (
+        <g
+          key={index}
+          fill="none"
+          stroke={theme.palette.primary.main}
+          transform={`${translate} ${transformHalfBArrow}`}
+        >
+          {HalfArrowPath}
+        </g>
+      ),
+      h: (
+        <g
+          key={index}
+          fill="none"
+          stroke={theme.palette.primary.main}
+          transform={`${translate} ${transformHalfHArrow}`}
+        >
+          {HalfArrowPath}
+        </g>
+      ),
+    };
+
+    return beatComponents[beat] || null;
   });
   return (
     <svg

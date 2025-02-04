@@ -1,6 +1,6 @@
 export const learnPatterns = [
   {
-    title: "Упражнение 1.1",
+    title: "1. Удары вниз",
     pattern: "10101010",
     temp: 80,
     note: "8n",
@@ -8,7 +8,7 @@ export const learnPatterns = [
     position: 38,
   },
   {
-    title: "Упражнение 1.2",
+    title: "2. Удар вверх на  3и",
     pattern: "10101110",
     temp: 80,
     note: "8n",
@@ -16,7 +16,7 @@ export const learnPatterns = [
     position: 39,
   },
   {
-    title: "Упражнение 1.3",
+    title: "3. Удар вверх на 2и",
     pattern: "10111010",
     temp: 80,
     note: "8n",
@@ -24,7 +24,7 @@ export const learnPatterns = [
     position: 40,
   },
   {
-    title: "Упражнение 1.4",
+    title: "4. Удары вверх на 1и и 3и",
     pattern: "11101110",
     temp: 80,
     note: "8n",
@@ -32,7 +32,7 @@ export const learnPatterns = [
     position: 41,
   },
   {
-    title: "Упражнение 1.5",
+    title: "5. Удары вверх на 2и и 4и",
     pattern: "10111011",
     temp: 80,
     note: "8n",
@@ -40,7 +40,7 @@ export const learnPatterns = [
     position: 42,
   },
   {
-    title: "Упражнение 1.6",
+    title: "6. Удары вверх на 1и и 4и",
     pattern: "11101011",
     temp: 80,
     note: "8n",
@@ -48,23 +48,15 @@ export const learnPatterns = [
     position: 43,
   },
   {
-    title: "Упражнение 2.1",
-    pattern: "10110110",
+    title: "7. Играем все удары",
+    pattern: "11111111",
     temp: 80,
     note: "8n",
     level: "learn",
     position: 44,
   },
   {
-    title: "Упражнение 2.2",
-    pattern: "11010101",
-    temp: 80,
-    note: "8n",
-    level: "learn",
-    position: 45,
-  },
-  {
-    title: "Упражнение 2.3",
+    title: "8. Пропускаем удар на 2",
     pattern: "11011111",
     temp: 80,
     note: "8n",
@@ -72,15 +64,15 @@ export const learnPatterns = [
     position: 46,
   },
   {
-    title: "Упражнение 2.4",
-    pattern: "10110111",
+    title: "9. Пропускаем удар на 2,3",
+    pattern: "11010111",
     temp: 80,
     note: "8n",
     level: "learn",
-    position: 47,
+    position: 45,
   },
   {
-    title: "Упражнение 2.5",
+    title: "10. Пропускаем удар на 2,4",
     pattern: "11011101",
     temp: 80,
     note: "8n",
@@ -88,7 +80,40 @@ export const learnPatterns = [
     position: 48,
   },
   {
-    title: "Упражнение 2.6",
+    title: "11. Пропускаем удар на 2,3,4",
+    pattern: "11010101",
+    temp: 80,
+    note: "8n",
+    level: "learn",
+    position: 45,
+  },
+  {
+    title: "12. Пропускаем удар на 1,2,3,4",
+    pattern: "01010101",
+    temp: 80,
+    note: "8n",
+    level: "learn",
+    position: 45,
+  },
+  {
+    title: "13. Комбинируем пропуски вверх и вниз",
+    pattern: "10110111",
+    temp: 80,
+    note: "8n",
+    level: "learn",
+    position: 47,
+  },
+  {
+    title: "14. Комбинируем пропуски вверх и вниз",
+    pattern: "10110110",
+    temp: 80,
+    note: "8n",
+    level: "learn",
+    position: 44,
+  },
+
+  {
+    title: "15. Комбинируем пропуски вверх и вниз",
     pattern: "11000111",
     temp: 80,
     note: "8n",
@@ -96,7 +121,7 @@ export const learnPatterns = [
     position: 49,
   },
   {
-    title: "Упражнение 3.1",
+    title: "16. Переходим на 16 ноты.",
     pattern: "1111101011111000",
     temp: 40,
     note: "16n",
@@ -104,7 +129,7 @@ export const learnPatterns = [
     position: 50,
   },
   {
-    title: "Упражнение 3.2",
+    title: "17. Разлиные вариации",
     pattern: "1111101010101111",
     temp: 40,
     note: "16n",
@@ -112,7 +137,7 @@ export const learnPatterns = [
     position: 51,
   },
   {
-    title: "Упражнение 3.3",
+    title: "18. Разлиные вариации",
     pattern: "1010111110101110",
     temp: 40,
     note: "16n",
@@ -120,7 +145,7 @@ export const learnPatterns = [
     position: 52,
   },
   {
-    title: "Упражнение 4.1",
+    title: "19. Разлиные вариации",
     pattern: "1111011101011111",
     temp: 40,
     note: "16n",
@@ -128,7 +153,7 @@ export const learnPatterns = [
     position: 53,
   },
   {
-    title: "Упражнение 4.2",
+    title: "20. Разлиные вариации",
     pattern: "1111011111011111",
     temp: 40,
     note: "16n",
@@ -136,7 +161,7 @@ export const learnPatterns = [
     position: 54,
   },
   {
-    title: "Упражнение 4.3",
+    title: "21. Разлиные вариации",
     pattern: "1110101101101011",
     temp: 40,
     note: "16n",
@@ -144,7 +169,7 @@ export const learnPatterns = [
     position: 55,
   },
   {
-    title: "Упражнение 4.4",
+    title: "21. Разлиные вариации",
     pattern: "1011101110110111",
     temp: 40,
     note: "16n",
@@ -152,7 +177,7 @@ export const learnPatterns = [
     position: 56,
   },
   {
-    title: "Упражнение 4.5",
+    title: "22. Разлиные вариации",
     pattern: "1011101101101011",
     temp: 40,
     note: "16n",
@@ -160,7 +185,7 @@ export const learnPatterns = [
     position: 57,
   },
   {
-    title: "Упражнение 4.6",
+    title: "23. Разлиные вариации",
     pattern: "1111100000101011",
     temp: 40,
     note: "16n",
@@ -168,7 +193,7 @@ export const learnPatterns = [
     position: 58,
   },
   {
-    title: "Упражнение 4.7",
+    title: "24. Разлиные вариации",
     pattern: "1010111110100111",
     temp: 40,
     note: "16n",
