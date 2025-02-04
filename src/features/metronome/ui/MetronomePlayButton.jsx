@@ -2,16 +2,16 @@
 import { useEffect } from "react";
 import { Button } from "@mui/material";
 import { PlayIcon, SquareIcon } from "@/shared/ui/Icons/Icons";
-import useConfigSelector from "@/hooks/useConfigSelector";
+import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
 import * as Tone from "tone";
 const MetronomePlayButton = () => {
-  const [isPlaying, dispatch] = useConfigSelector((config) => config.isPlaying);
+  const { toneSettings, dispatch } = useToneSettings();
 
   const handleClick = async () => {
     // Запуск/остановка метронома
     await Tone.start();
-    dispatch({ type: "setIsPlay", data: !isPlaying });
-    if (isPlaying) {
+    dispatch({ type: "SET_IS_PLAYING", payload: !toneSettings.isPlaying });
+    if (toneSettings.isPlaying) {
       Tone.getTransport().start();
     } else {
       Tone.getTransport().stop();
@@ -19,11 +19,11 @@ const MetronomePlayButton = () => {
   };
   useEffect(() => {
     return () => {
-      if (isPlaying) {
-        dispatch({ type: "setIsPlay", data: false }); // Остановить воспроизведение
+      if (toneSettings.isPlaying) {
+        dispatch({ type: "SET_IS_PLAYING", payload: false }); // Остановить воспроизведение
       }
     };
-  }, [dispatch, isPlaying]);
+  }, [dispatch, toneSettings.isPlaying]);
   return (
     <Button
       sx={{
@@ -34,7 +34,7 @@ const MetronomePlayButton = () => {
       value="play"
       onClick={handleClick}
     >
-      {isPlaying ? <SquareIcon /> : <PlayIcon />}
+      {toneSettings.isPlaying ? <SquareIcon /> : <PlayIcon />}
     </Button>
   );
 };

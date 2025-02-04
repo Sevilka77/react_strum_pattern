@@ -2,17 +2,22 @@ import { lazy, Suspense, useEffect } from "react";
 import { PlusIcon, MinusIcon, Share2Icon } from "lucide-react";
 import { Container, IconButton, Snackbar, Stack } from "@mui/material";
 import Header from "@/features/header";
-import ControlFooter from "@/components/ControlFooter";
+import ControlFooter from "@/features/metronome/ui/ControlFooter";
 import LDJson from "@/components/LDJson";
 import useEditor from "./lib/useEditor";
 import { learnPatterns } from "@/app/providers/learnPatterns";
-import useConfig from "../../hooks/useConfig";
+import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
+import { useEditMode } from "@/entities/editMode/lib/useEditMode";
 
-const MetronomeWrapper = lazy(() => import("@/components/MetronomeWrapper"));
-
+const MetronomeWrapper = lazy(() =>
+  import("@/widgets/metronomePlayer").then((module) => ({
+    default: module.MetronomePlayer,
+  })),
+);
 function EditorPage() {
   const { handleChange, handleClose, open, updateBeatPattern } = useEditor();
-  const { dispatch } = useConfig();
+  const { dispatch: toneDispatch } = useToneSettings();
+  const { dispatch } = useEditMode();
 
   const ldData = {
     "@context": "https://schema.org",
@@ -27,17 +32,18 @@ function EditorPage() {
 
   // Инициализация редактора
   useEffect(() => {
-    dispatch({ type: "setEditMode", data: true });
+    dispatch({ type: "SET_EDIT_MODE", payload: true });
     const firstPattern = learnPatterns[0];
     if (firstPattern) {
       updateBeatPattern(firstPattern.pattern);
-      dispatch({ type: "setNoteDuration", data: firstPattern.note });
-      dispatch({ type: "setTempo", data: firstPattern.temp });
+      toneDispatch({ type: "SET_NOTE_DURATION", payload: firstPattern.note });
+      toneDispatch({ type: "SET_TEMPO", payload: firstPattern.temp });
     }
 
     return () => {
-      dispatch({ type: "setEditMode", data: false });
+      dispatch({ type: "SET_EDIT_MODE", payload: false });
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

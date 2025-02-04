@@ -2,22 +2,28 @@ import Header from "../features/header";
 import LDJson from "../components/LDJson";
 import { lazy, Suspense } from "react";
 import { useLocation, useParams } from "react-router-dom";
-const MetronomeWrapper = lazy(() => import("../components/MetronomeWrapper"));
-
+const MetronomeWrapper = lazy(() =>
+  import("@/widgets/metronomePlayer").then((module) => ({
+    default: module.MetronomePlayer,
+  })),
+);
 // import VolumeControl from "../components/VolumeControl";
 
-import useConfig from "@/hooks/useConfig";
 import { useEffect, useState } from "react";
-import ControlFooter from "@/components/ControlFooter";
+import ControlFooter from "@/features/metronome/ui/ControlFooter";
 import { patterns } from "@/app/providers/patterns";
 import { Container } from "@mui/material";
-import useBeatPattern from "@/hooks/useBeatPattern";
+import { useSequenceSettings } from "@/entities/sequenceSettings/lib/useSequenceSettings";
+import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
 
 function PatternPage() {
   const location = useLocation();
   const { beatPattern } = useParams();
-  const { dispatch } = useConfig();
-  const { pattern, updateBeatPattern } = useBeatPattern();
+  const { dispatch: toneDispatch } = useToneSettings();
+  const { sequenceSettings, dispatch: sequenceDispatch } =
+    useSequenceSettings();
+
+  const { pattern } = sequenceSettings;
 
   const p = location.state;
   const [title, setTitle] = useState("Выбор боя");
@@ -27,9 +33,10 @@ function PatternPage() {
   useEffect(() => {
     if (p) {
       setTitle(p.title || "Пользовательский бой");
-      dispatch({ type: "setBeatPattern", data: p.pattern });
-      dispatch({ type: "setNoteDuration", data: p.note });
-      dispatch({ type: "setTempo", data: p.temp });
+      sequenceDispatch({ type: "SET_BEAT_PATTERN", payload: p.pattern });
+
+      toneDispatch({ type: "SET_NOTE_DURATION", payload: p.note });
+      toneDispatch({ type: "SET_TEMPO", payload: p.temp });
     } else if (beatPattern) {
       const foundPattern = patterns.find(
         (pattern) => pattern.pattern === beatPattern,
@@ -37,9 +44,13 @@ function PatternPage() {
 
       if (foundPattern) {
         setTitle(foundPattern.title || "Выбор боя"); // Заголовок по умолчанию
-        updateBeatPattern(foundPattern.pattern);
-        dispatch({ type: "setNoteDuration", data: foundPattern.note });
-        dispatch({ type: "setTempo", data: foundPattern.temp });
+        sequenceDispatch({
+          type: "SET_BEAT_PATTERN",
+          payload: foundPattern.pattern,
+        });
+
+        toneDispatch({ type: "SET_NOTE_DURATION", payload: foundPattern.note });
+        toneDispatch({ type: "SET_TEMPO", payload: foundPattern.temp });
 
         const imageUrl = `https://strumming.ru/assets/images/svg/${foundPattern.image}`;
         setPatternImage(imageUrl); // Обновляем состояние с изображением
@@ -62,18 +73,22 @@ function PatternPage() {
       } else {
         console.log("Паттерн не найден в массиве patterns.");
         setTitle("Пользовательский бой");
-        updateBeatPattern(beatPattern);
+        sequenceDispatch({
+          type: "SET_BEAT_PATTERN",
+          payload: beatPattern,
+        });
       }
     } else {
       console.log("Pattern не передан, используется значение по умолчанию");
-      updateBeatPattern(pattern);
+      sequenceDispatch({
+        type: "SET_BEAT_PATTERN",
+        payload: pattern,
+      });
     }
 
     // Очистка состояния при размонтировании компонента, если нужно
-    return () => {
-      dispatch({ type: "clearPattern" }); // Сбрасываем паттерн
-    };
-  }, [dispatch, p, beatPattern, pattern, patternImage, updateBeatPattern]);
+    return;
+  }, [p, beatPattern, pattern, patternImage, toneDispatch, sequenceDispatch]);
 
   return (
     <>

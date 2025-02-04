@@ -1,36 +1,36 @@
 import { useState } from "react";
-import useConfigSelector from "@/hooks/useConfigSelector";
+
 import { Stack, Button, TextField } from "@mui/material";
 import useTapTempo from "../lib/useTapTempo";
 import { Minus, Plus } from "lucide-react";
-
+import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
 const MetronomeTempoSelector = () => {
-  const [tempo, dispatch] = useConfigSelector((config) => config.tempo);
-  const [value, setValue] = useState(tempo);
+  const { toneSettings, dispatch } = useToneSettings();
+  const [value, setValue] = useState(toneSettings.tempo);
 
   // Обработчик увеличения темпа
   const handleIncrease = () => {
     const newValue = Math.min(value + 10, 300);
     setValue(newValue);
-    dispatch({ type: "setTempo", data: newValue });
+    dispatch({ type: "SET_TEMPO", payload: newValue });
   };
 
   // Обработчик уменьшения темпа
   const handleDecrease = () => {
     const newValue = Math.max(value - 10, 40);
     setValue(newValue);
-    dispatch({ type: "setTempo", data: newValue });
+    dispatch({ type: "SET_TEMPO", payload: newValue });
   };
 
   // Обработчик изменения значения в поле ввода
   const handleInputChange = (event) => {
     const newValue = Number(event.target.value);
     setValue(newValue);
-    dispatch({ type: "setTempo", data: newValue });
+    dispatch({ type: "SET_TEMPO", payload: newValue });
   };
   const handleTempoChange = (newValue) => {
     setValue(newValue);
-    dispatch({ type: "setTempo", data: newValue });
+    dispatch({ type: "SET_TEMPO", payload: newValue });
   };
   const handleTap = useTapTempo(handleTempoChange);
 
@@ -38,7 +38,7 @@ const MetronomeTempoSelector = () => {
     const clampedValue = Math.min(Math.max(value, 40), 300);
     if (clampedValue !== value) {
       setValue(clampedValue);
-      dispatch({ type: "setTempo", data: clampedValue });
+      dispatch({ type: "SET_TEMPO", payload: clampedValue });
     }
   };
 

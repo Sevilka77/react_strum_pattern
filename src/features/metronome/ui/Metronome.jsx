@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import MetronomeBeatIcon from "./MetronomeBeatIcon";
 import MetronomeBeatName from "./MetronomeBeatName";
-import PatternEdit from "@/components/PatternEdit";
+import PatternEdit from "./PatternEdit";
 import Grid from "@mui/material/Grid2";
 
 import { memo } from "react";
@@ -17,63 +17,51 @@ import {
   XUpIcon,
   XIcon,
 } from "@/shared/ui/Icons/Icons";
-import useCycle from "@/hooks/useCycle";
 
-import useConfigSelector from "@/hooks/useConfigSelector";
+import { useEditMode } from "@/entities/editMode/lib/useEditMode";
+
+const getBeatIcon = (beat, isUp) => {
+  switch (beat) {
+    case "0":
+      return isUp ? <ArrowU color="disabled" /> : <ArrowD color="disabled" />;
+    case "1":
+      return isUp ? <ArrowU color="primary" /> : <ArrowD color="primary" />;
+    case "b":
+      return isUp ? <ArrowUB color="primary" /> : <ArrowDB color="primary" />;
+    case "h":
+      return isUp ? <ArrowUH color="primary" /> : <ArrowDH color="primary" />;
+    case "A":
+      return isUp ? <ArrowU color="warning" /> : <ArrowD color="warning" />;
+    case "x":
+      return <XIcon color="primary" />;
+    case "c":
+      return isUp ? <XUpIcon color="primary" /> : <XDownIcon color="primary" />;
+    default:
+      return null;
+  }
+};
 
 const MetronomeNM = ({ noteDuration, beatPattern }) => {
-  const [editMode] = useConfigSelector((config) => config.editMode);
-  const beats = beatPattern;
-  const { activeBeat } = useCycle();
+  const { editMode } = useEditMode();
 
-  // Вычисляем иконки один раз для всех тактов
+  const beats = beatPattern;
+
   const icons = useMemo(() => {
-    return beats.map((beat, index) => {
+    return beatPattern.map((beat, index) => {
       const isUp = index % 2 !== 0;
-      switch (beat) {
-        case "0":
-          return isUp ? (
-            <ArrowU color="disabled" />
-          ) : (
-            <ArrowD color="disabled" />
-          );
-        case "1":
-          return isUp ? <ArrowU color="primary" /> : <ArrowD color="primary" />;
-        case "b":
-          return isUp ? (
-            <ArrowUB color="primary" />
-          ) : (
-            <ArrowDB color="primary" />
-          );
-        case "h":
-          return isUp ? (
-            <ArrowUH color="primary" />
-          ) : (
-            <ArrowDH color="primary" />
-          );
-        case "A":
-          return isUp ? <ArrowU color="warning" /> : <ArrowD color="warning" />;
-        case "x":
-          return <XIcon color="primary" />;
-        case "c":
-          return isUp ? (
-            <XUpIcon color="primary" />
-          ) : (
-            <XDownIcon color="primary" />
-          );
-        default:
-          return null;
-      }
+      return getBeatIcon(beat, isUp);
     });
-  }, [beats]);
+  }, [beatPattern]);
 
   return (
     <>
       <Grid
         container
         columns={8}
+        alignContent="center"
         alignItems="center" // Вертикальное выравнивание по центру
         justifyContent="center"
+        flexGrow="1"
       >
         {beats.map((b, index) => (
           <Grid
@@ -90,10 +78,10 @@ const MetronomeNM = ({ noteDuration, beatPattern }) => {
           >
             <MetronomeBeatName id={index} noteDuration={noteDuration} />
             <MetronomeBeatIcon
+              id={index}
               icon={icons[index]} // Передаем готовую иконку
-              active={activeBeat === index}
             />
-            {editMode && <PatternEdit index={index} />}
+            {editMode.edit && <PatternEdit index={index} />}
           </Grid>
         ))}
       </Grid>

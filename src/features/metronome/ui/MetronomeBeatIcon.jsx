@@ -1,16 +1,10 @@
 import { Typography } from "@mui/material";
 
-import React, { memo, useMemo } from "react";
+import React, { memo } from "react";
+import { useCycleSettings } from "@/entities/cycleSettings/lib/useCycleSettings";
 
-const MetronomeBeatNM = ({ icon, active }) => {
-  const iconStyles = useMemo(
-    () => ({
-      fill: active ? "currentColor" : "#ffffff0",
-      fontSize: "inherit",
-    }),
-    [active],
-  );
-
+const MetronomeBeatNM = ({ id, icon }) => {
+  const { cycleSettings } = useCycleSettings();
   return (
     <Typography
       variant="h1"
@@ -20,10 +14,18 @@ const MetronomeBeatNM = ({ icon, active }) => {
         alignItems: "center",
       }}
     >
-      {React.cloneElement(icon, { sx: iconStyles })}
+      {React.cloneElement(icon, {
+        sx: {
+          fill: cycleSettings.activeBeat === id ? "currentColor" : "#ffffff0",
+          fontSize: "inherit",
+        },
+      })}
     </Typography>
   );
 };
+const MetronomeBeatIcon = memo(MetronomeBeatNM, (prev, next) => {
+  return prev.icon === next.icon && prev.active === next.active;
+});
 
-const MetronomeBeatIcon = memo(MetronomeBeatNM);
+// const MetronomeBeatIcon = memo(MetronomeBeatNM);
 export default MetronomeBeatIcon;

@@ -1,11 +1,14 @@
 import { useState } from "react";
 
-import useBeatPattern from "@/hooks/useBeatPattern";
+import { useSequenceSettings } from "@/entities/sequenceSettings/lib/useSequenceSettings";
 
 const useEditor = () => {
-  const { beatPattern, updateBeatPattern } = useBeatPattern();
+  const { sequenceSettings, dispatch } = useSequenceSettings();
+  const { beatPattern } = sequenceSettings;
   const [open, setOpen] = useState(false);
-
+  const updateBeatPattern = (updatedPattern) => {
+    dispatch({ type: "SET_BEAT_PATTERN", payload: updatedPattern });
+  };
   const url = `${window.location.origin}/pattern/${beatPattern}`;
 
   const modifyBeatPattern = (event) => {
@@ -15,12 +18,16 @@ const useEditor = () => {
     } else if (event === "minus") {
       updatedPattern = updatedPattern.slice(0, -1); // Удаляем последний символ
     }
-
     updateBeatPattern(updatedPattern.join(""));
   };
 
   const copyToClip = async (url) => {
-    await navigator.clipboard.writeText(url);
+    try {
+      await navigator.clipboard.writeText(url); // Пытаемся записать в буфер обмена
+      console.log("URL copied to clipboard");
+    } catch (err) {
+      console.error("Failed to copy URL to clipboard", err); // Обработка ошибки
+    }
   };
 
   const handleChange = (event) => {

@@ -2,7 +2,7 @@
 import { Suspense, lazy, useEffect } from "react";
 import Providers from "./providers/index.jsx";
 
-import useWakeLock from "@/hooks/useWakeLock";
+import useWakeLock from "@/shared/hooks/useWakeLock";
 import { Box } from "@mui/material";
 
 import { BrowserRouter } from "react-router-dom";
@@ -17,6 +17,7 @@ const YandexMetrika =
 
 const App = () => {
   useWakeLock();
+
   useEffect(() => {
     loadAllChordsSamples(); // Загружаем сэмплы один раз
   }, []);

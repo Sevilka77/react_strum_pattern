@@ -4,7 +4,7 @@ import { memo, useMemo, useEffect } from "react";
 import { MoveLeftIcon } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import SettingsDialog from "../../components/Settings";
+import SettingsDialog from "@/features/tone/ui/settings";
 import { Stack } from "@mui/system";
 import { getPageTitle, getPageDescription, getPageHeader } from "./Header.util";
 
