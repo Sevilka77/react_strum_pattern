@@ -102,7 +102,6 @@ function RhythmPage() {
 
   useEffect(() => {
     if (autoNext && cycleSettings.cycleCount >= repeatCount) {
-      console.log(cycleSettings, repeatCount);
       cycleDispatch({ type: "RESET_CYCLE" });
 
       if (randomNext) {
