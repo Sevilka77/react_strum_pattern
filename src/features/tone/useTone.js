@@ -42,6 +42,9 @@ const useTone = () => {
 
       Tone.getDraw().schedule(() => {
         cycleDispatch({ type: "SET_ACTIVE_BEAT", payload: index });
+        if (index === stepsRef.current.length - 1) {
+          cycleDispatch({ type: "INCREMENT_CYCLE" });
+        }
       }, timeWithOffset + 0.1);
 
       if (soundSettings.isBeatSound) {
@@ -59,9 +62,6 @@ const useTone = () => {
           soundSettings.clickTaktBeat,
           toneSettings.noteDuration,
         );
-      }
-      if (index === stepsRef.current.length - 1) {
-        cycleDispatch({ type: "INCREMENT_CYCLE", payload: index });
       }
     },
     [

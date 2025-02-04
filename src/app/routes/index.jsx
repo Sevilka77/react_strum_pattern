@@ -6,6 +6,7 @@ const LearnPage = lazy(() => import("../../pages/LearnPage"));
 const EditorPage = lazy(() => import("../../pages/EditorPage"));
 const ListPage = lazy(() => import("../../pages/ListPage/ListPage"));
 const PatternPage = lazy(() => import("../../pages/PatternPage"));
+const RhythmPage = lazy(() => import("../../pages/RhythmPage"));
 
 const AppRoutes = () => (
   <Suspense fallback={<div>Loading...</div>}>
@@ -13,6 +14,7 @@ const AppRoutes = () => (
       <Route path="/" element={<HomePage />} />
       <Route path="/learn" element={<LearnPage />} />
       <Route path="/create" element={<EditorPage />} />
+      <Route path="/rhythm" element={<RhythmPage />} />
       <Route path="/patterns" element={<ListPage level={"main"} />} />
       <Route path="/custom" element={<ListPage level={"custom"} />} />
       <Route path="/pattern/:beatPattern" element={<PatternPage />} />

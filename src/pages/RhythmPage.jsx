@@ -9,22 +9,29 @@ const MetronomeWrapper = lazy(() =>
 
 import { useEffect, useState } from "react";
 import ControlFooter from "@/features/metronome/ui/ControlFooter";
-import { learnPatterns } from "@/app/providers/learnPatterns";
+import { rhythmPatterns } from "@/app/providers/rhythmPatterns";
 import { useCycleSettings } from "@/entities/cycleSettings/lib/useCycleSettings";
 import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
 import { useSequenceSettings } from "@/entities/sequenceSettings/lib/useSequenceSettings";
-import { Button, Container, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  FormControlLabel,
+  Switch,
+  Typography,
+} from "@mui/material";
 import LDJson from "../components/LDJson";
 import { Box, Stack } from "@mui/system";
 import { Minus, Plus } from "lucide-react";
 
-function LearnPage() {
+function RhythmPage() {
   const { cycleSettings, dispatch: cycleDispatch } = useCycleSettings();
   const { dispatch: toneDispatch } = useToneSettings();
   const { dispatch: seqDispatch } = useSequenceSettings();
   const [currentPatternIndex, setCurrentPatternIndex] = useState(0);
   const [repeatCount, setRepeatCount] = useState(5);
   const [autoNext, setAutoNext] = useState(false);
+  const [randomNext, setRandomNext] = useState(false);
   const [pattenName, setPatternName] = useState();
 
   const ldData = {
@@ -47,7 +54,7 @@ function LearnPage() {
   // Функция для перехода к предыдущему уроку
   const updatePattern = useCallback(
     (index) => {
-      const pattern = learnPatterns[index];
+      const pattern = rhythmPatterns[index];
       if (pattern) {
         setPatternName(pattern.title);
         seqDispatch({ type: "SET_BEAT_PATTERN", payload: pattern.pattern });
@@ -60,19 +67,28 @@ function LearnPage() {
 
   const goToPreviousLesson = useCallback(() => {
     const previousIndex =
-      (currentPatternIndex - 1 + learnPatterns.length) % learnPatterns.length; // Цикличность
+      (currentPatternIndex - 1 + rhythmPatterns.length) % rhythmPatterns.length; // Цикличность
     setCurrentPatternIndex(previousIndex);
     updatePattern(previousIndex);
   }, [currentPatternIndex, updatePattern]);
 
   const goToNextLesson = useCallback(() => {
-    const nextIndex = (currentPatternIndex + 1) % learnPatterns.length; // Цикличность
+    const nextIndex = (currentPatternIndex + 1) % rhythmPatterns.length; // Цикличность
     setCurrentPatternIndex(nextIndex);
     updatePattern(nextIndex);
   }, [currentPatternIndex, updatePattern]);
+  const goToRandomLesson = useCallback(() => {
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * rhythmPatterns.length);
+    } while (randomIndex === currentPatternIndex); // Исключаем повторение текущего индекса
+
+    setCurrentPatternIndex(randomIndex);
+    updatePattern(randomIndex);
+  }, [currentPatternIndex, updatePattern]);
 
   useEffect(() => {
-    const firstPattern = learnPatterns[0];
+    const firstPattern = rhythmPatterns[0];
     if (firstPattern) {
       setPatternName(firstPattern.title);
       seqDispatch({ type: "SET_BEAT_PATTERN", payload: firstPattern.pattern });
@@ -86,15 +102,24 @@ function LearnPage() {
 
   useEffect(() => {
     if (autoNext && cycleSettings.cycleCount >= repeatCount) {
+      console.log(cycleSettings, repeatCount);
       cycleDispatch({ type: "RESET_CYCLE" });
-      goToNextLesson();
+
+      if (randomNext) {
+        goToRandomLesson();
+      } else {
+        goToNextLesson();
+      }
     }
   }, [
     repeatCount,
     autoNext,
+    randomNext,
     goToNextLesson,
+    goToRandomLesson,
     cycleSettings.cycleCount,
     cycleDispatch,
+    cycleSettings,
   ]);
 
   return (
@@ -197,6 +222,26 @@ function LearnPage() {
               Авто переключение
             </Button>
           )}
+          {autoNext && (
+            <FormControlLabel
+              control={
+                <Switch
+                  size="small"
+                  checked={randomNext}
+                  onChange={(e) => setRandomNext(e.target.checked)}
+                />
+              }
+              label="Сллучайное переключение"
+              labelPlacement="start"
+              sx={{
+                mt: 2,
+                fontSize: "11px",
+                width: "100%",
+                textAlign: "center",
+                justifyContent: "center",
+              }}
+            />
+          )}
         </Box>
         <ControlFooter />
       </Container>
@@ -204,4 +249,4 @@ function LearnPage() {
   );
 }
 
-export default LearnPage;
+export default RhythmPage;

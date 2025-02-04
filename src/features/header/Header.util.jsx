@@ -5,6 +5,8 @@ export const getPageTitle = (pathname, title) => {
       return "Strumming.ru – Гитарный бой онлайн: тренажер, схемы и упражнения";
     case "/learn":
       return `Уроки гитарного боя – Учись играть с нуля на Strumming.ru`;
+    case "/rhythm":
+      return `Ритмический алфавит – Учись играть с нуля на Strumming.ru`;
     case "/create":
       return `Создай свой гитарный бой – Уникальный конструктор на Strumming.ru`;
     case "/patterns":
@@ -22,6 +24,8 @@ export const getPageDescription = (pathname, title) => {
       return "Уникальный тренажер для изучения гитарного боя с подробными схемами и упражнениями.";
     case "/learn":
       return "Уроки для начинающих и опытных музыкантов по техникам гитарного боя.";
+    case "/rhythm":
+      return `Ритмический алфавит – Тренеруй базу на Strumming.ru`;
     case "/create":
       return "Создайте свой собственный гитарный бой с помощью нашего конструктора.";
     case "/patterns":
@@ -39,6 +43,8 @@ export const getPageHeader = (pathname, title) => {
       return "Strumming - Онлайн тренажер гитарного боя";
     case "/learn":
       return "Уроки гитарного боя";
+    case "/rhythm":
+      return "Ритмический алфавит";
     case "/create":
       return "Создание гитарного боя";
     case "/patterns":

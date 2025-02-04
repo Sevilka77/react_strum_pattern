@@ -20,6 +20,13 @@ const cards = [
     link: "/learn",
   },
   {
+    title: "Ритмический алфавит",
+    description:
+      "Адаптация ритмического алфавита Бенни Греба для гитаристов. Любой ритм можно выразить через сочетание букв. Здесь мы отрабатываем основы.",
+    color: "rgb(120, 99, 237)",
+    link: "/rhythm",
+  },
+  {
     title: "Основные бои",
     description:
       "Изучи классические гитарные бои, такие как «Шестёрка» и «Восьмёрка». Тренируйся с метрономом для укрепления техники.",
@@ -41,7 +48,7 @@ function HomePage() {
     url: "https://strumming.ru",
     name: "Strumming - Онлайн тренажер гитарного боя",
     description:
-      "Онлайн тренажер гитарного боя. Освойте схемы гитарных боев: шестерка, восьмерка, четверка, бой галоп.",
+      "Онлайн тренажер гитарного боя. Освойте схемы гитарных боев: шестерка, восьмерка, четверка, бой галоп. Ритмический алфавит.",
     potentialAction: [
       {
         "@type": "ViewAction",
@@ -52,6 +59,11 @@ function HomePage() {
         "@type": "ViewAction",
         target: "https://strumming.ru/learn",
         name: "Изучить гитарный бой",
+      },
+      {
+        "@type": "ViewAction",
+        target: "https://strumming.ru/rhythm",
+        name: "Изучить ритмический алфавит",
       },
       {
         "@type": "ViewAction",
@@ -119,7 +131,7 @@ function HomePage() {
               gridTemplateColumns: {
                 xs: "repeat(1, 1fr)",
                 md: "repeat(2, 1fr)",
-                lg: "repeat(4, 1fr)",
+                lg: "repeat(5, 1fr)",
               }, // Сетка
               p: 0,
               gap: {
