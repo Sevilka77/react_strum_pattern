@@ -59,7 +59,6 @@ function RhythmPage() {
         setPatternName(pattern.title);
         seqDispatch({ type: "SET_BEAT_PATTERN", payload: pattern.pattern });
         toneDispatch({ type: "SET_NOTE_DURATION", payload: pattern.note });
-        toneDispatch({ type: "SET_TEMPO", payload: pattern.temp });
       }
     },
     [seqDispatch, toneDispatch],
@@ -93,7 +92,6 @@ function RhythmPage() {
       setPatternName(firstPattern.title);
       seqDispatch({ type: "SET_BEAT_PATTERN", payload: firstPattern.pattern });
       toneDispatch({ type: "SET_NOTE_DURATION", payload: firstPattern.note });
-      toneDispatch({ type: "SET_TEMPO", payload: firstPattern.temp });
     }
 
     // Очистка состояния при размонтировании компонента, если нужно
