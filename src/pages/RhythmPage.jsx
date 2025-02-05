@@ -99,7 +99,7 @@ function RhythmPage() {
   }, [seqDispatch, toneDispatch]); // Обязательно добавляем зависимости
 
   useEffect(() => {
-    if (autoNext && cycleSettings.cycleCount >= repeatCount) {
+    if (autoNext && cycleSettings.cycleCount == repeatCount) {
       cycleDispatch({ type: "RESET_CYCLE" });
 
       if (randomNext) {

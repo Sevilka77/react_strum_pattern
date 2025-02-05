@@ -1,0 +1,1 @@
+import{r as o}from"./vendor-Bn94jRP8.js";import{E as e}from"./index-Cfs7qhAn.js";const d=()=>{const t=o.useContext(e);if(!t)throw new Error("useEditMode must be used within a EditModeProvider");return t};export{d as u};

@@ -41,10 +41,10 @@ const useTone = () => {
       const timeWithOffset = time + 0.1;
 
       Tone.getDraw().schedule(() => {
-        cycleDispatch({ type: "SET_ACTIVE_BEAT", payload: index });
         if (index === stepsRef.current.length - 1) {
           cycleDispatch({ type: "INCREMENT_CYCLE" });
         }
+        cycleDispatch({ type: "SET_ACTIVE_BEAT", payload: index });
       }, timeWithOffset + 0.1);
 
       if (soundSettings.isBeatSound) {
@@ -76,7 +76,32 @@ const useTone = () => {
     ],
   );
 
-  // Управление воспроизведением (isPlaying)
+  useEffect(() => {
+    // Очищаем предыдущую последовательность, если она существует
+    if (seqRef.current) {
+      seqRef.current.dispose();
+    }
+
+    // Создаем новую последовательность
+    seqRef.current = new Tone.Sequence(
+      handleStepSequence,
+      Array.from({ length: stepsRef.current.length }, (_, i) => i),
+      toneSettings.noteDuration || "8n",
+    ).start(0);
+
+    // Очищаем последовательность при размонтировании компонента
+    return () => {
+      if (seqRef.current) {
+        seqRef.current.dispose();
+      }
+    };
+  }, [
+    beatPattern,
+    chordSettings.currentChord,
+    toneSettings.noteDuration,
+    handleStepSequence,
+  ]);
+
   useEffect(() => {
     if (!toneSettings.isPlaying) {
       Tone.getTransport().stop();
@@ -88,31 +113,11 @@ const useTone = () => {
       Tone.getTransport().start();
     });
 
-    // Создаем новую последовательность, если она еще не создана или изменилась
-    if (!seqRef.current || seqRef.current.length !== stepsRef.current.length) {
-      if (seqRef.current) {
-        seqRef.current.dispose(); // Очищаем предыдущую последовательность
-      }
-
-      seqRef.current = new Tone.Sequence(
-        handleStepSequence,
-        Array.from({ length: stepsRef.current.length }, (_, i) => i),
-        toneSettings.noteDuration || "8n",
-      ).start(0);
-    }
-
     return () => {
-      if (seqRef.current) {
-        seqRef.current.dispose();
-      }
+      Tone.getTransport().stop();
       cycleDispatch({ type: "RESET_CYCLE" });
     };
-  }, [
-    toneSettings.noteDuration,
-    handleStepSequence,
-    cycleDispatch,
-    toneSettings.isPlaying,
-  ]);
+  }, [toneSettings.isPlaying, cycleDispatch]);
 
   return;
 };
