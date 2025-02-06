@@ -33,7 +33,7 @@ export const getPageDescription = (pathname, title) => {
     case "/custom":
       return "Откройте для себя пользовательские гитарные бои и ритмы от сообщества Strumming.ru.";
     default:
-      return `Схема гитарного боя- ${title} — Тренировка и советы по технике.`;
+      return `Схема гитарного боя - ${title} — Тренировка и советы по технике.`;
   }
 };
 
