@@ -53,7 +53,6 @@ const Header = memo(function Header({ title }) {
           <>
             <IconButton
               aria-label="menu"
-              color="#25111b"
               sx={{ mr: 1 }}
               onClick={() => navigate(-1)}
             >
@@ -80,7 +79,7 @@ const Header = memo(function Header({ title }) {
                 {pageHeader}
               </Typography>
             </Stack>
-            <IconButton aria-label="menu" color="#25111b">
+            <IconButton aria-label="menu">
               <SettingsDialog />
             </IconButton>
           </>

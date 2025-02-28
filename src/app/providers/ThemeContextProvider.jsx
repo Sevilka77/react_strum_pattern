@@ -43,50 +43,6 @@ const ThemeContextProvider = ({ children }) => {
           c5: "#ffd9dd",
         },
       },
-      // palette: {
-      //   mode: "dark", // Задаем фиксированный режим
-      //   background: {
-      //     default: "#121C1D", // Темный фон
-      //     paper: "#121C1D", // Фон для компонентов
-      //   },
-      //   text: {
-      //     primary: "#9D9CA4",
-      //   },
-      // },
-
-      // components: {
-      //   MuiCard: {
-      //     styleOverrides: {
-      //       root: {
-      //         background: "transparent",
-      //       },
-      //     },
-      //   },
-      //   MuiPaper: {
-      //     styleOverrides: {
-      //       root: {
-      //         background: "#30393a",
-      //       },
-      //     },
-      //   },
-      //   MuiSnackbarContent: {
-      //     styleOverrides: {
-      //       root: {
-      //         background: "#121C1D",
-      //         color: "#ffffff",
-      //         borderRadius: "8px",
-      //         border: "2px solid #4A434B",
-      //       },
-      //     },
-      //   },
-      //   MuiBottomNavigation: {
-      //     styleOverrides: {
-      //       root: {
-      //         background: "transparent",
-      //       },
-      //     },
-      //   },
-      // },
     });
 
     // Применяем адаптивные размеры для шрифтов

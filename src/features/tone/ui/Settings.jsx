@@ -30,9 +30,8 @@ export default function SettingsDialog() {
 
   return (
     <React.Fragment>
-      <span onClick={handleClickOpen}>
-        <SettingsIcon />
-      </span>
+      <SettingsIcon onClick={handleClickOpen} />
+
       <Dialog
         open={open}
         onClose={handleClose}
