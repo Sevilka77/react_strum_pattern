@@ -1,47 +1,12 @@
 import { Box, Container, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 import Header from "../../features/header";
 import CardItem from "./ui/CardItem";
 import LDJson from "../../components/LDJson";
 
-const cards = [
-  {
-    title: "Создай свой бой",
-    description:
-      "Создавай уникальные ритмы с помощью удобного конструктора. Настрой упражнения под себя и тренируйся эффективно.",
-    color: "#FFD700",
-    link: "/create",
-  },
-  {
-    title: "Тренировка боя",
-    description:
-      "Тренируйся с 24 ритмическими заданиями. Улучши чувство ритма и отточи технику шаг за шагом.",
-    color: "rgb(99, 179, 237)",
-    link: "/learn",
-  },
-  {
-    title: "Ритмический алфавит",
-    description:
-      "Адаптация ритмического алфавита Бенни Греба для гитаристов. Любой ритм можно выразить через сочетание букв. Здесь мы отрабатываем основы.",
-    color: "rgb(120, 99, 237)",
-    link: "/rhythm",
-  },
-  {
-    title: "Основные бои",
-    description:
-      "Изучи классические гитарные бои, такие как «Шестёрка» и «Восьмёрка». Тренируйся с метрономом для укрепления техники.",
-    color: "rgb(72, 187, 120)",
-    link: "/patterns",
-  },
-  {
-    title: "Пользовательские бои",
-    description:
-      "Открывай популярные ритмы, созданные другими пользователями, и вдохновляйся уникальными идеями.",
-    color: "rgb(237, 100, 166)",
-    link: "/custom",
-  },
-];
 function HomePage() {
+  const theme = useTheme();
   const ldData = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -77,6 +42,43 @@ function HomePage() {
       },
     ],
   };
+  const cards = [
+    {
+      title: "Создай свой бой",
+      description:
+        "Создавай уникальные ритмы с помощью удобного конструктора. Настрой упражнения под себя и тренируйся эффективно.",
+      color: theme.palette.custom.c1,
+      link: "/create",
+    },
+    {
+      title: "Тренировка боя",
+      description:
+        "Тренируйся с 24 ритмическими заданиями. Улучши чувство ритма и отточи технику шаг за шагом.",
+      color: theme.palette.custom.c2,
+      link: "/learn",
+    },
+    {
+      title: "Ритмический алфавит",
+      description:
+        "Адаптация ритмического алфавита Бенни Греба для гитаристов. Любой ритм можно выразить через сочетание букв. Здесь мы отрабатываем основы.",
+      color: theme.palette.custom.c3,
+      link: "/rhythm",
+    },
+    {
+      title: "Основные бои",
+      description:
+        "Изучи классические гитарные бои, такие как «Шестёрка» и «Восьмёрка». Тренируйся с метрономом для укрепления техники.",
+      color: theme.palette.custom.c4,
+      link: "/patterns",
+    },
+    {
+      title: "Пользовательские бои",
+      description:
+        "Открывай популярные ритмы, созданные другими пользователями, и вдохновляйся уникальными идеями.",
+      color: theme.palette.custom.c5,
+      link: "/custom",
+    },
+  ];
   return (
     <>
       <LDJson data={ldData} />
@@ -101,14 +103,17 @@ function HomePage() {
             }}
           >
             Освой гитарные бои{" "}
-            <span style={{ color: "#FFD700" }}>с легкостью!</span>
+            <span style={{ color: theme.palette.primary.inverse }}>
+              с легкостью!
+            </span>
           </Typography>
 
           <Typography
+            color="secondary"
             sx={{
               lineHeight: "1",
               textAlign: "center",
-              color: "rgb(156, 153, 175)",
+
               fontSize: "clamp(16px, 2.08vw, 40px)",
               mb: {
                 xs: 1, // Мобильные устройства

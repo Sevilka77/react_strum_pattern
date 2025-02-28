@@ -10,41 +10,20 @@ const ControlFooterNM = () => {
   return (
     <Box
       sx={{
-        position: "fixed",
-        bottom: 0,
         width: "100%",
-        zIndex: 10,
         display: "flex",
-        flexDirection: "column",
+        pt: 1,
+        pb: 1,
+        flexDirection: "row", // Расставляем кнопки по строкам
         alignItems: "center",
+        justifyContent: "center",
+
+        marginBottom: 1, // Отступ перед нижней строкой
       }}
     >
-      {/* {children && (
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            flexDirection: "column", // Расставляем кнопки по строкам
-            justifyContent: "center",
-            marginBottom: "8px", // Отступ перед нижней строкой
-          }}
-        >
-          {children}
-        </Box>
-      )} */}
-      <Box
-        sx={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "row", // Расставляем кнопки по строкам
-          justifyContent: "center",
-          marginBottom: 1, // Отступ перед нижней строкой
-        }}
-      >
-        <MetronomePlayButton></MetronomePlayButton>
-        <MetronomeTempoSelector />
-        <ChordChange />
-      </Box>
+      <MetronomePlayButton />
+      <MetronomeTempoSelector />
+      <ChordChange />
     </Box>
   );
 };

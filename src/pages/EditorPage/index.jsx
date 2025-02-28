@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect } from "react";
 import { PlusIcon, MinusIcon, Share2Icon } from "lucide-react";
-import { Container, IconButton, Snackbar, Stack } from "@mui/material";
+import { Container, IconButton, Snackbar, Stack, Box } from "@mui/material";
 import Header from "@/features/header";
 import ControlFooter from "@/features/metronome/ui/ControlFooter";
 import LDJson from "@/components/LDJson";
@@ -54,36 +54,46 @@ function EditorPage() {
         component="main"
         sx={{
           display: "flex",
-          minHeight: "80dvh",
-          flexDirection: "row",
+          flex: 1,
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
         }}
         maxWidth="xl"
       >
-        <Suspense fallback={<div>Загрузка...</div>}>
-          <MetronomeWrapper />
-        </Suspense>
-        <Stack>
-          <IconButton
-            onClick={() => handleChange("plus")}
-            sx={{ borderRadius: "8px", border: "2px solid #4A434B", mt: 1 }}
-          >
-            <PlusIcon />
-          </IconButton>
-          <IconButton
-            onClick={() => handleChange("minus")}
-            sx={{ borderRadius: "8px", border: "2px solid #4A434B", mt: 1 }}
-          >
-            <MinusIcon />
-          </IconButton>
-          <IconButton
-            onClick={() => handleChange("share")}
-            sx={{ borderRadius: "8px", border: "2px solid #4A434B", mt: 1 }}
-          >
-            <Share2Icon />
-          </IconButton>
-        </Stack>
+        <Box
+          sx={{
+            display: "flex",
+            flex: 1,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Suspense fallback={<div>Загрузка...</div>}>
+            <MetronomeWrapper />
+          </Suspense>
+          <Stack>
+            <IconButton
+              onClick={() => handleChange("plus")}
+              sx={{ borderRadius: "8px", border: "2px solid #4A434B", mt: 1 }}
+            >
+              <PlusIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => handleChange("minus")}
+              sx={{ borderRadius: "8px", border: "2px solid #4A434B", mt: 1 }}
+            >
+              <MinusIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => handleChange("share")}
+              sx={{ borderRadius: "8px", border: "2px solid #4A434B", mt: 1 }}
+            >
+              <Share2Icon />
+            </IconButton>
+          </Stack>
+        </Box>
         <ControlFooter />
       </Container>
       <Snackbar

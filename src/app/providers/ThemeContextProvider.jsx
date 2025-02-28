@@ -9,91 +9,84 @@ const ThemeContextProvider = ({ children }) => {
   const theme = useMemo(() => {
     const baseTheme = createTheme({
       palette: {
-        mode: "dark", // Задаем фиксированный режим
+        mode: "dark",
+        primary: {
+          main: "#BFAF6F",
+          inverse: "#dbc66e",
+          contrastText: "#1E1B13",
+        },
+        secondary: {
+          main: "#A28E66",
+          contrastText: "#1E1B13",
+        },
+        tertiary: {
+          main: "#7FA08C",
+          contrastText: "#1E1B13",
+        },
+        error: {
+          main: "#FFB4AB",
+          contrastText: "#1E1B13",
+        },
         background: {
-          default: "#121C1D", // Темный фон
-          paper: "#121C1D", // Фон для компонентов
+          default: "#1E1B13",
+          paper: "#2C2A24",
         },
         text: {
-          primary: "#9D9CA4",
+          primary: "#EAE0C8",
+          secondary: "#BFB39A",
+        },
+        custom: {
+          c1: "#f9e287",
+          c2: "#bee9ff",
+          c3: "#eedcff",
+          c4: "#c0efb0",
+          c5: "#ffd9dd",
         },
       },
-      typography: {
-        fontFamily: "Inter, sans-serif", // Основной шрифт
-        h1: {
-          fontFamily: "Montserrat, sans-serif",
-          fontWeight: 700,
-          color: "#121C1D",
-        },
-        h2: {
-          fontFamily: "Montserrat, sans-serif",
-          fontWeight: 600,
-          color: "#FFFFFF",
-        },
-        h3: {
-          fontFamily: "Montserrat, sans-serif",
-          fontWeight: 600,
-          color: "#FFFFFF",
-        },
-        h4: {
-          fontFamily: "Montserrat, sans-serif",
-          fontWeight: 600,
-          color: "#FFFFFF",
-        },
-        h5: {
-          fontFamily: "Roboto",
-          fontWeight: 500,
-          color: "#FFFFFF",
-          fontSize: "18px",
-        },
-        h6: {
-          fontFamily: "Roboto",
-          fontWeight: 300,
-          color: "#FFFFFF",
-        },
-        body1: {
-          fontFamily: "Montserrat, sans-serif",
-          fontWeight: 400,
-          color: "#FFFFFF",
-        },
-        button: {
-          fontFamily: "Roboto",
-          textTransform: "none", // Отключаем преобразование в верхний регистр
-        },
-      },
-      components: {
-        MuiCard: {
-          styleOverrides: {
-            root: {
-              background: "transparent",
-            },
-          },
-        },
-        MuiPaper: {
-          styleOverrides: {
-            root: {
-              background: "#30393a",
-            },
-          },
-        },
-        MuiSnackbarContent: {
-          styleOverrides: {
-            root: {
-              background: "#121C1D",
-              color: "#ffffff",
-              borderRadius: "8px",
-              border: "2px solid #4A434B",
-            },
-          },
-        },
-        MuiBottomNavigation: {
-          styleOverrides: {
-            root: {
-              background: "transparent",
-            },
-          },
-        },
-      },
+      // palette: {
+      //   mode: "dark", // Задаем фиксированный режим
+      //   background: {
+      //     default: "#121C1D", // Темный фон
+      //     paper: "#121C1D", // Фон для компонентов
+      //   },
+      //   text: {
+      //     primary: "#9D9CA4",
+      //   },
+      // },
+
+      // components: {
+      //   MuiCard: {
+      //     styleOverrides: {
+      //       root: {
+      //         background: "transparent",
+      //       },
+      //     },
+      //   },
+      //   MuiPaper: {
+      //     styleOverrides: {
+      //       root: {
+      //         background: "#30393a",
+      //       },
+      //     },
+      //   },
+      //   MuiSnackbarContent: {
+      //     styleOverrides: {
+      //       root: {
+      //         background: "#121C1D",
+      //         color: "#ffffff",
+      //         borderRadius: "8px",
+      //         border: "2px solid #4A434B",
+      //       },
+      //     },
+      //   },
+      //   MuiBottomNavigation: {
+      //     styleOverrides: {
+      //       root: {
+      //         background: "transparent",
+      //       },
+      //     },
+      //   },
+      // },
     });
 
     // Применяем адаптивные размеры для шрифтов

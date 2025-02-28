@@ -6,8 +6,8 @@ const CardItem = ({ title, description, color, link }) => {
   return (
     <Card
       component="li"
+      variant="outlined"
       sx={{
-        backgroundColor: "rgb(31,41,55)",
         minWidth: 275,
         borderRadius: "8px",
         display: "flex",
@@ -17,20 +17,21 @@ const CardItem = ({ title, description, color, link }) => {
     >
       <CardContent>
         <Typography
-          variant="h5"
+          variant="h6"
           component="h2"
           color={color}
           textAlign="center"
+          fontWeight="bold"
           marginBottom={2}
         >
           {title}
         </Typography>
-        <Typography variant="body2" color="#9D9CA4" textAlign="center">
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
           {description}
         </Typography>
       </CardContent>
-      <CardActions style={{ justifyContent: "flex-end" }}>
-        <CardButton component={Link} to={link}>
+      <CardActions sx={{ justifyContent: "center", pb: 2, mt: "auto" }}>
+        <CardButton variant="contained" component={Link} to={link}>
           {title}
         </CardButton>
       </CardActions>

@@ -132,14 +132,14 @@ function LearnPage() {
             sx={{ minWidth: "140px" }}
             onClick={goToPreviousLesson}
           >
-            Предыдущая буква
+            Предыдущий урок
           </Button>
           <Button
             variant="h6"
             sx={{ minWidth: "140px" }}
             onClick={goToNextLesson}
           >
-            Следующая буква
+            Следующий урок
           </Button>
           {autoNext ? (
             <>

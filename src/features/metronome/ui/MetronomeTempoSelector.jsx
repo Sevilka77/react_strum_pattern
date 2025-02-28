@@ -4,6 +4,15 @@ import { Stack, Button, TextField } from "@mui/material";
 import useTapTempo from "../lib/useTapTempo";
 import { Minus, Plus } from "lucide-react";
 import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
+const buttonStyles = {
+  minWidth: "40px",
+  height: "40px",
+  padding: 0,
+  color: "#FFFFFF", // Белый текст
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
 const MetronomeTempoSelector = () => {
   const { toneSettings, dispatch } = useToneSettings();
   const [value, setValue] = useState(toneSettings.tempo);
@@ -48,39 +57,26 @@ const MetronomeTempoSelector = () => {
 
   return (
     <Stack
-      spacing={2}
+      spacing={1}
       direction="row"
       sx={{ alignItems: "center", justifyContent: "center" }}
     >
-      <Button
-        sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }}
-        onClick={handleDecrease}
-        color="primary"
-      >
+      <Button sx={buttonStyles} onClick={handleDecrease} color="primary">
         <Minus />
       </Button>
-
       <TextField
+        variant="standard"
         value={value}
         onChange={handleInputChange}
-        variant="outlined"
         size="small"
-        sx={{ width: "60px" }}
+        sx={{ width: "10%", border: 0 }}
         onBlur={handleBlur} // Проверка значения при выходе из поля
-      />
-      <Button
-        sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }}
-        onClick={handleTap}
-        color="primary"
-      >
-        TAP
-      </Button>
-      <Button
-        sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }}
-        onClick={handleIncrease}
-        color="primary"
-      >
+      />{" "}
+      <Button sx={buttonStyles} onClick={handleIncrease} color="primary">
         <Plus />
+      </Button>
+      <Button sx={buttonStyles} onClick={handleTap} color="primary">
+        TAP
       </Button>
     </Stack>
   );
