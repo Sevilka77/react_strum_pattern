@@ -31,6 +31,9 @@ const App = () => {
       <BrowserRouter>
         <Box
           sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignContent: "center",
             minHeight: "100dvh",
           }}
         >

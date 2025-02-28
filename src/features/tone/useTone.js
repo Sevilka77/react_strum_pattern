@@ -45,7 +45,7 @@ const useTone = () => {
           cycleDispatch({ type: "INCREMENT_CYCLE" });
         }
         cycleDispatch({ type: "SET_ACTIVE_BEAT", payload: index });
-      }, timeWithOffset + 0.1);
+      }, timeWithOffset);
 
       if (soundSettings.isBeatSound) {
         playInstruction(sound, timeWithOffset, soundSettings.isBeatSound);

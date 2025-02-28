@@ -98,8 +98,8 @@ function PatternPage() {
       <Container
         component="main"
         sx={{
+          flex: 1,
           display: "flex",
-          minHeight: "80dvh",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",

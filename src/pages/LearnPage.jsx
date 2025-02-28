@@ -101,14 +101,14 @@ function LearnPage() {
     <>
       <LDJson data={ldData} />
       <Header />
-      <Typography variant="h5" component="h3" align="center" flexGrow="1">
+      <Typography variant="h5" component="h3" align="center">
         {pattenName}
       </Typography>
       <Container
         component="main"
         sx={{
           display: "flex",
-          minHeight: "80dvh",
+          flex: 1,
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
