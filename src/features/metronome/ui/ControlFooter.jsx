@@ -1,31 +1,54 @@
-import MetronomeTempoSelector from "@/features/metronome/ui/MetronomeTempoSelector";
+import { useState } from "react";
+import { AppBar, Toolbar, IconButton, Stack } from "@mui/material";
 
-import { Box } from "@mui/material";
-import { memo } from "react";
 import MetronomePlayButton from "@/features/metronome/ui/MetronomePlayButton";
+import MetronomeButton from "../../tone/ui/MetronomeSoundButton";
+import MetronomeTempoSelector from "@/features/metronome/ui//MetronomeTempoSelector";
+import GuitarSoundButton from "../../tone/ui/GuitarSoundButton";
+import { CaretDown, Control } from "@phosphor-icons/react";
 
-import ChordChange from "@/features/tone/ui/chordChange";
+const ControlFooter = ({
+  prevButton = null,
+  nextButton = null,
+  settingsSlot = null,
+}) => {
+  const [expanded, setExpanded] = useState(false); // Состояние для раскрытия футера
 
-const ControlFooterNM = () => {
+  const toggleDrawer = () => {
+    setExpanded((prev) => !prev); // Переключение состояния раскрытия
+  };
+
   return (
-    <Box
-      sx={{
-        width: "100%",
-        display: "flex",
-        pt: 1,
-        pb: 1,
-        flexDirection: "row", // Расставляем кнопки по строкам
-        alignItems: "center",
-        justifyContent: "center",
+    <>
+      <AppBar
+        component="div"
+        variant="outlined"
+        elevation={0}
+        sx={{
+          bottom: 0,
+          top: "auto",
+          borderTopLeftRadius: "24px",
+          borderTopRightRadius: "24px",
+        }}
+      >
+        <Toolbar sx={{ justifyContent: "center", flexDirection: "column" }}>
+          <IconButton size="small" onClick={toggleDrawer}>
+            {expanded ? <CaretDown size={32} /> : <Control size={32} />}
+          </IconButton>
+          {expanded && settingsSlot}
+          {expanded && <MetronomeTempoSelector />}
 
-        marginBottom: 1, // Отступ перед нижней строкой
-      }}
-    >
-      <MetronomePlayButton />
-      <MetronomeTempoSelector />
-      <ChordChange />
-    </Box>
+          <Stack p={1} direction={"row"} alignItems="center" spacing={2}>
+            {prevButton}
+            <MetronomeButton />
+            <MetronomePlayButton />
+            <GuitarSoundButton />
+            {nextButton}
+          </Stack>
+        </Toolbar>
+      </AppBar>
+    </>
   );
 };
-const ControlFooter = memo(ControlFooterNM);
+
 export default ControlFooter;

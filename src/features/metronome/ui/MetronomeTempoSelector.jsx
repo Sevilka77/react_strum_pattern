@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { Stack, Button, TextField } from "@mui/material";
+import { Stack, Button, TextField, IconButton } from "@mui/material";
 import useTapTempo from "../lib/useTapTempo";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, HandTap } from "@phosphor-icons/react";
 import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
 const buttonStyles = {
   minWidth: "40px",
@@ -61,23 +61,50 @@ const MetronomeTempoSelector = () => {
       direction="row"
       sx={{ alignItems: "center", justifyContent: "center" }}
     >
-      <Button sx={buttonStyles} onClick={handleDecrease} color="primary">
-        <Minus />
-      </Button>
+      <IconButton
+        sx={{
+          borderRadius: "50%",
+        }}
+        value="minus"
+        onClick={handleDecrease}
+      >
+        <Minus size={40} />
+      </IconButton>
       <TextField
         variant="standard"
         value={value}
         onChange={handleInputChange}
-        size="small"
+        size="large"
         sx={{ width: "10%", border: 0 }}
-        onBlur={handleBlur} // Проверка значения при выходе из поля
+        onBlur={handleBlur}
+        InputProps={{
+          disableUnderline: true,
+          sx: {
+            textAlign: "center",
+            input: {
+              textAlign: "center",
+            },
+          },
+        }} // Проверка значения при выходе из поля
       />{" "}
-      <Button sx={buttonStyles} onClick={handleIncrease} color="primary">
-        <Plus />
-      </Button>
-      <Button sx={buttonStyles} onClick={handleTap} color="primary">
-        TAP
-      </Button>
+      <IconButton
+        sx={{
+          borderRadius: "50%",
+        }}
+        value="plus"
+        onClick={handleIncrease}
+      >
+        <Plus size={40} />
+      </IconButton>
+      <IconButton
+        sx={{
+          borderRadius: "50%",
+        }}
+        value="tap"
+        onClick={handleTap}
+      >
+        <HandTap size={40} />
+      </IconButton>
     </Stack>
   );
 };

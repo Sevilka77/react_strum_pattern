@@ -10,8 +10,8 @@ const buttonStyles = {
   height: "40px",
   padding: 0,
   color: "#FFFFFF", // Белый текст
-  backgroundColor: "#1976D2", // Синий фон (цвет primary из Material-UI)
-  borderRadius: "8px", // Скругленные углы
+  backgroundColor: "#404349", // Синий фон (цвет primary из Material-UI)
+  borderRadius: "50%", // Скругленные углы
   boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)", // Тень
   "&:hover": {
     backgroundColor: "#1565C0", // Темно-синий при наведении
@@ -22,6 +22,8 @@ const buttonStyles = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  fontWeight: "medium",
+  textTransform: "none",
 };
 
 const ChordChangeNM = () => {

@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { patterns } from "../../app/providers/patterns";
+import { rhythmPatterns } from "@/app/providers/rhythmPatterns";
 
 import Header from "../../features/header";
 import { Container } from "@mui/material";
@@ -9,6 +10,8 @@ const PatternList = lazy(() => import("./ui/PatternList"));
 
 function ListPage({ level }) {
   const filteredPatterns = patterns.filter((p) => p.level === level);
+  // level == "rhythm"
+  //   ? rhythmPatterns.filter((p) => p.level === level)   :
 
   const ldData = {
     "@context": "https://schema.org",

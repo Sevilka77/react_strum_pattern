@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from "react";
-import { PlusIcon, MinusIcon, Share2Icon } from "lucide-react";
+import { Plus, Minus, Export } from "@phosphor-icons/react";
 import { Container, IconButton, Snackbar, Stack, Box } from "@mui/material";
 import Header from "@/features/header";
 import ControlFooter from "@/features/metronome/ui/ControlFooter";
@@ -12,7 +12,7 @@ import { useEditMode } from "@/entities/editMode/lib/useEditMode";
 const MetronomeWrapper = lazy(() =>
   import("@/widgets/metronomePlayer").then((module) => ({
     default: module.MetronomePlayer,
-  })),
+  }))
 );
 function EditorPage() {
   const { handleChange, handleClose, open, updateBeatPattern } = useEditor();
@@ -78,19 +78,19 @@ function EditorPage() {
               onClick={() => handleChange("plus")}
               sx={{ borderRadius: "8px", border: "2px solid #4A434B", mt: 1 }}
             >
-              <PlusIcon />
+              <Plus />
             </IconButton>
             <IconButton
               onClick={() => handleChange("minus")}
               sx={{ borderRadius: "8px", border: "2px solid #4A434B", mt: 1 }}
             >
-              <MinusIcon />
+              <Minus />
             </IconButton>
             <IconButton
               onClick={() => handleChange("share")}
               sx={{ borderRadius: "8px", border: "2px solid #4A434B", mt: 1 }}
             >
-              <Share2Icon />
+              <Export />
             </IconButton>
           </Stack>
         </Box>

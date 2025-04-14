@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu, MenuItem, IconButton, ListItemIcon } from "@mui/material";
-import { DeleteIcon, WrenchIcon } from "lucide-react";
+import { Backspace, ArrowsCounterClockwise } from "@phosphor-icons/react";
 import {
   ArrowD,
   ArrowDB,
@@ -61,7 +61,7 @@ const PatternEditNM = ({ index }) => {
         onClick={handleClickMenu}
         sx={{ borderRadius: "8px", border: "2px solid #4A434B", mt: 1 }}
       >
-        <WrenchIcon />
+        <ArrowsCounterClockwise />
       </IconButton>
       <Menu
         id="basic-menu"
@@ -116,7 +116,7 @@ const PatternEditNM = ({ index }) => {
         </MenuItem>
         <MenuItem onClick={() => handleChange("del")}>
           <ListItemIcon>
-            <DeleteIcon />
+            <Backspace />
           </ListItemIcon>
           Удалить
         </MenuItem>

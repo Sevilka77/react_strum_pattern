@@ -95,7 +95,8 @@ function HomePage() {
               lineHeight: "1",
               textAlign: "center",
               fontWeight: 700,
-              mb: {
+
+              m: {
                 xs: 1, // Мобильные устройства
                 sm: 2, // Средние устройства
                 md: 3, // Большие устройства
@@ -103,13 +104,20 @@ function HomePage() {
             }}
           >
             Освой гитарные бои{" "}
-            <span style={{ color: theme.palette.primary.inverse }}>
+            <span
+              style={{
+                background:
+                  "linear-gradient(.287turn, #3d4ff7 6.46%, #c145ed 98.38%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
               с легкостью!
             </span>
           </Typography>
 
           <Typography
-            color="secondary"
+            color="main"
             sx={{
               lineHeight: "1",
               textAlign: "center",

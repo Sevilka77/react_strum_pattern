@@ -4,7 +4,7 @@ import { lazy, Suspense, useCallback } from "react";
 const MetronomeWrapper = lazy(() =>
   import("@/widgets/metronomePlayer").then((module) => ({
     default: module.MetronomePlayer,
-  })),
+  }))
 );
 
 import { useEffect, useState } from "react";
@@ -13,10 +13,10 @@ import { learnPatterns } from "@/app/providers/learnPatterns";
 import { useCycleSettings } from "@/entities/cycleSettings/lib/useCycleSettings";
 import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
 import { useSequenceSettings } from "@/entities/sequenceSettings/lib/useSequenceSettings";
-import { Button, Container, Typography } from "@mui/material";
+import { IconButton, Button, Container, Typography } from "@mui/material";
 import LDJson from "../components/LDJson";
 import { Box, Stack } from "@mui/system";
-import { Minus, Plus } from "lucide-react";
+import { Plus, Minus, SkipBack, SkipForward } from "@phosphor-icons/react";
 
 function LearnPage() {
   const { cycleSettings, dispatch: cycleDispatch } = useCycleSettings();
@@ -55,7 +55,7 @@ function LearnPage() {
         toneDispatch({ type: "SET_TEMPO", payload: pattern.temp });
       }
     },
-    [seqDispatch, toneDispatch],
+    [seqDispatch, toneDispatch]
   );
 
   const goToPreviousLesson = useCallback(() => {
@@ -97,6 +97,76 @@ function LearnPage() {
     cycleDispatch,
   ]);
 
+  const prevButton = (
+    <IconButton
+      sx={{
+        borderRadius: "50%",
+      }}
+      onClick={goToPreviousLesson}
+    >
+      <SkipBack size={32} />
+    </IconButton>
+  );
+  const nextButton = (
+    <IconButton
+      sx={{
+        borderRadius: "50%",
+      }}
+      onClick={goToNextLesson}
+    >
+      <SkipForward size={32} />
+    </IconButton>
+  );
+
+  const settingsSlot = (
+    <Box
+      sx={{
+        display: "flex",
+        direction: "row",
+        justifyContent: "center",
+        width: "100%",
+        flexWrap: "wrap",
+        gap: 1,
+        mt: 1,
+      }}
+    >
+      {autoNext ? (
+        <>
+          <Button variant="h6" onClick={() => setAutoNext(false)}>
+            Выключить
+          </Button>
+          <Button
+            sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }}
+            onClick={() => setRepeatCount((prev) => Math.max(1, prev - 1))}
+          >
+            <Minus />
+          </Button>
+          <Stack justifyContent="center">
+            <Typography
+              sx={{ width: "40px", minWidth: "40px" }}
+              alignSelf="center"
+              textAlign="center"
+            >
+              {repeatCount}
+            </Typography>
+            <Typography fontSize="11px" alignSelf="center" textAlign="center">
+              повторений
+            </Typography>
+          </Stack>
+          <Button
+            sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }}
+            onClick={() => setRepeatCount((prev) => Math.min(100, prev + 1))}
+          >
+            <Plus />
+          </Button>
+        </>
+      ) : (
+        <Button variant="h6" onClick={() => setAutoNext(true)}>
+          Авто переключение
+        </Button>
+      )}
+    </Box>
+  );
   return (
     <>
       <LDJson data={ldData} />
@@ -107,8 +177,8 @@ function LearnPage() {
       <Container
         component="main"
         sx={{
-          display: "flex",
           flex: 1,
+          display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
@@ -118,87 +188,12 @@ function LearnPage() {
         <Suspense fallback={<div>Загрузка...</div>}>
           <MetronomeWrapper />
         </Suspense>
-        <Box
-          sx={{
-            display: "flex",
-            direction: "row",
-            justifyContent: "center",
-            width: "100%",
-            flexWrap: "wrap",
-          }}
-        >
-          <Button
-            variant="h6"
-            sx={{ minWidth: "140px" }}
-            onClick={goToPreviousLesson}
-          >
-            Предыдущий урок
-          </Button>
-          <Button
-            variant="h6"
-            sx={{ minWidth: "140px" }}
-            onClick={goToNextLesson}
-          >
-            Следующий урок
-          </Button>
-          {autoNext ? (
-            <>
-              <Button variant="h6" onClick={() => setAutoNext(false)}>
-                Выключить
-              </Button>
-              <Button
-                sx={{
-                  color: "#FFFFFF",
-                  width: "40px",
-                  minWidth: "40px",
-                  px: 0,
-                }}
-                onClick={() =>
-                  setRepeatCount((prevValue) => Math.max(1, prevValue - 1))
-                }
-              >
-                <Minus />
-              </Button>
-              <Stack justifyContent="center">
-                <Typography
-                  sx={{
-                    width: "40px",
-                    minWidth: "40px",
-                  }}
-                  alignSelf="center"
-                  textAlign="center"
-                >
-                  {repeatCount}
-                </Typography>
-                <Typography
-                  fontSize="11px"
-                  alignSelf="center"
-                  textAlign="center"
-                >
-                  повторений
-                </Typography>
-              </Stack>
-              <Button
-                sx={{
-                  color: "#FFFFFF",
-                  width: "40px",
-                  minWidth: "40px",
-                  px: 0,
-                }}
-                onClick={() =>
-                  setRepeatCount((prevValue) => Math.min(100, prevValue + 1))
-                }
-              >
-                <Plus />
-              </Button>
-            </>
-          ) : (
-            <Button variant="h6" onClick={() => setAutoNext(true)}>
-              Авто переключение
-            </Button>
-          )}
-        </Box>
-        <ControlFooter />
+
+        <ControlFooter
+          nextButton={nextButton}
+          prevButton={prevButton}
+          settingsSlot={settingsSlot}
+        ></ControlFooter>
       </Container>
     </>
   );

@@ -34,7 +34,7 @@ export const SoundSettingsProvider = ({ children }) => {
         return setIsBeatSound(state, action.data);
       case "setIsHitSound":
         return setIsHitSound(state, action.data);
-      case "setIsMetronomSound":
+      case "setIsMetronomeSound":
         return setIsMetronomeSound(state, action.data);
       case "setClickAlways":
         return setClickAlways(state, action.data);
@@ -49,10 +49,7 @@ export const SoundSettingsProvider = ({ children }) => {
     }
   }, initialSoundSettings);
 
-  const value = useMemo(
-    () => ({ soundSettings, dispatch }),
-    [soundSettings, dispatch],
-  );
+  const value = useMemo(() => ({ soundSettings, dispatch }), [soundSettings]);
   return (
     <SoundSettingsContext.Provider value={value}>
       {children}

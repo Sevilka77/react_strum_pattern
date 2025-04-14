@@ -5,7 +5,7 @@ import { useLocation, useParams } from "react-router-dom";
 const MetronomeWrapper = lazy(() =>
   import("@/widgets/metronomePlayer").then((module) => ({
     default: module.MetronomePlayer,
-  })),
+  }))
 );
 // import VolumeControl from "../components/VolumeControl";
 
@@ -39,7 +39,7 @@ function PatternPage() {
       toneDispatch({ type: "SET_TEMPO", payload: p.temp });
     } else if (beatPattern) {
       const foundPattern = patterns.find(
-        (pattern) => pattern.pattern === beatPattern,
+        (pattern) => pattern.pattern === beatPattern
       );
 
       if (foundPattern) {

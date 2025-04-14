@@ -3,22 +3,36 @@ import { useMemo } from "react";
 import { ThemeProvider } from "@mui/system";
 import { createTheme, CssBaseline, GlobalStyles } from "@mui/material";
 import { responsiveFontSizes } from "@mui/material/styles";
+import "@fontsource/comfortaa"; // Импорт шрифта Comfortaa
 
 const ThemeContextProvider = ({ children }) => {
   // Создаем тему с фиксированными значениями, без переключения
   const theme = useMemo(() => {
     const baseTheme = createTheme({
+      typography: {
+        fontFamily: "Comfortaa, sans-serif",
+      },
       palette: {
         mode: "dark",
         primary: {
-          main: "#BFAF6F",
-          inverse: "#dbc66e",
-          contrastText: "#1E1B13",
+          main: "#90caf9",
         },
         secondary: {
-          main: "#A28E66",
-          contrastText: "#1E1B13",
+          main: "#ce93d8",
         },
+        background: {
+          default: "#121212",
+          paper: "#121212",
+        },
+        // primary: {
+        //   main: "#7b61ff",
+        //   inverse: "#FFFFFF",
+        //   contrastText: "#FFFFFF",
+        // },
+        // secondary: {
+        //   main: "#A28E66",
+        //   contrastText: "#1E1B13",
+        // },
         tertiary: {
           main: "#7FA08C",
           contrastText: "#1E1B13",
@@ -28,14 +42,15 @@ const ThemeContextProvider = ({ children }) => {
           contrastText: "#1E1B13",
         },
         background: {
-          default: "#1E1B13",
-          paper: "#2C2A24",
+          default: "#17171a",
+          paper: "#1d1e21",
         },
         text: {
-          primary: "#EAE0C8",
-          secondary: "#BFB39A",
+          primary: "#FFFFFF",
+          secondary: "#FFFFFF",
         },
         custom: {
+          button: "#e0e0e0",
           c1: "#f9e287",
           c2: "#bee9ff",
           c3: "#eedcff",

@@ -4,7 +4,7 @@ import { lazy, Suspense, useCallback } from "react";
 const MetronomeWrapper = lazy(() =>
   import("@/widgets/metronomePlayer").then((module) => ({
     default: module.MetronomePlayer,
-  })),
+  }))
 );
 
 import { useEffect, useState } from "react";
@@ -18,11 +18,13 @@ import {
   Container,
   FormControlLabel,
   Switch,
+  IconButton,
   Typography,
 } from "@mui/material";
 import LDJson from "../components/LDJson";
+
 import { Box, Stack } from "@mui/system";
-import { Minus, Plus } from "lucide-react";
+import { Plus, Minus, SkipBack, SkipForward } from "@phosphor-icons/react";
 
 function RhythmPage() {
   const { cycleSettings, dispatch: cycleDispatch } = useCycleSettings();
@@ -39,8 +41,8 @@ function RhythmPage() {
     "@type": "WebApplication",
     name: "Тренажер гитарного боя",
     operatingSystem: "Все платформы",
-    applicationCategory: "Музыкальный тренажер",
-    url: "https://strumming.ru/learn",
+    applicationCategory: "Ритмический алфавит",
+    url: "https://strumming.ru/rhythm",
     description:
       "Практикуйтесь в игре на гитаре с помощью онлайн тренажера гитарного боя на Strumming.ru.",
 
@@ -61,7 +63,7 @@ function RhythmPage() {
         toneDispatch({ type: "SET_NOTE_DURATION", payload: pattern.note });
       }
     },
-    [seqDispatch, toneDispatch],
+    [seqDispatch, toneDispatch]
   );
 
   const goToPreviousLesson = useCallback(() => {
@@ -118,6 +120,110 @@ function RhythmPage() {
     cycleDispatch,
     cycleSettings,
   ]);
+  const prevButton = (
+    <IconButton
+      sx={{
+        borderRadius: "50%",
+      }}
+      onClick={goToPreviousLesson}
+    >
+      <SkipBack size={32} />
+    </IconButton>
+  );
+  const nextButton = (
+    <IconButton
+      sx={{
+        borderRadius: "50%",
+      }}
+      onClick={goToNextLesson}
+    >
+      <SkipForward size={32} />
+    </IconButton>
+  );
+  const settingsSlot = (
+    <Box
+      sx={{
+        display: "flex",
+        direction: "row",
+        justifyContent: "center",
+        width: "100%",
+        flexWrap: "wrap",
+      }}
+    >
+      {autoNext ? (
+        <>
+          <Button variant="h6" onClick={() => setAutoNext(false)}>
+            Выключить
+          </Button>
+          <Button
+            sx={{
+              color: "#FFFFFF",
+              width: "40px",
+              minWidth: "40px",
+              px: 0,
+            }}
+            onClick={() =>
+              setRepeatCount((prevValue) => Math.max(1, prevValue - 1))
+            }
+          >
+            <Minus />
+          </Button>
+          <Stack justifyContent="center">
+            <Typography
+              sx={{
+                width: "40px",
+                minWidth: "40px",
+              }}
+              alignSelf="center"
+              textAlign="center"
+            >
+              {repeatCount}
+            </Typography>
+            <Typography fontSize="11px" alignSelf="center" textAlign="center">
+              повторений
+            </Typography>
+          </Stack>
+          <Button
+            sx={{
+              color: "#FFFFFF",
+              width: "40px",
+              minWidth: "40px",
+              px: 0,
+            }}
+            onClick={() =>
+              setRepeatCount((prevValue) => Math.min(100, prevValue + 1))
+            }
+          >
+            <Plus />
+          </Button>
+        </>
+      ) : (
+        <Button variant="h6" onClick={() => setAutoNext(true)}>
+          Авто переключение
+        </Button>
+      )}
+      {autoNext && (
+        <FormControlLabel
+          control={
+            <Switch
+              size="small"
+              checked={randomNext}
+              onChange={(e) => setRandomNext(e.target.checked)}
+            />
+          }
+          label="Сллучайное переключение"
+          labelPlacement="start"
+          sx={{
+            mt: 2,
+            fontSize: "11px",
+            width: "100%",
+            textAlign: "center",
+            justifyContent: "center",
+          }}
+        />
+      )}
+    </Box>
+  );
 
   return (
     <>
@@ -141,107 +247,12 @@ function RhythmPage() {
         <Suspense fallback={<div>Загрузка...</div>}>
           <MetronomeWrapper />
         </Suspense>
-        <Box
-          sx={{
-            display: "flex",
-            direction: "row",
-            justifyContent: "center",
-            width: "100%",
-            flexWrap: "wrap",
-          }}
-        >
-          <Button
-            variant="h6"
-            sx={{ minWidth: "140px" }}
-            onClick={goToPreviousLesson}
-          >
-            Предыдущая буква
-          </Button>
-          <Button
-            variant="h6"
-            sx={{ minWidth: "140px" }}
-            onClick={goToNextLesson}
-          >
-            Следующая буква
-          </Button>
-          {autoNext ? (
-            <>
-              <Button variant="h6" onClick={() => setAutoNext(false)}>
-                Выключить
-              </Button>
-              <Button
-                sx={{
-                  color: "#FFFFFF",
-                  width: "40px",
-                  minWidth: "40px",
-                  px: 0,
-                }}
-                onClick={() =>
-                  setRepeatCount((prevValue) => Math.max(1, prevValue - 1))
-                }
-              >
-                <Minus />
-              </Button>
-              <Stack justifyContent="center">
-                <Typography
-                  sx={{
-                    width: "40px",
-                    minWidth: "40px",
-                  }}
-                  alignSelf="center"
-                  textAlign="center"
-                >
-                  {repeatCount}
-                </Typography>
-                <Typography
-                  fontSize="11px"
-                  alignSelf="center"
-                  textAlign="center"
-                >
-                  повторений
-                </Typography>
-              </Stack>
-              <Button
-                sx={{
-                  color: "#FFFFFF",
-                  width: "40px",
-                  minWidth: "40px",
-                  px: 0,
-                }}
-                onClick={() =>
-                  setRepeatCount((prevValue) => Math.min(100, prevValue + 1))
-                }
-              >
-                <Plus />
-              </Button>
-            </>
-          ) : (
-            <Button variant="h6" onClick={() => setAutoNext(true)}>
-              Авто переключение
-            </Button>
-          )}
-          {autoNext && (
-            <FormControlLabel
-              control={
-                <Switch
-                  size="small"
-                  checked={randomNext}
-                  onChange={(e) => setRandomNext(e.target.checked)}
-                />
-              }
-              label="Сллучайное переключение"
-              labelPlacement="start"
-              sx={{
-                mt: 2,
-                fontSize: "11px",
-                width: "100%",
-                textAlign: "center",
-                justifyContent: "center",
-              }}
-            />
-          )}
-        </Box>
-        <ControlFooter />
+
+        <ControlFooter
+          nextButton={nextButton}
+          prevButton={prevButton}
+          settingsSlot={settingsSlot}
+        ></ControlFooter>
       </Container>
     </>
   );

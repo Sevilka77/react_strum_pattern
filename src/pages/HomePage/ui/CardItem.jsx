@@ -8,6 +8,7 @@ const CardItem = ({ title, description, color, link }) => {
       component="li"
       variant="outlined"
       sx={{
+        backgroundBlendMode: "overlay",
         minWidth: 275,
         borderRadius: "8px",
         display: "flex",
@@ -17,9 +18,9 @@ const CardItem = ({ title, description, color, link }) => {
     >
       <CardContent>
         <Typography
+          color={color}
           variant="h6"
           component="h2"
-          color={color}
           textAlign="center"
           fontWeight="bold"
           marginBottom={2}

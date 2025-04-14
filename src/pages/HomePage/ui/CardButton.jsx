@@ -6,6 +6,7 @@ const CardButton = styled(Button)({
   borderRadius: "4px",
   py: 1.5,
   fontWeight: "medium",
+  textTransform: "none",
 });
 
 export default CardButton;

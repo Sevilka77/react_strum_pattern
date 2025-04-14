@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SettingsIcon, XIcon } from "lucide-react";
+import { Faders, X } from "@phosphor-icons/react";
 import VolumeControl from "./VolumeControl";
 import {
   Box,
@@ -30,7 +30,7 @@ export default function SettingsDialog() {
 
   return (
     <React.Fragment>
-      <SettingsIcon onClick={handleClickOpen} />
+      <Faders onClick={handleClickOpen} />
 
       <Dialog
         open={open}
@@ -49,7 +49,7 @@ export default function SettingsDialog() {
             color: theme.palette.grey[500],
           })}
         >
-          <XIcon />
+          <X />
         </IconButton>
         <Box
           sx={{
@@ -83,7 +83,7 @@ export default function SettingsDialog() {
                 checked={soundSettings.isMetronomeSound}
                 onChange={() =>
                   soundDispatch({
-                    type: "setIsMetronomSound",
+                    type: "setIsMetronomeSound",
                     data: !soundSettings.isMetronomeSound,
                   })
                 }

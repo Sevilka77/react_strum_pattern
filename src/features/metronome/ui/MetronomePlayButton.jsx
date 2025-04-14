@@ -1,27 +1,12 @@
 // features/metronome/ui/MetronomePlayButton.js
 import { useEffect } from "react";
-import { Button } from "@mui/material";
-import { PlayIcon, SquareIcon } from "@/shared/ui/Icons/Icons";
+import { IconButton } from "@mui/material";
+
 import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
 import * as Tone from "tone";
 
-const buttonStyles = {
-  // width: "40px",
-  // minWidth: "40px",
-  // height: "40px",
-  // padding: 0,
-  // color: "#FFFFFF", // Белый текст
-  // backgroundColor: "#FFA726", // Синий фон (цвет primary из Material-UI)
-  // "&:hover": {
-  //   backgroundColor: "#d88f21", // Темно-синий при наведении
-  // },
-  // "&:active": {
-  //   backgroundColor: "#926118", // Еще темнее при нажатии
-  // },
-  // display: "flex",
-  // alignItems: "center",
-  // justifyContent: "center",
-};
+import { Play, Pause } from "@phosphor-icons/react";
+
 const MetronomePlayButton = () => {
   const { toneSettings, dispatch } = useToneSettings();
 
@@ -41,11 +26,19 @@ const MetronomePlayButton = () => {
         dispatch({ type: "SET_IS_PLAYING", payload: false }); // Остановить воспроизведение
       }
     };
+    а;
   }, [dispatch, toneSettings.isPlaying]);
   return (
-    <Button sx={buttonStyles} value="play" onClick={handleClick}>
-      {toneSettings.isPlaying ? <SquareIcon /> : <PlayIcon />}
-    </Button>
+    <IconButton
+      sx={{
+        borderRadius: "50%",
+        bgcolor: "primary.main",
+      }}
+      value="play"
+      onClick={handleClick}
+    >
+      {toneSettings.isPlaying ? <Pause size={48} /> : <Play size={48} />}
+    </IconButton>
   );
 };
 
