@@ -1,6 +1,6 @@
 import Header from "../features/header";
 import { lazy, Suspense, useCallback } from "react";
-
+import TopBarLoader from "@/shared/ui/TopBarLoader";
 const MetronomeWrapper = lazy(() =>
   import("@/widgets/metronomePlayer").then((module) => ({
     default: module.MetronomePlayer,
@@ -244,7 +244,7 @@ function RhythmPage() {
         }}
         maxWidth="xl"
       >
-        <Suspense fallback={<div>Загрузка...</div>}>
+        <Suspense fallback={<TopBarLoader />}>
           <MetronomeWrapper />
         </Suspense>
 

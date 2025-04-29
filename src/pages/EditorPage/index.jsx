@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { Plus, Minus, Export } from "@phosphor-icons/react";
 import { Container, IconButton, Snackbar, Stack, Box } from "@mui/material";
+import TopBarLoader from "@/shared/ui/TopBarLoader";
 import Header from "@/features/header";
 import ControlFooter from "@/features/metronome/ui/ControlFooter";
 import LDJson from "@/components/LDJson";
@@ -70,7 +71,7 @@ function EditorPage() {
             justifyContent: "center",
           }}
         >
-          <Suspense fallback={<div>Загрузка...</div>}>
+          <Suspense fallback={<TopBarLoader />}>
             <MetronomeWrapper />
           </Suspense>
           <Stack>

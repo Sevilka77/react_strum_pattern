@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { patterns } from "../../app/providers/patterns";
 import { rhythmPatterns } from "@/app/providers/rhythmPatterns";
+import TopBarLoader from "@/shared/ui/TopBarLoader";
 
 import Header from "../../features/header";
 import { Container } from "@mui/material";
@@ -63,7 +64,7 @@ function ListPage({ level }) {
         }}
         maxWidth="xl"
       >
-        <Suspense fallback={<div>Загрузка...</div>}>
+        <Suspense fallback={<TopBarLoader />}>
           <PatternList patterns={filteredPatterns} />
         </Suspense>
       </Container>

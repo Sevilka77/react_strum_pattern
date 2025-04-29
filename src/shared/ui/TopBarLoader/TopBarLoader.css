@@ -1,0 +1,21 @@
+.top-bar-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(0.287turn, rgb(61, 79, 247) 10.46%, rgb(193, 69, 237) 50.38%);
+  background-size: 200% 100%;
+  animation: neon-slide 1.5s linear infinite;
+  z-index: 9999;
+  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+}
+
+@keyframes neon-slide {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

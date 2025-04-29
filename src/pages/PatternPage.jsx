@@ -1,5 +1,6 @@
 import Header from "../features/header";
 import LDJson from "../components/LDJson";
+import TopBarLoader from "@/shared/ui/TopBarLoader";
 import { lazy, Suspense } from "react";
 import { useLocation, useParams } from "react-router-dom";
 const MetronomeWrapper = lazy(() =>
@@ -106,7 +107,7 @@ function PatternPage() {
         }}
         maxWidth="xl"
       >
-        <Suspense fallback={<div>Загрузка...</div>}>
+        <Suspense fallback={<TopBarLoader />}>
           <MetronomeWrapper />
         </Suspense>
 

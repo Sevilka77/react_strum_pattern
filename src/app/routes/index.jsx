@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
+import TopBarLoader from "@/shared/ui/TopBarLoader";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const LearnPage = lazy(() => import("../../pages/LearnPage"));
@@ -9,7 +10,7 @@ const PatternPage = lazy(() => import("../../pages/PatternPage"));
 const RhythmPage = lazy(() => import("../../pages/RhythmPage"));
 
 const AppRoutes = () => (
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<TopBarLoader />}>
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/learn" element={<LearnPage />} />
