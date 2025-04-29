@@ -12,6 +12,22 @@ const ThemeContextProvider = ({ children }) => {
       typography: {
         fontFamily: "Comfortaa, sans-serif",
       },
+      components: {
+        MuiButton: {
+          variants: [
+            {
+              props: { variant: "custom" },
+              style: {
+                backgroundColor: "#3E4EF6",
+                color: "#FFFFFF",
+                "&:hover": {
+                  backgroundColor: "#9948F0",
+                },
+              },
+            },
+          ],
+        },
+      },
       palette: {
         mode: "dark",
         primary: {
@@ -50,7 +66,6 @@ const ThemeContextProvider = ({ children }) => {
           secondary: "#FFFFFF",
         },
         custom: {
-          button: "#e0e0e0",
           c1: "#f9e287",
           c2: "#bee9ff",
           c3: "#eedcff",

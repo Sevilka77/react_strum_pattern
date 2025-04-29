@@ -32,7 +32,7 @@ const CardItem = ({ title, description, color, link }) => {
         </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: "center", pb: 2, mt: "auto" }}>
-        <CardButton variant="contained" component={Link} to={link}>
+        <CardButton variant="custom" component={Link} to={link}>
           {title}
         </CardButton>
       </CardActions>
