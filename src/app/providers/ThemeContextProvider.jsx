@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { ThemeProvider } from "@mui/system";
 import { createTheme, CssBaseline, GlobalStyles } from "@mui/material";
 import { responsiveFontSizes } from "@mui/material/styles";
-import "@fontsource/comfortaa"; // Импорт шрифта Comfortaa
+import "@/assets/fonts/fonts.css";
 
 const ThemeContextProvider = ({ children }) => {
   // Создаем тему с фиксированными значениями, без переключения
