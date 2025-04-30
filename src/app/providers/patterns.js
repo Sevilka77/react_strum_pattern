@@ -35,27 +35,10 @@ export const patterns = [
     position: 3,
     image: "shesterka-s-zaglushkoi.svg",
   },
-  {
-    title: "Шестерка кантри",
-    pattern: "10A100A0",
-    temp: 70,
-    note: "8n",
-    level: "main",
-    position: 37,
-    image: "shesterka-kantri.svg",
-  },
-  {
-    title: "шестерка кантри2",
-    pattern: "10A111A1",
-    temp: 70,
-    note: "8n",
-    level: "main",
-    position: 36,
-    image: "shesterka-kantri2.svg",
-  },
-  {
-    title: "шестерка кантри c заглушкой",
-    pattern: "10x111x1",
+
+    {
+    title: "Дворовый бой",
+    pattern: "11x101x1",
     temp: 70,
     note: "8n",
     level: "main",
@@ -80,15 +63,23 @@ export const patterns = [
     position: 7,
     image: "galop.svg",
   },
-  {
-    title: "Четверка джаз",
-    pattern: "10x1",
+     {
+    title: "Клубный бой-легкая версия",
+    pattern: "A001x0A00001x000",
     temp: 70,
-    note: "4n",
+    note: "16n",
     level: "main",
-    position: 34,
-    image: "chetverka-dzhaz.svg",
+    position: 12,
   },
+   {
+    title: "Клубный бой стандартная",
+    pattern: "A001x0A00101x111",
+    temp: 70,
+    note: "16n",
+    level: "main",
+    position: 12,
+  },
+
   {
     title: "Стандартный бой на 3/4",
     pattern: "101110",
@@ -125,6 +116,33 @@ export const patterns = [
     position: 5,
     image: "rok.svg",
   },
+      {
+    title: "Шестерка кантри",
+    pattern: "10A100A0",
+    temp: 70,
+    note: "8n",
+    level: "main",
+    position: 37,
+    image: "shesterka-kantri.svg",
+  },
+  {
+    title: "Шестерка кантри2",
+    pattern: "10A111A1",
+    temp: 70,
+    note: "8n",
+    level: "main",
+    position: 36,
+    image: "shesterka-kantri2.svg",
+  },
+  {
+    title: "Шестерка кантри c заглушкой",
+    pattern: "10x111x1",
+    temp: 70,
+    note: "8n",
+    level: "main",
+    position: 35,
+    image: "shesterka-kantri-c-zaglushkoi.svg",
+  },
   {
     title: "Восьмерка малая",
     pattern: "10001011",
@@ -151,6 +169,15 @@ export const patterns = [
     level: "custom",
     position: 31,
     image: "varvara.svg",
+  },
+    {
+    title: "Четверка джаз",
+    pattern: "10x1",
+    temp: 70,
+    note: "4n",
+    level: "main",
+    position: 34,
+    image: "chetverka-dzhaz.svg",
   },
   {
     title: "Рэгги",
@@ -180,7 +207,7 @@ export const patterns = [
     image: "vosьmerka-perkussionnaya.svg",
   },
   {
-    title: "восьмерка слабые доли",
+    title: "Восьмерка слабые доли",
     pattern: "A00A11A00A11A011",
     temp: 70,
     note: "16n",
@@ -189,7 +216,7 @@ export const patterns = [
     image: "vosьmerka-slabye-doli.svg",
   },
   {
-    title: "восьмерка с заглушками",
+    title: "Восьмерка с заглушками",
     pattern: "1001x1100100x111",
     temp: 70,
     note: "16n",
@@ -198,7 +225,7 @@ export const patterns = [
     image: "vosьmerka-s-zaglushkami.svg",
   },
   {
-    title: "пауэр бой",
+    title: "Пауэр бой",
     pattern: "10b0b010b0b010b0",
     temp: 70,
     note: "16n",
@@ -206,8 +233,9 @@ export const patterns = [
     position: 12,
   },
 
+
   {
-    title: "восьмерка два коробля",
+    title: "Восьмерка два коробля",
     pattern: "1001101101011011",
     temp: 70,
     note: "16n",
