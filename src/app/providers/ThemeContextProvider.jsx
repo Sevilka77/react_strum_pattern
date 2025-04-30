@@ -18,7 +18,7 @@ const ThemeContextProvider = ({ children }) => {
             {
               props: { variant: "custom" },
               style: {
-                backgroundColor: "#3E4EF6",
+                backgroundColor: "#4C6EF5",
                 color: "#FFFFFF",
                 "&:hover": {
                   backgroundColor: "#9948F0",
@@ -37,8 +37,9 @@ const ThemeContextProvider = ({ children }) => {
           main: "#ce93d8",
         },
         background: {
-          default: "#121212",
-          paper: "#121212",
+          default: " #171923",
+
+          paper: "#1E2235",
         },
         // primary: {
         //   main: "#7b61ff",
@@ -57,13 +58,9 @@ const ThemeContextProvider = ({ children }) => {
           main: "#FFB4AB",
           contrastText: "#1E1B13",
         },
-        background: {
-          default: "#17171a",
-          paper: "#1d1e21",
-        },
         text: {
-          primary: "#FFFFFF",
-          secondary: "#FFFFFF",
+          primary: "#F7FAFC",
+          secondary: "#F7FAFC",
         },
         custom: {
           c1: "#f9e287",

@@ -91,10 +91,10 @@ function HomePage() {
           <Typography
             component="h1"
             sx={{
-              fontSize: "clamp(24px,5.75vw, 360px)",
+              fontSize: "clamp(24px,5vw, 360px)",
               lineHeight: "1",
               textAlign: "center",
-              fontWeight: 700,
+              fontWeight: 500,
 
               m: {
                 xs: 1, // Мобильные устройства
@@ -119,9 +119,10 @@ function HomePage() {
           <Typography
             color="main"
             sx={{
-              lineHeight: "1",
+              lineHeight: "1.2",
               textAlign: "center",
-
+              opacity: 0.9,
+              fontWeight: 300,
               fontSize: "clamp(16px, 2.08vw, 40px)",
               mb: {
                 xs: 1, // Мобильные устройства
