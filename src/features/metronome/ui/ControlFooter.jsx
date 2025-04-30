@@ -23,8 +23,10 @@ const ControlFooter = ({
       <AppBar
         component="div"
         variant="outlined"
+        position="relative"
         elevation={0}
         sx={{
+          width: "100vw",
           bottom: 0,
           top: "auto",
           borderTopLeftRadius: "24px",
