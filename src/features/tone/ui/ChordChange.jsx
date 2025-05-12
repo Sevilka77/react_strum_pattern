@@ -4,28 +4,6 @@ import { Button, Menu, MenuItem } from "@mui/material";
 import { memo } from "react";
 import { useChordSettings } from "@/entities/chordSettings/lib/useChordSettings";
 
-const buttonStyles = {
-  width: "40px",
-  minWidth: "40px",
-  height: "40px",
-  padding: 0,
-  color: "#FFFFFF", // Белый текст
-  backgroundColor: "#404349", // Синий фон (цвет primary из Material-UI)
-  borderRadius: "50%", // Скругленные углы
-  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)", // Тень
-  "&:hover": {
-    backgroundColor: "#1565C0", // Темно-синий при наведении
-  },
-  "&:active": {
-    backgroundColor: "#0D47A1", // Еще темнее при нажатии
-  },
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontWeight: "medium",
-  textTransform: "none",
-};
-
 const ChordChangeNM = () => {
   const { chordSettings, dispatch } = useChordSettings();
 
@@ -55,12 +33,21 @@ const ChordChangeNM = () => {
   return (
     <>
       <Button
-        sx={buttonStyles}
+        // sx={buttonStyles}
         id="basic-button"
         aria-controls={openMenu ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={openMenu ? "true" : undefined}
         onClick={handleClickMenu}
+        sx={{
+          minWidth: 32,
+          width: 32,
+          height: 32,
+          p: 0,
+          fontSize: 12,
+          borderRadius: "50%",
+          textTransform: "none",
+        }}
       >
         {chordSettings.currentChord}
       </Button>

@@ -5,7 +5,10 @@ import MetronomePlayButton from "@/features/metronome/ui/MetronomePlayButton";
 import MetronomeButton from "../../tone/ui/MetronomeSoundButton";
 import MetronomeTempoSelector from "@/features/metronome/ui//MetronomeTempoSelector";
 import GuitarSoundButton from "../../tone/ui/GuitarSoundButton";
+import HitSoundButton from "../../tone/ui/HitSoundButton";
+
 import { CaretDown, Control } from "@phosphor-icons/react";
+import ChordChange from "../../tone/ui/ChordChange";
 
 const ControlFooter = ({
   prevButton = null,
@@ -35,16 +38,18 @@ const ControlFooter = ({
       >
         <Toolbar sx={{ justifyContent: "center", flexDirection: "column" }}>
           <IconButton size="small" onClick={toggleDrawer}>
-            {expanded ? <CaretDown size={32} /> : <Control size={32} />}
+            {expanded ? <CaretDown size={16} /> : <Control size={16} />}
           </IconButton>
           {expanded && settingsSlot}
           {expanded && <MetronomeTempoSelector />}
 
           <Stack p={1} direction={"row"} alignItems="center" spacing={2}>
             {prevButton}
+            <HitSoundButton />
             <MetronomeButton />
             <MetronomePlayButton />
             <GuitarSoundButton />
+            <ChordChange />
             {nextButton}
           </Stack>
         </Toolbar>

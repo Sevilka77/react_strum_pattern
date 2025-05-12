@@ -1,21 +1,21 @@
 // features/tone/ui/MetronomeSoundButton.js
 import { Checkbox } from "@mui/material";
-import { Metronome } from "@phosphor-icons/react";
+import { HandsClapping } from "@phosphor-icons/react";
 
 import { useSoundSettings } from "@/entities/soundSettings/lib/useSoundSettings";
 
-const MetronomeSoundButton = () => {
+const HitSoundButton = () => {
   const { soundSettings, dispatch } = useSoundSettings();
 
   const handleClick = () => {
     dispatch({
-      type: "setIsMetronomeSound",
-      data: !soundSettings.isMetronomeSound,
+      type: "setIsHitSound",
+      data: !soundSettings.isHitSound,
     });
   };
   return (
     <Checkbox
-      checked={soundSettings.isMetronomeSound}
+      checked={soundSettings.isHitSound}
       onChange={handleClick}
       sx={{
         backgroundColor: "transparent",
@@ -24,10 +24,10 @@ const MetronomeSoundButton = () => {
           backgroundColor: "primary.main",
         },
       }}
-      icon={<Metronome size={16} />}
-      checkedIcon={<Metronome size={16} />}
+      icon={<HandsClapping size={16} />}
+      checkedIcon={<HandsClapping size={16} />}
     ></Checkbox>
   );
 };
 
-export default MetronomeSoundButton;
+export default HitSoundButton;

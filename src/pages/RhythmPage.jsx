@@ -127,7 +127,7 @@ function RhythmPage() {
       }}
       onClick={goToPreviousLesson}
     >
-      <SkipBack size={32} />
+      <SkipBack size={16} />
     </IconButton>
   );
   const nextButton = (
@@ -137,7 +137,7 @@ function RhythmPage() {
       }}
       onClick={goToNextLesson}
     >
-      <SkipForward size={32} />
+      <SkipForward size={16} />
     </IconButton>
   );
   const settingsSlot = (
@@ -155,19 +155,17 @@ function RhythmPage() {
           <Button variant="h6" onClick={() => setAutoNext(false)}>
             Выключить
           </Button>
-          <Button
+          <IconButton
             sx={{
-              color: "#FFFFFF",
-              width: "40px",
-              minWidth: "40px",
-              px: 0,
+              borderRadius: "50%",
             }}
             onClick={() =>
               setRepeatCount((prevValue) => Math.max(1, prevValue - 1))
             }
           >
-            <Minus />
-          </Button>
+            <Minus size={16} />
+          </IconButton>
+
           <Stack justifyContent="center">
             <Typography
               sx={{
@@ -183,19 +181,16 @@ function RhythmPage() {
               повторений
             </Typography>
           </Stack>
-          <Button
+          <IconButton
             sx={{
-              color: "#FFFFFF",
-              width: "40px",
-              minWidth: "40px",
-              px: 0,
+              borderRadius: "50%",
             }}
             onClick={() =>
               setRepeatCount((prevValue) => Math.min(100, prevValue + 1))
             }
           >
-            <Plus />
-          </Button>
+            <Plus size={16} />
+          </IconButton>
         </>
       ) : (
         <Button variant="h6" onClick={() => setAutoNext(true)}>

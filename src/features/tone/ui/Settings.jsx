@@ -140,22 +140,6 @@ export default function SettingsDialog() {
             }
           />
           <FormControlLabel
-            label="Отстучать бой"
-            labelPlacement="end"
-            control={
-              <Switch
-                checked={soundSettings.isHitSound}
-                onChange={() =>
-                  soundDispatch({
-                    type: "setIsHitSound",
-                    data: !soundSettings.isHitSound,
-                  })
-                }
-                inputProps={{ "aria-label": "click-takt-beat" }}
-              />
-            }
-          />{" "}
-          <FormControlLabel
             label="Длительность нот"
             labelPlacement="end"
             control={

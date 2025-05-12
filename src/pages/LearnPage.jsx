@@ -105,7 +105,7 @@ function LearnPage() {
       }}
       onClick={goToPreviousLesson}
     >
-      <SkipBack size={32} />
+      <SkipBack size={16} />
     </IconButton>
   );
   const nextButton = (
@@ -115,7 +115,7 @@ function LearnPage() {
       }}
       onClick={goToNextLesson}
     >
-      <SkipForward size={32} />
+      <SkipForward size={16} />
     </IconButton>
   );
 
@@ -136,12 +136,15 @@ function LearnPage() {
           <Button variant="h6" onClick={() => setAutoNext(false)}>
             Выключить
           </Button>
-          <Button
-            sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }}
+          <IconButton
+            sx={{
+              borderRadius: "50%",
+            }}
             onClick={() => setRepeatCount((prev) => Math.max(1, prev - 1))}
           >
-            <Minus />
-          </Button>
+            <Minus size={16} />
+          </IconButton>
+
           <Stack justifyContent="center">
             <Typography
               sx={{ width: "40px", minWidth: "40px" }}
@@ -154,12 +157,14 @@ function LearnPage() {
               повторений
             </Typography>
           </Stack>
-          <Button
-            sx={{ color: "#FFFFFF", width: "40px", minWidth: "40px", px: 0 }}
+          <IconButton
+            sx={{
+              borderRadius: "50%",
+            }}
             onClick={() => setRepeatCount((prev) => Math.min(100, prev + 1))}
           >
-            <Plus />
-          </Button>
+            <Plus size={16} />
+          </IconButton>
         </>
       ) : (
         <Button variant="h6" onClick={() => setAutoNext(true)}>

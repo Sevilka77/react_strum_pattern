@@ -37,7 +37,7 @@ const MetronomePlayButton = () => {
       value="play"
       onClick={handleClick}
     >
-      {toneSettings.isPlaying ? <Pause size={48} /> : <Play size={48} />}
+      {toneSettings.isPlaying ? <Pause size={36} /> : <Play size={36} />}
     </IconButton>
   );
 };

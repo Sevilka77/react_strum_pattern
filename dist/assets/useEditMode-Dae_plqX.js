@@ -1,1 +1,0 @@
-import{r as o}from"./ui-DtFdnKGP.js";import{F as e}from"./index-ByDXk5D7.js";const d=()=>{const t=o.useContext(e);if(!t)throw new Error("useEditMode must be used within a EditModeProvider");return t};export{d as u};

@@ -25,8 +25,8 @@ const GuitarSoundButton = () => {
           backgroundColor: "primary.main",
         },
       }}
-      icon={<Guitar size={40} />}
-      checkedIcon={<Guitar size={40} />}
+      icon={<Guitar size={16} />}
+      checkedIcon={<Guitar size={16} />}
     ></Checkbox>
   );
 };

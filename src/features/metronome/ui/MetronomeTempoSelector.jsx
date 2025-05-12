@@ -68,7 +68,7 @@ const MetronomeTempoSelector = () => {
         value="minus"
         onClick={handleDecrease}
       >
-        <Minus size={40} />
+        <Minus size={16} />
       </IconButton>
       <TextField
         variant="standard"
@@ -94,7 +94,7 @@ const MetronomeTempoSelector = () => {
         value="plus"
         onClick={handleIncrease}
       >
-        <Plus size={40} />
+        <Plus size={16} />
       </IconButton>
       <IconButton
         sx={{
@@ -103,7 +103,7 @@ const MetronomeTempoSelector = () => {
         value="tap"
         onClick={handleTap}
       >
-        <HandTap size={40} />
+        <HandTap size={32} />
       </IconButton>
     </Stack>
   );
