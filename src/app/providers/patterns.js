@@ -79,6 +79,14 @@ export const patterns = [
     level: "main",
     position: 12,
   },
+     {
+    title: "Блатной бой",
+    pattern: "b0x0bhx0",
+    temp: 160,
+    note: "8n",
+    level: "main",
+    position: 12,
+  },
 
   {
     title: "Стандартный бой на 3/4",
