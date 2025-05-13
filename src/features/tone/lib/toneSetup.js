@@ -1,7 +1,7 @@
 import * as Tone from "tone";
 
-import click1 from "@/assets/samples/click1.wav";
-import click2 from "@/assets/samples/click2.wav";
+import click1 from "@/assets/samples/click1.mp3";
+import click2 from "@/assets/samples/click2.mp3";
 import hit from "@/assets/samples/hit.mp3";
 import hit2 from "@/assets/samples/hit2.mp3";
 import hihat from "@/assets/samples/hihat.mp3";
