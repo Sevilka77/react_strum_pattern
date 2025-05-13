@@ -14,6 +14,8 @@ export const getPageHeader = (pathname, title) => {
       return "Схемы гитарных боев";
     case "/custom":
       return "Пользовательские гитарные бои";
+    case "/404":
+      return "Strumming.ru";
     default:
       return `${title}`;
   }
