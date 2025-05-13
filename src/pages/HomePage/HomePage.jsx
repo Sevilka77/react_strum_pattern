@@ -3,45 +3,11 @@ import { useTheme } from "@mui/material/styles";
 
 import Header from "../../features/header";
 import CardItem from "./ui/CardItem";
-import LDJson from "../../components/LDJson";
+import MetaData from "@/shared/lib/seo/MetaData";
 
 function HomePage() {
   const theme = useTheme();
-  const ldData = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    url: "https://strumming.ru",
-    name: "Strumming - Онлайн тренажер гитарного боя",
-    description:
-      "Онлайн тренажер гитарного боя. Освойте схемы гитарных боев: шестерка, восьмерка, четверка, бой галоп. Ритмический алфавит.",
-    potentialAction: [
-      {
-        "@type": "ViewAction",
-        target: "https://strumming.ru/create",
-        name: "Создать гитарный бой",
-      },
-      {
-        "@type": "ViewAction",
-        target: "https://strumming.ru/learn",
-        name: "Изучить гитарный бой",
-      },
-      {
-        "@type": "ViewAction",
-        target: "https://strumming.ru/rhythm",
-        name: "Изучить ритмический алфавит",
-      },
-      {
-        "@type": "ViewAction",
-        target: "https://strumming.ru/patterns",
-        name: "Список схем гитарного боя",
-      },
-      {
-        "@type": "ViewAction",
-        target: "https://strumming.ru/custom",
-        name: "Пользовательские схемы боя",
-      },
-    ],
-  };
+
   const cards = [
     {
       title: "Создай свой бой",
@@ -81,7 +47,10 @@ function HomePage() {
   ];
   return (
     <>
-      <LDJson data={ldData} />
+      <MetaData
+        title=" Онлайн тренажёр гитарного боя — Обучение, тренировка и создание боёв"
+        description="Изучайте гитарные бои в интерактивном онлайн-тренажёре. Отработка ритма, визуальные схемы и тренировки популярных боёв: шестерка, восьмерка, галоп и другие."
+      />
       <Header />
       <Container component="main" maxWidth="xl">
         <Box

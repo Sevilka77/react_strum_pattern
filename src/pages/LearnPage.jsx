@@ -15,9 +15,10 @@ import { useCycleSettings } from "@/entities/cycleSettings/lib/useCycleSettings"
 import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
 import { useSequenceSettings } from "@/entities/sequenceSettings/lib/useSequenceSettings";
 import { IconButton, Button, Container, Typography } from "@mui/material";
-import LDJson from "../components/LDJson";
+
 import { Box, Stack } from "@mui/system";
 import { Plus, Minus, SkipBack, SkipForward } from "@phosphor-icons/react";
+import MetaData from "../shared/lib/seo/MetaData";
 
 function LearnPage() {
   const { cycleSettings, dispatch: cycleDispatch } = useCycleSettings();
@@ -27,23 +28,6 @@ function LearnPage() {
   const [repeatCount, setRepeatCount] = useState(5);
   const [autoNext, setAutoNext] = useState(false);
   const [pattenName, setPatternName] = useState();
-
-  const ldData = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    name: "Тренажер гитарного боя",
-    operatingSystem: "Все платформы",
-    applicationCategory: "Музыкальный тренажер",
-    url: "https://strumming.ru/learn",
-    description:
-      "Практикуйтесь в игре на гитаре с помощью онлайн тренажера гитарного боя на Strumming.ru.",
-
-    potentialAction: {
-      "@type": "ExerciseAction",
-      target: "https://strumming.ru/learn",
-      name: "Начать тренировку",
-    },
-  };
 
   // Функция для перехода к предыдущему уроку
   const updatePattern = useCallback(
@@ -175,7 +159,10 @@ function LearnPage() {
   );
   return (
     <>
-      <LDJson data={ldData} />
+      <MetaData
+        title="Учимся играть гитарные бои — от простого к сложному"
+        description="24 упражнения для уверенной игры боем: пошаговое развитие чувства ритма и техники правой руки. Учитесь играть гитарные ритмы постепенно и без стресса!"
+      />
       <Header />
       <Typography variant="h5" component="h3" align="center">
         {pattenName}

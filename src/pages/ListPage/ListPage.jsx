@@ -1,57 +1,29 @@
 import { lazy, Suspense } from "react";
 import { patterns } from "../../app/providers/patterns";
-import { rhythmPatterns } from "@/app/providers/rhythmPatterns";
+
 import TopBarLoader from "@/shared/ui/TopBarLoader";
 
 import Header from "../../features/header";
 import { Container } from "@mui/material";
-import LDJson from "../../components/LDJson";
+import MetaData from "@/shared/lib/seo/MetaData";
 
 const PatternList = lazy(() => import("./ui/PatternList"));
 
 function ListPage({ level }) {
   const filteredPatterns = patterns.filter((p) => p.level === level);
-  // level == "rhythm"
-  //   ? rhythmPatterns.filter((p) => p.level === level)   :
-
-  const ldData = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name:
-      level === "main"
-        ? "Схемы гитарных боев"
-        : "Пользовательские гитарные бои",
-    description:
-      level === "main"
-        ? "Изучите основные схемы гитарных боев, такие как Шестерка, Восьмерка, Галоп и другие."
-        : "Откройте для себя уникальные и пользовательские гитарные бои, созданные сообществом Strumming.",
-    url:
-      level === "main"
-        ? `https://strumming.ru/patterns`
-        : `https://strumming.ru/custom`,
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id":
-        level === "main"
-          ? `https://strumming.ru/patterns`
-          : `https://strumming.ru/custom`,
-    },
-    itemListElement: filteredPatterns.map((pattern, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      item: {
-        "@type": "CreativeWork",
-        name: pattern.title,
-        description: `Схема для гитарного боя ${pattern.title}`,
-        url: `https://strumming.ru/patterns/${pattern.pattern}`,
-        image: `https://strumming.ru/assets/images/svg/${pattern.image}`,
-      },
-    })),
-  };
-
   return (
     <>
-      <LDJson data={ldData} />
+      {level === "main" ? (
+        <MetaData
+          title="Схемы гитарных боев: Шестерка, Восьмерка, Галоп и другие – Полный список"
+          description="Все популярные схемы гитарных боев: Шестерка, Восьмерка, Галоп, Дворовый бой и другие. Начните тренировки с простых боев и переходите к более сложным!"
+        />
+      ) : (
+        <MetaData
+          title="Пользовательские схемы гитарных боев: Варвара, Кино, Сплин, Гитара с нуля и другие"
+          description="Откройте уникальные схемы боев, созданные пользователями. Попробуйте боевые ритмы для популярных песен: Варвара, Кино, Сплин и другие!"
+        />
+      )}
       <Header />
       <Container
         component="main"

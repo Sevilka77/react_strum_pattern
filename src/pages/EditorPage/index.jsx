@@ -4,11 +4,12 @@ import { Container, IconButton, Snackbar, Stack, Box } from "@mui/material";
 import TopBarLoader from "@/shared/ui/TopBarLoader";
 import Header from "@/features/header";
 import ControlFooter from "@/features/metronome/ui/ControlFooter";
-import LDJson from "@/components/LDJson";
+
 import useEditor from "./lib/useEditor";
 import { learnPatterns } from "@/app/providers/learnPatterns";
 import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
 import { useEditMode } from "@/entities/editMode/lib/useEditMode";
+import MetaData from "@/shared/lib/seo/MetaData";
 
 const MetronomeWrapper = lazy(() =>
   import("@/widgets/metronomePlayer").then((module) => ({
@@ -19,17 +20,6 @@ function EditorPage() {
   const { handleChange, handleClose, open, updateBeatPattern } = useEditor();
   const { dispatch: toneDispatch } = useToneSettings();
   const { dispatch } = useEditMode();
-
-  const ldData = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    name: "Редактор гитарного боя",
-    operatingSystem: "Все платформы",
-    applicationCategory: "Музыкальный инструмент",
-    url: "https://strumming.ru/create",
-    description:
-      "Создайте свой собственный гитарный бой с помощью редактора на Strumming.ru.",
-  };
 
   // Инициализация редактора
   useEffect(() => {
@@ -49,7 +39,11 @@ function EditorPage() {
 
   return (
     <>
-      <LDJson data={ldData} />
+      <MetaData
+        title="Создайте свой собственный гитарный бой — Strumming.ru"
+        description="Используйте редактор Strumming.ru для создания уникальных гитарных боев. Тренируйтесь и делитесь своими ритмами с другими музыкантами, улучшайте свою технику!"
+      />
+
       <Header title={"Редактор боя"} />
       <Container
         component="main"

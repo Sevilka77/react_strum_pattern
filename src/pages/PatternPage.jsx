@@ -1,5 +1,5 @@
 import Header from "../features/header";
-import LDJson from "../components/LDJson";
+
 import TopBarLoader from "@/shared/ui/TopBarLoader";
 import { lazy, Suspense } from "react";
 import { useLocation, useParams } from "react-router-dom";
@@ -16,6 +16,20 @@ import { patterns } from "@/app/providers/patterns";
 import { Container } from "@mui/material";
 import { useSequenceSettings } from "@/entities/sequenceSettings/lib/useSequenceSettings";
 import { useToneSettings } from "@/entities/toneSettings/lib/useToneSettings";
+import MetaData from "../shared/lib/seo/MetaData";
+function getMetaData(title, level) {
+  if (level === "main") {
+    return {
+      seoTitle: `Схема гитарного боя ${title} – ритм и техника исполнения`,
+      seoDescription: `Изучите гитарный бой «${title}». Подробная схема боя, советы по технике, темп и ритм. Идеально для самостоятельной практики и отработки правой руки.`,
+    };
+  } else {
+    return {
+      seoTitle: `Пользовательская схема боя «${title}» – уникальный гитарный ритм`,
+      seoDescription: `Попробуйте бой «${title}» из пользовательской коллекции. Авторский подход, оригинальная схема боя и тренировочный темп для гитары.`,
+    };
+  }
+}
 
 function PatternPage() {
   const location = useLocation();
@@ -27,9 +41,17 @@ function PatternPage() {
   const { pattern } = sequenceSettings;
 
   const p = location.state;
+
+  const foundPattern = beatPattern
+    ? patterns.find((pattern) => pattern.pattern === beatPattern)
+    : null;
+
+  const meta = getMetaData(
+    foundPattern?.title || p?.title || "Гитарный бой",
+    foundPattern?.level || p?.level || "custom"
+  );
+
   const [title, setTitle] = useState("Выбор боя");
-  const [patternImage, setPatternImage] = useState("");
-  const [ldData, setLdData] = useState({});
 
   useEffect(() => {
     if (p) {
@@ -52,25 +74,6 @@ function PatternPage() {
 
         toneDispatch({ type: "SET_NOTE_DURATION", payload: foundPattern.note });
         toneDispatch({ type: "SET_TEMPO", payload: foundPattern.temp });
-
-        const imageUrl = `https://strumming.ru/assets/images/svg/${foundPattern.image}`;
-        setPatternImage(imageUrl); // Обновляем состояние с изображением
-        // updateOGMetaTags(foundPattern.title, imageUrl, foundPattern.pattern);
-        // // Обновляем LD-разметку
-        const newLdData = {
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          "@id": `https://strumming.ru/pattern/${foundPattern.pattern}`,
-          url: `https://strumming.ru/pattern/${foundPattern.pattern}`,
-          name: `${foundPattern.title}`,
-          description: `Схема для гитарного боя ${foundPattern.title}`,
-          image: {
-            "@type": "ImageObject",
-            url: imageUrl,
-          },
-          mainEntityOfPage: `https://strumming.ru/pattern/${foundPattern.pattern}`,
-        };
-        setLdData(newLdData);
       } else {
         console.log("Паттерн не найден в массиве patterns.");
         setTitle("Пользовательский бой");
@@ -89,13 +92,12 @@ function PatternPage() {
 
     // Очистка состояния при размонтировании компонента, если нужно
     return;
-  }, [p, beatPattern, pattern, patternImage, toneDispatch, sequenceDispatch]);
+  }, [p, beatPattern, pattern, toneDispatch, sequenceDispatch, foundPattern]);
 
   return (
     <>
+      <MetaData title={meta.seoTitle} description={meta.seoDescription} />
       <Header title={title} />
-      <LDJson data={ldData} />
-      {/* <OGMetaTags title={title} image={patternImage} /> */}
       <Container
         component="main"
         sx={{

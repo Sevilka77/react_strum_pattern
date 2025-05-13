@@ -21,10 +21,10 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import LDJson from "../components/LDJson";
 
 import { Box, Stack } from "@mui/system";
 import { Plus, Minus, SkipBack, SkipForward } from "@phosphor-icons/react";
+import MetaData from "../shared/lib/seo/MetaData";
 
 function RhythmPage() {
   const { cycleSettings, dispatch: cycleDispatch } = useCycleSettings();
@@ -35,23 +35,6 @@ function RhythmPage() {
   const [autoNext, setAutoNext] = useState(false);
   const [randomNext, setRandomNext] = useState(false);
   const [pattenName, setPatternName] = useState();
-
-  const ldData = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    name: "Тренажер гитарного боя",
-    operatingSystem: "Все платформы",
-    applicationCategory: "Ритмический алфавит",
-    url: "https://strumming.ru/rhythm",
-    description:
-      "Практикуйтесь в игре на гитаре с помощью онлайн тренажера гитарного боя на Strumming.ru.",
-
-    potentialAction: {
-      "@type": "ExerciseAction",
-      target: "https://strumming.ru/learn",
-      name: "Начать тренировку",
-    },
-  };
 
   // Функция для перехода к предыдущему уроку
   const updatePattern = useCallback(
@@ -222,7 +205,11 @@ function RhythmPage() {
 
   return (
     <>
-      <LDJson data={ldData} />
+      <MetaData
+        title="Практика ритмического алфавита – Развиваем чувство ритма | Strumming.ru"
+        description="Погружаемся в практику ритмического алфавита: развиваем внутренний ритм, учимся свободно играть и чувствовать музыку. Шаг за шагом — к ритмической свободе!"
+      />
+
       <Header />
       <Typography variant="h5" component="h3" align="center">
         {pattenName}

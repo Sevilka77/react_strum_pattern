@@ -6,37 +6,16 @@ import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SettingsDialog from "@/features/tone/ui/settings";
 import { Stack } from "@mui/system";
-import { getPageTitle, getPageDescription, getPageHeader } from "./Header.util";
+import { getPageHeader } from "./Header.util";
 
 const Header = memo(function Header({ title }) {
   const location = useLocation(); // Получаем текущий путь
   const navigate = useNavigate();
 
-  const pageTitle = useMemo(
-    () => getPageTitle(location.pathname, title),
-    [location.pathname, title]
-  );
-  const pageDescription = useMemo(
-    () => getPageDescription(location.pathname, title),
-    [location.pathname, title]
-  );
   const pageHeader = useMemo(
     () => getPageHeader(location.pathname, title),
     [location.pathname, title]
   );
-
-  useEffect(() => {
-    document.title = pageTitle;
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute("content", pageDescription);
-    } else {
-      const newMetaDescription = document.createElement("meta");
-      newMetaDescription.setAttribute("name", "description");
-      newMetaDescription.setAttribute("content", pageDescription);
-      document.head.appendChild(newMetaDescription);
-    }
-  }, [pageTitle, pageDescription]);
 
   return (
     <AppBar

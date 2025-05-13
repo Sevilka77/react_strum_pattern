@@ -37,7 +37,7 @@ const ThemeContextProvider = ({ children }) => {
           main: "#ce93d8",
         },
         background: {
-          default: " #171923",
+          default: "#171923",
 
           paper: "#1E2235",
         },
