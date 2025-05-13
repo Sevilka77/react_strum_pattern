@@ -1,1 +1,0 @@
-import{j as t}from"./ui-BS00pWUR.js";import{H as s}from"./index-BCkWEEyH.js";const n=({title:r,description:e})=>t.jsxs(s,{children:[t.jsx("title",{children:r}),e&&t.jsx("meta",{name:"description",content:e})]});export{n as M};
