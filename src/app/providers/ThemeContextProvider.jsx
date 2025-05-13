@@ -10,7 +10,7 @@ const ThemeContextProvider = ({ children }) => {
   const theme = useMemo(() => {
     const baseTheme = createTheme({
       typography: {
-        fontFamily: "Comfortaa, sans-serif",
+        fontFamily: "system-ui, sans-serif",
       },
       components: {
         MuiButton: {
