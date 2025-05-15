@@ -1,4 +1,4 @@
-import ThemeContextProvider from "./ThemeContextProvider";
+// import ThemeContextProvider from "./ThemeContextProvider";
 import { EditModeProvider } from "@/entities/editMode/model/EditModeContext";
 import { CycleSettingsProvider } from "@/entities/cycleSettings/model/CycleSettingsContext";
 import { SequenceSettingsProvider } from "@/entities/sequenceSettings/model/SequenceSettingsContext";
@@ -7,19 +7,19 @@ import { SoundSettingsProvider } from "@/entities/soundSettings/model/SoundSetti
 import { ChordSettingsProvider } from "@/entities/chordSettings/model/ChordSettingsContext";
 const Providers = ({ children }) => {
   return (
-    <ThemeContextProvider>
-      <EditModeProvider>
-        <CycleSettingsProvider>
-          <SoundSettingsProvider>
-            <ToneSettingsProvider>
-              <ChordSettingsProvider>
-                <SequenceSettingsProvider>{children}</SequenceSettingsProvider>
-              </ChordSettingsProvider>
-            </ToneSettingsProvider>
-          </SoundSettingsProvider>
-        </CycleSettingsProvider>
-      </EditModeProvider>
-    </ThemeContextProvider>
+    // <ThemeContextProvider>
+    <EditModeProvider>
+      <CycleSettingsProvider>
+        <SoundSettingsProvider>
+          <ToneSettingsProvider>
+            <ChordSettingsProvider>
+              <SequenceSettingsProvider>{children}</SequenceSettingsProvider>
+            </ChordSettingsProvider>
+          </ToneSettingsProvider>
+        </SoundSettingsProvider>
+      </CycleSettingsProvider>
+    </EditModeProvider>
+    // </ThemeContextProvider>
   );
 };
 

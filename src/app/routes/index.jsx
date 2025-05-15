@@ -1,7 +1,8 @@
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import { Suspense, lazy, useEffect } from "react";
 import TopBarLoader from "@/shared/ui/TopBarLoader";
-
+// import Providers from "./providers/index.jsx";
+const Providers = lazy(() => import("../providers"));
 // Ленивая загрузка страниц
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
 const LearnPage = lazy(() => import("../../pages/LearnPage"));
@@ -42,23 +43,48 @@ function AppRoutes() {
   return (
     <Suspense fallback={<TopBarLoader />}>
       <Routes>
+        {/* Без провайдеров — титульная и 404 */}
         <Route path="/" element={<HomePage />} />
-        <Route path="/learn" element={<LearnPage />} />
-        <Route path="/create" element={<EditorPage />} />
-        <Route path="/rhythm" element={<RhythmPage />} />
+        <Route path="/404" element={<NotFoundPage />} />
+        <Route path="*" element={<NotFoundPage />} />
         <Route path="/patterns" element={<ListPage level="main" />} />
         <Route path="/custom" element={<ListPage level="custom" />} />
 
+        {/* С провайдерами — остальные */}
+        <Route
+          path="/learn"
+          element={
+            <Providers>
+              <LearnPage />
+            </Providers>
+          }
+        />
+        <Route
+          path="/create"
+          element={
+            <Providers>
+              <EditorPage />
+            </Providers>
+          }
+        />
+        <Route
+          path="/rhythm"
+          element={
+            <Providers>
+              <RhythmPage />
+            </Providers>
+          }
+        />
         <Route
           path="/pattern/:beatPattern"
           element={
-            <BeatPatternValidator>
-              <PatternPage />
-            </BeatPatternValidator>
+            <Providers>
+              <BeatPatternValidator>
+                <PatternPage />
+              </BeatPatternValidator>
+            </Providers>
           }
         />
-        <Route path="/404" element={<NotFoundPage />} />
-        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>
   );

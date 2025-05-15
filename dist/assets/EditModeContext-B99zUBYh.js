@@ -1,0 +1,1 @@
+import{r as e,j as a}from"./ui-CMvDxjNB.js";const n={edit:!1},c=e.createContext(),E=({children:d})=>{const[t,o]=e.useReducer((r,s)=>{switch(s.type){case"SET_EDIT_MODE":return{...r,edit:s.payload};default:return r}},n),i=e.useMemo(()=>({editMode:t,dispatch:o}),[t,o]);return a.jsx(c.Provider,{value:i,children:d})};export{E,c as a};

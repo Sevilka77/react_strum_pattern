@@ -2,20 +2,27 @@ import { Typography, AppBar, Toolbar, IconButton, Avatar } from "@mui/material";
 
 import { memo, useMemo, useEffect } from "react";
 import { ArrowLeft } from "@phosphor-icons/react";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useLocation, matchPath, useNavigate } from "react-router-dom";
+
 import SettingsDialog from "@/features/tone/ui/settings";
 import { Stack } from "@mui/system";
 import { getPageHeader } from "./Header.util";
 
 const Header = memo(function Header({ title }) {
   const location = useLocation(); // Получаем текущий путь
+  const { pathname } = location;
   const navigate = useNavigate();
 
   const pageHeader = useMemo(
     () => getPageHeader(location.pathname, title),
     [location.pathname, title]
   );
+
+  const shouldShowSeetingsIcon =
+    matchPath("//pattern/:beatPattern", pathname) ||
+    matchPath("/learn", pathname) ||
+    matchPath("/create", pathname) ||
+    matchPath("/rhythm", pathname);
 
   return (
     <AppBar
@@ -84,7 +91,7 @@ const Header = memo(function Header({ title }) {
               </Typography>
             </Stack>
             <IconButton aria-label="menu">
-              <SettingsDialog />
+              {shouldShowSeetingsIcon && <SettingsDialog />}
             </IconButton>
           </>
         )}
