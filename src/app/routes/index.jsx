@@ -1,15 +1,16 @@
 import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import { Suspense, lazy, useEffect } from "react";
 import TopBarLoader from "@/shared/ui/TopBarLoader";
-// import Providers from "./providers/index.jsx";
+
 const Providers = lazy(() => import("../providers"));
-// Ленивая загрузка страниц
-const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
-const LearnPage = lazy(() => import("../../pages/LearnPage"));
-const EditorPage = lazy(() => import("../../pages/EditorPage"));
-const ListPage = lazy(() => import("../../pages/ListPage/ListPage"));
-const PatternPage = lazy(() => import("../../pages/PatternPage"));
-const RhythmPage = lazy(() => import("../../pages/RhythmPage"));
+
+const HomePage = lazy(() => import("@/pages/HomePage/HomePage"));
+const LearnPage = lazy(() => import("@/pages/LearnPage"));
+const EditorPage = lazy(() => import("@/pages/EditorPage"));
+const ListPage = lazy(() => import("@/pages/ListPage/ListPage"));
+const PatternPage = lazy(() => import("@/pages/PatternPage"));
+const RhythmPage = lazy(() => import("@/pages/RhythmPage"));
+
 const NotFoundPage = lazy(() => import("../../pages/NotFoundPage"));
 
 // Список допустимых символов для beatPattern

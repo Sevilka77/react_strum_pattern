@@ -5,7 +5,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 38,
+    id: 0,
   },
   {
     title: "B",
@@ -13,7 +13,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 39,
+    id: 1,
   },
   {
     title: "C",
@@ -21,7 +21,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 40,
+    id: 2,
   },
   {
     title: "D",
@@ -29,7 +29,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 41,
+    id: 3,
   },
   {
     title: "E",
@@ -37,7 +37,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 42,
+    id: 4,
   },
   {
     title: "F",
@@ -45,7 +45,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 43,
+    id: 5,
   },
   {
     title: "G",
@@ -53,7 +53,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 44,
+    id: 6,
   },
   {
     title: "H",
@@ -61,7 +61,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 46,
+    id: 7,
   },
   {
     title: "I",
@@ -69,7 +69,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 45,
+    id: 8,
   },
   {
     title: "J",
@@ -77,7 +77,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 48,
+    id: 9,
   },
   {
     title: "K",
@@ -85,7 +85,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 45,
+    id: 10,
   },
   {
     title: "L",
@@ -93,7 +93,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 45,
+    id: 11
   },
   {
     title: "M",
@@ -101,7 +101,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 47,
+    id: 12,
   },
   {
     title: "N",
@@ -109,7 +109,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 48,
+    id: 13,
   },
   {
     title: "O",
@@ -117,7 +117,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 49,
+    id: 14,
   },
   {
     title: "P",
@@ -125,7 +125,7 @@ export const rhythmPatterns = [
     temp: 80,
     note: "4n",
     level: "rhythm",
-    position: 50,
+    id: 15,
   },
   // {
   //   title: "Q",

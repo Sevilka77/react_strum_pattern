@@ -92,7 +92,8 @@ export default function BeatImage({ beatString, title }) {
       key={beatString}
       xmlns="http://www.w3.org/2000/svg"
       viewBox={`0 0 ${iconSize * beatNumbers} ${iconSize}`}
-      style={{ maxHeight: "100%" }}
+      width={`${iconSize * beatNumbers}`}
+      height={`${iconSize}`}
       role="img"
       aria-labelledby="title desc"
     >

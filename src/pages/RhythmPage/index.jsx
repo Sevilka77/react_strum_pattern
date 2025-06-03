@@ -1,4 +1,4 @@
-import Header from "../features/header";
+import Header from "@/features/header";
 import { lazy, Suspense, useCallback } from "react";
 import TopBarLoader from "@/shared/ui/TopBarLoader";
 const MetronomeWrapper = lazy(() =>
@@ -24,7 +24,8 @@ import {
 
 import { Box, Stack } from "@mui/system";
 import { Plus, Minus, SkipBack, SkipForward } from "@phosphor-icons/react";
-import MetaData from "../shared/lib/seo/MetaData";
+import MetaData from "@/shared/lib/seo/MetaData";
+const PatternList = lazy(() => import("./ui/PatternList"));
 
 function RhythmPage() {
   const { cycleSettings, dispatch: cycleDispatch } = useCycleSettings();
@@ -35,6 +36,7 @@ function RhythmPage() {
   const [autoNext, setAutoNext] = useState(false);
   const [randomNext, setRandomNext] = useState(false);
   const [pattenName, setPatternName] = useState();
+  const [activePattern, setActivePattern] = useState(false);
 
   // Функция для перехода к предыдущему уроку
   const updatePattern = useCallback(
@@ -48,7 +50,10 @@ function RhythmPage() {
     },
     [seqDispatch, toneDispatch]
   );
-
+  const onSelect = (pattern) => {
+    setActivePattern(true);
+    updatePattern(pattern);
+  };
   const goToPreviousLesson = useCallback(() => {
     const previousIndex =
       (currentPatternIndex - 1 + rhythmPatterns.length) % rhythmPatterns.length; // Цикличность
@@ -209,11 +214,8 @@ function RhythmPage() {
         title="Практика ритмического алфавита – Развиваем чувство ритма | Strumming.ru"
         description="Погружаемся в практику ритмического алфавита: развиваем внутренний ритм, учимся свободно играть и чувствовать музыку. Шаг за шагом — к ритмической свободе!"
       />
-
       <Header />
-      <Typography variant="h5" component="h3" align="center">
-        {pattenName}
-      </Typography>
+
       <Container
         component="main"
         sx={{
@@ -226,15 +228,26 @@ function RhythmPage() {
         }}
         maxWidth="xl"
       >
-        <Suspense fallback={<TopBarLoader />}>
-          <MetronomeWrapper />
-        </Suspense>
-
-        <ControlFooter
-          nextButton={nextButton}
-          prevButton={prevButton}
-          settingsSlot={settingsSlot}
-        ></ControlFooter>
+        {!activePattern && (
+          <PatternList patterns={rhythmPatterns} onSelect={onSelect} />
+        )}{" "}
+        {activePattern && (
+          <Typography variant="h5" component="h3" align="center">
+            {pattenName}
+          </Typography>
+        )}
+        {activePattern && (
+          <Suspense fallback={<TopBarLoader />}>
+            <MetronomeWrapper />
+          </Suspense>
+        )}
+        {activePattern && (
+          <ControlFooter
+            nextButton={nextButton}
+            prevButton={prevButton}
+            settingsSlot={settingsSlot}
+          ></ControlFooter>
+        )}
       </Container>
     </>
   );
