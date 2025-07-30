@@ -377,4 +377,13 @@ export const patterns = [
     position: 27,
     image: "gsn-19-uprazhnenie.svg",
   },
+    {
+    title: "Бонд с кнопкой - Кухни",
+    pattern: "A001b0A001b0A011",
+    temp: 180,
+    note: "8n",
+    level: "custom",
+    position: 28,
+    image: "gsn-19-uprazhnenie.svg",
+  },
 ];
