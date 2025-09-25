@@ -8,6 +8,8 @@ import SettingsDialog from "@/features/tone/ui/settings";
 import { Stack } from "@mui/system";
 import { getPageHeader } from "./Header.util";
 
+import { TelegramLogo } from "@phosphor-icons/react";
+
 const Header = memo(function Header({ title }) {
   const location = useLocation(); // Получаем текущий путь
   const { pathname } = location;
@@ -58,10 +60,21 @@ const Header = memo(function Header({ title }) {
                 Strumming.ru
               </Typography>
             </Stack>
+            <IconButton
+              component="a"
+              href="https://t.me/+v5HFvtdzhgUyOWYy"
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={(theme) => ({
+                position: "absolute",
+                right: 8,
+              })}
+            >
+              <TelegramLogo size={32} />
+            </IconButton>
           </>
         ) : (
           <>
-            {" "}
             <Avatar
               src="../favicon-32x32.png"
               alt="Logo"
