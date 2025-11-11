@@ -21,6 +21,7 @@
     "@mui/material": "^6.1.6",
     "@mui/system": "^6.1.6",
     "@phosphor-icons/react": "^2.1.7",
+    "@vercel/analytics": "^1.5.0",
     "lucide-react": "^0.302.0",
     "node-fetch": "^3.3.2",
     "react": "^18.2.0",
