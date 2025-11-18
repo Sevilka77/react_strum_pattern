@@ -4,7 +4,7 @@ import { memo, useMemo, useEffect } from "react";
 import { ArrowLeft } from "@phosphor-icons/react";
 import { useLocation, matchPath, useNavigate } from "react-router-dom";
 
-import SettingsDialog from "@/features/tone/ui/settings";
+import SettingsDialog from "@/features/tone/ui/Settings.jsx";
 import { Stack } from "@mui/system";
 import { getPageHeader } from "./Header.util";
 
