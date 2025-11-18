@@ -1,5 +1,5 @@
 import Metronome from "@/features/metronome/ui/Metronome";
-import useTone from "@/features/Tone/useTone";
+import useTone from "@/features/Tone/useTone.js";
 import { useEffect } from "react";
 
 import { loadAllChordsSamples } from "@/features/tone/lib/samplesUtil";
