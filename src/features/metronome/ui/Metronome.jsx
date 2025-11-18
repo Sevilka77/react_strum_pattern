@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import MetronomeBeatIcon from "./MetronomeBeatIcon";
 import MetronomeBeatName from "./MetronomeBeatName";
-import PatternEdit from "./PatternEdit";
+import PatternEdit from "./patternEdit";
 import Grid from "@mui/material/Grid2";
 
 import { memo } from "react";
